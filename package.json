@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "@openzeppelin/contracts": "4.3",
+    "command-line-args": "^5.2.1",
+    "eth-sig-util": "^3.0.1",
+    "hardhat": "^2.17.4",
+    "hardhat-deploy": "^0.11.37",
+    "solidity-docgen": "^0.6.0-beta.36"
+  }
+}

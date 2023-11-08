@@ -1,0 +1,66 @@
+# terminal 1 - mumbai local
+rm -rf deployments/hhmumbai/* && npx hardhat node --fork https://rpc-mumbai.maticvigil.com/ --port 4545 --config hhmumbai.config.js
+
+# terminal 2- fuji local
+rm -rf  deployments/hhfuji/* && npx hardhat node --fork https://api.avax-test.network/ext/bc/C/rpc --port 3545 --config hhfuji.config.js
+
+# terminal 3 deploy and init
+    export CORE=hhmumbai
+    npx hardhat zDeploy --api core --owner zbyt --network $CORE --config $CORE.config.js
+    npx hardhat zDeploy --api initCoreStates --owner zbyt --network $CORE --config $CORE.config.js
+    export DPLAT=hhmumbai
+    npx hardhat zDeploy --api dplat --owner zbyt --network $DPLAT --config $DPLAT.config.js
+    npx hardhat zDeploy --api dapp --owner comd --network $DPLAT --config $DPLAT.config.js
+    npx hardhat zDeploy --api initDplatStates --owner zbyt --network $DPLAT --config $DPLAT.config.js
+    npx hardhat zDeploy --api initCoreStateForDplat --owner zbyt --relay ZbyteRelay --network $CORE --config $CORE.config.js
+    npx hardhat zDeploy --api initDappStates --owner zbyt --network $DPLAT --config $DPLAT.config.js
+    export DPLAT=hhfuji
+    npx hardhat zDeploy --api dplat --owner zbyt --network $DPLAT --config $DPLAT.config.js
+    npx hardhat zDeploy --api dapp --owner comd --network $DPLAT --config $DPLAT.config.js
+    npx hardhat zDeploy --api initDplatStates --owner zbyt --network $DPLAT --config $DPLAT.config.js
+    npx hardhat zDeploy --api initCoreStateForDplat --owner zbyt --relay ZbyteRelay --network $CORE --config $CORE.config.js
+    npx hardhat zDeploy --api initDappStates --owner zbyt --network $DPLAT --config $DPLAT.config.js
+
+# terminal 5 relay events on hhmumbai
+rm -rf test/.result.json&& rm -rf test/.resultAck.json && export CORE=hhmumbai && export DPLAT=hhmumbai && npx hardhat run tasks/relayEventListener.js --network $CORE --config $CORE.config.js
+# terminal 6 relay events on hhfuji
+export CORE=hhmumbai && export DPLAT=hhfuji && npx hardhat run tasks/relayEventListener.js --network $DPLAT --config $DPLAT.config.js
+
+# terminal 3 deposit/withdraw
+    export CORE=hhmumbai
+    export DPLAT=hhmumbai
+
+    export CORE=hhmumbai
+    export DPLAT=hhfuji
+
+    npx hardhat zbyteToken --api mint --receiver comp --amount 100 --owner zbyt  --network $CORE --config $CORE.config.js 
+    npx hardhat zbyteToken --api transfer --receiver comd --amount 100 --sender comp  --network $CORE  --config $CORE.config.js 
+    npx hardhat zbyteToken --api approve --approver comd --approvee ZbyteEscrow --amount 100 --network $CORE --config $CORE.config.js 
+    npx hardhat zbyteToken --api balanceOf --account comd   --network $CORE  --config $CORE.config.js 
+    npx hardhat zbyteToken --api balanceOf --account comp   --network $CORE  --config $CORE.config.js 
+    # comp = 0(Z), comd = 100(Z) 
+
+    npx hardhat zbyteToken --api balanceOf --account comd   --network $CORE  --config $CORE.config.js 
+    npx hardhat zbyteVToken --api balanceOf --account comd   --network $DPLAT  --config $DPLAT.config.js 
+    npx hardhat zbyteEscrow --api deposit --relay ZbyteRelay --receiver comd --amount 100 --sender comd  --network $CORE --config $CORE.config.js 
+    npx hardhat zbyteToken --api balanceOf --account comd   --network $CORE  --config $CORE.config.js 
+    npx hardhat zbyteVToken --api balanceOf --account comd   --network $DPLAT  --config $DPLAT.config.js 
+    # comd = 0 (Z), 100 (vZ)
+
+    npx hardhat zbyteToken --api mint --receiver comp --amount 100 --owner zbyt  --network $CORE --config $CORE.config.js 
+    npx hardhat zbyteToken --api balanceOf --account comp  --network $CORE  --config $CORE.config.js 
+    npx hardhat zbyteToken --api approve --approver comp --approvee ZbyteEscrow --amount 100 --network $CORE --config $CORE.config.js 
+    npx hardhat zbyteEscrow --api deposit --relay ZbyteRelay --receiver ZbyteForwarderDplat --amount 100 --sender comp  --network $CORE --config $CORE.config.js 
+    npx hardhat zbyteToken --api balanceOf --account comp  --network $CORE  --config $CORE.config.js 
+    npx hardhat zbyteVToken --api balanceOf --account ZbyteForwarderDplat  --network $DPLAT  --config $DPLAT.config.js 
+    # comp = 0 (Z), ZbyteForwarderDplat = 100 (vZ)
+
+    npx hardhat zbyteEscrow --api withdraw --relay ZbyteRelay --paymaster ZbyteForwarderDplat --receiver comp --owner zbyt  --network $CORE --config $CORE.config.js 
+    npx hardhat zbyteToken --api balanceOf --account comp  --network $CORE  --config $CORE.config.js 
+    npx hardhat zbyteVToken --api balanceOf --account ZbyteForwarderDplat  --network $DPLAT  --config $DPLAT.config.js 
+    # comp = 100(Z), ZbyteForwarderDplat 0 (vZ)
+
+    # comd: 0(Z), 100(vZ) 0n that chain!
+    # comp: 100(Z), 0 (vZ)
+    # ZFwd: 0 (Z), 0 (vZ)
+

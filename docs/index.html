@@ -1,0 +1,3911 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>index.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="solidity-api">Solidity API</h1>
+<h2 id="escrowerc20">EscrowERC20</h2>
+<p><em>DPLAT ERC20 escrow abstract contract</em></p>
+<h3 id="treasury">treasury</h3>
+<pre class="hljs"><code><div>address treasury
+</div></code></pre>
+<h3 id="verc20addresses">vERC20Addresses</h3>
+<pre class="hljs"><code><div>mapping(uint256 =&gt; address) vERC20Addresses
+</div></code></pre>
+<p>mapping of the vERC20 contract address for the chain</p>
+<h3 id="ulasset">ulAsset</h3>
+<pre class="hljs"><code><div>contract IERC20 ulAsset
+</div></code></pre>
+<p>The underlying ERC20 token contract</p>
+<h3 id="relaywrapper">relayWrapper</h3>
+<pre class="hljs"><code><div>contract IRelayWrapper relayWrapper
+</div></code></pre>
+<p>RelayWrapper contract address</p>
+<p><em>Escrow can only use this trusted RelayWrapper to perform deposit/withdraw</em></p>
+<h3 id="nonce">nonce</h3>
+<pre class="hljs"><code><div>uint256 nonce
+</div></code></pre>
+<p>nonce used for deposit/withdraw operations.  Incremented for every successful deposit or withdraw</p>
+<h3 id="action">Action</h3>
+<pre class="hljs"><code><div>enum Action {
+  NONE,
+  DEPOSIT,
+  WITHDRAW
+}
+</div></code></pre>
+<h3 id="pendingaction">PendingAction</h3>
+<pre class="hljs"><code><div>struct PendingAction {
+  enum EscrowERC20.Action action;
+  address nAddress;
+  address rAddress;
+  uint256 chainId;
+  uint256 amount;
+}
+</div></code></pre>
+<h3 id="pendingaction">pendingAction</h3>
+<pre class="hljs"><code><div>mapping(bytes32 =&gt; struct EscrowERC20.PendingAction) pendingAction
+</div></code></pre>
+<p>mapping of current deposit/withdraw operations for which callback has not yet been received</p>
+<p><em>action: EscrowERC20.Action that is being performed<br>
+nAddress: Address from which ERC20 tokens are deposited (for Action.DEPOSIT) or tokens are received into (for Action.WITHDRAW)<br>
+rAddress: Address to which vERC20 tokens are deposited (for Action.DEPOSIT) or tokens are received into (for Action.WITHDRAW)<br>
+chainId: chain id of the remote chain<br>
+amount: Amount of tokens that are deposited or withdrawn<br>
+This is updated on successful deposit/withdraw and cleared when callback is received</em></p>
+<h3 id="constructor">constructor</h3>
+<pre class="hljs"><code><div>constructor(address forwarder_, contract IERC20 asset_) internal
+</div></code></pre>
+<p>ZBYT ERC20 Escrow constructor</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>forwarder_</td>
+<td>address</td>
+<td>Forwarder contact address</td>
+</tr>
+<tr>
+<td>asset_</td>
+<td>contract IERC20</td>
+<td>Underlying ERC20 asset address</td>
+</tr>
+</tbody>
+</table>
+<h3 id="receive">receive</h3>
+<pre class="hljs"><code><div>receive() external payable
+</div></code></pre>
+<p>receive function</p>
+<h3 id="onlyrelay">onlyRelay</h3>
+<pre class="hljs"><code><div>modifier onlyRelay()
+</div></code></pre>
+<p>Modifier to enforce call only from valid relay contract</p>
+<h3 id="getnonce">getNonce</h3>
+<pre class="hljs"><code><div>function getNonce() public view returns (uint256)
+</div></code></pre>
+<p>Get the latest nonce</p>
+<p><em>nonce is incremented for every successful deposit or withdraw</em></p>
+<h3 id="settreasuryaddress">setTreasuryAddress</h3>
+<pre class="hljs"><code><div>function setTreasuryAddress(address treasury_) public
+</div></code></pre>
+<p>Set the treasury address</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>treasury_</td>
+<td>address</td>
+<td>Treasury address</td>
+</tr>
+</tbody>
+</table>
+<h3 id="setverc20address">_setvERC20Address</h3>
+<pre class="hljs"><code><div>function _setvERC20Address(address verc20_, uint256 chain_) internal
+</div></code></pre>
+<p>Set the address of vERC20 on a given chain</p>
+<p><em>nonce is incremented for every successful deposit or withdraw</em></p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>verc20_</td>
+<td>address</td>
+<td>vERC20 contract address</td>
+</tr>
+<tr>
+<td>chain_</td>
+<td>uint256</td>
+<td>chain id of the chain where vERC2o contract resides</td>
+</tr>
+</tbody>
+</table>
+<h3 id="setrelaywrapperaddress">_setRelayWrapperAddress</h3>
+<pre class="hljs"><code><div>function _setRelayWrapperAddress(address wrapper_) internal
+</div></code></pre>
+<p>Set the address of core relay wrapper</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>wrapper_</td>
+<td>address</td>
+<td>Core relay wrapper contract address</td>
+</tr>
+</tbody>
+</table>
+<h3 id="totalsupplyallchains">totalSupplyAllChains</h3>
+<pre class="hljs"><code><div>function totalSupplyAllChains() public view virtual returns (uint256)
+</div></code></pre>
+<p>Return the amount of vERC20 currently available on all chains</p>
+<h3 id="totalsupply">totalSupply</h3>
+<pre class="hljs"><code><div>function totalSupply(uint256 chain_) public view virtual returns (uint256)
+</div></code></pre>
+<p>Return the amount of vERC20 currently available on a given chain</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>chain_</td>
+<td>uint256</td>
+<td>The id of the chain of interest</td>
+</tr>
+</tbody>
+</table>
+<h3 id="asset">asset</h3>
+<pre class="hljs"><code><div>function asset() external view virtual returns (address)
+</div></code></pre>
+<p>Return the address of underlying ERC20 contract address</p>
+<h3 id="record">_record</h3>
+<pre class="hljs"><code><div>function _record(enum EscrowERC20.Action action_, uint256 amount_, uint256 chain_) internal
+</div></code></pre>
+<p>Record and update state on successful deposit/withdraw</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>action_</td>
+<td>enum EscrowERC20.Action</td>
+<td>deposit or withdraw action</td>
+</tr>
+<tr>
+<td>amount_</td>
+<td>uint256</td>
+<td>amount of tokens deposited or withdrawn</td>
+</tr>
+<tr>
+<td>chain_</td>
+<td>uint256</td>
+<td>target chain id</td>
+</tr>
+</tbody>
+</table>
+<h3 id="deposit">_deposit</h3>
+<pre class="hljs"><code><div>function _deposit(uint256 relay_, uint256 chain_, address receiver_, uint256 amount_) internal returns (bool result)
+</div></code></pre>
+<p>Deposit ERC20 tokens to obtain vERC20 on target chain</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>relay_</td>
+<td>uint256</td>
+<td>Relay identifier that should be used for the crosschain call</td>
+</tr>
+<tr>
+<td>chain_</td>
+<td>uint256</td>
+<td>Target chain identifier</td>
+</tr>
+<tr>
+<td>receiver_</td>
+<td>address</td>
+<td>Recipient address for vERC20</td>
+</tr>
+<tr>
+<td>amount_</td>
+<td>uint256</td>
+<td>Amount of ERC20 deposited</td>
+</tr>
+</tbody>
+</table>
+<h3 id="withdraw">_withdraw</h3>
+<pre class="hljs"><code><div>function _withdraw(uint256 relay_, uint256 chain_, address paymaster_, address receiver_) internal returns (bool result)
+</div></code></pre>
+<p>Withdraw ERC20 tokens by depositing vERC20 on target chain</p>
+<p><em>The paymaster</em> should be a valid paymaster (e.g., forwarder). All vERC20 held by paymaster is destroyed and equal ERC20 is deposited_</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>relay_</td>
+<td>uint256</td>
+<td>Relay identifier that should be used for the crosschain call</td>
+</tr>
+<tr>
+<td>chain_</td>
+<td>uint256</td>
+<td>Target chain identifier</td>
+</tr>
+<tr>
+<td>paymaster_</td>
+<td>address</td>
+<td>Paymaster address to deposit vERC20</td>
+</tr>
+<tr>
+<td>receiver_</td>
+<td>address</td>
+<td>Recipient address for ERC20</td>
+</tr>
+</tbody>
+</table>
+<h3 id="callbackhandler">_callbackHandler</h3>
+<pre class="hljs"><code><div>function _callbackHandler(uint256 chain_, bytes32 ack_, bool success_, uint256 retval_) internal returns (uint256)
+</div></code></pre>
+<p>callback handler to handle acknowledgement for deposit/withdraw</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>chain_</td>
+<td>uint256</td>
+<td>Target chain identifier</td>
+</tr>
+<tr>
+<td>ack_</td>
+<td>bytes32</td>
+<td>Unique hash of the submitted deposit/withdraw request</td>
+</tr>
+<tr>
+<td>success_</td>
+<td>bool</td>
+<td>true if the deposit/withdraw was successful on remote</td>
+</tr>
+<tr>
+<td>retval_</td>
+<td>uint256</td>
+<td>The amount of tokens that were deposited/withdrawn</td>
+</tr>
+</tbody>
+</table>
+<h3 id="beforetokendeposit">_beforeTokenDeposit</h3>
+<pre class="hljs"><code><div>function _beforeTokenDeposit(uint256 relay_, uint256 chain_, address receiver_, uint256 amount_, address verc20_) internal
+</div></code></pre>
+<p>Hook called before token deposit</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>relay_</td>
+<td>uint256</td>
+<td>Relay identifier that should be used for the crosschain call</td>
+</tr>
+<tr>
+<td>chain_</td>
+<td>uint256</td>
+<td>Target chain identifier</td>
+</tr>
+<tr>
+<td>receiver_</td>
+<td>address</td>
+<td>Recipient address for vERC20</td>
+</tr>
+<tr>
+<td>amount_</td>
+<td>uint256</td>
+<td>Amount of ERC20 deposited</td>
+</tr>
+<tr>
+<td>verc20_</td>
+<td>address</td>
+<td>vERC20 contract address on target chain</td>
+</tr>
+</tbody>
+</table>
+<h3 id="aftertokendeposit">_afterTokenDeposit</h3>
+<pre class="hljs"><code><div>function _afterTokenDeposit(uint256 relay_, uint256 chain_, address receiver_, uint256 amount_, address verc20_) internal
+</div></code></pre>
+<p>Hook called after token deposit</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>relay_</td>
+<td>uint256</td>
+<td>Relay identifier that should be used for the crosschain call</td>
+</tr>
+<tr>
+<td>chain_</td>
+<td>uint256</td>
+<td>Target chain identifier</td>
+</tr>
+<tr>
+<td>receiver_</td>
+<td>address</td>
+<td>Recipient address for vERC20</td>
+</tr>
+<tr>
+<td>amount_</td>
+<td>uint256</td>
+<td>Amount of ERC20 deposited</td>
+</tr>
+<tr>
+<td>verc20_</td>
+<td>address</td>
+<td>vERC20 contract address on target chain</td>
+</tr>
+</tbody>
+</table>
+<h3 id="beforetokenwithdraw">_beforeTokenWithdraw</h3>
+<pre class="hljs"><code><div>function _beforeTokenWithdraw(uint256 relay_, uint256 chain_, address paymaster_, address receiver_, address verc20_) internal
+</div></code></pre>
+<p>Hook called before token withdraw</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>relay_</td>
+<td>uint256</td>
+<td>Relay identifier that should be used for the crosschain call</td>
+</tr>
+<tr>
+<td>chain_</td>
+<td>uint256</td>
+<td>Target chain identifier</td>
+</tr>
+<tr>
+<td>paymaster_</td>
+<td>address</td>
+<td>Paymaster address to deposit vERC20</td>
+</tr>
+<tr>
+<td>receiver_</td>
+<td>address</td>
+<td>Recipient address for ERC20</td>
+</tr>
+<tr>
+<td>verc20_</td>
+<td>address</td>
+<td>vERC20 contract address on target chain</td>
+</tr>
+</tbody>
+</table>
+<h3 id="aftertokenwithdraw">_afterTokenWithdraw</h3>
+<pre class="hljs"><code><div>function _afterTokenWithdraw(uint256 relay_, uint256 chain_, address paymaster_, address receiver_, address verc20_) internal
+</div></code></pre>
+<p>Hook called after token withdraw</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>relay_</td>
+<td>uint256</td>
+<td>Relay identifier that should be used for the crosschain call</td>
+</tr>
+<tr>
+<td>chain_</td>
+<td>uint256</td>
+<td>Target chain identifier</td>
+</tr>
+<tr>
+<td>paymaster_</td>
+<td>address</td>
+<td>Paymaster address to deposit vERC20</td>
+</tr>
+<tr>
+<td>receiver_</td>
+<td>address</td>
+<td>Recipient address for ERC20</td>
+</tr>
+<tr>
+<td>verc20_</td>
+<td>address</td>
+<td>vERC20 contract address on target chain</td>
+</tr>
+</tbody>
+</table>
+<h2 id="zbyteescrow">ZbyteEscrow</h2>
+<h3 id="constructor">constructor</h3>
+<pre class="hljs"><code><div>constructor(address forwarder_, address zbyte_, address treasury_) public
+</div></code></pre>
+<h3 id="deposit">deposit</h3>
+<pre class="hljs"><code><div>function deposit(uint256 relay_, uint256 chain_, address receiver_, uint256 amount_) public returns (bool result)
+</div></code></pre>
+<p>Deposit ERC20 tokens to obtain vERC20 on target chain</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>relay_</td>
+<td>uint256</td>
+<td>Relay identifier that should be used for the crosschain call</td>
+</tr>
+<tr>
+<td>chain_</td>
+<td>uint256</td>
+<td>Target chain identifier</td>
+</tr>
+<tr>
+<td>receiver_</td>
+<td>address</td>
+<td>Recipient address for vERC20</td>
+</tr>
+<tr>
+<td>amount_</td>
+<td>uint256</td>
+<td>Amount of ERC20 deposited</td>
+</tr>
+</tbody>
+</table>
+<h3 id="withdraw">withdraw</h3>
+<pre class="hljs"><code><div>function withdraw(uint256 relay_, uint256 chain_, address paymaster_, address receiver_) public returns (bool result)
+</div></code></pre>
+<p>Withdraw ERC20 tokens by depositing vERC20 on target chain</p>
+<p><em>The paymaster</em> should be a valid paymaster (e.g., forwarder). All vERC20 held by paymaster is destroyed and equal ERC20 is deposited_</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>relay_</td>
+<td>uint256</td>
+<td>Relay identifier that should be used for the crosschain call</td>
+</tr>
+<tr>
+<td>chain_</td>
+<td>uint256</td>
+<td>Target chain identifier</td>
+</tr>
+<tr>
+<td>paymaster_</td>
+<td>address</td>
+<td>Paymaster address to deposit vERC20</td>
+</tr>
+<tr>
+<td>receiver_</td>
+<td>address</td>
+<td>Recipient address for ERC20</td>
+</tr>
+</tbody>
+</table>
+<h3 id="callbackhandler">callbackHandler</h3>
+<pre class="hljs"><code><div>function callbackHandler(uint256 chain_, bytes32 ack_, bool success_, uint256 retval_) external returns (uint256)
+</div></code></pre>
+<p>callback handler to handle acknowledgement for deposit/withdraw</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>chain_</td>
+<td>uint256</td>
+<td>Target chain identifier</td>
+</tr>
+<tr>
+<td>ack_</td>
+<td>bytes32</td>
+<td>Unique hash of the submitted deposit/withdraw request</td>
+</tr>
+<tr>
+<td>success_</td>
+<td>bool</td>
+<td>true if the deposit/withdraw was successful on remote</td>
+</tr>
+<tr>
+<td>retval_</td>
+<td>uint256</td>
+<td>The amount of tokens that were deposited/withdrawn</td>
+</tr>
+</tbody>
+</table>
+<h3 id="setverc20address">setvERC20Address</h3>
+<pre class="hljs"><code><div>function setvERC20Address(address verc20_, uint256 chain_) public
+</div></code></pre>
+<p>Set the address of vERC20 on a given chain</p>
+<p><em>nonce is incremented for every successful deposit or withdraw</em></p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>verc20_</td>
+<td>address</td>
+<td>vERC20 contract address</td>
+</tr>
+<tr>
+<td>chain_</td>
+<td>uint256</td>
+<td>chain id of the chain where vERC2o contract resides</td>
+</tr>
+</tbody>
+</table>
+<h3 id="setrelaywrapperaddress">setRelayWrapperAddress</h3>
+<pre class="hljs"><code><div>function setRelayWrapperAddress(address wrapper_) public
+</div></code></pre>
+<p>Set the address of core relay wrapper</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>wrapper_</td>
+<td>address</td>
+<td>Core relay wrapper contract address</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pause">pause</h3>
+<pre class="hljs"><code><div>function pause() external
+</div></code></pre>
+<p>Pauses the contract (mint, transfer and burn operations are paused)</p>
+<h3 id="unpause">unpause</h3>
+<pre class="hljs"><code><div>function unpause() external
+</div></code></pre>
+<p>Unpauses the paused contract</p>
+<h3 id="msgsender">_msgSender</h3>
+<pre class="hljs"><code><div>function _msgSender() internal view returns (address sender)
+</div></code></pre>
+<p>ERC2771 _msgSender override</p>
+<h3 id="msgdata">_msgData</h3>
+<pre class="hljs"><code><div>function _msgData() internal view returns (bytes)
+</div></code></pre>
+<p>ERC2771 _msgData override</p>
+<h2 id="zbyteforwardercore">ZbyteForwarderCore</h2>
+<p><em>The Zbyte core forwarder contract.</em></p>
+<h3 id="zeroaddress">ZeroAddress</h3>
+<pre class="hljs"><code><div>error ZeroAddress()
+</div></code></pre>
+<p>error (0xd92e233d): Address is address(0)</p>
+<h3 id="zbyteaddressset">ZbyteAddressSet</h3>
+<pre class="hljs"><code><div>event ZbyteAddressSet(address)
+</div></code></pre>
+<p>event (0xa6cc9cbb): DPLAT address is set</p>
+<h3 id="zbytetokenforwarderaddressset">ZbyteTokenForwarderAddressSet</h3>
+<pre class="hljs"><code><div>event ZbyteTokenForwarderAddressSet(address)
+</div></code></pre>
+<p>event (0x0a787863): Token forwarder address is set</p>
+<h3 id="escrowaddressset">EscrowAddressSet</h3>
+<pre class="hljs"><code><div>event EscrowAddressSet(address)
+</div></code></pre>
+<p>event (0x14229a64) Escrow address is set</p>
+<h3 id="zbyteaddress">zByteAddress</h3>
+<pre class="hljs"><code><div>address zByteAddress
+</div></code></pre>
+<p>DPLAT ERC20 contract address</p>
+<h3 id="zbytetokenforwarder">zbyteTokenForwarder</h3>
+<pre class="hljs"><code><div>contract MinimalForwarder zbyteTokenForwarder
+</div></code></pre>
+<p>Forwarder of ERC20 token contract</p>
+<h3 id="escrowaddress">escrowAddress</h3>
+<pre class="hljs"><code><div>address escrowAddress
+</div></code></pre>
+<p>Escrow contract address</p>
+<h3 id="setzbyteaddress">setZbyteAddress</h3>
+<pre class="hljs"><code><div>function setZbyteAddress(address zbyte_) public
+</div></code></pre>
+<p>Set DPLAT ERC20 address</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>zbyte_</td>
+<td>address</td>
+<td>DPLAT ERC20 contact address</td>
+</tr>
+</tbody>
+</table>
+<h3 id="setzbytetokenforwarderaddress">setZbyteTokenForwarderAddress</h3>
+<pre class="hljs"><code><div>function setZbyteTokenForwarderAddress(address forwarder_) public
+</div></code></pre>
+<p>Set DPLAT ERC20 Forwarder address</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>forwarder_</td>
+<td>address</td>
+<td>DPLAT ERC20 forwarder contact address</td>
+</tr>
+</tbody>
+</table>
+<h3 id="setescrowaddress">setEscrowAddress</h3>
+<pre class="hljs"><code><div>function setEscrowAddress(address escrow_) public
+</div></code></pre>
+<p>Set Zbyte Escrow address</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>escrow_</td>
+<td>address</td>
+<td>Zbyte Escrow contract address</td>
+</tr>
+</tbody>
+</table>
+<h3 id="approveanddeposit">approveAndDeposit</h3>
+<pre class="hljs"><code><div>function approveAndDeposit(struct MinimalForwarder.ForwardRequest reqApprove_, bytes signatureApprove_, struct MinimalForwarder.ForwardRequest reqDeposit_, bytes signatureDeposit_) public payable returns (bool success)
+</div></code></pre>
+<p>Perform approve and depost of Zbyte in single call</p>
+<p><em>Allows gasless approve+deposit of DPLAT token to be used at https://dplat.zbyte.io</em></p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>reqApprove_</td>
+<td>struct MinimalForwarder.ForwardRequest</td>
+<td>ForwardRequest for the approve call</td>
+</tr>
+<tr>
+<td>signatureApprove_</td>
+<td>bytes</td>
+<td>Signature of the approve call params</td>
+</tr>
+<tr>
+<td>reqDeposit_</td>
+<td>struct MinimalForwarder.ForwardRequest</td>
+<td>ForwardRequest for the deposit call</td>
+</tr>
+<tr>
+<td>signatureDeposit_</td>
+<td>bytes</td>
+<td>Signature of the deposit call params</td>
+</tr>
+</tbody>
+</table>
+<h4 id="return-values">Return Values</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>success</td>
+<td>bool</td>
+<td>returns true of approve and deposit are successful</td>
+</tr>
+</tbody>
+</table>
+<h2 id="libdplatbase">LibDPlatBase</h2>
+<p>Library for DPlat base storage and functions</p>
+<p><em>Library for DPlat base storage and functions</em></p>
+<h3 id="diamondstorage">DiamondStorage</h3>
+<pre class="hljs"><code><div>struct DiamondStorage {
+  address zbyteVToken;
+  uint256 zbyteValueInNativeEthGwei;
+  uint256 zbyteBurnFactor;
+}
+</div></code></pre>
+<h3 id="diamondstorage">diamondStorage</h3>
+<pre class="hljs"><code><div>function diamondStorage() internal pure returns (struct LibDPlatBase.DiamondStorage ds)
+</div></code></pre>
+<p>Retrieves the DiamondStorage struct for the library.</p>
+<p><em>zbyteVToken: The address of the ZbyteVToken<br>
+zbyteValueInNativeEthGwei: The value of Zbyte in native Ether (in Gwei)<br>
+zbyteBurnFactor: Burn factor, represents the percent of gas used that will be 'burnt'</em></p>
+<h3 id="getzbytevtoken">_getZbyteVToken</h3>
+<pre class="hljs"><code><div>function _getZbyteVToken() internal view returns (address)
+</div></code></pre>
+<p>Gets the ZbyteVToken address.</p>
+<h4 id="return-values">Return Values</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[0]</td>
+<td>address</td>
+<td>The address of the ZbyteVToken.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="getnativeethequivalentzbytevalue">_getNativeEthEquivalentZbyteValue</h3>
+<pre class="hljs"><code><div>function _getNativeEthEquivalentZbyteValue(uint256 ethAmount_) internal view returns (uint256)
+</div></code></pre>
+<p>Calculates the native Ether equivalent value of Zbyte.</p>
+<p><em>ethAmountInGWei = (ethAmountinWei/10<strong>9), inZbyte = ethAmountInGWei<em>zbyteValueInNativeEthGwei, inZbyteWei = inZbyte</em>10</strong>18</em></p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ethAmount_</td>
+<td>uint256</td>
+<td>The amount in Ether (wei).</td>
+</tr>
+</tbody>
+</table>
+<h4 id="return-values">Return Values</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[0]</td>
+<td>uint256</td>
+<td>The equivalent value in Zbyte (wei).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="getzbyteburnfactor">_getZbyteBurnFactor</h3>
+<pre class="hljs"><code><div>function _getZbyteBurnFactor() internal view returns (uint256)
+</div></code></pre>
+<p>Gets the Zbyte burn factor.</p>
+<h4 id="return-values">Return Values</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[0]</td>
+<td>uint256</td>
+<td>The Zbyte burn factor.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="libdplatregistration">LibDPlatRegistration</h2>
+<p>Library for DPlat registration storage and functions</p>
+<p><em>Library for DPlat registration storage and functions</em></p>
+<h3 id="diamondstorage">DiamondStorage</h3>
+<pre class="hljs"><code><div>struct DiamondStorage {
+  mapping(bytes4 =&gt; address) registeredEnterprises;
+  mapping(bytes4 =&gt; address) registeredEnterprisePolicy;
+  mapping(address =&gt; bytes4) registeredDapps;
+  mapping(address =&gt; bytes4) registeredEnterpriseUsers;
+  mapping(bytes4 =&gt; uint256) enterpriseLimit;
+}
+</div></code></pre>
+<h3 id="diamondstorage">diamondStorage</h3>
+<pre class="hljs"><code><div>function diamondStorage() internal pure returns (struct LibDPlatRegistration.DiamondStorage ds)
+</div></code></pre>
+<p>Retrieves the DiamondStorage struct for the library.</p>
+<p><em>registeredEnterprises: Mapping of registered enterprises by bytes4 ID<br>
+registeredEnterprisePolicy: Mapping of enterprise policies by bytes4 ID<br>
+registeredDapps: Mapping of registered Dapps by address<br>
+registeredEnterpriseUsers: Mapping of registered enterprise users by address<br>
+enterpriseLimit: Mapping of enterprise limits by bytes4 ID</em></p>
+<h3 id="getenterpriselimit">_getEnterpriseLimit</h3>
+<pre class="hljs"><code><div>function _getEnterpriseLimit(bytes4 enterprise_) internal view returns (uint256)
+</div></code></pre>
+<p>Gets the enterprise limit for a given enterprise ID.</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>enterprise_</td>
+<td>bytes4</td>
+<td>The enterprise ID.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="return-values">Return Values</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[0]</td>
+<td>uint256</td>
+<td>The enterprise limit.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="setentepriselimit">_setEntepriseLimit</h3>
+<pre class="hljs"><code><div>function _setEntepriseLimit(bytes4 enterprise_, uint256 amount_) internal
+</div></code></pre>
+<p>Sets the enterprise limit for a given enterprise ID.</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>enterprise_</td>
+<td>bytes4</td>
+<td>The enterprise ID.</td>
+</tr>
+<tr>
+<td>amount_</td>
+<td>uint256</td>
+<td>The limit amount to set.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="doesenterprisehavepolicy">_doesEnterpriseHavePolicy</h3>
+<pre class="hljs"><code><div>function _doesEnterpriseHavePolicy(bytes4 enterprise_) internal view returns (bool, address)
+</div></code></pre>
+<p>Checks if an enterprise has a registered policy and retrieves the policy address.</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>enterprise_</td>
+<td>bytes4</td>
+<td>The enterprise ID.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="return-values">Return Values</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[0]</td>
+<td>bool</td>
+<td>A tuple indicating whether the enterprise policy exists and the policy address.</td>
+</tr>
+<tr>
+<td>[1]</td>
+<td>address</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="isproviderregistered">isProviderRegistered</h3>
+<pre class="hljs"><code><div>function isProviderRegistered(address provider_) internal view returns (bool)
+</div></code></pre>
+<p>Checks if the given provider is registered</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>provider_</td>
+<td>address</td>
+<td>The provider address</td>
+</tr>
+</tbody>
+</table>
+<h4 id="return-values">Return Values</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[0]</td>
+<td>bool</td>
+<td>bool indicating if the provider is registered</td>
+</tr>
+</tbody>
+</table>
+<h3 id="isprovideragentregistered">isProviderAgentRegistered</h3>
+<pre class="hljs"><code><div>function isProviderAgentRegistered(address agent_) internal view returns (address)
+</div></code></pre>
+<p>Checks if the given agent is registered</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>agent_</td>
+<td>address</td>
+<td>The agent address</td>
+</tr>
+</tbody>
+</table>
+<h4 id="return-values">Return Values</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[0]</td>
+<td>address</td>
+<td>returns the address of provider if registered, or address(0)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="isenterpriseregistered">isEnterpriseRegistered</h3>
+<pre class="hljs"><code><div>function isEnterpriseRegistered(bytes4 enterprise_) internal view returns (address)
+</div></code></pre>
+<p>Checks if the given enterprise is registered</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>enterprise_</td>
+<td>bytes4</td>
+<td>The enterprise bytes4 ID</td>
+</tr>
+</tbody>
+</table>
+<h4 id="return-values">Return Values</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[0]</td>
+<td>address</td>
+<td>returns the address of provider if registered, or address(0)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="isenterpriseuserregistered">isEnterpriseUserRegistered</h3>
+<pre class="hljs"><code><div>function isEnterpriseUserRegistered(address user_) internal view returns (bytes4)
+</div></code></pre>
+<p>Checks if the given user is registered with an enterprise</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user_</td>
+<td>address</td>
+<td>The user address</td>
+</tr>
+</tbody>
+</table>
+<h4 id="return-values">Return Values</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[0]</td>
+<td>bytes4</td>
+<td>returns the address of provider if registered, or address(0)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="isenterprisedappregistered">isEnterpriseDappRegistered</h3>
+<pre class="hljs"><code><div>function isEnterpriseDappRegistered(address dapp_) internal view returns (bytes4)
+</div></code></pre>
+<p>Checks if the given dapp (contract) is registered with an enterprise</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dapp_</td>
+<td>address</td>
+<td>The contract address</td>
+</tr>
+</tbody>
+</table>
+<h4 id="return-values">Return Values</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[0]</td>
+<td>bytes4</td>
+<td>returns the address of provider if registered, or address(0)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="libdplatprovider">LibDPlatProvider</h2>
+<p>Library for DPlat provider storage and functions</p>
+<p><em>Library for DPlat provider storage and functions</em></p>
+<h3 id="diamondstorage">DiamondStorage</h3>
+<pre class="hljs"><code><div>struct DiamondStorage {
+  mapping(address =&gt; bool) registeredProviders;
+  mapping(address =&gt; address) registeredProviderAgent;
+}
+</div></code></pre>
+<h3 id="diamondstorage">diamondStorage</h3>
+<pre class="hljs"><code><div>function diamondStorage() internal pure returns (struct LibDPlatProvider.DiamondStorage ds)
+</div></code></pre>
+<p>Retrieves the DiamondStorage struct for the library.</p>
+<p><em>registeredProviders: Mapping of registered providers by address<br>
+registeredProviderAgent: Mapping of registered provider agents by address</em></p>
+<h2 id="zbytedplatbasefacet">ZbyteDPlatBaseFacet</h2>
+<p><em>DPlat Base Facet contract</em></p>
+<h3 id="zbytevtokenaddressset">ZbyteVTokenAddressSet</h3>
+<pre class="hljs"><code><div>event ZbyteVTokenAddressSet(address)
+</div></code></pre>
+<p>event (0x10e1dc22): VZbyte token address is set.</p>
+<h3 id="zbytevalueinnativeethgweiset">ZbyteValueInNativeEthGweiSet</h3>
+<pre class="hljs"><code><div>event ZbyteValueInNativeEthGweiSet(uint256)
+</div></code></pre>
+<p>event (0xa0e61546): Zbyte token value in terms of native eth is set.</p>
+<h3 id="zbyteburnfactorset">ZbyteBurnFactorSet</h3>
+<pre class="hljs"><code><div>event ZbyteBurnFactorSet(uint256)
+</div></code></pre>
+<p>event (0xd7a7cf8c): Zbyte burn factor is set.</p>
+<h3 id="setzbytevtoken">setZbyteVToken</h3>
+<pre class="hljs"><code><div>function setZbyteVToken(address zbyteVToken_) public
+</div></code></pre>
+<p>Sets the address of the ZbyteVToken.</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>zbyteVToken_</td>
+<td>address</td>
+<td>The address of the ZbyteVToken.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="setzbyteburnfactor">setZbyteBurnFactor</h3>
+<pre class="hljs"><code><div>function setZbyteBurnFactor(uint256 zbyteBurnFactor_) public
+</div></code></pre>
+<p>Sets the Zbyte burn factor.</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>zbyteBurnFactor_</td>
+<td>uint256</td>
+<td>Zbyte burn factor</td>
+</tr>
+</tbody>
+</table>
+<h3 id="getzbytevtoken">getZbyteVToken</h3>
+<pre class="hljs"><code><div>function getZbyteVToken() public view returns (address)
+</div></code></pre>
+<p>Gets the address of the ZbyteVToken.</p>
+<h4 id="return-values">Return Values</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[0]</td>
+<td>address</td>
+<td>The address of the ZbyteVToken.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="setzbytevalueinnativeethgwei">setZbyteValueInNativeEthGwei</h3>
+<pre class="hljs"><code><div>function setZbyteValueInNativeEthGwei(uint256 zbyteValueInNativeEthGwei_) public
+</div></code></pre>
+<p>Sets the value of Zbyte in native Ether (in Gwei).</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>zbyteValueInNativeEthGwei_</td>
+<td>uint256</td>
+<td>The value of Zbyte in native Ether (in Gwei).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="getzbytevalueinnativeethgwei">getZbyteValueInNativeEthGwei</h3>
+<pre class="hljs"><code><div>function getZbyteValueInNativeEthGwei() public view returns (uint256)
+</div></code></pre>
+<p>Gets the value of Zbyte in native Ether (in Gwei).</p>
+<h4 id="return-values">Return Values</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[0]</td>
+<td>uint256</td>
+<td>The value of Zbyte in native Ether (in Gwei).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="getzbyteburnfactor">getZbyteBurnFactor</h3>
+<pre class="hljs"><code><div>function getZbyteBurnFactor() public view returns (uint256)
+</div></code></pre>
+<p>Gets the Zbyte burn factor.</p>
+<h4 id="return-values">Return Values</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[0]</td>
+<td>uint256</td>
+<td>The Zbyte burn factor (0-100).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="zbytedplatpaymentfacet">ZbyteDPlatPaymentFacet</h2>
+<h3 id="refundethtopayer">RefundEthToPayer</h3>
+<pre class="hljs"><code><div>event RefundEthToPayer(address, uint256)
+</div></code></pre>
+<p>events
+Error(0x187e1a0c) Amount to be refund in terms of Eth to Payer.</p>
+<h3 id="getpayer">getPayer</h3>
+<pre class="hljs"><code><div>function getPayer(address user_, address dapp_, bytes4 functionSig_, uint256 amount_) public returns (address)
+</div></code></pre>
+<p>Determines the payer for a transaction.</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user_</td>
+<td>address</td>
+<td>The user's address.</td>
+</tr>
+<tr>
+<td>dapp_</td>
+<td>address</td>
+<td>The Dapp's address.</td>
+</tr>
+<tr>
+<td>functionSig_</td>
+<td>bytes4</td>
+<td>The function signature (bytes4).</td>
+</tr>
+<tr>
+<td>amount_</td>
+<td>uint256</td>
+<td>The transaction amount.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="return-values">Return Values</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[0]</td>
+<td>address</td>
+<td>The payer's address.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="preexecute">preExecute</h3>
+<pre class="hljs"><code><div>function preExecute(address dapp_, address user_, bytes4 functionSig_, uint256 ethChargeAmount_) public returns (address _payer)
+</div></code></pre>
+<p>Pre Execution (Finds the payer and charges in ZbyteVToken)</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dapp_</td>
+<td>address</td>
+<td>The Dapp's address.</td>
+</tr>
+<tr>
+<td>user_</td>
+<td>address</td>
+<td>The user's address.</td>
+</tr>
+<tr>
+<td>functionSig_</td>
+<td>bytes4</td>
+<td>The function signature (bytes4).</td>
+</tr>
+<tr>
+<td>ethChargeAmount_</td>
+<td>uint256</td>
+<td>The Ether amount to charge.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="postexecute">postExecute</h3>
+<pre class="hljs"><code><div>function postExecute(address payer_, bool executeResult_, uint256 reqValue_, uint256 gasConsumedEth_, uint256 preChargeEth_) public
+</div></code></pre>
+<p><em>Executes a transaction and handles Zbyte-related operations.</em></p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>payer_</td>
+<td>address</td>
+<td>The address of the payer initiating the execution.</td>
+</tr>
+<tr>
+<td>executeResult_</td>
+<td>bool</td>
+<td>A boolean indicating the success of the execution.</td>
+</tr>
+<tr>
+<td>reqValue_</td>
+<td>uint256</td>
+<td>The amount of Ether sent with the execution request.</td>
+</tr>
+<tr>
+<td>gasConsumedEth_</td>
+<td>uint256</td>
+<td>The amount of Ether consumed for gas during execution.</td>
+</tr>
+<tr>
+<td>preChargeEth_</td>
+<td>uint256</td>
+<td>The amount of Ether charged before execution. This function can only be called by the <code>onlyForwarder</code> modifier.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="zbytedplatregistrationfacet">ZbyteDPlatRegistrationFacet</h2>
+<p>Zbyte DPlat Registration Facet</p>
+<p><em>Zbyte DPlat Registration Facet</em></p>
+<h3 id="zbytedplatproviderregistred">ZbyteDPlatProviderRegistred</h3>
+<pre class="hljs"><code><div>event ZbyteDPlatProviderRegistred(address, bool)
+</div></code></pre>
+<p>events
+event (0x2a3043c9): Zbyte DPlat provider is registered.</p>
+<h3 id="zbytedplatprovideragentregistered">ZbyteDPlatProviderAgentRegistered</h3>
+<pre class="hljs"><code><div>event ZbyteDPlatProviderAgentRegistered(address, address)
+</div></code></pre>
+<p>event (0xb0c62993): Zbyte DPlat provider agent is registered.</p>
+<h3 id="zbytedplatenterpriseregistered">ZbyteDPlatEnterpriseRegistered</h3>
+<pre class="hljs"><code><div>event ZbyteDPlatEnterpriseRegistered(bytes4, address)
+</div></code></pre>
+<p>event (0xa98ff618): Zbyte DPlat enterprise is registered.</p>
+<h3 id="zbytedplatenterpriseuserregistered">ZbyteDPlatEnterpriseUserRegistered</h3>
+<pre class="hljs"><code><div>event ZbyteDPlatEnterpriseUserRegistered(address, bytes4)
+</div></code></pre>
+<p>event (0x83439d26): Zbyte DPlat enterprise user is registered.</p>
+<h3 id="zbytedplatdappregistered">ZbyteDPlatDappRegistered</h3>
+<pre class="hljs"><code><div>event ZbyteDPlatDappRegistered(address, bytes4)
+</div></code></pre>
+<p>event (0x822d049d): Zbyte DPlat dapp is registered.</p>
+<h3 id="zbytedplatenterpriselimitset">ZbyteDPlatEnterpriseLimitSet</h3>
+<pre class="hljs"><code><div>event ZbyteDPlatEnterpriseLimitSet(bytes4, uint256)
+</div></code></pre>
+<p>event (0xf9d1da16): Zbyte DPlat enterprise limit is set.</p>
+<h3 id="provideralreadyregistered">ProviderAlreadyRegistered</h3>
+<pre class="hljs"><code><div>error ProviderAlreadyRegistered(address)
+</div></code></pre>
+<p>errors
+error (0x74f7822a): Provider already registered.</p>
+<h3 id="providernotregistered">ProviderNotRegistered</h3>
+<pre class="hljs"><code><div>error ProviderNotRegistered(address)
+</div></code></pre>
+<p>error (0x232cb27a): Provider not registered.</p>
+<h3 id="invalidenterprise">InvalidEnterprise</h3>
+<pre class="hljs"><code><div>error InvalidEnterprise(bytes4)
+</div></code></pre>
+<p>error (0x128c088b): Invalid enterprise hash.</p>
+<h3 id="provideragentalreadyregistered">ProviderAgentAlreadyRegistered</h3>
+<pre class="hljs"><code><div>error ProviderAgentAlreadyRegistered(address)
+</div></code></pre>
+<p>error (0xe751ad65): Provider Agent is already registered.</p>
+<h3 id="provideragentnotregistered">ProviderAgentNotRegistered</h3>
+<pre class="hljs"><code><div>error ProviderAgentNotRegistered(address)
+</div></code></pre>
+<p>error (0xd0141a6a): Not a registered provider agent.</p>
+<h3 id="invalidprovider">InvalidProvider</h3>
+<pre class="hljs"><code><div>error InvalidProvider(address)
+</div></code></pre>
+<p>error (0x96271599): Invalid provider.</p>
+<h3 id="enterprisealreadyregistered">EnterpriseAlreadyRegistered</h3>
+<pre class="hljs"><code><div>error EnterpriseAlreadyRegistered(bytes4)
+</div></code></pre>
+<p>error (0x6d998cea): Enterprise is already registered.</p>
+<h3 id="enterprisenotregistered">EnterpriseNotRegistered</h3>
+<pre class="hljs"><code><div>error EnterpriseNotRegistered(bytes4)
+</div></code></pre>
+<p>error (0xbd825961): Enterprise is not registered.</p>
+<h3 id="notaregisteredprovider">NotARegisteredProvider</h3>
+<pre class="hljs"><code><div>error NotARegisteredProvider(address)
+</div></code></pre>
+<p>error (0xca61871b): Not a registered provider.</p>
+<h3 id="enterpriseuseralreadyregistered">EnterpriseUserAlreadyRegistered</h3>
+<pre class="hljs"><code><div>error EnterpriseUserAlreadyRegistered(address)
+</div></code></pre>
+<p>error (0x43469070): Enterprise user is already registered.</p>
+<h3 id="enterpriseusernotregistered">EnterpriseUserNotRegistered</h3>
+<pre class="hljs"><code><div>error EnterpriseUserNotRegistered(address)
+</div></code></pre>
+<p>error (0x1b7bfcf8): Enterprise user is not registered.</p>
+<h3 id="enterprisedappalreadyregistered">EnterpriseDappAlreadyRegistered</h3>
+<pre class="hljs"><code><div>error EnterpriseDappAlreadyRegistered(address)
+</div></code></pre>
+<p>error (0xbcb8afa4): Enterprise dapp is already registered.</p>
+<h3 id="enterprisedappnotregistered">EnterpriseDappNotRegistered</h3>
+<pre class="hljs"><code><div>error EnterpriseDappNotRegistered(address)
+</div></code></pre>
+<p>error (0x31b254a2): Enterprise dapp is not registered.</p>
+<h3 id="setregisteredprovider">_setRegisteredProvider</h3>
+<pre class="hljs"><code><div>function _setRegisteredProvider(address provider_, bool set_) internal
+</div></code></pre>
+<p>Internal function to set the registration status of a provider.</p>
+<p><em>This function is used internally to manage the registration status of providers.</em></p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>provider_</td>
+<td>address</td>
+<td>The address of the provider whose registration status will be set.</td>
+</tr>
+<tr>
+<td>set_</td>
+<td>bool</td>
+<td>A boolean indicating whether to set the provider as registered or not.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="setregisteredprovideragent">_setRegisteredProviderAgent</h3>
+<pre class="hljs"><code><div>function _setRegisteredProviderAgent(address agent_, address provider_) internal
+</div></code></pre>
+<p>Internal function to set the registration of a provider agent.</p>
+<p><em>This function is used internally to manage the registration of provider agents.</em></p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>agent_</td>
+<td>address</td>
+<td>The address of the agent whose provider registration will be set.</td>
+</tr>
+<tr>
+<td>provider_</td>
+<td>address</td>
+<td>The address of the provider associated with the agent.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="setregisteredenterprise">_setRegisteredEnterprise</h3>
+<pre class="hljs"><code><div>function _setRegisteredEnterprise(bytes4 enterprise_, address provider_) internal
+</div></code></pre>
+<p>Internal function to set the registration status of an enterprise.</p>
+<p><em>This function is used internally to manage the registration status of enterprises.</em></p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>enterprise_</td>
+<td>bytes4</td>
+<td>The identifier of the enterprise whose registration status will be set.</td>
+</tr>
+<tr>
+<td>provider_</td>
+<td>address</td>
+<td>The address of the provider associated with the enterprise.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="setregisteredenterpriseuser">_setRegisteredEnterpriseUser</h3>
+<pre class="hljs"><code><div>function _setRegisteredEnterpriseUser(address user_, bytes4 enterprise_) internal
+</div></code></pre>
+<p>Internal function to set the registration status of an enterprise user.</p>
+<p><em>This function is used internally to manage the registration status of enterprise users.</em></p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user_</td>
+<td>address</td>
+<td>The address of the user whose enterprise registration will be set.</td>
+</tr>
+<tr>
+<td>enterprise_</td>
+<td>bytes4</td>
+<td>The identifier of the enterprise associated with the user.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="setregisteredenterprisedapp">_setRegisteredEnterpriseDapp</h3>
+<pre class="hljs"><code><div>function _setRegisteredEnterpriseDapp(address dapp_, bytes4 enterprise_) internal
+</div></code></pre>
+<p>Internal function to set the registration status of an enterprise Dapp.</p>
+<p><em>This function is used internally to manage the registration status of enterprise Dapps.</em></p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dapp_</td>
+<td>address</td>
+<td>The address of the Dapp whose enterprise registration will be set.</td>
+</tr>
+<tr>
+<td>enterprise_</td>
+<td>bytes4</td>
+<td>The identifier of the enterprise associated with the Dapp.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="isproviderregistered">isProviderRegistered</h3>
+<pre class="hljs"><code><div>function isProviderRegistered(address provider_) public view returns (bool)
+</div></code></pre>
+<p>Checks if a provider is registered.</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>provider_</td>
+<td>address</td>
+<td>The address of the provider to check.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="return-values">Return Values</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[0]</td>
+<td>bool</td>
+<td>A boolean indicating whether the provider is registered.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="isprovideragentregistered">isProviderAgentRegistered</h3>
+<pre class="hljs"><code><div>function isProviderAgentRegistered(address agent_) public view returns (address)
+</div></code></pre>
+<p>Checks if a provider agent is registered and returns the associated provider's address.</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>agent_</td>
+<td>address</td>
+<td>The address of the provider agent to check.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="return-values">Return Values</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[0]</td>
+<td>address</td>
+<td>The address of the associated registered provider.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="isenterpriseregistered">isEnterpriseRegistered</h3>
+<pre class="hljs"><code><div>function isEnterpriseRegistered(bytes4 enterprise_) public view returns (address)
+</div></code></pre>
+<p>Checks if an enterprise is registered and returns the associated provider's address.</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>enterprise_</td>
+<td>bytes4</td>
+<td>The identifier of the enterprise to check.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="return-values">Return Values</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[0]</td>
+<td>address</td>
+<td>The address of the associated registered provider.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="isenterpriseuserregistered">isEnterpriseUserRegistered</h3>
+<pre class="hljs"><code><div>function isEnterpriseUserRegistered(address user_) public view returns (bytes4)
+</div></code></pre>
+<p>Checks if an enterprise user is registered and returns the associated enterprise identifier.</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user_</td>
+<td>address</td>
+<td>The address of the user to check.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="return-values">Return Values</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[0]</td>
+<td>bytes4</td>
+<td>The identifier of the associated registered enterprise.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="isenterprisedappregistered">isEnterpriseDappRegistered</h3>
+<pre class="hljs"><code><div>function isEnterpriseDappRegistered(address dapp_) public view returns (bytes4)
+</div></code></pre>
+<p>Checks if an enterprise Dapp is registered and returns the associated enterprise identifier.</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dapp_</td>
+<td>address</td>
+<td>The address of the Dapp to check.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="return-values">Return Values</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[0]</td>
+<td>bytes4</td>
+<td>The identifier of the associated registered enterprise.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="registerprovider">registerProvider</h3>
+<pre class="hljs"><code><div>function registerProvider(address provider_) public
+</div></code></pre>
+<p>Registers a provider.</p>
+<p>_Relation between provider, agent, enterprise, users and dapps is as follows:</p>
+<p>zbyte<br>
+____(1) &lt;--------&gt; (n) provider<br>
+____________________________(1) &lt;--------&gt; (n) agent<br>
+____________________________(1) &lt;--------&gt; (n) enterprise<br>
+________________________________________________________(1) &lt;--------&gt; (n) user<br>
+________________________________________________________(1) &lt;--------&gt; (n) dapp</p>
+<p>For an enterprise usecase, an enterprise can allow users to invoke registered dapps.<br>
+Users can invoke the contract functions without any need to hold crypto assets.<br>
+L1 needed for the call is given by the authorized workers and providers compensate them in vERC20.<br>
+<br>
+For opensource usecase,<br>
+Users can invoke the contract functions without any need to hold L1 assets.<br>
+L1 needed for the call is given by the authorized workers and the users compensate them in vERC20<br>
+<br>
+NOTE: When one of the components (provider, enterprise, agent, user or dapp) is deregistered,<br>
+all the other components registered under it remain registered.<br>
+So, if the component is registered again, the entire subtree becomes active again_</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>provider_</td>
+<td>address</td>
+<td>The address of the provider to register.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="deregisterprovider">deregisterProvider</h3>
+<pre class="hljs"><code><div>function deregisterProvider(address provider_) public
+</div></code></pre>
+<p>Deregisters a provider.</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>provider_</td>
+<td>address</td>
+<td>The address of the provider to deregister.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="registerprovideragent">registerProviderAgent</h3>
+<pre class="hljs"><code><div>function registerProviderAgent(address agent_) public
+</div></code></pre>
+<p>Registers a provider agent.</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>agent_</td>
+<td>address</td>
+<td>The address of the provider agent to register.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="deregisterprovideragent">deRegisterProviderAgent</h3>
+<pre class="hljs"><code><div>function deRegisterProviderAgent(address agent_) public
+</div></code></pre>
+<p>Deregisters a provider agent.</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>agent_</td>
+<td>address</td>
+<td>The address of the provider agent to deregister.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="registerenterprise">registerEnterprise</h3>
+<pre class="hljs"><code><div>function registerEnterprise(bytes4 enterprise_) public
+</div></code></pre>
+<p>Registers an enterprise.</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>enterprise_</td>
+<td>bytes4</td>
+<td>The bytes4 identifier of the enterprise to register.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="deregisterenterprise">deregisterEnterprise</h3>
+<pre class="hljs"><code><div>function deregisterEnterprise(bytes4 enterprise_) public
+</div></code></pre>
+<p>Deregisters an enterprise.</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>enterprise_</td>
+<td>bytes4</td>
+<td>The bytes4 identifier of the enterprise to deregister.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="registerenterpriseuser">registerEnterpriseUser</h3>
+<pre class="hljs"><code><div>function registerEnterpriseUser(address user_, bytes4 enterprise_) public
+</div></code></pre>
+<p>Registers an enterprise user.</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user_</td>
+<td>address</td>
+<td>The address of the user to register.</td>
+</tr>
+<tr>
+<td>enterprise_</td>
+<td>bytes4</td>
+<td>The bytes4 identifier of the enterprise.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="deregisterenterpriseuser">deregisterEnterpriseUser</h3>
+<pre class="hljs"><code><div>function deregisterEnterpriseUser(address user_) public
+</div></code></pre>
+<p>Deregisters an enterprise user.</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user_</td>
+<td>address</td>
+<td>The address of the user to deregister.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="registerdapp">registerDapp</h3>
+<pre class="hljs"><code><div>function registerDapp(address dapp_, bytes4 enterprise_) public
+</div></code></pre>
+<p>Registers a Dapp for an enterprise.</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dapp_</td>
+<td>address</td>
+<td>The address of the Dapp to register.</td>
+</tr>
+<tr>
+<td>enterprise_</td>
+<td>bytes4</td>
+<td>The bytes4 identifier of the enterprise.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="deregisterdapp">deregisterDapp</h3>
+<pre class="hljs"><code><div>function deregisterDapp(address dapp_) public
+</div></code></pre>
+<p>Deregisters a Dapp for an enterprise.</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dapp_</td>
+<td>address</td>
+<td>The address of the Dapp to deregister.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="setenterpriselimit">setEnterpriseLimit</h3>
+<pre class="hljs"><code><div>function setEnterpriseLimit(bytes4 enterprise_, uint256 amount_) public
+</div></code></pre>
+<p>Sets the enterprise limit for a specific enterprise.</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>enterprise_</td>
+<td>bytes4</td>
+<td>The bytes4 identifier of the enterprise.</td>
+</tr>
+<tr>
+<td>amount_</td>
+<td>uint256</td>
+<td>The new limit amount.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="zbyteforwarderdplat">ZbyteForwarderDPlat</h2>
+<h3 id="forwarderdplatset">ForwarderDplatSet</h3>
+<pre class="hljs"><code><div>event ForwarderDplatSet(address)
+</div></code></pre>
+<p>events
+event (0xeae099e1): Forwarder address is set.</p>
+<h3 id="forwarderdplatminimumprocessinggasset">ForwarderDplatMinimumProcessingGasSet</h3>
+<pre class="hljs"><code><div>event ForwarderDplatMinimumProcessingGasSet(uint256)
+</div></code></pre>
+<p>event (0x6342abcf): Forwarder minimum processing gas is set.</p>
+<h3 id="forwarderdplatworkerregistered">ForwarderDplatWorkerRegistered</h3>
+<pre class="hljs"><code><div>event ForwarderDplatWorkerRegistered(address, bool)
+</div></code></pre>
+<p>event (0xe1554bda): Forwarder worker is registered.</p>
+<h3 id="refundeth">RefundEth</h3>
+<pre class="hljs"><code><div>event RefundEth(address, uint256)
+</div></code></pre>
+<p>event (0xe5cac075): Refund Eth to payer.</p>
+<h3 id="zbyteforwarderdplatexecute">ZbyteForwarderDPlatExecute</h3>
+<pre class="hljs"><code><div>event ZbyteForwarderDPlatExecute(bool, bytes)
+</div></code></pre>
+<p>event (0x5c3206c6): Execute result and return data</p>
+<h3 id="zeroaddress">ZeroAddress</h3>
+<pre class="hljs"><code><div>error ZeroAddress()
+</div></code></pre>
+<p>errors
+error (0xd92e233d): Address is zero.</p>
+<h3 id="arraysizemismatch">ArraySizeMismatch</h3>
+<pre class="hljs"><code><div>error ArraySizeMismatch(uint256, uint256)
+</div></code></pre>
+<p>error (0xfb3dd446): Array sizes don't match.</p>
+<h3 id="notenoughethersent">NotEnoughEtherSent</h3>
+<pre class="hljs"><code><div>error NotEnoughEtherSent(uint256, uint256)
+</div></code></pre>
+<p>error (0xf9309a09): Not enough ether sent the function.</p>
+<h3 id="failedtosendether">FailedToSendEther</h3>
+<pre class="hljs"><code><div>error FailedToSendEther(address, uint256, bytes)
+</div></code></pre>
+<p>error (0xb7da4a55): Failed to send ether.</p>
+<h3 id="notaworker">NotAWorker</h3>
+<pre class="hljs"><code><div>error NotAWorker(address)
+</div></code></pre>
+<p>error (0x9059e055): Not a worker.</p>
+<h3 id="minprocessinggas">minProcessingGas</h3>
+<pre class="hljs"><code><div>uint256 minProcessingGas
+</div></code></pre>
+<p>Minimum amount of gas needed for a call via the forwarder</p>
+<h3 id="zbytedplat">zbyteDPlat</h3>
+<pre class="hljs"><code><div>address zbyteDPlat
+</div></code></pre>
+<p>Address of the Zbyte DPlat contract</p>
+<h3 id="registeredworkers">registeredWorkers</h3>
+<pre class="hljs"><code><div>mapping(address =&gt; bool) registeredWorkers
+</div></code></pre>
+<p>Mapping of registered workers</p>
+<h3 id="onlyworker">onlyWorker</h3>
+<pre class="hljs"><code><div>modifier onlyWorker()
+</div></code></pre>
+<p>Modifier to restrict a function to only be callable by registered workers.</p>
+<p><em>The function using this modifier will only execute if the sender's address is a registered worker<br>
+It will revert with a 'NotAWorker' error if the sender is not a registered worker.</em></p>
+<h3 id="setminprocessinggas">setMinProcessingGas</h3>
+<pre class="hljs"><code><div>function setMinProcessingGas(uint256 minProcessingGas_) public
+</div></code></pre>
+<p>Sets the minimum processing gas</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>minProcessingGas_</td>
+<td>uint256</td>
+<td>The new minimum processing gas value</td>
+</tr>
+</tbody>
+</table>
+<h3 id="setzbytedplat">setZbyteDPlat</h3>
+<pre class="hljs"><code><div>function setZbyteDPlat(address zbyteDPlat_) public
+</div></code></pre>
+<p>Sets the address of the Zbyte DPlat contract</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>zbyteDPlat_</td>
+<td>address</td>
+<td>The address of the Zbyte DPlat contract</td>
+</tr>
+</tbody>
+</table>
+<h3 id="registerworkers">registerWorkers</h3>
+<pre class="hljs"><code><div>function registerWorkers(address[] workers_, bool[] register_) public
+</div></code></pre>
+<p>Registers workers with the contract</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>workers_</td>
+<td>address[]</td>
+<td>An array of worker addresses</td>
+</tr>
+<tr>
+<td>register_</td>
+<td>bool[]</td>
+<td>An array of boolean values indicating registration status</td>
+</tr>
+</tbody>
+</table>
+<h3 id="zbyteexecute">zbyteExecute</h3>
+<pre class="hljs"><code><div>function zbyteExecute(struct MinimalForwarder.ForwardRequest req_, bytes signature_) public payable returns (bool, bytes)
+</div></code></pre>
+<p>Executes a forward request, ensuring that it is called by a registered worker and handling gas fees.</p>
+<p>_This function facilitates call to a target contract while allowing the user to pay in DPLAT tokens<br>
+The user would have received vERC20 necessary for the call execution.  An equivalent amount is charged in vERC20 from the user<br>
+If the target contract accepts msg.value, equivalent of that is charged from the user during preExecute<br>
+If preExecute collects more vERC20 than that is needed for the call, an event is emitted with the refund amount<br>
+If the target contract sends any refund to the <em>msgSender(), the caller receives the refund directly
+If the target contract call reverts, msg.value is not sent to the target and an event is emitted with the refund amount</em></p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>req_</td>
+<td>struct MinimalForwarder.ForwardRequest</td>
+<td>The forward request data containing the recipient, value, data, and other information.</td>
+</tr>
+<tr>
+<td>signature_</td>
+<td>bytes</td>
+<td>The signature for the forward request (if required).</td>
+</tr>
+</tbody>
+</table>
+<h4 id="return-values">Return Values</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[0]</td>
+<td>bool</td>
+<td>success A boolean indicating whether the execution was successful.</td>
+</tr>
+<tr>
+<td>[1]</td>
+<td>bytes</td>
+<td>returndata The return data from the executed contract.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="withdraweth">withdrawEth</h3>
+<pre class="hljs"><code><div>function withdrawEth(address receiver_) public
+</div></code></pre>
+<p>Allows the owner of the contract to withdraw the contract's Ether balance.</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>receiver_</td>
+<td>address</td>
+<td>The address to which the Ether balance will be sent.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="zbytevtoken">ZbyteVToken</h2>
+<p><em>The ZBYT vERC20 contract</em></p>
+<h3 id="zeroaddress">ZeroAddress</h3>
+<pre class="hljs"><code><div>error ZeroAddress()
+</div></code></pre>
+<p>error (0xd92e233d): Address is address(0)</p>
+<h3 id="cannotsendether">CannotSendEther</h3>
+<pre class="hljs"><code><div>error CannotSendEther()
+</div></code></pre>
+<p>error (0xbf064619): Contract cannot receive ether</p>
+<h3 id="invaliddestroyaddress">InvalidDestroyAddress</h3>
+<pre class="hljs"><code><div>error InvalidDestroyAddress(address, address, address)
+</div></code></pre>
+<p>error (b034fa06): The address sent for destroy is not valid</p>
+<h3 id="paymasteraddressset">PaymasterAddressSet</h3>
+<pre class="hljs"><code><div>event PaymasterAddressSet(address)
+</div></code></pre>
+<p>event (0xa16990bf) Paymaster address is set</p>
+<h3 id="zbytedplataddressset">ZbyteDPlatAddressSet</h3>
+<pre class="hljs"><code><div>event ZbyteDPlatAddressSet(address)
+</div></code></pre>
+<p>event (0xcdb1d336) ZbyteDPlat address is set</p>
+<h3 id="constructor">constructor</h3>
+<pre class="hljs"><code><div>constructor(address burner_) public
+</div></code></pre>
+<p>ZBYT ERC20 constructor</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>burner_</td>
+<td>address</td>
+<td>Burn account address (Tokens are locked here, not destroyed)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pause">pause</h3>
+<pre class="hljs"><code><div>function pause() external
+</div></code></pre>
+<p>Pauses the contract (mint, transfer and burn operations are paused)</p>
+<h3 id="unpause">unpause</h3>
+<pre class="hljs"><code><div>function unpause() external
+</div></code></pre>
+<p>Unpauses the paused contract</p>
+<h3 id="setpaymasteraddress">setPaymasterAddress</h3>
+<pre class="hljs"><code><div>function setPaymasterAddress(address paymaster_) public
+</div></code></pre>
+<p>Set the paymaster (forwarder) address</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>paymaster_</td>
+<td>address</td>
+<td>Paymaster contract address</td>
+</tr>
+</tbody>
+</table>
+<h3 id="setzbytedplataddress">setZbyteDPlatAddress</h3>
+<pre class="hljs"><code><div>function setZbyteDPlatAddress(address dplat_) public
+</div></code></pre>
+<p>Set the DPlat address</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dplat_</td>
+<td>address</td>
+<td>DPlat contract address</td>
+</tr>
+</tbody>
+</table>
+<h3 id="transfer">transfer</h3>
+<pre class="hljs"><code><div>function transfer(address to_, uint256 value_) public returns (bool)
+</div></code></pre>
+<p>Transfer vERC20 from caller's account to receiver's account</p>
+<p><em>requiresAuth ensures that this call can be complely disabled, or only specific accounts can call</em></p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>to_</td>
+<td>address</td>
+<td>Receiver account address</td>
+</tr>
+<tr>
+<td>value_</td>
+<td>uint256</td>
+<td>Amount of tokens to be transferred</td>
+</tr>
+</tbody>
+</table>
+<h3 id="transferfrom">transferFrom</h3>
+<pre class="hljs"><code><div>function transferFrom(address from_, address to_, uint256 value_) public returns (bool)
+</div></code></pre>
+<p>Transfers tokens from a specified address to another address.</p>
+<p><em>requiresAuth ensures that this call can be complely disabled, or only specific accounts can call
+Allowing only specific accounts to perform transferFrom allows controlled transfer of vERC20 in future</em></p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>from_</td>
+<td>address</td>
+<td>The address to transfer tokens from</td>
+</tr>
+<tr>
+<td>to_</td>
+<td>address</td>
+<td>The address to transfer tokens to</td>
+</tr>
+<tr>
+<td>value_</td>
+<td>uint256</td>
+<td>The amount of tokens to transfer</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mint">mint</h3>
+<pre class="hljs"><code><div>function mint(address to_, uint256 amount_) external returns (uint256)
+</div></code></pre>
+<p>mint vZBYT ERC20</p>
+<p><em>The forwarder charges user in this ERC20 token for the contract call.  Approve the tokens to dplat at mint itself.</em></p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>to_</td>
+<td>address</td>
+<td>Receiver address</td>
+</tr>
+<tr>
+<td>amount_</td>
+<td>uint256</td>
+<td>Amount to mint to the address(to_) and approve to dplat</td>
+</tr>
+</tbody>
+</table>
+<h3 id="burn">burn</h3>
+<pre class="hljs"><code><div>function burn(address from_, uint256 amount_) external returns (uint256)
+</div></code></pre>
+<p>Transfer vERC20 to 'burner' address</p>
+<p><em>requiresAuth ensures that this call can be complely disabled, or only specific accounts can call</em></p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>from_</td>
+<td>address</td>
+<td>Sender address to burn tokens from</td>
+</tr>
+<tr>
+<td>amount_</td>
+<td>uint256</td>
+<td>Amount to burn</td>
+</tr>
+</tbody>
+</table>
+<h3 id="destroy">destroy</h3>
+<pre class="hljs"><code><div>function destroy(address from_) external returns (uint256)
+</div></code></pre>
+<p>Destroy vERC20</p>
+<p><em>This is called during withdraw / reconciliation only.  Withdraw is allowed only from the paymaster or burner address</em></p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>from_</td>
+<td>address</td>
+<td>Paymaster/burner address from which tokens are destroyed</td>
+</tr>
+</tbody>
+</table>
+<h3 id="receive">receive</h3>
+<pre class="hljs"><code><div>receive() external payable
+</div></code></pre>
+<p>receive function (reverts)</p>
+<h2 id="iescrowerc20">IEscrowERC20</h2>
+<h3 id="invalidrelay">InvalidRelay</h3>
+<pre class="hljs"><code><div>error InvalidRelay(address)
+</div></code></pre>
+<p>Caller is not a valid relay</p>
+<h3 id="invalidcallbackmessage">InvalidCallbackMessage</h3>
+<pre class="hljs"><code><div>error InvalidCallbackMessage(uint256, uint256, uint256, uint256)
+</div></code></pre>
+<p>event (0xd6facdff): The callback received was invalid</p>
+<h3 id="invalidcallbackack">InvalidCallbackAck</h3>
+<pre class="hljs"><code><div>error InvalidCallbackAck(uint256, bytes32, bool, uint256)
+</div></code></pre>
+<p>event (0xcd9d7bb0): The ack in callback received was not found</p>
+<h3 id="verc20addressset">vERC20AddressSet</h3>
+<pre class="hljs"><code><div>event vERC20AddressSet(address, uint256)
+</div></code></pre>
+<p>event (0x1a40ce6d): vERC20 contract address is set</p>
+<h3 id="relaywrapperaddressset">RelayWrapperAddressSet</h3>
+<pre class="hljs"><code><div>event RelayWrapperAddressSet(address)
+</div></code></pre>
+<p>event (0x95290bcc): Core relay wrapper contract address is set</p>
+<h3 id="erc20deposited">ERC20Deposited</h3>
+<pre class="hljs"><code><div>event ERC20Deposited(address, address, uint256, uint256, bytes32)
+</div></code></pre>
+<p>event (0xcae09af7): ERC20 tokens deposited</p>
+<h3 id="erc20depositfailed">ERC20DepositFailed</h3>
+<pre class="hljs"><code><div>event ERC20DepositFailed(address, address, uint256, uint256, bytes32)
+</div></code></pre>
+<p>event (0x0583eefc): ERC20 tokens deposit failed</p>
+<h3 id="erc20depositconfirmed">ERC20DepositConfirmed</h3>
+<pre class="hljs"><code><div>event ERC20DepositConfirmed(bytes32, bool, uint256)
+</div></code></pre>
+<p>event (0xf64578a8): ERC20 tokens deposit confirmed</p>
+<h3 id="erc20withdrawn">ERC20Withdrawn</h3>
+<pre class="hljs"><code><div>event ERC20Withdrawn(address, address, address, uint256, bytes32)
+</div></code></pre>
+<p>event (0x8b923c21): ERC20 tokens withdrawn</p>
+<h3 id="erc20withdrawfailed">ERC20WithdrawFailed</h3>
+<pre class="hljs"><code><div>event ERC20WithdrawFailed(address, address, address, uint256, bytes32)
+</div></code></pre>
+<p>event (0x2b4d7cea): ERC20 tokens withdraw failed</p>
+<h3 id="erc20withdrawconfirmed">ERC20WithdrawConfirmed</h3>
+<pre class="hljs"><code><div>event ERC20WithdrawConfirmed(bytes32, bool, uint256)
+</div></code></pre>
+<p>event (0xf5a60bd1): ERC20 tokens withdraw confirmed</p>
+<h3 id="treasuryaddressset">TreasuryAddressSet</h3>
+<pre class="hljs"><code><div>event TreasuryAddressSet(address, address)
+</div></code></pre>
+<p>event (0x1db696c9): The Treasury address is set</p>
+<h3 id="getnonce">getNonce</h3>
+<pre class="hljs"><code><div>function getNonce() external view returns (uint256)
+</div></code></pre>
+<h3 id="totalsupplyallchains">totalSupplyAllChains</h3>
+<pre class="hljs"><code><div>function totalSupplyAllChains() external view returns (uint256)
+</div></code></pre>
+<h3 id="totalsupply">totalSupply</h3>
+<pre class="hljs"><code><div>function totalSupply(uint256 chain_) external view returns (uint256)
+</div></code></pre>
+<h3 id="asset">asset</h3>
+<pre class="hljs"><code><div>function asset() external view returns (address)
+</div></code></pre>
+<h3 id="callbackhandler">callbackHandler</h3>
+<pre class="hljs"><code><div>function callbackHandler(uint256 chain_, bytes32 ack_, bool success_, uint256 retval_) external returns (uint256)
+</div></code></pre>
+<h2 id="ienterprisepaymentpolicy">IEnterprisePaymentPolicy</h2>
+<h3 id="isuserordappeligibleforpayment">isUserOrDappEligibleForPayment</h3>
+<pre class="hljs"><code><div>function isUserOrDappEligibleForPayment(address user_, address dapp_, bytes4 functionSig_, uint256 amount_) external returns (bool)
+</div></code></pre>
+<h2 id="izbytedplat">IZbyteDPlat</h2>
+<h3 id="preexecute">preExecute</h3>
+<pre class="hljs"><code><div>function preExecute(address user_, address dapp_, bytes4 functionSig_, uint256 chargeEth_) external returns (address)
+</div></code></pre>
+<h3 id="postexecute">postExecute</h3>
+<pre class="hljs"><code><div>function postExecute(address payer_, bool executeResult_, uint256 reqValue_, uint256 gasConsumedEth_, uint256 preChargeEth_) external
+</div></code></pre>
+<h2 id="iverc20">IvERC20</h2>
+<p><em>Interface for a contract representing a variation of the ERC20 token.</em></p>
+<h3 id="burn">burn</h3>
+<pre class="hljs"><code><div>function burn(address to, uint256 amount) external returns (uint256)
+</div></code></pre>
+<p><em>Burns a specified amount of tokens by transferring them to the specified address.</em></p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>to</td>
+<td>address</td>
+<td>The address to which the tokens will be burned.</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>uint256</td>
+<td>The amount of tokens to be burned.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mint">mint</h3>
+<pre class="hljs"><code><div>function mint(address to, uint256 amount) external returns (uint256)
+</div></code></pre>
+<p><em>Mints a specified amount of tokens and transfers them to the specified address.</em></p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>to</td>
+<td>address</td>
+<td>The address to which the tokens will be minted and transferred.</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>uint256</td>
+<td>The amount of tokens to be minted.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="irelaywrapper">IRelayWrapper</h2>
+<h3 id="performcrosschaincall">performCrossChainCall</h3>
+<pre class="hljs"><code><div>function performCrossChainCall(uint256 relay_, uint256 srcChain_, uint256 destChain_, address destContract_, bytes destCallData_, bytes32 ack_, address callbackContract_, bytes relayParams_) external payable returns (bool)
+</div></code></pre>
+<h3 id="isvalidrelay">isValidRelay</h3>
+<pre class="hljs"><code><div>function isValidRelay(uint256 chainId, address relay_) external returns (bool)
+</div></code></pre>
+<h3 id="updatepayload">updatePayload</h3>
+<pre class="hljs"><code><div>function updatePayload(uint256 destChain_, address destContract_, bytes32 ack_, address callbackContract_, bytes data_) external pure returns (bytes)
+</div></code></pre>
+<h2 id="relaywrapper">RelayWrapper</h2>
+<p><em>The Relay wrapper to facilitate ZBYT deposit/mint</em></p>
+<h3 id="invalidcallbackcontract">InvalidCallBackContract</h3>
+<pre class="hljs"><code><div>error InvalidCallBackContract()
+</div></code></pre>
+<p>error (0xeed987a0): The callback contract address is 0 but ack is set</p>
+<h3 id="relaycontractnotset">RelayContractNotSet</h3>
+<pre class="hljs"><code><div>error RelayContractNotSet(uint256, address, address)
+</div></code></pre>
+<p>error (0x089c2a3e): The relay contract address is not set for the given relay id</p>
+<h3 id="callernotescrow">CallerNotEscrow</h3>
+<pre class="hljs"><code><div>error CallerNotEscrow(address, address)
+</div></code></pre>
+<p>error (0x5c87504d): Caller is not the registered escrow</p>
+<h3 id="escrowaddressset">EscrowAddressSet</h3>
+<pre class="hljs"><code><div>event EscrowAddressSet(address)
+</div></code></pre>
+<p>error (0x14229a64): Address of escrow contract is set</p>
+<h3 id="relayaddressset">RelayAddressSet</h3>
+<pre class="hljs"><code><div>event RelayAddressSet(uint256, uint256, address)
+</div></code></pre>
+<p>error (0xbe32fe92): Address of Relay is set for given chain id and relay id</p>
+<h3 id="relaycontract">relayContract</h3>
+<pre class="hljs"><code><div>mapping(uint256 =&gt; mapping(uint256 =&gt; address)) relayContract
+</div></code></pre>
+<p>mapping of chain id =&gt; relay id =&gt; relay address</p>
+<p><em>relay id is an identifier for relay (e.g., 0 -&gt; zbyte relay, 1 -&gt; axelar, etc)</em></p>
+<h3 id="chainrelays">chainRelays</h3>
+<pre class="hljs"><code><div>mapping(uint256 =&gt; uint256[]) chainRelays
+</div></code></pre>
+<p>mapping of chain id =&gt; array of valid relay ids</p>
+<h3 id="escrow">escrow</h3>
+<pre class="hljs"><code><div>address escrow
+</div></code></pre>
+<p>Registered escrow contract address</p>
+<h3 id="constructor">constructor</h3>
+<pre class="hljs"><code><div>constructor(address forwarder_) public
+</div></code></pre>
+<p>Relay Wrapper constructor</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>forwarder_</td>
+<td>address</td>
+<td>Forwarder contact address</td>
+</tr>
+</tbody>
+</table>
+<h3 id="onlyescrow">onlyEscrow</h3>
+<pre class="hljs"><code><div>modifier onlyEscrow()
+</div></code></pre>
+<p>Modifier to check if the caller is the registered escrow</p>
+<h3 id="setescrowaddress">setEscrowAddress</h3>
+<pre class="hljs"><code><div>function setEscrowAddress(address escrow_) public
+</div></code></pre>
+<p>Set the address of Escrow contract</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>escrow_</td>
+<td>address</td>
+<td>Escrow contract address</td>
+</tr>
+</tbody>
+</table>
+<h3 id="setrelayaddress">setRelayAddress</h3>
+<pre class="hljs"><code><div>function setRelayAddress(uint256 chain_, uint256 relayid_, address relay_) public
+</div></code></pre>
+<p>Set the address of Relay contract</p>
+<p><em>set the relay address to 0 to disable the relay</em></p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>chain_</td>
+<td>uint256</td>
+<td>Chain id for which the relay address is set</td>
+</tr>
+<tr>
+<td>relayid_</td>
+<td>uint256</td>
+<td>Relay id for which relay address is set</td>
+</tr>
+<tr>
+<td>relay_</td>
+<td>address</td>
+<td>Relay contract Address</td>
+</tr>
+</tbody>
+</table>
+<h3 id="isvalidrelay">isValidRelay</h3>
+<pre class="hljs"><code><div>function isValidRelay(uint256 chain_, address relay_) external view returns (bool)
+</div></code></pre>
+<p>Verify if given relay is a valid one for the given chain id</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>chain_</td>
+<td>uint256</td>
+<td>Chain id for which the relay address is set</td>
+</tr>
+<tr>
+<td>relay_</td>
+<td>address</td>
+<td>Relay contract Address</td>
+</tr>
+</tbody>
+</table>
+<h3 id="performcrosschaincall">performCrossChainCall</h3>
+<pre class="hljs"><code><div>function performCrossChainCall(uint256 relayid_, uint256 srcChain_, uint256 destChain_, address destContract_, bytes destCallData_, bytes32 ack_, address callbackContract_, bytes relayParams_) external payable returns (bool)
+</div></code></pre>
+<p>Initiate the cross chain call for deposit/mint</p>
+<p><em>This function can be called only the the registered escrow contract</em></p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>relayid_</td>
+<td>uint256</td>
+<td>Relay id that should be used for this call</td>
+</tr>
+<tr>
+<td>srcChain_</td>
+<td>uint256</td>
+<td>Chain id of source chain</td>
+</tr>
+<tr>
+<td>destChain_</td>
+<td>uint256</td>
+<td>Chain id of destination chain</td>
+</tr>
+<tr>
+<td>destContract_</td>
+<td>address</td>
+<td>Address of contract to be called on destination chain</td>
+</tr>
+<tr>
+<td>destCallData_</td>
+<td>bytes</td>
+<td>Calldata for the call on destination chain</td>
+</tr>
+<tr>
+<td>ack_</td>
+<td>bytes32</td>
+<td>Unique hash of the cross chain deposit/mint call</td>
+</tr>
+<tr>
+<td>callbackContract_</td>
+<td>address</td>
+<td>Address of contract on source chain to handle callback</td>
+</tr>
+<tr>
+<td>relayParams_</td>
+<td>bytes</td>
+<td>Additional data that can be sent to the relay</td>
+</tr>
+</tbody>
+</table>
+<h3 id="updatepayload">updatePayload</h3>
+<pre class="hljs"><code><div>function updatePayload(uint256 destChain_, address destContract_, bytes32 ack_, address callbackContract_, bytes data_) public pure returns (bytes)
+</div></code></pre>
+<p>Update the payload to include additional information</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>destChain_</td>
+<td>uint256</td>
+<td>Chain id of destination chain</td>
+</tr>
+<tr>
+<td>destContract_</td>
+<td>address</td>
+<td>Address of contract to be called on destination chain</td>
+</tr>
+<tr>
+<td>ack_</td>
+<td>bytes32</td>
+<td>Unique hash of the cross chain deposit/mint call</td>
+</tr>
+<tr>
+<td>callbackContract_</td>
+<td>address</td>
+<td>Address of contract on source chain to handle callback</td>
+</tr>
+<tr>
+<td>data_</td>
+<td>bytes</td>
+<td>original payload</td>
+</tr>
+</tbody>
+</table>
+<h3 id="msgsender">_msgSender</h3>
+<pre class="hljs"><code><div>function _msgSender() internal view returns (address sender)
+</div></code></pre>
+<p>ERC2771 _msgSender override</p>
+<h3 id="msgdata">_msgData</h3>
+<pre class="hljs"><code><div>function _msgData() internal view returns (bytes)
+</div></code></pre>
+<p>ERC2771 _msgData override</p>
+<h2 id="zbyterelay">ZbyteRelay</h2>
+<p><em>The Zbyte Relay contract</em></p>
+<h3 id="notapproved">NotApproved</h3>
+<pre class="hljs"><code><div>error NotApproved(address)
+</div></code></pre>
+<p>error (0x0ca968d8): Caller is not an approved caller</p>
+<h3 id="notrelaywrapperorself">NotRelayWrapperOrSelf</h3>
+<pre class="hljs"><code><div>error NotRelayWrapperOrSelf(address, address)
+</div></code></pre>
+<p>error (0x26fb3778): Caller is not the RelayWrapper or this contract</p>
+<h3 id="invalidchain">InvalidChain</h3>
+<pre class="hljs"><code><div>error InvalidChain(uint256, uint256)
+</div></code></pre>
+<p>error (0xc16b00ce): Current chain id does not match with the one sent in payload</p>
+<h3 id="relaycallremotereceived">RelayCallRemoteReceived</h3>
+<pre class="hljs"><code><div>event RelayCallRemoteReceived(uint256, address, uint256, address, bytes)
+</div></code></pre>
+<p>event (0x9a3d7ba1): Received the request to perform a remote call</p>
+<h3 id="relayreceivecallexecuted">RelayReceiveCallExecuted</h3>
+<pre class="hljs"><code><div>event RelayReceiveCallExecuted(bytes, bool, uint256)
+</div></code></pre>
+<p>event (0xceeaa702): Executed the call request from a source chain</p>
+<h3 id="relaywrapperset">RelayWrapperSet</h3>
+<pre class="hljs"><code><div>event RelayWrapperSet(address)
+</div></code></pre>
+<p>event (0x2658b600): Relay Wrapper address is set</p>
+<h3 id="relayapproveeadded">RelayApproveeAdded</h3>
+<pre class="hljs"><code><div>event RelayApproveeAdded(address)
+</div></code></pre>
+<p>event (0xe89d9bcd): Approvee address is set</p>
+<h3 id="approved">approved</h3>
+<pre class="hljs"><code><div>mapping(address =&gt; bool) approved
+</div></code></pre>
+<p>mapping of approved addresses.  Only these addresses can invoke the 'receiveCall'</p>
+<h3 id="relaywrapper">relayWrapper</h3>
+<pre class="hljs"><code><div>contract IRelayWrapper relayWrapper
+</div></code></pre>
+<p>Address of the RelayWrapper (on core)</p>
+<h3 id="constructor">constructor</h3>
+<pre class="hljs"><code><div>constructor(address forwarder_) public
+</div></code></pre>
+<p>Zbyte Relay constructor</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>forwarder_</td>
+<td>address</td>
+<td>Forwarder contact address</td>
+</tr>
+</tbody>
+</table>
+<h3 id="onlyapprovedorself">onlyApprovedOrSelf</h3>
+<pre class="hljs"><code><div>modifier onlyApprovedOrSelf()
+</div></code></pre>
+<p>Modifier to check if the caller is approved or this contract</p>
+<h3 id="onlyrelaywrapperorself">onlyRelayWrapperOrSelf</h3>
+<pre class="hljs"><code><div>modifier onlyRelayWrapperOrSelf()
+</div></code></pre>
+<p>Modifier to check if the caller is RelayWrapper or this contract</p>
+<h3 id="setrelaywrapper">setRelayWrapper</h3>
+<pre class="hljs"><code><div>function setRelayWrapper(address wrapper_) external
+</div></code></pre>
+<p>Set the RelayWrapper contract address</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>wrapper_</td>
+<td>address</td>
+<td>RelayWrapper contact address</td>
+</tr>
+</tbody>
+</table>
+<h3 id="addrelayapprovee">addRelayApprovee</h3>
+<pre class="hljs"><code><div>function addRelayApprovee(address approvee_) external
+</div></code></pre>
+<p>Set the approvee address</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>approvee_</td>
+<td>address</td>
+<td>Address of the approvee</td>
+</tr>
+</tbody>
+</table>
+<h3 id="callremote">callRemote</h3>
+<pre class="hljs"><code><div>function callRemote(uint256 destChain_, address destRelay_, bytes payload_) public payable returns (bool)
+</div></code></pre>
+<p>Initiate the remote chain call</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>destChain_</td>
+<td>uint256</td>
+<td>Chain id of destination chain</td>
+</tr>
+<tr>
+<td>destRelay_</td>
+<td>address</td>
+<td>Address of the trusted relay on destination chain</td>
+</tr>
+<tr>
+<td>payload_</td>
+<td>bytes</td>
+<td>Payload to be used for the destination call</td>
+</tr>
+</tbody>
+</table>
+<h3 id="receivecall">receiveCall</h3>
+<pre class="hljs"><code><div>function receiveCall(uint256 srcChain_, address srcRelay_, bytes payload_) external returns (bool)
+</div></code></pre>
+<p>Handle the call received from source chain</p>
+<p><em>Call can be made only by approved accounts or self</em></p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>srcChain_</td>
+<td>uint256</td>
+<td>Chain id of source chain</td>
+</tr>
+<tr>
+<td>srcRelay_</td>
+<td>address</td>
+<td>Address of the trusted relay on source chain</td>
+</tr>
+<tr>
+<td>payload_</td>
+<td>bytes</td>
+<td>Payload to be used for the call on this chain</td>
+</tr>
+</tbody>
+</table>
+<h3 id="updatepayload">updatePayload</h3>
+<pre class="hljs"><code><div>function updatePayload(uint256 destChain_, address destContract_, bytes32 ack_, address callbackContract_, bytes data_) public pure returns (bytes)
+</div></code></pre>
+<p>Update the payload to include additional information</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>destChain_</td>
+<td>uint256</td>
+<td>Chain id of destination chain</td>
+</tr>
+<tr>
+<td>destContract_</td>
+<td>address</td>
+<td>Address of contract to be called on destination chain</td>
+</tr>
+<tr>
+<td>ack_</td>
+<td>bytes32</td>
+<td>Unique hash of the cross chain deposit/mint call</td>
+</tr>
+<tr>
+<td>callbackContract_</td>
+<td>address</td>
+<td>Address of contract on source chain to handle callback</td>
+</tr>
+<tr>
+<td>data_</td>
+<td>bytes</td>
+<td>original payload</td>
+</tr>
+</tbody>
+</table>
+<h3 id="msgsender">_msgSender</h3>
+<pre class="hljs"><code><div>function _msgSender() internal view returns (address sender)
+</div></code></pre>
+<p>ERC2771 _msgSender override</p>
+<h3 id="msgdata">_msgData</h3>
+<pre class="hljs"><code><div>function _msgData() internal view returns (bytes)
+</div></code></pre>
+<p>ERC2771 _msgData override</p>
+<h2 id="sampledstoredapp">SampleDstoreDapp</h2>
+<h3 id="dstoreset">DStoreSet</h3>
+<pre class="hljs"><code><div>event DStoreSet(address, uint256)
+</div></code></pre>
+<h3 id="storedvalue">storedValue</h3>
+<pre class="hljs"><code><div>uint8 storedValue
+</div></code></pre>
+<h3 id="storedby">storedBy</h3>
+<pre class="hljs"><code><div>address storedBy
+</div></code></pre>
+<h3 id="constructor">constructor</h3>
+<pre class="hljs"><code><div>constructor(address forwarder_) public
+</div></code></pre>
+<h3 id="storevalue">storeValue</h3>
+<pre class="hljs"><code><div>function storeValue(uint8 _value) public
+</div></code></pre>
+<h2 id="auth">Auth</h2>
+<h3 id="userroleupdated">UserRoleUpdated</h3>
+<pre class="hljs"><code><div>event UserRoleUpdated(address user, uint8 role, bool enabled)
+</div></code></pre>
+<h3 id="publiccapabilityupdated">PublicCapabilityUpdated</h3>
+<pre class="hljs"><code><div>event PublicCapabilityUpdated(bytes4 functionSig, bool enabled)
+</div></code></pre>
+<h3 id="rolecapabilityupdated">RoleCapabilityUpdated</h3>
+<pre class="hljs"><code><div>event RoleCapabilityUpdated(uint8 role, bytes4 functionSig, bool enabled)
+</div></code></pre>
+<h3 id="diamondstorage">DiamondStorage</h3>
+<pre class="hljs"><code><div>struct DiamondStorage {
+  mapping(address =&gt; bytes32) getUserRoles;
+  mapping(bytes4 =&gt; bool) isCapabilityPublic;
+  mapping(bytes4 =&gt; bytes32) getRolesWithCapability;
+}
+</div></code></pre>
+<h3 id="diamondstorage">diamondStorage</h3>
+<pre class="hljs"><code><div>function diamondStorage() internal pure returns (struct Auth.DiamondStorage ds)
+</div></code></pre>
+<h3 id="getowner">getOwner</h3>
+<pre class="hljs"><code><div>function getOwner() public virtual returns (address)
+</div></code></pre>
+<h3 id="doesuserhaverole">doesUserHaveRole</h3>
+<pre class="hljs"><code><div>function doesUserHaveRole(address user, uint8 role) public view returns (bool)
+</div></code></pre>
+<h3 id="doesrolehavecapability">doesRoleHaveCapability</h3>
+<pre class="hljs"><code><div>function doesRoleHaveCapability(uint8 role, bytes4 functionSig) public view returns (bool)
+</div></code></pre>
+<h3 id="cancall">canCall</h3>
+<pre class="hljs"><code><div>function canCall(address user, bytes4 functionSig) public view returns (bool)
+</div></code></pre>
+<h3 id="isauthorized">isAuthorized</h3>
+<pre class="hljs"><code><div>function isAuthorized(address user, bytes4 functionSig) internal view returns (bool)
+</div></code></pre>
+<h3 id="isauthorizedorowner">isAuthorizedOrOwner</h3>
+<pre class="hljs"><code><div>function isAuthorizedOrOwner(address user, bytes4 functionSig) internal returns (bool)
+</div></code></pre>
+<h3 id="requiresauth">requiresAuth</h3>
+<pre class="hljs"><code><div>modifier requiresAuth()
+</div></code></pre>
+<h3 id="requiresauthorowner">requiresAuthOrOwner</h3>
+<pre class="hljs"><code><div>modifier requiresAuthOrOwner()
+</div></code></pre>
+<h3 id="setpubliccapability">setPublicCapability</h3>
+<pre class="hljs"><code><div>function setPublicCapability(bytes4 functionSig, bool enabled) public
+</div></code></pre>
+<h3 id="setrolecapability">setRoleCapability</h3>
+<pre class="hljs"><code><div>function setRoleCapability(uint8 role, bytes4 functionSig, bool enabled) public
+</div></code></pre>
+<h3 id="setuserrole">setUserRole</h3>
+<pre class="hljs"><code><div>function setUserRole(address user, uint8 role, bool enabled) public
+</div></code></pre>
+<h2 id="authdiamond">AuthDiamond</h2>
+<h3 id="getowner">getOwner</h3>
+<pre class="hljs"><code><div>function getOwner() public virtual returns (address)
+</div></code></pre>
+<h2 id="authsimple">AuthSimple</h2>
+<h3 id="getowner">getOwner</h3>
+<pre class="hljs"><code><div>function getOwner() public virtual returns (address)
+</div></code></pre>
+<h2 id="libcommonerrors">LibCommonErrors</h2>
+<h3 id="zeroaddress">ZeroAddress</h3>
+<pre class="hljs"><code><div>error ZeroAddress()
+</div></code></pre>
+<h3 id="notowner">NotOwner</h3>
+<pre class="hljs"><code><div>error NotOwner()
+</div></code></pre>
+<h3 id="unauthorized">Unauthorized</h3>
+<pre class="hljs"><code><div>error Unauthorized()
+</div></code></pre>
+<h3 id="arraysizemismatched">ArraySizeMismatched</h3>
+<pre class="hljs"><code><div>error ArraySizeMismatched(uint256, uint256)
+</div></code></pre>
+<h2 id="libzbyteforwarderfacet">LibZbyteForwarderFacet</h2>
+<p>The Zbyte Forwarder Facet</p>
+<p><em>The Zbyte Forwarder Facet</em></p>
+<h3 id="diamondstorage">DiamondStorage</h3>
+<pre class="hljs"><code><div>struct DiamondStorage {
+  address trustedForwarder;
+}
+</div></code></pre>
+<h3 id="diamondstorage">diamondStorage</h3>
+<pre class="hljs"><code><div>function diamondStorage() internal pure returns (struct LibZbyteForwarderFacet.DiamondStorage ds)
+</div></code></pre>
+<p>Retrieves the DiamondStorage struct for the library.</p>
+<p><em>trustedForwarder: Address of the trusted forwarder</em></p>
+<h3 id="settrustedforwarder">_setTrustedForwarder</h3>
+<pre class="hljs"><code><div>function _setTrustedForwarder(address forwarder_) internal
+</div></code></pre>
+<p>Sets the address of trusted forwarder</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>forwarder_</td>
+<td>address</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="gettrustedforwarder">_getTrustedForwarder</h3>
+<pre class="hljs"><code><div>function _getTrustedForwarder() internal view returns (address)
+</div></code></pre>
+<p>Gets the address of trusted forwarder</p>
+<h3 id="istrustedforwarder">isTrustedForwarder</h3>
+<pre class="hljs"><code><div>function isTrustedForwarder(address forwarder_) internal view returns (bool)
+</div></code></pre>
+<p>Checks if the given forwarder is the trusted forwarder</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>forwarder_</td>
+<td>address</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="zbytecontext">ZbyteContext</h2>
+<p><em>ERC2771Context with a function to set forwarder</em></p>
+<h3 id="cannotsendether">CannotSendEther</h3>
+<pre class="hljs"><code><div>error CannotSendEther()
+</div></code></pre>
+<p>error (0xbf064619): Contract cannot receive ether</p>
+<h3 id="zeroaddress">ZeroAddress</h3>
+<pre class="hljs"><code><div>error ZeroAddress()
+</div></code></pre>
+<p>error (0xd92e233d): Address is address(0)</p>
+<h3 id="zerovalue">ZeroValue</h3>
+<pre class="hljs"><code><div>error ZeroValue()
+</div></code></pre>
+<p>error(): Value sent is 0</p>
+<h3 id="forwarderset">ForwarderSet</h3>
+<pre class="hljs"><code><div>event ForwarderSet(address, address)
+</div></code></pre>
+<p>event (0x94aed472): Forwarder address is changed</p>
+<h3 id="istrustedforwarder">isTrustedForwarder</h3>
+<pre class="hljs"><code><div>function isTrustedForwarder(address forwarder_) public view virtual returns (bool)
+</div></code></pre>
+<p>Check if the given address is the trusted forwarder</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>forwarder_</td>
+<td>address</td>
+<td>Address to check</td>
+</tr>
+</tbody>
+</table>
+<h4 id="return-values">Return Values</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[0]</td>
+<td>bool</td>
+<td>true if forwarder_ is trusted forwarder</td>
+</tr>
+</tbody>
+</table>
+<h3 id="settrustedforwarder">_setTrustedForwarder</h3>
+<pre class="hljs"><code><div>function _setTrustedForwarder(address forwarder_) internal
+</div></code></pre>
+<p>Set a trusted forwarder address</p>
+<p><em>emits ForwarderSet on success</em></p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>forwarder_</td>
+<td>address</td>
+<td>Trusted forwarder address</td>
+</tr>
+</tbody>
+</table>
+<h3 id="settrustedforwarder">setTrustedForwarder</h3>
+<pre class="hljs"><code><div>function setTrustedForwarder(address forwarder_) public
+</div></code></pre>
+<p>Set the forwarder contract address</p>
+<p><em>onlyOwner can call</em></p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>forwarder_</td>
+<td>address</td>
+<td>Frwarder conract address</td>
+</tr>
+</tbody>
+</table>
+<h3 id="msgsender">_msgSender</h3>
+<pre class="hljs"><code><div>function _msgSender() internal view virtual returns (address sender)
+</div></code></pre>
+<p>Extract true caller if called via trusted forwarder</p>
+<h3 id="msgdata">_msgData</h3>
+<pre class="hljs"><code><div>function _msgData() internal view virtual returns (bytes)
+</div></code></pre>
+<p>Extract data if called via trusted forwarder</p>
+<h2 id="zbytecontextdiamond">ZbyteContextDiamond</h2>
+<h3 id="notaforwarder">NotAForwarder</h3>
+<pre class="hljs"><code><div>error NotAForwarder()
+</div></code></pre>
+<p>error (0x5ac85bab): Caller is not a forwarder</p>
+<h3 id="onlyowner">onlyOwner</h3>
+<pre class="hljs"><code><div>modifier onlyOwner()
+</div></code></pre>
+<p>modifier to enforce that the caller is the owner</p>
+<h3 id="onlyforwarder">onlyForwarder</h3>
+<pre class="hljs"><code><div>modifier onlyForwarder()
+</div></code></pre>
+<p>modifier to enforce that the caller is the forwarder</p>
+<h3 id="msgsender">_msgSender</h3>
+<pre class="hljs"><code><div>function _msgSender() internal view returns (address ret)
+</div></code></pre>
+<p>Extract true caller if called via trusted forwarder</p>
+<h3 id="msgdata">_msgData</h3>
+<pre class="hljs"><code><div>function _msgData() internal view returns (bytes ret)
+</div></code></pre>
+<p>Extract data if called via trusted forwarder</p>
+<h2 id="zbyteforwarderfacet">ZbyteForwarderFacet</h2>
+<h3 id="forwarderset">ForwarderSet</h3>
+<pre class="hljs"><code><div>event ForwarderSet(address)
+</div></code></pre>
+<p>event (0x94aed472): Forwarder address is changed</p>
+<h3 id="setforwarder">setForwarder</h3>
+<pre class="hljs"><code><div>function setForwarder(address forwarder_) public
+</div></code></pre>
+<p>Set the address of trusted forwarder</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>forwarder_</td>
+<td>address</td>
+<td>Address of the trusted forwarder</td>
+</tr>
+</tbody>
+</table>
+<h3 id="gettrustedforwarder">getTrustedForwarder</h3>
+<pre class="hljs"><code><div>function getTrustedForwarder() public view returns (address)
+</div></code></pre>
+<p>Get the address of trusted forwarder</p>
+
+</body>
+</html>
