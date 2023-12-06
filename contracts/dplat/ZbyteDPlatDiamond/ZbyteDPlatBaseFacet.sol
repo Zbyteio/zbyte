@@ -25,6 +25,17 @@ contract ZbyteDPlatBaseFacet is ZbyteContextDiamond {
     event ZbyteValueInNativeEthGweiSet(uint256);
     /// @notice event (0xd7a7cf8c): Zbyte burn factor is set.
     event ZbyteBurnFactorSet(uint256);
+    /// @notice event (0xf208822b): Zbyte authorized price modifiers registered.
+    event ZbytePriceModifierRegistered(address,bool);
+
+
+    error NotAuthorized(address);
+
+    modifier onlyAuthorized() {
+        LibDPlatBase.DiamondStorage storage _dsb = LibDPlatBase.diamondStorage();
+        if (!_dsb.authorizedPriceModifiers[_msgSender()]) revert NotAuthorized(_msgSender());
+        _;
+    }
 
     /// @notice Sets the address of the ZbyteVToken.
     /// @param zbyteVToken_ The address of the ZbyteVToken.
@@ -50,10 +61,20 @@ contract ZbyteDPlatBaseFacet is ZbyteContextDiamond {
 
     /// @notice Sets the value of Zbyte in native Ether (in Gwei).
     /// @param zbyteValueInNativeEthGwei_ The value of Zbyte in native Ether (in Gwei).
-    function setZbyteValueInNativeEthGwei(uint256 zbyteValueInNativeEthGwei_) public onlyOwner {
+    function setZbyteValueInNativeEthGwei(uint256 zbyteValueInNativeEthGwei_) public onlyAuthorized {
         LibDPlatBase.DiamondStorage storage _dsb = LibDPlatBase.diamondStorage();
         _dsb.zbyteValueInNativeEthGwei = zbyteValueInNativeEthGwei_;
         emit ZbyteValueInNativeEthGweiSet(zbyteValueInNativeEthGwei_);
+    }
+
+
+    /// @notice Registers authorized zbyte price modifiers.
+    /// @param authorized_ Authorized price modifier's address.
+    /// @param register_ register or deregister.
+    function registerAuthorizedPriceModifiers(address authorized_, bool register_) public onlyOwner {
+        LibDPlatBase.DiamondStorage storage _dsb = LibDPlatBase.diamondStorage();
+        _dsb.authorizedPriceModifiers[authorized_] = register_;
+        emit ZbytePriceModifierRegistered(authorized_, register_);
     }
 
     /// @notice Gets the value of Zbyte in native Ether (in Gwei).

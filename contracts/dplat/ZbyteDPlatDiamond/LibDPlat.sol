@@ -19,7 +19,10 @@ library LibDPlatBase {
     struct DiamondStorage {
         address zbyteVToken; 
         uint256 zbyteValueInNativeEthGwei; 
+        uint256 usdToTokenValueInGwei;//token prrice in gwei
+        uint256 usdBurnRateInMill;//burn rate in mill
         uint256 zbyteBurnFactor;
+        mapping (address=>bool) authorizedPriceModifiers;
     }
 
     /// @notice Retrieves the DiamondStorage struct for the library.
@@ -54,6 +57,11 @@ library LibDPlatBase {
     function _getZbyteBurnFactor() internal view returns (uint256) {
         DiamondStorage storage _dsb = diamondStorage();
         return _dsb.zbyteBurnFactor;
+    }
+
+    function _getUSDMillEquivalentZbyteValue(uint256 usdMill_) internal view returns(uint256){
+        DiamondStorage storage _dsb = diamondStorage();
+        return usdMill_ * _dsb.usdToTokenValueInGwei * 10 ** 9 / 1000;
     }
 }
 
@@ -101,12 +109,10 @@ library LibDPlatRegistration {
 
     /// @notice Checks if an enterprise has a registered policy and retrieves the policy address.
     /// @param enterprise_ The enterprise ID.
-    /// @return A tuple indicating whether the enterprise policy exists and the policy address.
-    function _doesEnterpriseHavePolicy(bytes4 enterprise_) internal view returns (bool, address) {
+    /// @return The policy address.
+    function _doesEnterpriseHavePolicy(bytes4 enterprise_) internal view returns (address) {
         DiamondStorage storage _dsp = diamondStorage();
-        address _enterprisePolicy = _dsp.registeredEnterprisePolicy[enterprise_];
-        bool _enterprisePolicyExists = (_enterprisePolicy != address(0));
-        return (_enterprisePolicyExists, _enterprisePolicy);
+        return _dsp.registeredEnterprisePolicy[enterprise_];
     }
 
     /// @notice Checks if the given provider is registered

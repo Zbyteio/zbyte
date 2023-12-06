@@ -18,6 +18,8 @@ import "./EscrowERC20.sol";
 /// @title The ZBYT ERC20 Escrow contract
 contract ZbyteEscrow is Ownable, Pausable, EscrowERC20 {
 
+
+
     constructor(address forwarder_,
                 address zbyte_,
                 address treasury_)
@@ -42,16 +44,16 @@ contract ZbyteEscrow is Ownable, Pausable, EscrowERC20 {
     /// @notice Withdraw ERC20 tokens by depositing vERC20 on target chain
     /// @param relay_ Relay identifier that should be used for the crosschain call
     /// @param chain_ Target chain identifier
-    /// @param paymaster_ Paymaster address to deposit vERC20
+    /// @param vERC20Depositor_ Address to deposit vERC20
     /// @param receiver_ Recipient address for ERC20
     /// @dev The paymaster_ should be a valid paymaster (e.g., forwarder). All vERC20 held by paymaster is destroyed and equal ERC20 is deposited
     function withdraw(uint256 relay_,
                       uint256 chain_,
-                      address paymaster_,
+                      address vERC20Depositor_,
                       address receiver_)
-                      public onlyOwner
+                      public onlyAuthorized
                       returns (bool result) {
-        return _withdraw(relay_,chain_,paymaster_,receiver_);
+        return _withdraw(relay_,chain_,vERC20Depositor_,receiver_);
     }
 
     /// @notice callback handler to handle acknowledgement for deposit/withdraw

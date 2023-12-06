@@ -191,6 +191,23 @@ async function getPendingAction(ack) {
     }  
 }
 
+async function registerWorker(owner, worker) {
+    try {
+        let contractWithSigner = await lib.getContractWithSigner(contractName, owner);
+        let workerAddress = await lib.getAddress(worker);
+        console.log("registerWorker:", workerAddress);
+        const tx = await contractWithSigner.registerWorker(workerAddress,true);
+        await expect(tx.wait())
+                .to.emit(contractWithSigner,"ZbyteAuthorizedWorkerRegistered")
+                .withArgs(workerAddress,true);
+        return {function: "registerWorker",
+                "authorizedAddress": workerAddress,
+                "register": true
+            }
+    } catch (error) {
+        console.log(error);
+    }  
+}
 
 module.exports = {
     setvERC20Address:setvERC20Address,
@@ -199,5 +216,6 @@ module.exports = {
     withdraw:withdraw,
     pause:pause,
     unpause:unpause,
-    getPendingAction:getPendingAction
+    getPendingAction:getPendingAction,
+    registerWorker:registerWorker
 }

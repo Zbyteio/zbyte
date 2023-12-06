@@ -25,6 +25,8 @@ contract ZbyteForwarderDPlat is Ownable, MinimalForwarder, ReentrancyGuard {
     event ForwarderDplatSet(address);
     /// @notice event (0x6342abcf): Forwarder minimum processing gas is set.
     event ForwarderDplatMinimumProcessingGasSet(uint256);
+    /// @notice event (0x1f32728a): Forwarder post exec gas is set.
+    event ForwarderDplatPostExecGasSet(uint256);
     /// @notice event (0xe1554bda): Forwarder worker is registered.
     event ForwarderDplatWorkerRegistered(address,bool);
     /// @notice event (0xe5cac075): Refund Eth to payer.
@@ -47,6 +49,8 @@ contract ZbyteForwarderDPlat is Ownable, MinimalForwarder, ReentrancyGuard {
     // Minimum processing gas
     /// @notice Minimum amount of gas needed for a call via the forwarder
     uint256 public minProcessingGas;
+    /// @notice Amount of gas needed for a post execute to the DPlat
+    uint256 public postExecGas;
     /// @notice Address of the Zbyte DPlat contract
     address public zbyteDPlat;
     /// @notice Mapping of registered workers
@@ -65,6 +69,13 @@ contract ZbyteForwarderDPlat is Ownable, MinimalForwarder, ReentrancyGuard {
     function setMinProcessingGas(uint256 minProcessingGas_) public onlyOwner {
         minProcessingGas = minProcessingGas_;
         emit ForwarderDplatMinimumProcessingGasSet(minProcessingGas_);
+    }
+
+    /// @notice Sets the post execute processing gas
+    /// @param postExecGas_ The new minimum processing gas value
+    function setPostExecGas(uint256 postExecGas_) public onlyOwner {
+        postExecGas = postExecGas_;
+        emit ForwarderDplatPostExecGasSet(postExecGas_);
     }
 
     /// @notice Sets the address of the Zbyte DPlat contract
@@ -115,8 +126,7 @@ contract ZbyteForwarderDPlat is Ownable, MinimalForwarder, ReentrancyGuard {
         address _payer = IZbyteDPlat(zbyteDPlat).preExecute(req_.to, req_.from, bytes4(req_.data[:4]), _preChargeEth);
         (bool _success, bytes memory _returndata) = MinimalForwarder.execute(req_, signature_);
 
-
-        uint256 _gasConsumedEth = (_startGas - gasleft()) * tx.gasprice;
+        uint256 _gasConsumedEth = (postExecGas + _startGas - gasleft()) * tx.gasprice;
         IZbyteDPlat(zbyteDPlat).postExecute(_payer, _success, req_.value, _gasConsumedEth, _preChargeEth);
         emit ZbyteForwarderDPlatExecute(_success, _returndata);
         return(_success, _returndata);

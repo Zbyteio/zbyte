@@ -48,6 +48,26 @@ async function setZbyteDPlat(owner) {
     }
   }
   
+    async function setPostExecGas(owner, postExecGas) {
+    try {
+      let contractWithSigner = await lib.getContractWithSigner(contractName, owner);
+  
+      console.log("setPostExecGas: ", postExecGas);
+      const tx = await contractWithSigner.setPostExecGas(postExecGas);
+      await expect(tx.wait())
+      .to.emit(contractWithSigner,"ForwarderDplatPostExecGasSet")
+      .withArgs(postExecGas);
+  
+      return { function: "setPostExecGas",
+               PostExecGas: postExecGas
+             }
+  
+    } catch (error) {
+        console.log(error);
+        throw(error);
+    }
+  }
+
   async function registerWorker(owner, worker) {
     try {
       let contractWithSigner = await lib.getContractWithSigner(contractName, owner);
@@ -80,5 +100,6 @@ async function setZbyteDPlat(owner) {
   module.exports = {
     "registerWorker":registerWorker,
     "setZbyteDPlat":setZbyteDPlat,
-    "setMinProcessingGas":setMinProcessingGas
+    "setMinProcessingGas":setMinProcessingGas,
+    "setPostExecGas":setPostExecGas
   }

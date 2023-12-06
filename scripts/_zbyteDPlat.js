@@ -70,13 +70,35 @@ async function setZbyteValueInNativeEthGwei(owner, zbyteValueInNativeEthGwei) {
     }
 }
 
-async function registerProvider(owner, provider) {
+async function registerAuthorizedPriceModifiers(owner, authorized) {
     try {
         let contractWithSigner = await lib.getContractWithSigner(contractName, owner);
+        const authorizedAddress = await lib.getAddress(authorized);
+  
+        console.log("registerAuthorizedPriceModifiers: " + authorizedAddress);
+
+        const tx = await contractWithSigner.registerAuthorizedPriceModifiers(authorizedAddress,true);
+        await expect(tx.wait())
+        .to.emit(contractWithSigner,"ZbytePriceModifierRegistered")
+        .withArgs(authorizedAddress,true);
+
+        return { function: "registerAuthorizedPriceModifiers",
+                Authorized : authorizedAddress
+               }
+    } catch (error) {
+        console.log(error);
+        throw(error);
+    }
+}
+
+
+async function registerProvider(provider) {
+    try {
+        let contractWithSigner = await lib.getContractWithSigner(contractName, provider);
         const providerAddress = await lib.getAddress(provider);
         console.log("registerProvider: " + providerAddress);
 
-        const tx = await contractWithSigner.registerProvider(providerAddress);
+        const tx = await contractWithSigner.registerProvider();
         await expect(tx.wait())
         .to.emit(contractWithSigner,"ZbyteDPlatProviderRegistred")
         .withArgs(providerAddress,true)
@@ -236,5 +258,6 @@ module.exports = {
     "registerEnterpriseUser":registerEnterpriseUser,
     "registerDapp":registerDapp,
     "setEnterpriseLimit":setEnterpriseLimit,
-    "setZbyteBurnFactor":setZbyteBurnFactor
+    "setZbyteBurnFactor":setZbyteBurnFactor,
+    "registerAuthorizedPriceModifiers":registerAuthorizedPriceModifiers
 }

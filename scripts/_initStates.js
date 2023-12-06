@@ -29,7 +29,10 @@ async function initCoreStates(owner) {
         console.log(" Zbyte Escrow wrapper -- relay vZbyte");
         ret = await escrow.setRelayWrapperAddress(owner);
         retval["escrow-setRelayWrapper"] = ret;
-    
+
+        ret = await escrow.registerWorker('wrkr');
+        retval["escrow-registerWorker"] = ret;
+
         ret = await relayWrapper.setEscrowAddress(owner);
         retval["relayWrapper-setEscrowAddress"] = ret;
     
@@ -90,6 +93,9 @@ async function initDplatStates(owner) {
         ret = await zbyteFwdDPlat.setMinProcessingGas('zbyt', 42000);
         retval["zbyteFwdDPlat-setMinProcessingGas"] = ret;
 
+        ret = await zbyteFwdDPlat.setPostExecGas('zbyt', 70000);
+        retval["zbyteFwdDPlat-setPostExecGas"] = ret;
+
         ret = await zbyteFwdDPlat.setZbyteDPlat('zbyt');
         retval["zbyteFwdDPlat-setZbyteDPlat"] = ret;
 
@@ -100,16 +106,19 @@ async function initDplatStates(owner) {
         ret = await zbyteDPlat.setZbyteVToken('zbyt');
         retval["zbyteFwdDPlat-setZbyteVToken"] = ret;
 
+        ret = await zbyteDPlat.registerAuthorizedPriceModifiers('zbyt', 'wrkr')
+        retval["zbyteDPlat-registerAuthorizedPriceModifiers"] = ret;
+
         ret = await zbyteDPlat.setZbyteBurnFactor('zbyt', 5);
         retval["zbyteDPlat-setZbyteBurnFactor"] = ret;
     
-        ret = await zbyteDPlat.setZbyteValueInNativeEthGwei('zbyt', 10000000);
+        ret = await zbyteDPlat.setZbyteValueInNativeEthGwei('wrkr', 20000000);
         retval["zbyteFwdDPlat-setZbyteValueInNativeEthGwei"] = ret;
 
         ret = await zbyteDPlat.setZbyteForwarderDPlat('zbyt');
         retval["zbyteFwdDPlat-setZbyteForwarderDPlat"] = ret;
 
-        ret = await zbyteDPlat.registerProvider('zbyt', 'prov');
+        ret = await zbyteDPlat.registerProvider('prov');
         retval["zbyteFwdDPlat-registerProvider"] = ret;
 
         ret = await zbyteDPlat.registerProviderAgent('prov', 'paag');

@@ -26,6 +26,9 @@ contract ZbyteRelay is Ownable, ZbyteContext {
     error NotRelayWrapperOrSelf(address,address);
     /// @notice error (0xc16b00ce): Current chain id does not match with the one sent in payload
     error InvalidChain(uint256,uint256);
+    /// @notice error (0xc16b00ce): Current chain id does not match with the one sent in payload
+    error InvalidChain(uint256,uint256);
+    
 
     // events
     /// @notice event (0x9a3d7ba1): Received the request to perform a remote call
@@ -101,7 +104,11 @@ contract ZbyteRelay is Ownable, ZbyteContext {
         // initiate the remote call on source
         (uint256 _destChain,,,,) =
                 abi.decode(payload_,(uint256,address,bytes32,address,bytes));
+
+        b
         require(_destChain == destChain_, "Invalid destination chain");
+
+        bytes memory _abi.encode(destChain_,destContract_,ack_,callbackContract_,data_)
 
         // loop if dest == src
         if (destChain_ == block.chainid) {
@@ -130,8 +137,10 @@ contract ZbyteRelay is Ownable, ZbyteContext {
         if(_destChain != block.chainid) {
             revert InvalidChain(_destChain, block.chainid);
         }
-        // TODO add this line back
-        //require(_destRelay == address(this), "Invalid destination contract");
+    
+        if(_destRelay != address(this)) {
+            revert InvalidDestinationRelay(_destRelay, address(this));
+        }
 
         (bool success, bytes memory returnData) = _destContract.call(_data);
         uint256 retval = abi.decode(returnData,(uint256));

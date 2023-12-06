@@ -101,7 +101,7 @@ task("zbyteEscrow", "Zbyte Escrow Tasks")
 .addOptionalParam("receiver","vToken receiver")
 .addOptionalParam("amount","amount of tokens to deposit")
 .addOptionalParam("sender","token depositor")
-.addOptionalParam("owner","owner of the contrat")
+.addOptionalParam("worker","worker authorized to withdraw of the contrat")
 .setAction(
     async (taskArgs, hre) => {
         const zbyteEscrow = require("../scripts/_zbyteEscrow.js")
@@ -114,7 +114,7 @@ task("zbyteEscrow", "Zbyte Escrow Tasks")
         } else if(taskArgs.api == "withdraw") {
             const dplatChain = process.env.DPLAT
             retval = await zbyteEscrow.withdraw(taskArgs.relay,dplatChain,
-                    taskArgs.paymaster,taskArgs.receiver,taskArgs.owner);
+                    taskArgs.paymaster,taskArgs.receiver,taskArgs.worker);
         }
         require("../scripts/lib.js").logResult(retval);
     });

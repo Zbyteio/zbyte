@@ -58,6 +58,11 @@ abstract contract ZbyteContext is Context, Ownable {
         emit ForwarderSet(oldForwarder,forwarder_);
     }
 
+    /// @notice Get the trusted forwarder address
+    function _getTrustedForwarder() internal view returns(address){
+        return trustedForwarder;
+    }
+
     /// @notice Set the forwarder contract address
     /// @param forwarder_ Frwarder conract address
     /// @dev onlyOwner can call
