@@ -102,6 +102,8 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
             }
             LibDPlatRegistration._setEntepriseLimit(_payerEnterprise, _currentEnterpriseLimit - _zbyteCharge);
         }
+        if(_zbyteCharge != 0)
+            ZbyteVToken(payable(_dsb.zbyteVToken)).transferFrom(_payer, msg.sender, _zbyteCharge);
         return _payer;
     }
 
@@ -132,11 +134,10 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
 
         uint256 _zbyteCharge = IZbytePriceFeeder(_dsb.zbytePriceFeeder).convertEthToEquivalentZbyte(_chargeEth);
 
-        address _vZbyte = LibDPlatBase._getZbyteVToken();
         if(_zbyteCharge != 0)
-            ZbyteVToken(payable(_vZbyte)).transferFrom(payer_, msg.sender, _zbyteCharge);
+            ZbyteVToken(payable(_dsb.zbyteVToken)).transferFrom(payer_, msg.sender, _zbyteCharge);
         if(_zbyteBurn != 0)
-            ZbyteVToken(payable(_vZbyte)).burn(payer_, _zbyteBurn);
+            ZbyteVToken(payable(_dsb.zbyteVToken)).burn(payer_, _zbyteBurn);
 
         emit RefundEthToPayer(payer_, _refundEth);
     }

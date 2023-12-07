@@ -168,13 +168,13 @@ async function initDplatStates(owner) {
 
 
         //zbytePriceFeeder states
-        ret = await zbytePriceFeeder.setNativeEthEquivalentZbyteInGwei(owner, "4000000000");
+        ret = await zbytePriceFeeder.setNativeEthEquivalentZbyteInGwei(owner, "41000000000");
         retval["zbytePriceFeeder-setNativeEthEquivalentZbyteInGwei"] = ret;
 
-        ret = await zbytePriceFeeder.setZbytePriceInGwei(owner, "5000000000");
+        ret = await zbytePriceFeeder.setZbytePriceInGwei(owner, "50000000000");
         retval["zbytePriceFeeder-setZbytePriceInGwei"] = ret;
 
-        ret = await zbytePriceFeeder.setBurnRateInMill(owner, "2");
+        ret = await zbytePriceFeeder.setBurnRateInMill(owner, "20");
         retval["zbytePriceFeeder-setBurnRateInMill"] = ret;
 
         return retval;

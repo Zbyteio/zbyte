@@ -49,4 +49,8 @@ contract ZbyteDPlatBaseFacet is ZbyteContextDiamond {
     function getZbyteVToken() public view returns (address) {
         return LibDPlatBase._getZbyteVToken();
     }
+
+    function getZbytePriceFeeder() public view returns (address) {
+        return LibDPlatBase._getZbytePriceFeeder();
+    }
 }

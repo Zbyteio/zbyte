@@ -38,6 +38,11 @@ library LibDPlatBase {
         DiamondStorage storage _dsb = diamondStorage();
         return _dsb.zbyteVToken;
     }
+
+    function _getZbytePriceFeeder() internal view returns (address) {
+        DiamondStorage storage _dsb = diamondStorage();
+        return _dsb.zbytePriceFeeder;
+    }
 }
 
 /// @notice Library for DPlat registration storage and functions
