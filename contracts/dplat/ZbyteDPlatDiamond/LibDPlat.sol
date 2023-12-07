@@ -18,8 +18,7 @@ library LibDPlatBase {
     /// @notice Diamond storage for DPlat Base struct
     struct DiamondStorage {
         address zbyteVToken; 
-        uint256 zbyteValueInNativeEthGwei; 
-        uint256 zbyteBurnFactor;
+        address zbytePriceFeeder;
     }
 
     /// @notice Retrieves the DiamondStorage struct for the library.
@@ -38,22 +37,6 @@ library LibDPlatBase {
     function _getZbyteVToken() internal view returns (address) {
         DiamondStorage storage _dsb = diamondStorage();
         return _dsb.zbyteVToken;
-    }
-
-    /// @notice Calculates the native Ether equivalent value of Zbyte.
-    /// @param ethAmount_ The amount in Ether (wei).
-    /// @return The equivalent value in Zbyte (wei).
-    /// @dev ethAmountInGWei = (ethAmountinWei/10**9), inZbyte = ethAmountInGWei*zbyteValueInNativeEthGwei, inZbyteWei = inZbyte*10**18
-    function _getNativeEthEquivalentZbyteValue(uint256 ethAmount_) internal view returns (uint256) {
-        DiamondStorage storage _dsb = diamondStorage();
-        return (ethAmount_ * 10 ** 9) / _dsb.zbyteValueInNativeEthGwei;
-    }
-
-    /// @notice Gets the Zbyte burn factor.
-    /// @return The Zbyte burn factor.
-    function _getZbyteBurnFactor() internal view returns (uint256) {
-        DiamondStorage storage _dsb = diamondStorage();
-        return _dsb.zbyteBurnFactor;
     }
 }
 
@@ -101,12 +84,10 @@ library LibDPlatRegistration {
 
     /// @notice Checks if an enterprise has a registered policy and retrieves the policy address.
     /// @param enterprise_ The enterprise ID.
-    /// @return A tuple indicating whether the enterprise policy exists and the policy address.
-    function _doesEnterpriseHavePolicy(bytes4 enterprise_) internal view returns (bool, address) {
+    /// @return Enterprise payment policy address.
+    function _doesEnterpriseHavePolicy(bytes4 enterprise_) internal view returns (address) {
         DiamondStorage storage _dsp = diamondStorage();
-        address _enterprisePolicy = _dsp.registeredEnterprisePolicy[enterprise_];
-        bool _enterprisePolicyExists = (_enterprisePolicy != address(0));
-        return (_enterprisePolicyExists, _enterprisePolicy);
+        return _dsp.registeredEnterprisePolicy[enterprise_];
     }
 
     /// @notice Checks if the given provider is registered

@@ -50,11 +50,16 @@ async function setRelayWrapper(owner) {
 
 async function receiveCall(srcChain, srcRelay, destChain, destRelay, payload, amount,owner) {
     try {
-        let contractWithSigner = await lib.getContractWithSigner(contractName,owner);
 
         let srcChainId = lib.nameToChainId(srcChain)
         const abiCoder = new ethers.AbiCoder();
-        let plFields = abiCoder.decode(["uint256","address","bytes32","address","bytes"],payload);
+        console.log("payload: ", srcChain, srcRelay, destChain, destRelay, payload, amount,owner);
+        let uPlFields = abiCoder.decode(["address","bytes"],payload);
+        let plFields = abiCoder.decode(["uint256","address","bytes32","address","bytes"],uPlFields[1]);
+        console.log("uPlFields", uPlFields);
+        console.log("plFields", plFields);
+        let contractWithSigner = await lib.getContractWithSigner(contractName,owner);
+
         /* example for mumbai -> fuji deposit/mint */
         let destChainId = Number(plFields[0]);  // fuji
         let destContract = plFields[1];  // vZBYT on fuji
@@ -86,7 +91,7 @@ async function receiveCall(srcChain, srcRelay, destChain, destRelay, payload, am
             const tx = await contractWithSigner.receiveCall(srcChainId,srcRelay,modifiedPayload);
             await expect(tx.wait())
                 .to.emit(contractWithSigner,"RelayReceiveCallExecuted") //dest side relay called, target fn executed
-                .withArgs(modifiedPayload,true,amountWei)
+                .withArgs(payload,true,amountWei)
                 .to.emit(contractWithSigner,"RelayCallRemoteReceived") //dest side relay now becomes src side and initiates ack
                 .withArgs(destChainId,destRelay,srcChainId,srcRelay,ackPayload);
         }

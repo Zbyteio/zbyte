@@ -26,6 +26,8 @@ contract ZbyteRelay is Ownable, ZbyteContext {
     error NotRelayWrapperOrSelf(address,address);
     /// @notice error (0xc16b00ce): Current chain id does not match with the one sent in payload
     error InvalidChain(uint256,uint256);
+    /// @notice error (0x4a01d2ac): Invalid destination relay
+    error InvalidDestinationRelay(address,address);
 
     // events
     /// @notice event (0x9a3d7ba1): Received the request to perform a remote call
@@ -103,12 +105,14 @@ contract ZbyteRelay is Ownable, ZbyteContext {
                 abi.decode(payload_,(uint256,address,bytes32,address,bytes));
         require(_destChain == destChain_, "Invalid destination chain");
 
+        bytes memory _updatedPayload = abi.encode(destRelay_, payload_);
+
         // loop if dest == src
         if (destChain_ == block.chainid) {
-            this.receiveCall(block.chainid,address(this),payload_);
+            this.receiveCall(block.chainid,address(this),_updatedPayload);
         }
 
-        emit RelayCallRemoteReceived(block.chainid,address(this),destChain_,destRelay_,payload_);
+        emit RelayCallRemoteReceived(block.chainid,address(this),destChain_,destRelay_,_updatedPayload);
         return true;
     }
 
@@ -124,19 +128,21 @@ contract ZbyteRelay is Ownable, ZbyteContext {
         external
         returns(bool) {
         // receive the call on dest
+        (address _destRelay, bytes memory _callPayload) = abi.decode(payload_, (address, bytes));
         (uint256 _destChain, address _destContract,
          bytes32 _ack, address _callbackContract, bytes memory _data) = 
-                abi.decode(payload_,(uint256,address,bytes32,address,bytes));
+                abi.decode(_callPayload,(uint256,address,bytes32,address,bytes));
         if(_destChain != block.chainid) {
             revert InvalidChain(_destChain, block.chainid);
         }
-        // TODO add this line back
-        //require(_destRelay == address(this), "Invalid destination contract");
+        if(_destRelay != address(this)) {
+            revert InvalidDestinationRelay(_destRelay, address(this));
+        }
 
         (bool success, bytes memory returnData) = _destContract.call(_data);
         uint256 retval = abi.decode(returnData,(uint256));
         
-        emit RelayReceiveCallExecuted(payload_,success,retval);
+        emit RelayReceiveCallExecuted(_callPayload,success,retval);
 
 
         if ((_ack != bytes32(0)) && (_callbackContract != address(0))) {

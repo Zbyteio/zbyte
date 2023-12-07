@@ -32,7 +32,10 @@ async function initCoreStates(owner) {
     
         ret = await relayWrapper.setEscrowAddress(owner);
         retval["relayWrapper-setEscrowAddress"] = ret;
-    
+
+        ret = await escrow.registerWorker('zbyt', 'wrkr');
+        retval["escrow-registerWorker"] = ret;
+
         return retval;
     } catch (error) {
         console.log(error);
@@ -49,6 +52,7 @@ async function initCoreStateForDplat(owner,chain,relay) {
         let retval = {};
         const escrow = require("./_zbyteEscrow.js");
         const relayWrapper = require("./_relayWrapper.js");
+        const zbytePriceFeeder = require("./_zbytePriceFeeder.js");
     
         let ret;
         console.log("  RwlayWrapper ----> Relay");
@@ -59,6 +63,12 @@ async function initCoreStateForDplat(owner,chain,relay) {
         ret = await escrow.setvERC20Address(owner,chain);
         retval["Escrow-setvERC20Address"] = ret;        
         
+        ret = await escrow.setZbytePriceFeeder(owner);
+        retval["Escrow-setZbytePriceFeeder"] = ret;
+
+        ret = await zbytePriceFeeder.setApproveAndDepositGasCost(owner, relay, chain, "1000000000000000000");
+        retval["ZbytePriceFeeder-setZbytePriceFeeder"] = ret;
+
         return retval;
     } catch (error) {
         console.log(error);
@@ -78,6 +88,7 @@ async function initDplatStates(owner) {
         const zbyteVToken = require("./_zbyteVToken.js");
         const zbyteDPlat = require("./_zbyteDPlat.js");
         const zbyteFwdDPlat = require("./_zbyteForwarderDplat.js");
+        const zbytePriceFeeder = require("./_zbytePriceFeeder.js");
     
         let ret;
         /*
@@ -90,6 +101,9 @@ async function initDplatStates(owner) {
         ret = await zbyteFwdDPlat.setMinProcessingGas('zbyt', 42000);
         retval["zbyteFwdDPlat-setMinProcessingGas"] = ret;
 
+        ret = await zbyteFwdDPlat.setPostExecGas('zbyt', 70000);
+        retval["zbyteFwdDPlat-setPostExecGas"] = ret;
+
         ret = await zbyteFwdDPlat.setZbyteDPlat('zbyt');
         retval["zbyteFwdDPlat-setZbyteDPlat"] = ret;
 
@@ -100,19 +114,22 @@ async function initDplatStates(owner) {
         ret = await zbyteDPlat.setZbyteVToken('zbyt');
         retval["zbyteFwdDPlat-setZbyteVToken"] = ret;
 
-        ret = await zbyteDPlat.setZbyteBurnFactor('zbyt', 5);
-        retval["zbyteDPlat-setZbyteBurnFactor"] = ret;
+        // ret = await zbyteDPlat.setZbyteBurnFactor('zbyt', 5);
+        // retval["zbyteDPlat-setZbyteBurnFactor"] = ret;
     
-        ret = await zbyteDPlat.setZbyteValueInNativeEthGwei('zbyt', 10000000);
-        retval["zbyteFwdDPlat-setZbyteValueInNativeEthGwei"] = ret;
+        // ret = await zbyteDPlat.setZbyteValueInNativeEthGwei('zbyt', 10000000);
+        // retval["zbyteFwdDPlat-setZbyteValueInNativeEthGwei"] = ret;
 
         ret = await zbyteDPlat.setZbyteForwarderDPlat('zbyt');
         retval["zbyteFwdDPlat-setZbyteForwarderDPlat"] = ret;
 
-        ret = await zbyteDPlat.registerProvider('zbyt', 'prov');
+        ret = await zbyteDPlat.registerProvider('prov');
         retval["zbyteFwdDPlat-registerProvider"] = ret;
 
         ret = await zbyteDPlat.registerProviderAgent('prov', 'paag');
+        retval["zbyteFwdDPlat-registerProviderAgent"] = ret;
+
+        ret = await zbyteDPlat.setZbytePriceFeeder('zbyt');
         retval["zbyteFwdDPlat-registerProviderAgent"] = ret;
 
         // zbyte relay set states
@@ -154,6 +171,16 @@ async function initDplatStates(owner) {
 
         ret = await zbyteVToken.setZbyteDPlatAddress(owner);
         retval["zbyteVToken-setZbyteDPlatAddress"] = ret;
+
+
+        //zbytePriceFeeder states
+        ret = await zbytePriceFeeder.setNativeEthEquivalentZbyteInGwei(owner, "4000000000");
+        retval["zbytePriceFeeder-setNativeEthEquivalentZbyteInGwei"] = ret;
+
+        ret = await zbytePriceFeeder.setZbytePriceInGwei(owner, "5000000000");
+        retval["zbytePriceFeeder-setZbytePriceInGwei"] = ret;
+
+
 
         return retval;
     } catch (error) {

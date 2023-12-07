@@ -3,16 +3,16 @@ const fs = require("fs");
 const { task } = require("hardhat/config");
 /*
 npx hardhat node --fork https://rpc-mumbai.maticvigil.com/ --port 4545 --config hhmumbai.config.js
-npx hardhat node --fork https://api.avax-test.network/ext/bc/C/rpc --port 3545 --config hhfuji.config.js
+npx hardhat node --fork https://avalanche-fuji.infura.io/v3/c4adc113c65d419fa4aa11d536d51e2c --port 3545 --config hhfuji.config.js
 */
 /*
-export CORE=mumbai
-export CCONFIG=hardhat.config.js
+export CORE=hhmumbai
+export CCONFIG=hhmumbai.config.js
 #cd deployments/$CORE && shopt -s extglob && rm -rf -v !(ZbyteToken.json|ZbyteTokenForwarder.json) && cd -
 npx hardhat zDeploy --api core --owner zbyt --network $CORE --config $CCONFIG
 npx hardhat zDeploy --api initCoreStates --owner zbyt --network $CORE --config $CCONFIG
-export DPLAT=mumbai
-export DCONFIG=hardhat.config.js
+export DPLAT=hhmumbai
+export DCONFIG=hhmumbai.config.js
 npx hardhat zDeploy --api dplat --owner zbyt --network $DPLAT --config $DCONFIG
 npx hardhat zDeploy --api dapp --owner comd --network $DPLAT --config $DCONFIG
 npx hardhat zDeploy --api initDplatStates --owner zbyt --network $DPLAT --config $DCONFIG

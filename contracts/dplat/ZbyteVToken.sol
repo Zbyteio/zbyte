@@ -117,7 +117,8 @@ contract ZbyteVToken is Ownable, Pausable, ERC20, AuthSimple, IvERC20 {
             revert ZeroAddress();
         }
         ERC20._mint(to_, amount_);
-        ERC20._approve(to_, dplat, amount_);
+        uint256 _allowance = ERC20.allowance(to_, dplat);
+        ERC20._approve(to_, dplat, _allowance + amount_);
         return amount_;
     }
 
@@ -139,9 +140,6 @@ contract ZbyteVToken is Ownable, Pausable, ERC20, AuthSimple, IvERC20 {
         external
         requiresAuth whenNotPaused
         returns(uint256) {
-        if(!((from_ == paymaster) || (from_ == burner))) {
-            revert InvalidDestroyAddress(from_,paymaster,burner);
-        }
         uint256 _amount = this.balanceOf(from_);
         _burn(from_, _amount);
         return _amount;

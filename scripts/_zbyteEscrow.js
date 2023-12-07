@@ -10,6 +10,7 @@ const contractName = "ZbyteEscrow";
 async function deposit(relay,dplatChain,receiver,amount,sender) {
     try {
         let contractWithSigner = await lib.getContractWithSigner(contractName, sender);
+        let zbytePriceFeederContract = await lib.getContract("ZbytePriceFeeder");
         var amountWei = ethers.parseUnits(amount,18);
         let dplatChainId = lib.nameToChainId(dplatChain);
         let coreChainId = lib.nameToChainId(hre.network.name)
@@ -126,6 +127,25 @@ async function setvERC20Address(owner,dplatChain) {
     }
 }
 
+async function setZbytePriceFeeder(owner) {
+    try {
+        let contractWithSigner = await lib.getContractWithSigner(contractName, owner);
+        let zbytePriceFeederAddress = await lib.getAddress("ZbytePriceFeeder");
+
+        const tx = await contractWithSigner.setZbytePriceFeederAddress(zbytePriceFeederAddress);
+        await expect(tx.wait())
+            .to.emit(contractWithSigner,"ZbytePriceFeederAddressSet")
+            .withArgs(zbytePriceFeederAddress);
+
+        return { function : "setZbytePriceFeederAddress",
+                 zbytePriceFeeder: zbytePriceFeederAddress,
+                }
+    } catch (error) {
+        console.log(error);
+        throw(error);
+    }
+}
+
 async function setRelayWrapperAddress(owner) {
     try {
         let contractWithSigner = await lib.getContractWithSigner(contractName, owner);
@@ -191,6 +211,23 @@ async function getPendingAction(ack) {
     }  
 }
 
+async function registerWorker(owner, worker) {
+    try {
+        let contractWithSigner = await lib.getContractWithSigner(contractName, owner);
+        let workerAddress = await lib.getAddress(worker);
+
+        console.log("registerWorker: ", workerAddress);
+        const tx = await contractWithSigner.registerWorker(workerAddress, true);
+        await expect(tx.wait())
+                .to.emit(contractWithSigner,"WorkerRegistered")
+                .withArgs(workerAddress,true);
+        return {function: "registerWorker",
+                "worker": workerAddress
+               }
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 module.exports = {
     setvERC20Address:setvERC20Address,
@@ -199,5 +236,7 @@ module.exports = {
     withdraw:withdraw,
     pause:pause,
     unpause:unpause,
-    getPendingAction:getPendingAction
+    getPendingAction:getPendingAction,
+    setZbytePriceFeeder:setZbytePriceFeeder,
+    registerWorker:registerWorker
 }

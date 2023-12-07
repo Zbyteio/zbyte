@@ -25,6 +25,8 @@ contract ZbyteDPlatBaseFacet is ZbyteContextDiamond {
     event ZbyteValueInNativeEthGweiSet(uint256);
     /// @notice event (0xd7a7cf8c): Zbyte burn factor is set.
     event ZbyteBurnFactorSet(uint256);
+    /// @notice event (0xe603ec36): Zbyte price feeder is set.
+    event ZbytePriceFeederSet(address);
 
     /// @notice Sets the address of the ZbyteVToken.
     /// @param zbyteVToken_ The address of the ZbyteVToken.
@@ -34,38 +36,17 @@ contract ZbyteDPlatBaseFacet is ZbyteContextDiamond {
         emit ZbyteVTokenAddressSet(zbyteVToken_);
     }
 
-    /// @notice Sets the Zbyte burn factor.
-    /// @param zbyteBurnFactor_ Zbyte burn factor
-    function setZbyteBurnFactor(uint256 zbyteBurnFactor_) public onlyOwner {
+    /// @notice Sets the Zbyte Price Feeder address.
+    /// @param zbytePriceFeeder_ Zbyte Price Feeder address.
+    function setZbytePriceFeeder(address zbytePriceFeeder_) public onlyOwner {
         LibDPlatBase.DiamondStorage storage _dsb = LibDPlatBase.diamondStorage();
-        _dsb.zbyteBurnFactor = zbyteBurnFactor_;
-        emit ZbyteBurnFactorSet(zbyteBurnFactor_);
+        _dsb.zbytePriceFeeder = zbytePriceFeeder_;
+        emit ZbytePriceFeederSet(zbytePriceFeeder_);
     }
 
     /// @notice Gets the address of the ZbyteVToken.
     /// @return The address of the ZbyteVToken.
     function getZbyteVToken() public view returns (address) {
         return LibDPlatBase._getZbyteVToken();
-    }
-
-    /// @notice Sets the value of Zbyte in native Ether (in Gwei).
-    /// @param zbyteValueInNativeEthGwei_ The value of Zbyte in native Ether (in Gwei).
-    function setZbyteValueInNativeEthGwei(uint256 zbyteValueInNativeEthGwei_) public onlyOwner {
-        LibDPlatBase.DiamondStorage storage _dsb = LibDPlatBase.diamondStorage();
-        _dsb.zbyteValueInNativeEthGwei = zbyteValueInNativeEthGwei_;
-        emit ZbyteValueInNativeEthGweiSet(zbyteValueInNativeEthGwei_);
-    }
-
-    /// @notice Gets the value of Zbyte in native Ether (in Gwei).
-    /// @return The value of Zbyte in native Ether (in Gwei).
-    function getZbyteValueInNativeEthGwei() public view returns (uint256) {
-        LibDPlatBase.DiamondStorage storage _dsb = LibDPlatBase.diamondStorage();
-        return _dsb.zbyteValueInNativeEthGwei;
-    }
-
-    /// @notice Gets the Zbyte burn factor.
-    /// @return The Zbyte burn factor (0-100).
-    function getZbyteBurnFactor() public view returns (uint256) {
-        return LibDPlatBase._getZbyteBurnFactor();
     }
 }

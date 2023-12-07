@@ -70,13 +70,13 @@ async function setZbyteValueInNativeEthGwei(owner, zbyteValueInNativeEthGwei) {
     }
 }
 
-async function registerProvider(owner, provider) {
+async function registerProvider(provider) {
     try {
-        let contractWithSigner = await lib.getContractWithSigner(contractName, owner);
+        let contractWithSigner = await lib.getContractWithSigner(contractName, provider);
         const providerAddress = await lib.getAddress(provider);
         console.log("registerProvider: " + providerAddress);
 
-        const tx = await contractWithSigner.registerProvider(providerAddress);
+        const tx = await contractWithSigner.registerProvider();
         await expect(tx.wait())
         .to.emit(contractWithSigner,"ZbyteDPlatProviderRegistred")
         .withArgs(providerAddress,true)
@@ -225,6 +225,25 @@ async function setZbyteBurnFactor(owner, factor) {
     }
   }
   
+async function setZbytePriceFeeder(owner) {
+    try {
+      let contractWithSigner = await lib.getContractWithSigner(contractName, owner);
+  
+      console.log("setZbytePriceFeeder: ", await lib.getAddress("ZbytePriceFeeder"));
+
+      const tx = await contractWithSigner.setZbytePriceFeeder(await lib.getAddress("ZbytePriceFeeder"));
+      await expect(tx.wait())
+      .to.emit(contractWithSigner,"ZbytePriceFeederSet")
+      .withArgs(await lib.getAddress("ZbytePriceFeeder"));
+  
+      return { function: "setZbytePriceFeeder",
+               "ZbytePriceFeeder": await lib.getAddress("ZbytePriceFeeder")
+             }
+    } catch (error) {
+        console.log(error);
+        throw(error);
+    }
+}
 
 module.exports = {
     "setZbyteVToken":setZbyteVToken,
@@ -236,5 +255,6 @@ module.exports = {
     "registerEnterpriseUser":registerEnterpriseUser,
     "registerDapp":registerDapp,
     "setEnterpriseLimit":setEnterpriseLimit,
-    "setZbyteBurnFactor":setZbyteBurnFactor
+    "setZbyteBurnFactor":setZbyteBurnFactor,
+    "setZbytePriceFeeder":setZbytePriceFeeder
 }

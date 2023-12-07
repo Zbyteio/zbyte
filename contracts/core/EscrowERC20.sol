@@ -16,8 +16,9 @@ import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "../utils/ZbyteContext.sol";
 import "../interface/relay/IRelayWrapper.sol";
 import "../interface/core/IEscrowERC20.sol";
+import "../interface/dplat/IZbytePriceFeeder.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
-
+import "hardhat/console.sol";
 
 /// @title The ERC20 Escrow contract
 /// @dev DPLAT ERC20 escrow abstract contract
@@ -34,6 +35,10 @@ abstract contract EscrowERC20 is ZbyteContext, IEscrowERC20, ReentrancyGuard {
     mapping(uint256 => address) public vERC20Addresses;
     /// @notice The underlying ERC20 token contract
     IERC20 public ulAsset;
+    /// @notice Zbyte price feeder address.
+    address zbytePriceFeeder;
+    /// @notice Authorized workers
+    mapping(address => bool) authorizedWorkers;
     /// @notice RelayWrapper contract address
     /// @dev Escrow can only use this trusted RelayWrapper to perform deposit/withdraw
     IRelayWrapper public relayWrapper;
@@ -81,6 +86,18 @@ abstract contract EscrowERC20 is ZbyteContext, IEscrowERC20, ReentrancyGuard {
         revert CannotSendEther();
     }
 
+
+    /**
+    * @dev Modifier to ensure that the sender is an authorized worker.
+    * @notice Reverts the transaction with an `UnAuthorized` error if the sender is not authorized.
+    */
+    modifier onlyAuthorized() {
+        if (!authorizedWorkers[_msgSender()]) {
+            revert UnAuthorized(_msgSender());
+        }
+        _;
+    }
+
     /// @notice Modifier to enforce call only from valid relay contract
     modifier onlyRelay {
         if(!(relayWrapper.isValidRelay(block.chainid,_msgSender()))) {
@@ -89,10 +106,27 @@ abstract contract EscrowERC20 is ZbyteContext, IEscrowERC20, ReentrancyGuard {
         _;
     }
 
+    /// @notice Registers or unregisters a worker, allowing or denying access to specific functionality.
+    /// @param worker_ The address of the worker to be registered or unregistered.
+    /// @param register_ A boolean indicating whether to register (true) or unregister (false) the worker.
+    function registerWorker(address worker_, bool register_) public onlyOwner {
+        authorizedWorkers[worker_] = register_;
+        emit WorkerRegistered(worker_, register_);
+    }
+
+
     /// @notice Get the latest nonce 
     /// @dev nonce is incremented for every successful deposit or withdraw
     function getNonce() public view returns(uint256) {
         return nonce;
+    }
+
+    /// @notice Sets the address of the ZbytePriceFeeder contract.
+    /// @dev This function allows updating the address of the ZbytePriceFeeder contract.
+    /// @param zbytePriceFeederAddress_ The address of the ZbytePriceFeeder contract.
+    function setZbytePriceFeederAddress(address zbytePriceFeederAddress_) public {
+        zbytePriceFeeder = zbytePriceFeederAddress_;
+        emit ZbytePriceFeederAddressSet(zbytePriceFeederAddress_);
     }
 
     /// @notice Set the treasury address
@@ -165,6 +199,7 @@ abstract contract EscrowERC20 is ZbyteContext, IEscrowERC20, ReentrancyGuard {
      }
 
     /// @notice Deposit ERC20 tokens to obtain vERC20 on target chain
+    /// @notice Deposit with ZbyteRelay is supported only via Zbyte Platform in case user deposits directly, it may result in loss of funds(Zbyte).
     /// @param relay_ Relay identifier that should be used for the crosschain call
     /// @param chain_ Target chain identifier
     /// @param receiver_ Recipient address for vERC20
@@ -178,9 +213,19 @@ abstract contract EscrowERC20 is ZbyteContext, IEscrowERC20, ReentrancyGuard {
         address verc20_ = vERC20Addresses[chain_];
         _beforeTokenDeposit(relay_, chain_, receiver_, amount_, verc20_);
 
+        uint256 _gasCostForApproveAndDeposit = IZbytePriceFeeder(zbytePriceFeeder).getApproveAndDepositGasCostInZbyte(relay_, chain_);
+        console.log("_gasCostForApproveAndDeposit: ", _gasCostForApproveAndDeposit);
+        console.log("relay_: ", relay_);
+        console.log("chain_: ", chain_);
+        console.log("zbytePriceFeeder: ", zbytePriceFeeder);
+        if(amount_ < _gasCostForApproveAndDeposit) revert InsufficientERC20ForDepositGas(amount_, _gasCostForApproveAndDeposit);
+
+
+        IERC20(ulAsset).safeTransferFrom(_msgSender(), _getTrustedForwarder(), _gasCostForApproveAndDeposit);
+        amount_ = amount_ - _gasCostForApproveAndDeposit;
         IERC20(ulAsset).safeTransferFrom(_msgSender(), address(this), amount_);
 
-        bytes32 _ack = keccak256(abi.encodePacked(chain_,receiver_,amount_,nonce));
+        bytes32 _ack = keccak256(abi.encodePacked(chain_,receiver_,amount_, nonce));
         nonce = nonce + 1;
         PendingAction memory pAction;
         pAction.action = Action.DEPOSIT;
@@ -208,24 +253,24 @@ abstract contract EscrowERC20 is ZbyteContext, IEscrowERC20, ReentrancyGuard {
     /// @notice Withdraw ERC20 tokens by depositing vERC20 on target chain
     /// @param relay_ Relay identifier that should be used for the crosschain call
     /// @param chain_ Target chain identifier
-    /// @param paymaster_ Paymaster address to deposit vERC20
+    /// @param vERC20Depositor_ Address to deposit vERC20
     /// @param receiver_ Recipient address for ERC20
     /// @dev The paymaster_ should be a valid paymaster (e.g., forwarder). All vERC20 held by paymaster is destroyed and equal ERC20 is deposited
     function _withdraw(uint256 relay_,
                       uint256 chain_,
-                      address paymaster_,
+                      address vERC20Depositor_,
                       address receiver_)
                       internal
                       returns (bool result) {
         address verc20_ = vERC20Addresses[chain_];
-        _beforeTokenWithdraw(relay_, chain_, paymaster_, receiver_, verc20_);
+        _beforeTokenWithdraw(relay_, chain_, vERC20Depositor_, receiver_, verc20_);
 
-        bytes32 _ack = keccak256(abi.encodePacked(chain_,paymaster_,receiver_,nonce));
+        bytes32 _ack = keccak256(abi.encodePacked(chain_,vERC20Depositor_,receiver_,nonce));
         nonce = nonce + 1;
         PendingAction memory pAction;
         pAction.action = Action.WITHDRAW;
         pAction.nAddress = receiver_;
-        pAction.rAddress = paymaster_;
+        pAction.rAddress = vERC20Depositor_;
         pAction.chainId = chain_;
         pAction.amount = 0;
         pendingAction[_ack] = pAction;
@@ -233,16 +278,16 @@ abstract contract EscrowERC20 is ZbyteContext, IEscrowERC20, ReentrancyGuard {
                                 block.chainid,
                                 chain_,
                                 verc20_,
-                                abi.encodeWithSignature("destroy(address)",paymaster_),
+                                abi.encodeWithSignature("destroy(address)",vERC20Depositor_),
                                 _ack,
                                 address(this),
                                 "");
 
         require(result, "_withdraw: callRemote failed.");
         
-        _afterTokenWithdraw(relay_, chain_, paymaster_, receiver_, verc20_);
+        _afterTokenWithdraw(relay_, chain_, vERC20Depositor_, receiver_, verc20_);
 
-        emit ERC20Withdrawn(_msgSender(), paymaster_, receiver_, chain_, _ack);
+        emit ERC20Withdrawn(_msgSender(), vERC20Depositor_, receiver_, chain_, _ack);
         return result;
     }
 
@@ -267,12 +312,18 @@ abstract contract EscrowERC20 is ZbyteContext, IEscrowERC20, ReentrancyGuard {
             if ((chain_ != _chainId) || (_amount != retval_)) {
                 revert InvalidCallbackMessage(_chainId, _amount, chain_, retval_);
             }
-            _record(Action.DEPOSIT, _amount, _chainId);
+            if(success_) {
+                _record(Action.DEPOSIT, _amount, _chainId);
 
-            delete pendingAction[ack_];
-            emit ERC20DepositConfirmed(ack_, success_,retval_);
+                delete pendingAction[ack_];
+                emit ERC20DepositConfirmed(ack_, success_,retval_);
+            } else {
+                IERC20(ulAsset).safeTransfer(_nAddress, _amount);
+                delete pendingAction[ack_];
+                emit ERC20DepositFailedAndRefunded(ack_, success_,retval_);
+            }
 
-        } else if (_pAction.action == Action.WITHDRAW) {
+        } else if (_pAction.action == Action.WITHDRAW && success_) {
             if (chain_ != _chainId) {
                 revert InvalidCallbackMessage(_chainId, _amount, chain_, retval_);
             }

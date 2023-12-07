@@ -31,6 +31,8 @@ contract ZbyteForwarderDPlat is Ownable, MinimalForwarder, ReentrancyGuard {
     event RefundEth(address,uint256);
     /// @notice event (0x5c3206c6): Execute result and return data
     event ZbyteForwarderDPlatExecute(bool,bytes);
+    /// @notice event (0x1f32728a): Forwarder post exec gas is set.
+    event ForwarderDplatPostExecGasSet(uint256);
 
     /// errors
     /// @notice error (0xd92e233d): Address is zero. 
@@ -49,6 +51,8 @@ contract ZbyteForwarderDPlat is Ownable, MinimalForwarder, ReentrancyGuard {
     uint256 public minProcessingGas;
     /// @notice Address of the Zbyte DPlat contract
     address public zbyteDPlat;
+    /// @notice Amount of gas needed for a post execute to the DPlat
+    uint256 public postExecGas;
     /// @notice Mapping of registered workers
     mapping (address => bool) public registeredWorkers;
 
@@ -58,6 +62,13 @@ contract ZbyteForwarderDPlat is Ownable, MinimalForwarder, ReentrancyGuard {
     modifier onlyWorker() {
         if(!registeredWorkers[msg.sender]) revert NotAWorker(msg.sender);
         _;
+    }
+
+    /// @notice Sets the post execute processing gas
+    /// @param postExecGas_ The new minimum processing gas value
+    function setPostExecGas(uint256 postExecGas_) public onlyOwner {
+        postExecGas = postExecGas_;
+        emit ForwarderDplatPostExecGasSet(postExecGas_);
     }
 
     /// @notice Sets the minimum processing gas
@@ -116,7 +127,7 @@ contract ZbyteForwarderDPlat is Ownable, MinimalForwarder, ReentrancyGuard {
         (bool _success, bytes memory _returndata) = MinimalForwarder.execute(req_, signature_);
 
 
-        uint256 _gasConsumedEth = (_startGas - gasleft()) * tx.gasprice;
+        uint256 _gasConsumedEth = (postExecGas + _startGas - gasleft()) * tx.gasprice;
         IZbyteDPlat(zbyteDPlat).postExecute(_payer, _success, req_.value, _gasConsumedEth, _preChargeEth);
         emit ZbyteForwarderDPlatExecute(_success, _returndata);
         return(_success, _returndata);

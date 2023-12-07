@@ -162,7 +162,6 @@ contract ZbyteDPlatRegistrationFacet is ZbyteContextDiamond {
     }
 
     /// @notice Registers a provider.
-    /// @param provider_ The address of the provider to register.
     /// @dev Relation between provider, agent, enterprise, users and dapps is as follows:
     ///
     /// zbyte\
@@ -183,18 +182,17 @@ contract ZbyteDPlatRegistrationFacet is ZbyteContextDiamond {
     ///   NOTE: When one of the components (provider, enterprise, agent, user or dapp) is deregistered,\
     ///    all the other components registered under it remain registered.\
     ///    So, if the component is registered again, the entire subtree becomes active again
-    function registerProvider(address provider_) public onlyOwner {
-        if (isProviderRegistered(provider_)) revert ProviderAlreadyRegistered(provider_);
-        _setRegisteredProvider(provider_, true);
-        _setRegisteredProviderAgent(provider_, provider_);
+    function registerProvider() public {
+        if (isProviderRegistered(_msgSender())) revert ProviderAlreadyRegistered(_msgSender());
+        _setRegisteredProvider(_msgSender(), true);
+        _setRegisteredProviderAgent(_msgSender(), _msgSender());
     }
 
     /// @notice Deregisters a provider.
-    /// @param provider_ The address of the provider to deregister.
-    function deregisterProvider(address provider_) public onlyOwner {
-        if (!isProviderRegistered(provider_)) revert ProviderNotRegistered(provider_);
-        _setRegisteredProvider(provider_, false);
-        _setRegisteredProviderAgent(provider_, address(0));
+    function deregisterProvider() public {
+        if (!isProviderRegistered(_msgSender())) revert ProviderNotRegistered(_msgSender());
+        _setRegisteredProvider(_msgSender(), false);
+        _setRegisteredProviderAgent(_msgSender(), address(0));
     }
 
     /// @notice Registers a provider agent.

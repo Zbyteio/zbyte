@@ -14,6 +14,7 @@ pragma solidity ^0.8.9;
 import "./LibDPlat.sol";
 import "../../utils/ZbyteContextDiamond.sol";
 import "../../interface/dplat/IEnterprisePaymentPolicy.sol";
+import "../../interface/dplat/IZbytePriceFeeder.sol";
 import "../ZbyteVToken.sol";
 import "hardhat/console.sol";
 
@@ -30,24 +31,24 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
     /// @param functionSig_ The function signature (bytes4).
     /// @param amount_ The transaction amount.
     /// @return The payer's address.
-    function getPayer(address user_, address dapp_, bytes4 functionSig_, uint256 amount_) public returns (address) {
+    function getPayer(address user_, address dapp_, bytes4 functionSig_, uint256 amount_) public view returns (bytes4, uint256, address) {
         bytes4 _dappEnterprise = LibDPlatRegistration.isEnterpriseDappRegistered(dapp_);
 
         if (_dappEnterprise != bytes4(0)) {
             address _enterpriseProvider = LibDPlatRegistration.isEnterpriseRegistered(_dappEnterprise);
             if (_enterpriseProvider != address(0) && LibDPlatRegistration.isProviderRegistered(_enterpriseProvider)) {
                 uint256 _enterpriseLimit = LibDPlatRegistration._getEnterpriseLimit(_dappEnterprise);
-                (bool _doesEnterprisePolicyExists, address _enterprisePolicy) = LibDPlatRegistration._doesEnterpriseHavePolicy(_dappEnterprise);
+                address _enterprisePolicy = LibDPlatRegistration._doesEnterpriseHavePolicy(_dappEnterprise);
 
                 if (_enterpriseLimit > amount_) {
-                    if (_doesEnterprisePolicyExists) {
+                    if (_enterprisePolicy != address(0)) {
                         bool _willEnterprisePay = IEnterprisePaymentPolicy(_enterprisePolicy).isUserOrDappEligibleForPayment(user_, dapp_, functionSig_, amount_);
                         if (_willEnterprisePay) {
-                            return _enterpriseProvider;
+                            return (_dappEnterprise, _enterpriseLimit, _enterpriseProvider);
                         }
                     } else {
-                        LibDPlatRegistration._setEntepriseLimit(_dappEnterprise, _enterpriseLimit - amount_);
-                        return _enterpriseProvider;
+                        return (_dappEnterprise, _enterpriseLimit, _enterpriseProvider);
+
                     }
                 }
             }
@@ -60,23 +61,21 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
             if (_enterpriseProvider != address(0) && LibDPlatRegistration.isProviderRegistered(_enterpriseProvider)) {
 
                 uint256 _enterpriseLimit = LibDPlatRegistration._getEnterpriseLimit(_userEnterprise);
-                (bool _doesEnterprisePolicyExists, address _enterprisePolicy) = LibDPlatRegistration._doesEnterpriseHavePolicy(_userEnterprise);
+                address _enterprisePolicy = LibDPlatRegistration._doesEnterpriseHavePolicy(_userEnterprise);
 
                 if (_enterpriseLimit > amount_) {
-                    if (_doesEnterprisePolicyExists) {
+                    if (_enterprisePolicy != address(0)) {
                         bool _willEnterprisePay = IEnterprisePaymentPolicy(_enterprisePolicy).isUserOrDappEligibleForPayment(user_, dapp_, functionSig_, amount_);
                         if (_willEnterprisePay) {
-                            LibDPlatRegistration._setEntepriseLimit(_dappEnterprise, _enterpriseLimit - amount_);
-                            return _enterpriseProvider;
+                            return (_userEnterprise, _enterpriseLimit, _enterpriseProvider);
                         }
                     } else {
-                        LibDPlatRegistration._setEntepriseLimit(_dappEnterprise, _enterpriseLimit - amount_);
-                        return _enterpriseProvider;
+                        return (_userEnterprise, _enterpriseLimit, _enterpriseProvider);
                     }
                 }
             }
         }
-        return user_;
+        return (bytes4(0), uint256(0), user_);
     }
 
     /// @notice Pre Execution (Finds the payer and charges in ZbyteVToken)
@@ -89,12 +88,22 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
         address user_,
         bytes4 functionSig_,
         uint256 ethChargeAmount_
-    ) public onlyForwarder returns(address _payer) {
-        uint256 _zbyteCharge = LibDPlatBase._getNativeEthEquivalentZbyteValue(ethChargeAmount_);
-        _payer = getPayer(user_, dapp_, functionSig_, _zbyteCharge);
+    ) public onlyForwarder returns(address) {
+        bytes4 _payerEnterprise;
+        uint256 _currentEnterpriseLimit;
+        address _payer;
+        LibDPlatBase.DiamondStorage storage _dsb = LibDPlatBase.diamondStorage();
+        uint256 _zbyteCharge = IZbytePriceFeeder(_dsb.zbytePriceFeeder).convertEthToEquivalentZbyte(ethChargeAmount_);
+        (_payerEnterprise, _currentEnterpriseLimit, _payer) = getPayer(user_, dapp_, functionSig_, _zbyteCharge);
 
-        address _vZbyte = LibDPlatBase._getZbyteVToken();
-        ZbyteVToken(payable(_vZbyte)).transferFrom(_payer, msg.sender, _zbyteCharge);
+        if(_payerEnterprise != bytes4(0)) {
+            address _enterprisePolicy = LibDPlatRegistration._doesEnterpriseHavePolicy(_payerEnterprise);
+            if(_enterprisePolicy != address(0)) {
+                IEnterprisePaymentPolicy(_enterprisePolicy).updateEnterpriseEligibility(user_, dapp_, functionSig_, _zbyteCharge);
+            }
+            LibDPlatRegistration._setEntepriseLimit(_payerEnterprise, _currentEnterpriseLimit - _zbyteCharge);
+        }
+        return _payer;
     }
 
 
@@ -112,7 +121,8 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
                          uint256 reqValue_,
                          uint256 gasConsumedEth_,
                          uint256 preChargeEth_) public onlyForwarder {
-        uint256 _zbyteBurn = LibDPlatBase._getNativeEthEquivalentZbyteValue(gasConsumedEth_ * LibDPlatBase._getZbyteBurnFactor() / 100);
+        LibDPlatBase.DiamondStorage storage _dsb = LibDPlatBase.diamondStorage();
+        uint256 _zbyteBurn = IZbytePriceFeeder(_dsb.zbytePriceFeeder).getBurnAmountInZbyte();
 
         // Execute was successfull, also consider eth sent to execute request
         if (executeResult_) {
@@ -121,7 +131,7 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
         uint256 _chargeEth = gasConsumedEth_ > preChargeEth_ ? gasConsumedEth_ - preChargeEth_ : 0;
         uint256 _refundEth = gasConsumedEth_ > preChargeEth_ ? 0 : preChargeEth_ - gasConsumedEth_;
 
-        uint256 _zbyteCharge = LibDPlatBase._getNativeEthEquivalentZbyteValue(_chargeEth);
+        uint256 _zbyteCharge = IZbytePriceFeeder(_dsb.zbytePriceFeeder).convertEthToEquivalentZbyte(_chargeEth);
 
         address _vZbyte = LibDPlatBase._getZbyteVToken();
         if(_zbyteCharge != 0)

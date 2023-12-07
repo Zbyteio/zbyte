@@ -16,10 +16,14 @@ interface IEscrowERC20 {
     // errors
     /// @notice Caller is not a valid relay
     error InvalidRelay(address);
-    /// @notice event (0xd6facdff): The callback received was invalid
+    /// @notice error (0xd6facdff): The callback received was invalid
     error InvalidCallbackMessage(uint256,uint256,uint256,uint256);
-    /// @notice event (0xcd9d7bb0): The ack in callback received was not found
+    /// @notice error (0xcd9d7bb0): The ack in callback received was not found
     error InvalidCallbackAck(uint256,bytes32,bool,uint256);
+    /// @notice error (0xed3fc6b3): Insufficient ERC20 for Deposit operation.
+    error InsufficientERC20ForDepositGas(uint256,uint256);
+    /// @notice error (0xb3922495): Unauthorized caller.
+    error UnAuthorized(address);
 
     // events
     /// @notice event (0x1a40ce6d): vERC20 contract address is set
@@ -40,7 +44,12 @@ interface IEscrowERC20 {
     event ERC20WithdrawConfirmed(bytes32,bool,uint256);
     /// @notice event (0x1db696c9): The Treasury address is set
     event TreasuryAddressSet(address,address);
-
+    /// @notice event (0x5e7c3cb3): Zbyte Price Feeder address is set
+    event ZbytePriceFeederAddressSet(address);
+    /// @notice event (0x82b9d61d): ERC20 tokens deposit failed and refund issued to depositor
+    event ERC20DepositFailedAndRefunded(bytes32,bool,uint256);
+    /// @notice event (0x2ddb4d51): Worker is registered(true/false)
+    event WorkerRegistered(address,bool);
 
     function getNonce() external view returns(uint256);
     function totalSupplyAllChains() external view returns (uint256);

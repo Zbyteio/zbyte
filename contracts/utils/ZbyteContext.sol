@@ -65,6 +65,11 @@ abstract contract ZbyteContext is Context, Ownable {
         _setTrustedForwarder(forwarder_);
     }
 
+    /// @notice Get the trusted forwarder address
+    function _getTrustedForwarder() internal view returns(address){
+        return trustedForwarder;
+    }
+
     /// @notice Extract true caller if called via trusted forwarder
     function _msgSender() internal view virtual override returns (address sender) {
         if (isTrustedForwarder(msg.sender)) {

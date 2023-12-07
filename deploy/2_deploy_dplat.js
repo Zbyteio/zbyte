@@ -40,6 +40,15 @@ async function deployDplat() {
         })
     console.log('==ZbyteRelay addr=', ZbyteRelay.address);
 
+    ZbytePriceFeeder = await hre.deployments.deploy(
+        'ZbytePriceFeeder', {
+            from:deployer,
+            args: [ZbyteForwarderDPlat.address],
+            gasLimit: 6e6,
+            deterministicDeployment: false
+        })
+    console.log('==ZbytePriceFeeder addr=', ZbytePriceFeeder.address);
+
     const zbyteDPlat = await hre.deployments.diamond.deploy(
         'ZbyteDPlat', {
             from:deployer,
