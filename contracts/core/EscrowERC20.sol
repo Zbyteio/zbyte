@@ -18,7 +18,6 @@ import "../interface/relay/IRelayWrapper.sol";
 import "../interface/core/IEscrowERC20.sol";
 import "../interface/dplat/IZbytePriceFeeder.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
-import "hardhat/console.sol";
 
 /// @title The ERC20 Escrow contract
 /// @dev DPLAT ERC20 escrow abstract contract
@@ -214,10 +213,6 @@ abstract contract EscrowERC20 is ZbyteContext, IEscrowERC20, ReentrancyGuard {
         _beforeTokenDeposit(relay_, chain_, receiver_, amount_, verc20_);
 
         uint256 _gasCostForApproveAndDeposit = IZbytePriceFeeder(zbytePriceFeeder).getApproveAndDepositGasCostInZbyte(relay_, chain_);
-        console.log("_gasCostForApproveAndDeposit: ", _gasCostForApproveAndDeposit);
-        console.log("relay_: ", relay_);
-        console.log("chain_: ", chain_);
-        console.log("zbytePriceFeeder: ", zbytePriceFeeder);
         if(amount_ < _gasCostForApproveAndDeposit) revert InsufficientERC20ForDepositGas(amount_, _gasCostForApproveAndDeposit);
 
 

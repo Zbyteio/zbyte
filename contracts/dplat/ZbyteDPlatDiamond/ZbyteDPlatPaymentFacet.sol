@@ -16,7 +16,6 @@ import "../../utils/ZbyteContextDiamond.sol";
 import "../../interface/dplat/IEnterprisePaymentPolicy.sol";
 import "../../interface/dplat/IZbytePriceFeeder.sol";
 import "../ZbyteVToken.sol";
-import "hardhat/console.sol";
 
 /// @title Zbyte DPlat Payment Facet
 contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
