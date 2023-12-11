@@ -202,22 +202,18 @@ abstract contract EscrowERC20 is ZbyteContext, IEscrowERC20, ReentrancyGuard {
     /// @param relay_ Relay identifier that should be used for the crosschain call
     /// @param chain_ Target chain identifier
     /// @param receiver_ Recipient address for vERC20
+    /// @param cost_ Cost of the operation
     /// @param amount_ Amount of ERC20 deposited
     function _deposit(uint256 relay_,
                       uint256 chain_,
                       address receiver_,
+                      uint256 cost_,
                       uint256 amount_)
                       internal
                       returns (bool result) {
         address verc20_ = vERC20Addresses[chain_];
         _beforeTokenDeposit(relay_, chain_, receiver_, amount_, verc20_);
-
-        uint256 _gasCostForApproveAndDeposit = IZbytePriceFeeder(zbytePriceFeeder).getApproveAndDepositGasCostInZbyte(relay_, chain_);
-        if(amount_ < _gasCostForApproveAndDeposit) revert InsufficientERC20ForDepositGas(amount_, _gasCostForApproveAndDeposit);
-
-
-        IERC20(ulAsset).safeTransferFrom(_msgSender(), _getTrustedForwarder(), _gasCostForApproveAndDeposit);
-        amount_ = amount_ - _gasCostForApproveAndDeposit;
+        IERC20(ulAsset).safeTransferFrom(_msgSender(), _getTrustedForwarder(), cost_);
         IERC20(ulAsset).safeTransferFrom(_msgSender(), address(this), amount_);
 
         bytes32 _ack = keccak256(abi.encodePacked(chain_,receiver_,amount_, nonce));
