@@ -9,6 +9,7 @@ const contractName = "ZbyteEscrow";
 
 async function deposit(relay,dplatChain,receiver,cost,amount,sender) {
     try {
+        const abiCoder = new ethers.AbiCoder();
         let contractWithSigner = await lib.getContractWithSigner(contractName, sender);
         let zbytePriceFeederContract = await lib.getContract("ZbytePriceFeeder");
         var amountWei = ethers.parseUnits(amount,18);
@@ -42,15 +43,16 @@ async function deposit(relay,dplatChain,receiver,cost,amount,sender) {
         let relayId = constants.relayNameToId[relay];
 
         const tx = await contractWithSigner.deposit(relayId,dplatChainId,receiverAddress,costWei,amountWei);
+        let modifiedPayload = abiCoder.encode(["address","bytes"], [destRelay, payload]);
         await expect(tx.wait())
                       .to.emit(contractWithSigner,"ERC20Deposited")  // Escro called relay
                       .withArgs(senderAddress,receiverAddress,amountWei,dplatChainId,ack)
                       .to.emit(relayContract,"RelayCallRemoteReceived")  // source side relay received call
-                      .withArgs(coreChainId,relayContract.target,dplatChainId,destRelay,payload);
-           
+                      .withArgs(coreChainId,relayContract.target,dplatChainId,destRelay,modifiedPayload);
+
         let retval = { function: "deposit",
                        srcChain: hre.network.name, srcRelay: relayContract.target,
-                       destChain: dplatChain, destRelay: destRelay, data: payload,
+                       destChain: dplatChain, destRelay: destRelay, data: modifiedPayload,
                        ack:ack, amount: amount, caller:'escrow'};
         return retval;
     } catch (error) {

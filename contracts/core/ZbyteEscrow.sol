@@ -38,6 +38,7 @@ contract ZbyteEscrow is Ownable, Pausable, EscrowERC20 {
                       uint256 amount_)
                       public
                       whenNotPaused
+                      nonReentrant
                       returns (bool result) {
         return _deposit(relay_,chain_,receiver_,cost_,amount_);
     }

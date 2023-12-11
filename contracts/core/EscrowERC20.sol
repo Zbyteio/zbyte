@@ -202,7 +202,7 @@ abstract contract EscrowERC20 is ZbyteContext, IEscrowERC20, ReentrancyGuard {
     /// @param relay_ Relay identifier that should be used for the crosschain call
     /// @param chain_ Target chain identifier
     /// @param receiver_ Recipient address for vERC20
-    /// @param cost_ Amount of ERC20 deposited
+    /// @param cost_ Cost of the operation
     /// @param amount_ Amount of ERC20 deposited
     function _deposit(uint256 relay_,
                       uint256 chain_,
