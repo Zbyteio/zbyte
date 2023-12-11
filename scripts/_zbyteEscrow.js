@@ -7,11 +7,12 @@ const constants = require("./constants.js");
 
 const contractName = "ZbyteEscrow";
 
-async function deposit(relay,dplatChain,receiver,amount,sender) {
+async function deposit(relay,dplatChain,receiver,cost,amount,sender) {
     try {
         let contractWithSigner = await lib.getContractWithSigner(contractName, sender);
         let zbytePriceFeederContract = await lib.getContract("ZbytePriceFeeder");
         var amountWei = ethers.parseUnits(amount,18);
+        var costWei = ethers.parseUnits(cost,18);
         let dplatChainId = lib.nameToChainId(dplatChain);
         let coreChainId = lib.nameToChainId(hre.network.name)
         let receiverAddress = await lib.getAddressOnChain(receiver,dplatChain);
@@ -40,7 +41,7 @@ async function deposit(relay,dplatChain,receiver,amount,sender) {
                             await lib.getAddress("ZbyteEscrow"),mintCallData)
         let relayId = constants.relayNameToId[relay];
 
-        const tx = await contractWithSigner.deposit(relayId,dplatChainId,receiverAddress,amountWei);
+        const tx = await contractWithSigner.deposit(relayId,dplatChainId,receiverAddress,costWei,amountWei);
         await expect(tx.wait())
                       .to.emit(contractWithSigner,"ERC20Deposited")  // Escro called relay
                       .withArgs(senderAddress,receiverAddress,amountWei,dplatChainId,ack)

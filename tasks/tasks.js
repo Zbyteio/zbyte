@@ -102,6 +102,7 @@ task("zbyteEscrow", "Zbyte Escrow Tasks")
 .addOptionalParam("amount","amount of tokens to deposit")
 .addOptionalParam("sender","token depositor")
 .addOptionalParam("owner","owner of the contrat")
+.addOptionalParam("cost","cost of the operation")
 .setAction(
     async (taskArgs, hre) => {
         const zbyteEscrow = require("../scripts/_zbyteEscrow.js")
@@ -110,7 +111,7 @@ task("zbyteEscrow", "Zbyte Escrow Tasks")
         if(taskArgs.api == "deposit") {
             const dplatChain = process.env.DPLAT
             retval = await zbyteEscrow.deposit(taskArgs.relay,dplatChain,
-                    taskArgs.receiver,taskArgs.amount,taskArgs.sender);
+                    taskArgs.receiver,taskArgs.cost,taskArgs.amount,taskArgs.sender);
         } else if(taskArgs.api == "withdraw") {
             const dplatChain = process.env.DPLAT
             retval = await zbyteEscrow.withdraw(taskArgs.relay,dplatChain,

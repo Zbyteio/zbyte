@@ -29,15 +29,17 @@ contract ZbyteEscrow is Ownable, Pausable, EscrowERC20 {
     /// @param relay_ Relay identifier that should be used for the crosschain call
     /// @param chain_ Target chain identifier
     /// @param receiver_ Recipient address for vERC20
+    /// @param cost_ Cost of the operation
     /// @param amount_ Amount of ERC20 deposited
     function deposit(uint256 relay_,
                       uint256 chain_,
                       address receiver_,
+                      uint256 cost_,
                       uint256 amount_)
                       public
                       whenNotPaused
                       returns (bool result) {
-        return _deposit(relay_,chain_,receiver_,amount_);
+        return _deposit(relay_,chain_,receiver_,cost_,amount_);
     }
 
     /// @notice Withdraw ERC20 tokens by depositing vERC20 on target chain

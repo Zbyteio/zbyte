@@ -112,7 +112,7 @@ contract ZbyteRelay is Ownable, ZbyteContext {
             this.receiveCall(block.chainid,address(this),_updatedPayload);
         }
 
-        emit RelayCallRemoteReceived(block.chainid,address(this),destChain_,destRelay_,_updatedPayload);
+        emit RelayCallRemoteReceived(block.chainid,address(this),destChain_,destRelay_,payload_);
         return true;
     }
 
