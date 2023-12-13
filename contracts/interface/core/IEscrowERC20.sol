@@ -32,20 +32,16 @@ interface IEscrowERC20 {
     event RelayWrapperAddressSet(address);
     /// @notice event (0xcae09af7): ERC20 tokens deposited
     event ERC20Deposited(address,address,uint256,uint256,bytes32);
-    /// @notice event (0x0583eefc): ERC20 tokens deposit failed
-    event ERC20DepositFailed(address,address,uint256,uint256,bytes32);
     /// @notice event (0xf64578a8): ERC20 tokens deposit confirmed
     event ERC20DepositConfirmed(bytes32,bool,uint256);
     /// @notice event (0x8b923c21): ERC20 tokens withdrawn
     event ERC20Withdrawn(address,address,address,uint256,bytes32);
-    /// @notice event (0x2b4d7cea): ERC20 tokens withdraw failed
-    event ERC20WithdrawFailed(address,address,address,uint256,bytes32);
+    /// @notice event (0x9c33bbca): ERC20 tokens withdraw failed
+    event ERC20WithdrawFailed(bytes32,bool,uint256);
     /// @notice event (0xf5a60bd1): ERC20 tokens withdraw confirmed
     event ERC20WithdrawConfirmed(bytes32,bool,uint256);
     /// @notice event (0x1db696c9): The Treasury address is set
     event TreasuryAddressSet(address,address);
-    /// @notice event (0x5e7c3cb3): Zbyte Price Feeder address is set
-    event ZbytePriceFeederAddressSet(address);
     /// @notice event (0x82b9d61d): ERC20 tokens deposit failed and refund issued to depositor
     event ERC20DepositFailedAndRefunded(bytes32,bool,uint256);
     /// @notice event (0x2ddb4d51): Worker is registered(true/false)

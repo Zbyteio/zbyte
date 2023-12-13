@@ -16,7 +16,6 @@ import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "../utils/ZbyteContext.sol";
 import "../interface/relay/IRelayWrapper.sol";
 import "../interface/core/IEscrowERC20.sol";
-import "../interface/dplat/IZbytePriceFeeder.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 /// @title The ERC20 Escrow contract
@@ -24,8 +23,6 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 abstract contract EscrowERC20 is ZbyteContext, IEscrowERC20, ReentrancyGuard {
     using SafeERC20 for IERC20;
 
-    // @notice Address to treasury. Holds the 'platform fee' tokens
-    address public treasury;
     /// @notice Total vERC20 supply on all chains
     uint256 private _totalSupply;
     // @notice mapping of vERC20 amount for the chain
@@ -34,8 +31,6 @@ abstract contract EscrowERC20 is ZbyteContext, IEscrowERC20, ReentrancyGuard {
     mapping(uint256 => address) public vERC20Addresses;
     /// @notice The underlying ERC20 token contract
     IERC20 public ulAsset;
-    /// @notice Zbyte price feeder address.
-    address zbytePriceFeeder;
     /// @notice Authorized workers
     mapping(address => bool) authorizedWorkers;
     /// @notice RelayWrapper contract address
@@ -120,26 +115,6 @@ abstract contract EscrowERC20 is ZbyteContext, IEscrowERC20, ReentrancyGuard {
         return nonce;
     }
 
-    /// @notice Sets the address of the ZbytePriceFeeder contract.
-    /// @dev This function allows updating the address of the ZbytePriceFeeder contract.
-    /// @param zbytePriceFeederAddress_ The address of the ZbytePriceFeeder contract.
-    function setZbytePriceFeederAddress(address zbytePriceFeederAddress_) public {
-        zbytePriceFeeder = zbytePriceFeederAddress_;
-        emit ZbytePriceFeederAddressSet(zbytePriceFeederAddress_);
-    }
-
-    /// @notice Set the treasury address
-    /// @param treasury_ Treasury address
-    function setTreasuryAddress(address treasury_) public onlyOwner {
-        if(treasury_ == address(0)) {
-            revert ZeroAddress();
-        }
-        address oldTreasury = treasury;
-        treasury = treasury_;
-
-        emit TreasuryAddressSet(oldTreasury,treasury);
-    }
-
     /// @notice Set the address of vERC20 on a given chain
     /// @param verc20_ vERC20 contract address
     /// @param chain_ chain id of the chain where vERC2o contract resides
@@ -210,6 +185,7 @@ abstract contract EscrowERC20 is ZbyteContext, IEscrowERC20, ReentrancyGuard {
                       uint256 cost_,
                       uint256 amount_)
                       internal
+                      nonReentrant
                       returns (bool result) {
         address verc20_ = vERC20Addresses[chain_];
         _beforeTokenDeposit(relay_, chain_, receiver_, amount_, verc20_);
@@ -252,6 +228,7 @@ abstract contract EscrowERC20 is ZbyteContext, IEscrowERC20, ReentrancyGuard {
                       address vERC20Depositor_,
                       address receiver_)
                       internal
+                      nonReentrant
                       returns (bool result) {
         address verc20_ = vERC20Addresses[chain_];
         _beforeTokenWithdraw(relay_, chain_, vERC20Depositor_, receiver_, verc20_);
@@ -305,24 +282,25 @@ abstract contract EscrowERC20 is ZbyteContext, IEscrowERC20, ReentrancyGuard {
             }
             if(success_) {
                 _record(Action.DEPOSIT, _amount, _chainId);
-
-                delete pendingAction[ack_];
                 emit ERC20DepositConfirmed(ack_, success_,retval_);
             } else {
                 IERC20(ulAsset).safeTransfer(_nAddress, _amount);
-                delete pendingAction[ack_];
                 emit ERC20DepositFailedAndRefunded(ack_, success_,retval_);
             }
-
-        } else if (_pAction.action == Action.WITHDRAW && success_) {
+            delete pendingAction[ack_];
+        } else if (_pAction.action == Action.WITHDRAW) {
             if (chain_ != _chainId) {
                 revert InvalidCallbackMessage(_chainId, _amount, chain_, retval_);
             }
-            IERC20(ulAsset).safeTransfer(_nAddress, retval_);
-            _record(Action.WITHDRAW, _amount, _chainId);
 
+            if (success_) {
+                IERC20(ulAsset).safeTransfer(_nAddress, retval_);
+                _record(Action.WITHDRAW, _amount, _chainId);
+                emit ERC20WithdrawConfirmed(ack_, success_,retval_);
+            } else {
+                emit ERC20WithdrawFailed(ack_, success_, retval_);
+            }
             delete pendingAction[ack_];
-            emit ERC20WithdrawConfirmed(ack_, success_,retval_);
 
         } else {
             revert InvalidCallbackAck(chain_,ack_, success_,retval_);

@@ -19,10 +19,8 @@ import "./EscrowERC20.sol";
 contract ZbyteEscrow is Ownable, Pausable, EscrowERC20 {
 
     constructor(address forwarder_,
-                address zbyte_,
-                address treasury_)
+                address zbyte_)
                 EscrowERC20(forwarder_, IERC20(zbyte_)) {
-        setTreasuryAddress(treasury_);
     }
 
     /// @notice Deposit ERC20 tokens to obtain vERC20 on target chain
@@ -38,7 +36,6 @@ contract ZbyteEscrow is Ownable, Pausable, EscrowERC20 {
                       uint256 amount_)
                       public
                       whenNotPaused
-                      nonReentrant
                       returns (bool result) {
         return _deposit(relay_,chain_,receiver_,cost_,amount_);
     }

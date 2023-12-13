@@ -20,9 +20,6 @@ interface IZbytePriceFeeder {
     /// @notice Event emitted when the Zbyte price in Gwei is set.
     event ZbytePriceInGweiSet(uint256 zbytePriceInGwei);
 
-    /// @notice Event emitted when the gas cost for approve and deposit operation is set.
-    event ApproveAndDepositGasCostSet(uint256 relay, uint256 remoteChainId, uint256 gasCost);
-
     /// @notice Event emitted when the burn rate is set.
     event BurnRateInMillSet(uint256);
 
@@ -35,12 +32,6 @@ interface IZbytePriceFeeder {
     /// @param priceInMill_ Price in millionths.
     /// @return Equivalent Zbyte amount.
     function convertMillToZbyte(uint256 priceInMill_) external view returns (uint256);
-
-    /// @notice Retrieves the gas cost for approve and deposit operation converted to Zbyte.
-    /// @param relay_ The relay identifier.
-    /// @param remoteChainId_ The remote chain identifier.
-    /// @return Equivalent Zbyte gas cost.
-    function getApproveAndDepositGasCostInZbyte(uint256 relay_, uint256 remoteChainId_) external view returns (uint256);
 
     /// @notice Returns equivalent amount of Zbyte to burn.
     /// @return Equivalent amount of Zbyte to burn.

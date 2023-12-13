@@ -25,6 +25,7 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
     event RefundEthToPayer(address,uint256);
 
     /// @notice Determines the payer for a transaction.
+    /// @notice In the absence of an enteprise policy, if a dapp or  is registered with ent
     /// @param user_ The user's address.
     /// @param dapp_ The Dapp's address.
     /// @param functionSig_ The function signature (bytes4).
@@ -46,6 +47,8 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
                             return (_dappEnterprise, _enterpriseLimit, _enterpriseProvider);
                         }
                     } else {
+                        //In absence of an ent policy, if a dapp is registered with ent
+                        //ent will pay for any call to that dapp, as long as it has balance
                         return (_dappEnterprise, _enterpriseLimit, _enterpriseProvider);
 
                     }
@@ -69,6 +72,8 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
                             return (_userEnterprise, _enterpriseLimit, _enterpriseProvider);
                         }
                     } else {
+                        //In absence of an ent policy, if a user is registered with ent
+                        //ent will pay for any call from that user, as long as it has balance
                         return (_userEnterprise, _enterpriseLimit, _enterpriseProvider);
                     }
                 }
@@ -95,15 +100,16 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
         uint256 _zbyteCharge = IZbytePriceFeeder(_dsb.zbytePriceFeeder).convertEthToEquivalentZbyte(ethChargeAmount_);
         (_payerEnterprise, _currentEnterpriseLimit, _payer) = getPayer(user_, dapp_, functionSig_, _zbyteCharge);
 
-        if(_payerEnterprise != bytes4(0)) {
-            address _enterprisePolicy = LibDPlatRegistration._doesEnterpriseHavePolicy(_payerEnterprise);
-            if(_enterprisePolicy != address(0)) {
-                IEnterprisePaymentPolicy(_enterprisePolicy).updateEnterpriseEligibility(user_, dapp_, functionSig_, _zbyteCharge);
+        if (_zbyteCharge != 0) {
+            if(_payerEnterprise != bytes4(0)) {
+                address _enterprisePolicy = LibDPlatRegistration._doesEnterpriseHavePolicy(_payerEnterprise);
+                if(_enterprisePolicy != address(0)) {
+                    IEnterprisePaymentPolicy(_enterprisePolicy).updateEnterpriseEligibility(user_, dapp_, functionSig_, _zbyteCharge);
+                }
+                LibDPlatRegistration._setEntepriseLimit(_payerEnterprise, _currentEnterpriseLimit - _zbyteCharge);
             }
-            LibDPlatRegistration._setEntepriseLimit(_payerEnterprise, _currentEnterpriseLimit - _zbyteCharge);
-        }
-        if(_zbyteCharge != 0)
             ZbyteVToken(payable(_dsb.zbyteVToken)).transferFrom(_payer, msg.sender, _zbyteCharge);
+        }
         return _payer;
     }
 
