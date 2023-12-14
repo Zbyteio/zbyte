@@ -4,12 +4,6 @@
 
 _DPLAT ERC20 escrow abstract contract_
 
-### treasury
-
-```solidity
-address treasury
-```
-
 ### vERC20Addresses
 
 ```solidity
@@ -25,6 +19,14 @@ contract IERC20 ulAsset
 ```
 
 The underlying ERC20 token contract
+
+### authorizedWorkers
+
+```solidity
+mapping(address => bool) authorizedWorkers
+```
+
+Authorized workers
 
 ### relayWrapper
 
@@ -104,6 +106,16 @@ receive() external payable
 
 receive function
 
+### onlyAuthorized
+
+```solidity
+modifier onlyAuthorized()
+```
+
+Reverts the transaction with an `UnAuthorized` error if the sender is not authorized.
+
+_Modifier to ensure that the sender is an authorized worker._
+
 ### onlyRelay
 
 ```solidity
@@ -111,6 +123,21 @@ modifier onlyRelay()
 ```
 
 Modifier to enforce call only from valid relay contract
+
+### registerWorker
+
+```solidity
+function registerWorker(address worker_, bool register_) public
+```
+
+Registers or unregisters a worker, allowing or denying access to specific functionality.
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| worker_ | address | The address of the worker to be registered or unregistered. |
+| register_ | bool | A boolean indicating whether to register (true) or unregister (false) the worker. |
 
 ### getNonce
 
@@ -121,20 +148,6 @@ function getNonce() public view returns (uint256)
 Get the latest nonce
 
 _nonce is incremented for every successful deposit or withdraw_
-
-### setTreasuryAddress
-
-```solidity
-function setTreasuryAddress(address treasury_) public
-```
-
-Set the treasury address
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| treasury_ | address | Treasury address |
 
 ### _setvERC20Address
 
@@ -216,10 +229,11 @@ Record and update state on successful deposit/withdraw
 ### _deposit
 
 ```solidity
-function _deposit(uint256 relay_, uint256 chain_, address receiver_, uint256 amount_) internal returns (bool result)
+function _deposit(uint256 relay_, uint256 chain_, address receiver_, uint256 cost_, uint256 amount_) internal returns (bool result)
 ```
 
 Deposit ERC20 tokens to obtain vERC20 on target chain
+Deposit with ZbyteRelay is supported only via Zbyte Platform in case user deposits directly, it may result in loss of funds(Zbyte).
 
 #### Parameters
 
@@ -228,12 +242,13 @@ Deposit ERC20 tokens to obtain vERC20 on target chain
 | relay_ | uint256 | Relay identifier that should be used for the crosschain call |
 | chain_ | uint256 | Target chain identifier |
 | receiver_ | address | Recipient address for vERC20 |
+| cost_ | uint256 | Cost of the operation |
 | amount_ | uint256 | Amount of ERC20 deposited |
 
 ### _withdraw
 
 ```solidity
-function _withdraw(uint256 relay_, uint256 chain_, address paymaster_, address receiver_) internal returns (bool result)
+function _withdraw(uint256 relay_, uint256 chain_, address vERC20Depositor_, address receiver_) internal returns (bool result)
 ```
 
 Withdraw ERC20 tokens by depositing vERC20 on target chain
@@ -246,7 +261,7 @@ _The paymaster_ should be a valid paymaster (e.g., forwarder). All vERC20 held b
 | ---- | ---- | ----------- |
 | relay_ | uint256 | Relay identifier that should be used for the crosschain call |
 | chain_ | uint256 | Target chain identifier |
-| paymaster_ | address | Paymaster address to deposit vERC20 |
+| vERC20Depositor_ | address | Address to deposit vERC20 |
 | receiver_ | address | Recipient address for ERC20 |
 
 ### _callbackHandler
@@ -343,13 +358,13 @@ Hook called after token withdraw
 ### constructor
 
 ```solidity
-constructor(address forwarder_, address zbyte_, address treasury_) public
+constructor(address forwarder_, address zbyte_) public
 ```
 
 ### deposit
 
 ```solidity
-function deposit(uint256 relay_, uint256 chain_, address receiver_, uint256 amount_) public returns (bool result)
+function deposit(uint256 relay_, uint256 chain_, address receiver_, uint256 cost_, uint256 amount_) public returns (bool result)
 ```
 
 Deposit ERC20 tokens to obtain vERC20 on target chain
@@ -361,12 +376,13 @@ Deposit ERC20 tokens to obtain vERC20 on target chain
 | relay_ | uint256 | Relay identifier that should be used for the crosschain call |
 | chain_ | uint256 | Target chain identifier |
 | receiver_ | address | Recipient address for vERC20 |
+| cost_ | uint256 | Cost of the operation |
 | amount_ | uint256 | Amount of ERC20 deposited |
 
 ### withdraw
 
 ```solidity
-function withdraw(uint256 relay_, uint256 chain_, address paymaster_, address receiver_) public returns (bool result)
+function withdraw(uint256 relay_, uint256 chain_, address vERC20Depositor_, address receiver_) public returns (bool result)
 ```
 
 Withdraw ERC20 tokens by depositing vERC20 on target chain
@@ -379,7 +395,7 @@ _The paymaster_ should be a valid paymaster (e.g., forwarder). All vERC20 held b
 | ---- | ---- | ----------- |
 | relay_ | uint256 | Relay identifier that should be used for the crosschain call |
 | chain_ | uint256 | Target chain identifier |
-| paymaster_ | address | Paymaster address to deposit vERC20 |
+| vERC20Depositor_ | address | Address to deposit vERC20 |
 | receiver_ | address | Recipient address for ERC20 |
 
 ### callbackHandler
@@ -600,8 +616,7 @@ _Library for DPlat base storage and functions_
 ```solidity
 struct DiamondStorage {
   address zbyteVToken;
-  uint256 zbyteValueInNativeEthGwei;
-  uint256 zbyteBurnFactor;
+  address zbytePriceFeeder;
 }
 ```
 
@@ -631,41 +646,11 @@ Gets the ZbyteVToken address.
 | ---- | ---- | ----------- |
 | [0] | address | The address of the ZbyteVToken. |
 
-### _getNativeEthEquivalentZbyteValue
+### _getZbytePriceFeeder
 
 ```solidity
-function _getNativeEthEquivalentZbyteValue(uint256 ethAmount_) internal view returns (uint256)
+function _getZbytePriceFeeder() internal view returns (address)
 ```
-
-Calculates the native Ether equivalent value of Zbyte.
-
-_ethAmountInGWei = (ethAmountinWei/10**9), inZbyte = ethAmountInGWei*zbyteValueInNativeEthGwei, inZbyteWei = inZbyte*10**18_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| ethAmount_ | uint256 | The amount in Ether (wei). |
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | uint256 | The equivalent value in Zbyte (wei). |
-
-### _getZbyteBurnFactor
-
-```solidity
-function _getZbyteBurnFactor() internal view returns (uint256)
-```
-
-Gets the Zbyte burn factor.
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | uint256 | The Zbyte burn factor. |
 
 ## LibDPlatRegistration
 
@@ -737,7 +722,7 @@ Sets the enterprise limit for a given enterprise ID.
 ### _doesEnterpriseHavePolicy
 
 ```solidity
-function _doesEnterpriseHavePolicy(bytes4 enterprise_) internal view returns (bool, address)
+function _doesEnterpriseHavePolicy(bytes4 enterprise_) internal view returns (address)
 ```
 
 Checks if an enterprise has a registered policy and retrieves the policy address.
@@ -752,8 +737,7 @@ Checks if an enterprise has a registered policy and retrieves the policy address
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| [0] | bool | A tuple indicating whether the enterprise policy exists and the policy address. |
-| [1] | address |  |
+| [0] | address | Enterprise payment policy address. |
 
 ### isProviderRegistered
 
@@ -909,6 +893,14 @@ event ZbyteBurnFactorSet(uint256)
 
 event (0xd7a7cf8c): Zbyte burn factor is set.
 
+### ZbytePriceFeederSet
+
+```solidity
+event ZbytePriceFeederSet(address)
+```
+
+event (0xe603ec36): Zbyte price feeder is set.
+
 ### setZbyteVToken
 
 ```solidity
@@ -923,19 +915,19 @@ Sets the address of the ZbyteVToken.
 | ---- | ---- | ----------- |
 | zbyteVToken_ | address | The address of the ZbyteVToken. |
 
-### setZbyteBurnFactor
+### setZbytePriceFeeder
 
 ```solidity
-function setZbyteBurnFactor(uint256 zbyteBurnFactor_) public
+function setZbytePriceFeeder(address zbytePriceFeeder_) public
 ```
 
-Sets the Zbyte burn factor.
+Sets the Zbyte Price Feeder address.
 
 #### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| zbyteBurnFactor_ | uint256 | Zbyte burn factor |
+| zbytePriceFeeder_ | address | Zbyte Price Feeder address. |
 
 ### getZbyteVToken
 
@@ -951,47 +943,11 @@ Gets the address of the ZbyteVToken.
 | ---- | ---- | ----------- |
 | [0] | address | The address of the ZbyteVToken. |
 
-### setZbyteValueInNativeEthGwei
+### getZbytePriceFeeder
 
 ```solidity
-function setZbyteValueInNativeEthGwei(uint256 zbyteValueInNativeEthGwei_) public
+function getZbytePriceFeeder() public view returns (address)
 ```
-
-Sets the value of Zbyte in native Ether (in Gwei).
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| zbyteValueInNativeEthGwei_ | uint256 | The value of Zbyte in native Ether (in Gwei). |
-
-### getZbyteValueInNativeEthGwei
-
-```solidity
-function getZbyteValueInNativeEthGwei() public view returns (uint256)
-```
-
-Gets the value of Zbyte in native Ether (in Gwei).
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | uint256 | The value of Zbyte in native Ether (in Gwei). |
-
-### getZbyteBurnFactor
-
-```solidity
-function getZbyteBurnFactor() public view returns (uint256)
-```
-
-Gets the Zbyte burn factor.
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | uint256 | The Zbyte burn factor (0-100). |
 
 ## ZbyteDPlatPaymentFacet
 
@@ -1007,10 +963,12 @@ Error(0x187e1a0c) Amount to be refund in terms of Eth to Payer.
 ### getPayer
 
 ```solidity
-function getPayer(address user_, address dapp_, bytes4 functionSig_, uint256 amount_) public returns (address)
+function getPayer(address user_, address dapp_, bytes4 functionSig_, uint256 amount_) public view returns (bytes4, uint256, address)
 ```
 
 Determines the payer for a transaction.
+In the absence of an enteprise policy, if a dapp or user is registered with ent,
+ent will pay for the call, as long as it has balance
 
 #### Parameters
 
@@ -1025,12 +983,14 @@ Determines the payer for a transaction.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| [0] | address | The payer's address. |
+| [0] | bytes4 | The payer's address. |
+| [1] | uint256 |  |
+| [2] | address |  |
 
 ### preExecute
 
 ```solidity
-function preExecute(address dapp_, address user_, bytes4 functionSig_, uint256 ethChargeAmount_) public returns (address _payer)
+function preExecute(address dapp_, address user_, bytes4 functionSig_, uint256 ethChargeAmount_) public returns (address)
 ```
 
 Pre Execution (Finds the payer and charges in ZbyteVToken)
@@ -1410,7 +1370,7 @@ Checks if an enterprise Dapp is registered and returns the associated enterprise
 ### registerProvider
 
 ```solidity
-function registerProvider(address provider_) public
+function registerProvider() public
 ```
 
 Registers a provider.
@@ -1436,25 +1396,13 @@ ________________________________________________________(1) <--------> (n) dapp
    all the other components registered under it remain registered.\
    So, if the component is registered again, the entire subtree becomes active again_
 
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| provider_ | address | The address of the provider to register. |
-
 ### deregisterProvider
 
 ```solidity
-function deregisterProvider(address provider_) public
+function deregisterProvider() public
 ```
 
 Deregisters a provider.
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| provider_ | address | The address of the provider to deregister. |
 
 ### registerProviderAgent
 
@@ -1628,6 +1576,14 @@ event ZbyteForwarderDPlatExecute(bool, bytes)
 
 event (0x5c3206c6): Execute result and return data
 
+### ForwarderDplatPostExecGasSet
+
+```solidity
+event ForwarderDplatPostExecGasSet(uint256)
+```
+
+event (0x1f32728a): Forwarder post exec gas is set.
+
 ### ZeroAddress
 
 ```solidity
@@ -1685,6 +1641,14 @@ address zbyteDPlat
 
 Address of the Zbyte DPlat contract
 
+### postExecGas
+
+```solidity
+uint256 postExecGas
+```
+
+Amount of gas needed for a post execute to the DPlat
+
 ### registeredWorkers
 
 ```solidity
@@ -1703,6 +1667,20 @@ Modifier to restrict a function to only be callable by registered workers.
 
 _The function using this modifier will only execute if the sender's address is a registered worker\
  It will revert with a 'NotAWorker' error if the sender is not a registered worker._
+
+### setPostExecGas
+
+```solidity
+function setPostExecGas(uint256 postExecGas_) public
+```
+
+Sets the post execute processing gas
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| postExecGas_ | uint256 | The new minimum processing gas value |
 
 ### setMinProcessingGas
 
@@ -1790,6 +1768,211 @@ Allows the owner of the contract to withdraw the contract's Ether balance.
 | ---- | ---- | ----------- |
 | receiver_ | address | The address to which the Ether balance will be sent. |
 
+## ZbytePriceFeeder
+
+Implements the IZbytePriceFeeder interface and provides functionality to manage gas costs and price conversions.
+
+### UnAuthorized
+
+```solidity
+error UnAuthorized(address)
+```
+
+error (0xb3922495): Unauthorized caller.
+
+### WorkerRegistered
+
+```solidity
+event WorkerRegistered(address, bool)
+```
+
+event (0x2ddb4d51): Worker is registered(true/false)
+
+### nativeEthEquivalentZbyteInGwei
+
+```solidity
+uint256 nativeEthEquivalentZbyteInGwei
+```
+
+### zbytePriceEquivalentInGwei
+
+```solidity
+uint256 zbytePriceEquivalentInGwei
+```
+
+### burnRateInMill
+
+```solidity
+uint256 burnRateInMill
+```
+
+### authorizedWorkers
+
+```solidity
+mapping(address => bool) authorizedWorkers
+```
+
+Authorized workers
+
+### constructor
+
+```solidity
+constructor(address forwarder_) public
+```
+
+### onlyAuthorized
+
+```solidity
+modifier onlyAuthorized()
+```
+
+Reverts the transaction with an `UnAuthorized` error if the sender is not authorized.
+
+_Modifier to ensure that the sender is an authorized worker._
+
+### registerWorker
+
+```solidity
+function registerWorker(address worker_, bool register_) public
+```
+
+Registers or unregisters a worker, allowing or denying access to specific functionality.
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| worker_ | address | The address of the worker to be registered or unregistered. |
+| register_ | bool | A boolean indicating whether to register (true) or unregister (false) the worker. |
+
+### setNativeEthEquivalentZbyteInGwei
+
+```solidity
+function setNativeEthEquivalentZbyteInGwei(uint256 nativeEthEquivalentZbyteInGwei_) public
+```
+
+Sets the equivalent Zbyte price in Gwei for native ETH.
+
+_Example:\
+Say, Native Eth Price = 1$\
+Zbyte Price = 2¢\
+Ratio(Native Eth Price / Zbyte Price) = 100 / 2\
+nativeEthEquivalentZbyteInGwei = Ratio * 10 ^ decimals() / Gwei\
+                               = 50 * 10 ^ 18 / 10 ^ 9 = 50,000,000,000\_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| nativeEthEquivalentZbyteInGwei_ | uint256 | The equivalent Zbyte price in Gwei for native ETH. |
+
+### setZbytePriceInGwei
+
+```solidity
+function setZbytePriceInGwei(uint256 zbytePriceInGwei_) public
+```
+
+Sets the Zbyte price in Gwei.
+
+_Example:\
+Say, Unit Price = 1$\
+Zbyte Price = 2¢\
+Ratio(Unit Price / Zbyte Price) = 100 / 2\
+zbytePriceInGwei_ = Ratio * 10 ^ decimals() / Gwei\
+                               = 50 * 10 ^ 18 / 10 ^ 9 = 50,000,000,000\_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| zbytePriceInGwei_ | uint256 | The Zbyte price in Gwei. |
+
+### convertEthToEquivalentZbyte
+
+```solidity
+function convertEthToEquivalentZbyte(uint256 ethAmount_) public view returns (uint256)
+```
+
+Converts eth to equivalent Zbyte amount.
+
+_Example:\
+Say, Native Eth Price = 1$\
+Zbyte Price = 2¢\
+nativeEthEquivalentZbyteInGwei = 50,000,000,000 Gwei (i.e. 1 Native Eth = 50 Zbyte)\
+ethAmount_  = 1,000,000,000,000,000,000 Wei (1 Native Eth)\
+zbyteAmount = (1,000,000,000,000,000,000 * 50,000,000,000) / 1,000,000,000\
+            = 50,000,000,000,000,000,000 Wei (50 ZBYT)\_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| ethAmount_ | uint256 | Amount of eth. |
+
+#### Return Values
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| [0] | uint256 | Equivalent Amount of zbyte. |
+
+### convertMillToZbyte
+
+```solidity
+function convertMillToZbyte(uint256 priceInMill_) public view returns (uint256)
+```
+
+Converts price in millionths to Zbyte amount.
+
+_Example:\
+Say, Unit Price = 1$\
+Zbyte Price = 2¢\
+So, zbytePriceEquivalentInGwei = 50,000,000,000 Gwei (i.e. 1 Unit = 50 Zbyte)\
+priceInMill_ = 20 Mill (i.e. (2 / 1000) Unit)\
+zbyteAmount = (20 * 50,000,000,000 * 1,000,000,000) / 1000\
+            = 1,000,000,000,000,000,000 Wei (1 ZBYT)\_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| priceInMill_ | uint256 | Price in millionths. |
+
+#### Return Values
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| [0] | uint256 | Equivalent Zbyte amount. |
+
+### getBurnAmountInZbyte
+
+```solidity
+function getBurnAmountInZbyte() public view returns (uint256)
+```
+
+Returns equivalent amount of Zbyte to burn.
+1 Unit = 1000 Mill
+
+#### Return Values
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| [0] | uint256 | Equivalent amount of Zbyte to burn. |
+
+### setBurnRateInMill
+
+```solidity
+function setBurnRateInMill(uint256 burnRate_) public
+```
+
+Sets burn rate for invoke calls in mill
+1 Unit = 1000 Mill
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| burnRate_ | uint256 | burn rate in mill |
+
 ## ZbyteVToken
 
 _The ZBYT vERC20 contract_
@@ -1809,22 +1992,6 @@ error CannotSendEther()
 ```
 
 error (0xbf064619): Contract cannot receive ether
-
-### InvalidDestroyAddress
-
-```solidity
-error InvalidDestroyAddress(address, address, address)
-```
-
-error (b034fa06): The address sent for destroy is not valid
-
-### PaymasterAddressSet
-
-```solidity
-event PaymasterAddressSet(address)
-```
-
-event (0xa16990bf) Paymaster address is set
 
 ### ZbyteDPlatAddressSet
 
@@ -1863,20 +2030,6 @@ function unpause() external
 ```
 
 Unpauses the paused contract
-
-### setPaymasterAddress
-
-```solidity
-function setPaymasterAddress(address paymaster_) public
-```
-
-Set the paymaster (forwarder) address
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| paymaster_ | address | Paymaster contract address |
 
 ### setZbyteDPlatAddress
 
@@ -1976,7 +2129,7 @@ _This is called during withdraw / reconciliation only.  Withdraw is allowed only
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| from_ | address | Paymaster/burner address from which tokens are destroyed |
+| from_ | address | Address from which tokens are destroyed |
 
 ### receive
 
@@ -2002,7 +2155,7 @@ Caller is not a valid relay
 error InvalidCallbackMessage(uint256, uint256, uint256, uint256)
 ```
 
-event (0xd6facdff): The callback received was invalid
+error (0xd6facdff): The callback received was invalid
 
 ### InvalidCallbackAck
 
@@ -2010,7 +2163,23 @@ event (0xd6facdff): The callback received was invalid
 error InvalidCallbackAck(uint256, bytes32, bool, uint256)
 ```
 
-event (0xcd9d7bb0): The ack in callback received was not found
+error (0xcd9d7bb0): The ack in callback received was not found
+
+### InsufficientERC20ForDepositGas
+
+```solidity
+error InsufficientERC20ForDepositGas(uint256, uint256)
+```
+
+error (0xed3fc6b3): Insufficient ERC20 for Deposit operation.
+
+### UnAuthorized
+
+```solidity
+error UnAuthorized(address)
+```
+
+error (0xb3922495): Unauthorized caller.
 
 ### vERC20AddressSet
 
@@ -2036,14 +2205,6 @@ event ERC20Deposited(address, address, uint256, uint256, bytes32)
 
 event (0xcae09af7): ERC20 tokens deposited
 
-### ERC20DepositFailed
-
-```solidity
-event ERC20DepositFailed(address, address, uint256, uint256, bytes32)
-```
-
-event (0x0583eefc): ERC20 tokens deposit failed
-
 ### ERC20DepositConfirmed
 
 ```solidity
@@ -2063,10 +2224,10 @@ event (0x8b923c21): ERC20 tokens withdrawn
 ### ERC20WithdrawFailed
 
 ```solidity
-event ERC20WithdrawFailed(address, address, address, uint256, bytes32)
+event ERC20WithdrawFailed(bytes32, bool, uint256)
 ```
 
-event (0x2b4d7cea): ERC20 tokens withdraw failed
+event (0x9c33bbca): ERC20 tokens withdraw failed
 
 ### ERC20WithdrawConfirmed
 
@@ -2083,6 +2244,22 @@ event TreasuryAddressSet(address, address)
 ```
 
 event (0x1db696c9): The Treasury address is set
+
+### ERC20DepositFailedAndRefunded
+
+```solidity
+event ERC20DepositFailedAndRefunded(bytes32, bool, uint256)
+```
+
+event (0x82b9d61d): ERC20 tokens deposit failed and refund issued to depositor
+
+### WorkerRegistered
+
+```solidity
+event WorkerRegistered(address, bool)
+```
+
+event (0x2ddb4d51): Worker is registered(true/false)
 
 ### getNonce
 
@@ -2119,7 +2296,13 @@ function callbackHandler(uint256 chain_, bytes32 ack_, bool success_, uint256 re
 ### isUserOrDappEligibleForPayment
 
 ```solidity
-function isUserOrDappEligibleForPayment(address user_, address dapp_, bytes4 functionSig_, uint256 amount_) external returns (bool)
+function isUserOrDappEligibleForPayment(address user_, address dapp_, bytes4 functionSig_, uint256 amount_) external view returns (bool)
+```
+
+### updateEnterpriseEligibility
+
+```solidity
+function updateEnterpriseEligibility(address user_, address dapp_, bytes4 functionSig_, uint256 amount_) external returns (bool)
 ```
 
 ## IZbyteDPlat
@@ -2135,6 +2318,88 @@ function preExecute(address user_, address dapp_, bytes4 functionSig_, uint256 c
 ```solidity
 function postExecute(address payer_, bool executeResult_, uint256 reqValue_, uint256 gasConsumedEth_, uint256 preChargeEth_) external
 ```
+
+## IZbytePriceFeeder
+
+Interface for Zbyte price feeder, defining functions for gas cost conversion and retrieval.
+
+### NativeEthEquivalentZbyteSet
+
+```solidity
+event NativeEthEquivalentZbyteSet(uint256 nativeEthEquivalentZbyteInGwei)
+```
+
+Event emitted when the equivalent Zbyte price for native ETH is set.
+
+### ZbytePriceInGweiSet
+
+```solidity
+event ZbytePriceInGweiSet(uint256 zbytePriceInGwei)
+```
+
+Event emitted when the Zbyte price in Gwei is set.
+
+### BurnRateInMillSet
+
+```solidity
+event BurnRateInMillSet(uint256)
+```
+
+Event emitted when the burn rate is set.
+
+### convertEthToEquivalentZbyte
+
+```solidity
+function convertEthToEquivalentZbyte(uint256 ethAmount_) external view returns (uint256)
+```
+
+Converts eth to equivalent Zbyte amount.
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| ethAmount_ | uint256 | Amount of eth. |
+
+#### Return Values
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| [0] | uint256 | Equivalent Amount of zbyte. |
+
+### convertMillToZbyte
+
+```solidity
+function convertMillToZbyte(uint256 priceInMill_) external view returns (uint256)
+```
+
+Converts price in millionths to Zbyte amount.
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| priceInMill_ | uint256 | Price in millionths. |
+
+#### Return Values
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| [0] | uint256 | Equivalent Zbyte amount. |
+
+### getBurnAmountInZbyte
+
+```solidity
+function getBurnAmountInZbyte() external view returns (uint256)
+```
+
+Returns equivalent amount of Zbyte to burn.
+
+#### Return Values
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| [0] | uint256 | Equivalent amount of Zbyte to burn. |
 
 ## IvERC20
 
@@ -2413,6 +2678,14 @@ error InvalidChain(uint256, uint256)
 ```
 
 error (0xc16b00ce): Current chain id does not match with the one sent in payload
+
+### InvalidDestinationRelay
+
+```solidity
+error InvalidDestinationRelay(address, address)
+```
+
+error (0x4a01d2ac): Invalid destination relay
 
 ### RelayCallRemoteReceived
 
@@ -2911,6 +3184,14 @@ _onlyOwner can call_
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | forwarder_ | address | Frwarder conract address |
+
+### _getTrustedForwarder
+
+```solidity
+function _getTrustedForwarder() internal view returns (address)
+```
+
+Get the trusted forwarder address
 
 ### _msgSender
 

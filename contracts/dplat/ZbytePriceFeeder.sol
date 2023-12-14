@@ -54,12 +54,12 @@ contract ZbytePriceFeeder is IZbytePriceFeeder, ZbyteContext {
     }
 
     /// @notice Sets the equivalent Zbyte price in Gwei for native ETH.
-    /// @dev Calculation:
-    /// Say, Native Eth Price = 1$
-    /// Zbyte Price = 2¢
-    /// Ratio(Native Eth Price / Zbyte Price) = 100 / 2
-    /// nativeEthEquivalentZbyteInGwei = Ratio * 10 ^ decimals() / Gwei
-    ///                                = 50 * 10 ^ 18 / 10 ^ 9 = 50,000,000,000
+    /// @dev Example:\
+    /// Say, Native Eth Price = 1$\
+    /// Zbyte Price = 2¢\
+    /// Ratio(Native Eth Price / Zbyte Price) = 100 / 2\
+    /// nativeEthEquivalentZbyteInGwei = Ratio * 10 ^ decimals() / Gwei\
+    ///                                = 50 * 10 ^ 18 / 10 ^ 9 = 50,000,000,000\
     /// @param nativeEthEquivalentZbyteInGwei_ The equivalent Zbyte price in Gwei for native ETH.
     function setNativeEthEquivalentZbyteInGwei(uint256 nativeEthEquivalentZbyteInGwei_) public onlyAuthorized {
         nativeEthEquivalentZbyteInGwei = nativeEthEquivalentZbyteInGwei_;
@@ -67,12 +67,12 @@ contract ZbytePriceFeeder is IZbytePriceFeeder, ZbyteContext {
     }
 
     /// @notice Sets the Zbyte price in Gwei.
-    /// @dev Calculation:
-    /// Say, Unit Price = 1$
-    /// Zbyte Price = 2¢
-    /// Ratio(Unit Price / Zbyte Price) = 100 / 2
-    /// zbytePriceInGwei_ = Ratio * 10 ^ decimals() / Gwei
-    ///                                = 50 * 10 ^ 18 / 10 ^ 9 = 50,000,000,000
+    /// @dev Example:\
+    /// Say, Unit Price = 1$\
+    /// Zbyte Price = 2¢\
+    /// Ratio(Unit Price / Zbyte Price) = 100 / 2\
+    /// zbytePriceInGwei_ = Ratio * 10 ^ decimals() / Gwei\
+    ///                                = 50 * 10 ^ 18 / 10 ^ 9 = 50,000,000,000\
     /// @param zbytePriceInGwei_ The Zbyte price in Gwei.
     function setZbytePriceInGwei(uint256 zbytePriceInGwei_) public onlyAuthorized {
         zbytePriceEquivalentInGwei = zbytePriceInGwei_;
@@ -80,13 +80,13 @@ contract ZbytePriceFeeder is IZbytePriceFeeder, ZbyteContext {
     }
 
     /// @notice Converts eth to equivalent Zbyte amount.
-    /// @dev Example:
-    /// Say, Native Eth Price = 1$
-    /// Zbyte Price = 2¢
-    /// nativeEthEquivalentZbyteInGwei = 50,000,000,000 Gwei (i.e. 1 Native Eth = 50 Zbyte)
-    /// ethAmount_  = 1,000,000,000,000,000,000 Wei (1 Native Eth)
-    /// zbyteAmount = (1,000,000,000,000,000,000 * 50,000,000,000) / 1,000,000,000
-    ///             = 50,000,000,000,000,000,000 Wei (50 ZBYT)
+    /// @dev Example:\
+    /// Say, Native Eth Price = 1$\
+    /// Zbyte Price = 2¢\
+    /// nativeEthEquivalentZbyteInGwei = 50,000,000,000 Gwei (i.e. 1 Native Eth = 50 Zbyte)\
+    /// ethAmount_  = 1,000,000,000,000,000,000 Wei (1 Native Eth)\
+    /// zbyteAmount = (1,000,000,000,000,000,000 * 50,000,000,000) / 1,000,000,000\
+    ///             = 50,000,000,000,000,000,000 Wei (50 ZBYT)\
     /// @param ethAmount_ Amount of eth.
     /// @return Equivalent Amount of zbyte.
     function convertEthToEquivalentZbyte(uint256 ethAmount_) public view returns (uint256) {
@@ -95,13 +95,13 @@ contract ZbytePriceFeeder is IZbytePriceFeeder, ZbyteContext {
     }
 
     /// @notice Converts price in millionths to Zbyte amount.
-    /// @dev Example:
-    /// Say, Unit Price = 1$
-    /// Zbyte Price = 2¢
-    /// So, zbytePriceEquivalentInGwei = 50,000,000,000 Gwei (i.e. 1 Unit = 50 Zbyte)
-    /// priceInMill_ = 20 Mill (i.e. (2 / 1000) Unit)
-    /// zbyteAmount = (20 * 50,000,000,000 * 1,000,000,000) / 1000
-    ///             = 1,000,000,000,000,000,000 Wei (1 ZBYT)
+    /// @dev Example:\
+    /// Say, Unit Price = 1$\
+    /// Zbyte Price = 2¢\
+    /// So, zbytePriceEquivalentInGwei = 50,000,000,000 Gwei (i.e. 1 Unit = 50 Zbyte)\
+    /// priceInMill_ = 20 Mill (i.e. (2 / 1000) Unit)\
+    /// zbyteAmount = (20 * 50,000,000,000 * 1,000,000,000) / 1000\
+    ///             = 1,000,000,000,000,000,000 Wei (1 ZBYT)\
     /// @param priceInMill_ Price in millionths.
     /// @return Equivalent Zbyte amount.
     function convertMillToZbyte(uint256 priceInMill_) public view returns (uint256) {

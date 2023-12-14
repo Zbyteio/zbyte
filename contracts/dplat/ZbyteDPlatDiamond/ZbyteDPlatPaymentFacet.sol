@@ -25,7 +25,8 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
     event RefundEthToPayer(address,uint256);
 
     /// @notice Determines the payer for a transaction.
-    /// @notice In the absence of an enteprise policy, if a dapp or  is registered with ent
+    /// @notice In the absence of an enteprise policy, if a dapp or user is registered with ent,
+    /// ent will pay for the call, as long as it has balance
     /// @param user_ The user's address.
     /// @param dapp_ The Dapp's address.
     /// @param functionSig_ The function signature (bytes4).
