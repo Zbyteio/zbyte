@@ -2840,6 +2840,107 @@
             "user": "0x7a84a712C113001f4317dD975CCDF048Ac5Cd730",
             "balZ": "0.0",
             "balL1": "4.0"
+        },
+        {
+            "function": "storeValue",
+            "storedBy": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "storedValue": "10"
+        },
+        {
+            "function": "transfer",
+            "sender": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+            "receiver": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "amount": "100.0"
+        },
+        {
+            "function": "transfer",
+            "sender": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+            "receiver": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "amount": "100.0"
+        },
+        {
+            "function": "approve",
+            "approver": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "approvee": "0xa6CA8Ff1a9256dd9318736d8A937614682FAC590",
+            "amount": "100.0"
+        },
+        {
+            "function": "approve",
+            "approver": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "approvee": "0xa6CA8Ff1a9256dd9318736d8A937614682FAC590",
+            "amount": "100.0"
+        },
+        null,
+        null,
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "99.0",
+            "balL1": "3.990289178847323379"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "balZ": "99.0",
+            "balL1": "1.993362317895786784"
+        },
+        null,
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "97.992834675885354816",
+            "balL1": "3.990289178847323379"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "balZ": "99.0",
+            "balL1": "1.993362317895786784"
+        },
+        {
+            "function": "registerEnterprise",
+            "enterprise": "0x693a03aa"
+        },
+        {
+            "function": "registerDapp",
+            "enterprise": "0x693a03aa",
+            "limit": "1000000000000000000000"
+        },
+        {
+            "function": "registerEnterpriseUser",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "enterprise": "0x693a03aa"
+        },
+        null,
+        {
+            "function": "balanceOf",
+            "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "balZ": "97.993039388888630224",
+            "balL1": "1.993362317895786784"
+        },
+        {
+            "function": "registerDapp",
+            "dapp": "0x92096f31E9575314A7735f7c9c7264e8bB136A4F",
+            "enterprise": "0x693a03aa"
+        },
+        null,
+        {
+            "function": "balanceOf",
+            "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "balZ": "96.986055817776893088",
+            "balL1": "1.993362317895786784"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "97.992834675885354816",
+            "balL1": "3.990289178847323379"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x7a84a712C113001f4317dD975CCDF048Ac5Cd730",
+            "balZ": "0.0",
+            "balL1": "0.0"
         }
     ]
 }
