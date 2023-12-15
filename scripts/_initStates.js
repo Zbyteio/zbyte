@@ -61,14 +61,7 @@ async function initCoreStateForDplat(owner,chain,relay) {
 
         console.log("  Escrow --|--> vERC20");
         ret = await escrow.setvERC20Address(owner,chain);
-        retval["Escrow-setvERC20Address"] = ret;        
-        
-        ret = await escrow.setZbytePriceFeeder(owner);
-        retval["Escrow-setZbytePriceFeeder"] = ret;
-
-        ret = await zbytePriceFeeder.setApproveAndDepositGasCost(owner, relay, chain, "1000000000000000000");
-        retval["ZbytePriceFeeder-setZbytePriceFeeder"] = ret;
-
+        retval["Escrow-setvERC20Address"] = ret;
         return retval;
     } catch (error) {
         console.log(error);
@@ -137,9 +130,6 @@ async function initDplatStates(owner) {
         }
 
         // vzbyte set states
-        ret = await zbyteVToken.setPaymasterAddress(owner);
-        retval["zbyteVToken-setPaymasterAddress"] = ret;
-
         ret = await zbyteVToken.setRoleCapability(1,
             "mint(address to_, uint256 amount_) public returns(uint256)",
             true,'zbyt')
@@ -160,6 +150,11 @@ async function initDplatStates(owner) {
             true,'zbyt')
         retval["zbyteVToken-setRoleCapability"] = ret;
 
+        ret = await zbyteVToken.setRoleCapability(2,
+            "transfer(address from_, uint256 amount_) external returns(uint256)",
+            true,'zbyt')
+        retval["zbyteVToken-setRoleCapability"] = ret;
+
         ret = await zbyteVToken.setUserRole('ZbyteDPlat',2,true,'zbyt')
         retval["zbyteVToken-setUserRole"] = ret;
 
@@ -168,6 +163,9 @@ async function initDplatStates(owner) {
 
 
         //zbytePriceFeeder states
+        ret = await zbytePriceFeeder.registerWorker(owner);
+        retval["zbytePriceFeeder-registerWorker"] = ret;
+
         ret = await zbytePriceFeeder.setNativeEthEquivalentZbyteInGwei(owner, "41000000000");
         retval["zbytePriceFeeder-setNativeEthEquivalentZbyteInGwei"] = ret;
 

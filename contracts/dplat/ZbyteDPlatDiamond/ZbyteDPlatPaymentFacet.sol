@@ -21,8 +21,8 @@ import "../ZbyteVToken.sol";
 contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
 
     /// events
-    /// @notice Error(0x187e1a0c) Amount to be refund in terms of Eth to Payer.
-    event RefundEthToPayer(address,uint256);
+    /// @notice Event(0x306f3bdb) Address of the payer, DPlat, Infra and Royalty Fee
+    event ExecuteFees(address,uint256,uint256,uint256);
 
     /// @notice Determines the payer for a transaction.
     /// @notice In the absence of an enteprise policy, if a dapp or  is registered with ent
@@ -108,7 +108,7 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
                 }
                 LibDPlatRegistration._setEntepriseLimit(_payerEnterprise, _currentEnterpriseLimit - _zbyteCharge);
             }
-            ZbyteVToken(payable(_dsb.zbyteVToken)).transferFrom(_payer, msg.sender, _zbyteCharge);
+            ZbyteVToken(payable(_dsb.zbyteVToken)).transferFrom(_payer, address(this), _zbyteCharge);
         }
         return _payer;
     }
@@ -129,22 +129,37 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
                          uint256 gasConsumedEth_,
                          uint256 preChargeEth_) public onlyForwarder {
         LibDPlatBase.DiamondStorage storage _dsb = LibDPlatBase.diamondStorage();
-        uint256 _zbyteBurn = IZbytePriceFeeder(_dsb.zbytePriceFeeder).getBurnAmountInZbyte();
+        uint256 _infraFee;
+        uint256 _dPlatFee = IZbytePriceFeeder(_dsb.zbytePriceFeeder).getDPlatFeeInZbyte();
 
         // Execute was successfull, also consider eth sent to execute request
         if (executeResult_) {
             gasConsumedEth_ += reqValue_;
         }       
-        uint256 _chargeEth = gasConsumedEth_ > preChargeEth_ ? gasConsumedEth_ - preChargeEth_ : 0;
+        uint256 _chargeEth = gasConsumedEth_ >= preChargeEth_ ? gasConsumedEth_ - preChargeEth_ : 0;
         uint256 _refundEth = gasConsumedEth_ > preChargeEth_ ? 0 : preChargeEth_ - gasConsumedEth_;
 
-        uint256 _zbyteCharge = IZbytePriceFeeder(_dsb.zbytePriceFeeder).convertEthToEquivalentZbyte(_chargeEth);
+        uint256 _infraFeePreCharge = IZbytePriceFeeder(_dsb.zbytePriceFeeder).convertEthToEquivalentZbyte(preChargeEth_);
 
-        if(_zbyteCharge != 0)
-            ZbyteVToken(payable(_dsb.zbyteVToken)).transferFrom(payer_, msg.sender, _zbyteCharge);
-        if(_zbyteBurn != 0)
-            ZbyteVToken(payable(_dsb.zbyteVToken)).burn(payer_, _zbyteBurn);
+        if(_chargeEth != 0) {
+            uint256 _infraFeeCharge = IZbytePriceFeeder(_dsb.zbytePriceFeeder).convertEthToEquivalentZbyte(_chargeEth);
+            ZbyteVToken(payable(_dsb.zbyteVToken)).transfer(msg.sender, _infraFeePreCharge);
+            ZbyteVToken(payable(_dsb.zbyteVToken)).transferFrom(payer_, msg.sender, _infraFeeCharge);
+            _infraFee = _infraFeePreCharge + _infraFeeCharge;
+        }
 
-        emit RefundEthToPayer(payer_, _refundEth);
+        if(_refundEth != 0) {
+            uint256 _infraFeePreChargeRefund = IZbytePriceFeeder(_dsb.zbytePriceFeeder).convertEthToEquivalentZbyte(_refundEth);
+            ZbyteVToken(payable(_dsb.zbyteVToken)).transfer(payer_, _infraFeePreChargeRefund);
+            ZbyteVToken(payable(_dsb.zbyteVToken)).transfer(msg.sender, _infraFeePreCharge - _infraFeePreChargeRefund);
+            _infraFee = _infraFeePreCharge - _infraFeePreChargeRefund;
+        }
+
+        if(_dPlatFee != 0) {
+            ZbyteVToken(payable(_dsb.zbyteVToken)).burn(payer_, _dPlatFee);
+        }
+
+        /// currently royaltyFee is not being charged
+        emit ExecuteFees(payer_, _dPlatFee, _infraFee, 0);
     }
 }

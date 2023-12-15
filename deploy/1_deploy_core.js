@@ -25,7 +25,7 @@ async function deployCore() {
     ZbyteEscrow = await hre.deployments.deploy(
         'ZbyteEscrow', {
             from:deployer,
-            args: [ZbyteForwarderCore.address,ZbyteTokenAddress,treasury],
+            args: [ZbyteForwarderCore.address,ZbyteTokenAddress],
             gasLimit: 6e6,
             deterministicDeployment: false
         })

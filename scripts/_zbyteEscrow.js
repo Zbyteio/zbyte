@@ -130,25 +130,6 @@ async function setvERC20Address(owner,dplatChain) {
     }
 }
 
-async function setZbytePriceFeeder(owner) {
-    try {
-        let contractWithSigner = await lib.getContractWithSigner(contractName, owner);
-        let zbytePriceFeederAddress = await lib.getAddress("ZbytePriceFeeder");
-
-        const tx = await contractWithSigner.setZbytePriceFeederAddress(zbytePriceFeederAddress);
-        await expect(tx.wait())
-            .to.emit(contractWithSigner,"ZbytePriceFeederAddressSet")
-            .withArgs(zbytePriceFeederAddress);
-
-        return { function : "setZbytePriceFeederAddress",
-                 zbytePriceFeeder: zbytePriceFeederAddress,
-                }
-    } catch (error) {
-        console.log(error);
-        throw(error);
-    }
-}
-
 async function setRelayWrapperAddress(owner) {
     try {
         let contractWithSigner = await lib.getContractWithSigner(contractName, owner);
@@ -240,6 +221,5 @@ module.exports = {
     pause:pause,
     unpause:unpause,
     getPendingAction:getPendingAction,
-    setZbytePriceFeeder:setZbytePriceFeeder,
     registerWorker:registerWorker
 }

@@ -12,8 +12,9 @@
 pragma solidity ^0.8.9;
 
 import "../utils/ZbyteContext.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
 
+/// @title Sample Data Storage Dapp
+/// @notice To prepare a contract for DPlat compatibility, users are required to derive from the abstract contract called ZbyteContext.
 contract SampleDstoreDapp is  ZbyteContext {
   event DStoreSet(address,uint256);
 

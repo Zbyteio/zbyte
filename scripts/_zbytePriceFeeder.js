@@ -63,22 +63,17 @@ async function setBurnRateInMill(owner, burnRateInMill_) {
     }
 }
 
-async function setApproveAndDepositGasCost(owner, relayName, chain, gasCostInZbyte_) {
+async function registerWorker(owner) {
     try {
         let contractWithSigner = await lib.getContractWithSigner(contractName, owner);
 
-        let relayId = constants.relayNameToId[relayName];
-        let chainId = lib.nameToChainId(chain);
-        console.log("setApproveAndDepositGasCost: ", relayId, chainId, gasCostInZbyte_);
-        const tx = await contractWithSigner.setApproveAndDepositGasCost(relayId, chainId, gasCostInZbyte_);
+        const tx = await contractWithSigner.registerWorker(await lib.getAddress(owner), true);
         await expect(tx.wait())
-        .to.emit(contractWithSigner,"ApproveAndDepositGasCostSet")
-        .withArgs(relayId, chainId, gasCostInZbyte_);
+        .to.emit(contractWithSigner,"WorkerRegistered")
+        .withArgs(await lib.getAddress(owner), true);
 
-        return { function: "setApproveAndDepositGasCost",
-                 "relayId_": relayId,
-                 "remoteChainId_": chainId,
-                 "gasCost_": gasCostInZbyte_
+        return { function: "registerWorker",
+                 "worker": await lib.getAddress(owner)
                }
     } catch (error) {
         console.log(error);
@@ -87,8 +82,8 @@ async function setApproveAndDepositGasCost(owner, relayName, chain, gasCostInZby
 }
 
 module.exports = {
-"setApproveAndDepositGasCost":setApproveAndDepositGasCost,
 "setZbytePriceInGwei":setZbytePriceInGwei,
 "setNativeEthEquivalentZbyteInGwei":setNativeEthEquivalentZbyteInGwei,
-"setBurnRateInMill":setBurnRateInMill
+"setBurnRateInMill":setBurnRateInMill,
+"registerWorker":registerWorker
 }

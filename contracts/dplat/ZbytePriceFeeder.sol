@@ -108,10 +108,10 @@ contract ZbytePriceFeeder is IZbytePriceFeeder, ZbyteContext {
         return (priceInMill_ * zbytePriceEquivalentInGwei * 10**9) / 1000;
     }
 
-    /// @notice Returns equivalent amount of Zbyte to burn.
+    /// @notice DPlat fee in terms of Zbyte
     /// 1 Unit = 1000 Mill
-    /// @return Equivalent amount of Zbyte to burn.
-    function getBurnAmountInZbyte() public view returns(uint256) {
+    /// @return DPlat fee
+    function getDPlatFeeInZbyte() public view returns(uint256) {
         return convertMillToZbyte(burnRateInMill);
     }
 

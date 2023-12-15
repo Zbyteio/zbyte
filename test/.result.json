@@ -3674,6 +3674,960 @@
             "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
             "balZ": "360.0",
             "balL1": "9999.999421573684146179"
+        },
+        {
+            "function": "storeValue",
+            "storedBy": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "storedValue": "10"
+        },
+        {
+            "function": "transfer",
+            "sender": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+            "receiver": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "amount": "100.0"
+        },
+        {
+            "function": "transfer",
+            "sender": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+            "receiver": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "amount": "100.0"
+        },
+        {
+            "function": "approve",
+            "approver": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "approvee": "0xDe9fE39B97b2A37cC95d483E46d7127894E6f528",
+            "amount": "100.0"
+        },
+        {
+            "function": "approve",
+            "approver": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "approvee": "0xDe9fE39B97b2A37cC95d483E46d7127894E6f528",
+            "amount": "100.0"
+        },
+        {
+            "function": "deposit",
+            "srcChain": "hhmumbai",
+            "srcRelay": "0x7021ee9d941BbEc396e589351016fA73AacBBcbd",
+            "destChain": "hhmumbai",
+            "destRelay": "0x7021ee9d941BbEc396e589351016fA73AacBBcbd",
+            "data": "0x0000000000000000000000007021ee9d941bbec396e589351016fa73aacbbcbd000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000001200000000000000000000000000000000000000000000000000000000000000ec1000000000000000000000000db7ba1ccc6d32459a3e6ba3cd8d2b1bbcbb76aa04857218873c98788f034126c668a94de39047b1945ac65f4df35f4b63839eefd000000000000000000000000de9fe39b97b2a37cc95d483e46d7127894e6f52800000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000004440c10f190000000000000000000000008f4bfde402d934da748b80e5db6e1b2535873f73000000000000000000000000000000000000000000000004e1003b28d928000000000000000000000000000000000000000000000000000000000000",
+            "ack": "0x4857218873c98788f034126c668a94de39047b1945ac65f4df35f4b63839eefd",
+            "amount": "90",
+            "caller": "escrow"
+        },
+        {
+            "function": "deposit",
+            "srcChain": "hhmumbai",
+            "srcRelay": "0x7021ee9d941BbEc396e589351016fA73AacBBcbd",
+            "destChain": "hhmumbai",
+            "destRelay": "0x7021ee9d941BbEc396e589351016fA73AacBBcbd",
+            "data": "0x0000000000000000000000007021ee9d941bbec396e589351016fa73aacbbcbd000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000001200000000000000000000000000000000000000000000000000000000000000ec1000000000000000000000000db7ba1ccc6d32459a3e6ba3cd8d2b1bbcbb76aa04e028dbc52889a338ecdebb8c3f5a95b31a6497f4dba4c435a6b3c756a072e97000000000000000000000000de9fe39b97b2a37cc95d483e46d7127894e6f52800000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000004440c10f19000000000000000000000000016c8fdd5199927597126ec5eeb27143191177e4000000000000000000000000000000000000000000000004e1003b28d928000000000000000000000000000000000000000000000000000000000000",
+            "ack": "0x4e028dbc52889a338ecdebb8c3f5a95b31a6497f4dba4c435a6b3c756a072e97",
+            "amount": "90",
+            "caller": "escrow"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "0.0",
+            "balL1": "3.9911346828637598"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "balZ": "0.0",
+            "balL1": "1.993895787908313391"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "0.0",
+            "balL1": "3.9911346828637598"
+        },
+        {
+            "function": "registerEnterprise",
+            "enterprise": "0x693a03aa"
+        },
+        {
+            "function": "registerDapp",
+            "enterprise": "0x693a03aa",
+            "limit": "1000000000000000000000"
+        },
+        {
+            "function": "registerEnterpriseUser",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "enterprise": "0x693a03aa"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "balZ": "0.0",
+            "balL1": "1.993895787908313391"
+        },
+        {
+            "function": "registerDapp",
+            "dapp": "0xc290E9D1B1946de029b5C96b5631653D7C297c1a",
+            "enterprise": "0x693a03aa"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "balZ": "0.0",
+            "balL1": "1.993895787908313391"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "0.0",
+            "balL1": "3.9911346828637598"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x7a84a712C113001f4317dD975CCDF048Ac5Cd730",
+            "balZ": "0.0",
+            "balL1": "0.0"
+        },
+        {
+            "function": "storeValue",
+            "storedBy": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "storedValue": "10"
+        },
+        {
+            "function": "transfer",
+            "sender": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+            "receiver": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "amount": "100.0"
+        },
+        {
+            "function": "transfer",
+            "sender": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+            "receiver": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "amount": "100.0"
+        },
+        {
+            "function": "approve",
+            "approver": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "approvee": "0x693d9ae45c36C2ddDDc2115aEFe4c1Bf7F3091CF",
+            "amount": "100.0"
+        },
+        {
+            "function": "approve",
+            "approver": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "approvee": "0x693d9ae45c36C2ddDDc2115aEFe4c1Bf7F3091CF",
+            "amount": "100.0"
+        },
+        {
+            "function": "deposit",
+            "srcChain": "hhmumbai",
+            "srcRelay": "0xefcB55923CB34dBdbaCd3fdC102700a01AEE2697",
+            "destChain": "hhmumbai",
+            "destRelay": "0xefcB55923CB34dBdbaCd3fdC102700a01AEE2697",
+            "data": "0x000000000000000000000000efcb55923cb34dbdbacd3fdc102700a01aee2697000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000001200000000000000000000000000000000000000000000000000000000000000ec10000000000000000000000006a2e9e0526513529e9faadde98b4ef22fc1b82bd4857218873c98788f034126c668a94de39047b1945ac65f4df35f4b63839eefd000000000000000000000000693d9ae45c36c2ddddc2115aefe4c1bf7f3091cf00000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000004440c10f190000000000000000000000008f4bfde402d934da748b80e5db6e1b2535873f73000000000000000000000000000000000000000000000004e1003b28d928000000000000000000000000000000000000000000000000000000000000",
+            "ack": "0x4857218873c98788f034126c668a94de39047b1945ac65f4df35f4b63839eefd",
+            "amount": "90",
+            "caller": "escrow"
+        },
+        {
+            "function": "deposit",
+            "srcChain": "hhmumbai",
+            "srcRelay": "0xefcB55923CB34dBdbaCd3fdC102700a01AEE2697",
+            "destChain": "hhmumbai",
+            "destRelay": "0xefcB55923CB34dBdbaCd3fdC102700a01AEE2697",
+            "data": "0x000000000000000000000000efcb55923cb34dbdbacd3fdc102700a01aee2697000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000001200000000000000000000000000000000000000000000000000000000000000ec10000000000000000000000006a2e9e0526513529e9faadde98b4ef22fc1b82bd4e028dbc52889a338ecdebb8c3f5a95b31a6497f4dba4c435a6b3c756a072e97000000000000000000000000693d9ae45c36c2ddddc2115aefe4c1bf7f3091cf00000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000004440c10f19000000000000000000000000016c8fdd5199927597126ec5eeb27143191177e4000000000000000000000000000000000000000000000004e1003b28d928000000000000000000000000000000000000000000000000000000000000",
+            "ack": "0x4e028dbc52889a338ecdebb8c3f5a95b31a6497f4dba4c435a6b3c756a072e97",
+            "amount": "90",
+            "caller": "escrow"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "90.0",
+            "balL1": "3.990672220860060104"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "balZ": "90.0",
+            "balL1": "1.993422340904525815"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "90.0",
+            "balL1": "3.990672220860060104"
+        },
+        {
+            "function": "registerEnterprise",
+            "enterprise": "0x693a03aa"
+        },
+        {
+            "function": "registerDapp",
+            "enterprise": "0x693a03aa",
+            "limit": "1000000000000000000000"
+        },
+        {
+            "function": "registerEnterpriseUser",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "enterprise": "0x693a03aa"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "balZ": "90.0",
+            "balL1": "1.993422340904525815"
+        },
+        {
+            "function": "registerDapp",
+            "dapp": "0xd5a235fea391C6d91dCa0496F217956bdF15c6d6",
+            "enterprise": "0x693a03aa"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "balZ": "90.0",
+            "balL1": "1.993422340904525815"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "90.0",
+            "balL1": "3.990672220860060104"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x7a84a712C113001f4317dD975CCDF048Ac5Cd730",
+            "balZ": "0.0",
+            "balL1": "0.0"
+        },
+        {
+            "function": "storeValue",
+            "storedBy": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "storedValue": "10"
+        },
+        {
+            "function": "transfer",
+            "sender": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+            "receiver": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "amount": "100.0"
+        },
+        {
+            "function": "transfer",
+            "sender": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+            "receiver": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "amount": "100.0"
+        },
+        {
+            "function": "approve",
+            "approver": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "approvee": "0xd6328E55fEdea82f283EA1524713cba4CBb014dD",
+            "amount": "100.0"
+        },
+        {
+            "function": "approve",
+            "approver": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "approvee": "0xd6328E55fEdea82f283EA1524713cba4CBb014dD",
+            "amount": "100.0"
+        },
+        {
+            "function": "deposit",
+            "srcChain": "hhmumbai",
+            "srcRelay": "0x37A46db24709956145579cA3d0f6fbDb37afb786",
+            "destChain": "hhmumbai",
+            "destRelay": "0x37A46db24709956145579cA3d0f6fbDb37afb786",
+            "data": "0x00000000000000000000000037a46db24709956145579ca3d0f6fbdb37afb786000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000001200000000000000000000000000000000000000000000000000000000000000ec1000000000000000000000000568c9b3d830e2ad51a00ca9212831d5f2b1ecfd34857218873c98788f034126c668a94de39047b1945ac65f4df35f4b63839eefd000000000000000000000000d6328e55fedea82f283ea1524713cba4cbb014dd00000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000004440c10f190000000000000000000000008f4bfde402d934da748b80e5db6e1b2535873f73000000000000000000000000000000000000000000000004e1003b28d928000000000000000000000000000000000000000000000000000000000000",
+            "ack": "0x4857218873c98788f034126c668a94de39047b1945ac65f4df35f4b63839eefd",
+            "amount": "90",
+            "caller": "escrow"
+        },
+        {
+            "function": "deposit",
+            "srcChain": "hhmumbai",
+            "srcRelay": "0x37A46db24709956145579cA3d0f6fbDb37afb786",
+            "destChain": "hhmumbai",
+            "destRelay": "0x37A46db24709956145579cA3d0f6fbDb37afb786",
+            "data": "0x00000000000000000000000037a46db24709956145579ca3d0f6fbdb37afb786000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000001200000000000000000000000000000000000000000000000000000000000000ec1000000000000000000000000568c9b3d830e2ad51a00ca9212831d5f2b1ecfd34e028dbc52889a338ecdebb8c3f5a95b31a6497f4dba4c435a6b3c756a072e97000000000000000000000000d6328e55fedea82f283ea1524713cba4cbb014dd00000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000004440c10f19000000000000000000000000016c8fdd5199927597126ec5eeb27143191177e4000000000000000000000000000000000000000000000004e1003b28d928000000000000000000000000000000000000000000000000000000000000",
+            "ack": "0x4e028dbc52889a338ecdebb8c3f5a95b31a6497f4dba4c435a6b3c756a072e97",
+            "amount": "90",
+            "caller": "escrow"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "90.0",
+            "balL1": "3.990209758856360408"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "balZ": "90.0",
+            "balL1": "1.992948893900738239"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "90.0",
+            "balL1": "3.990209758856360408"
+        },
+        {
+            "function": "registerEnterprise",
+            "enterprise": "0x693a03aa"
+        },
+        {
+            "function": "registerDapp",
+            "enterprise": "0x693a03aa",
+            "limit": "1000000000000000000000"
+        },
+        {
+            "function": "registerEnterpriseUser",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "enterprise": "0x693a03aa"
+        },
+        {
+            "function": "storeValue",
+            "storedBy": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "storedValue": "10"
+        },
+        {
+            "function": "transfer",
+            "sender": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+            "receiver": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "amount": "100.0"
+        },
+        {
+            "function": "transfer",
+            "sender": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+            "receiver": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "amount": "100.0"
+        },
+        {
+            "function": "approve",
+            "approver": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "approvee": "0xe2B1f4ae493b8cb29945385553e7dD57B31A0a04",
+            "amount": "100.0"
+        },
+        {
+            "function": "approve",
+            "approver": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "approvee": "0xe2B1f4ae493b8cb29945385553e7dD57B31A0a04",
+            "amount": "100.0"
+        },
+        {
+            "function": "deposit",
+            "srcChain": "hhmumbai",
+            "srcRelay": "0x4BBBCFcD4FB174682710dA1b42472c8c60A5FC65",
+            "destChain": "hhmumbai",
+            "destRelay": "0x4BBBCFcD4FB174682710dA1b42472c8c60A5FC65",
+            "data": "0x0000000000000000000000004bbbcfcd4fb174682710da1b42472c8c60a5fc65000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000001200000000000000000000000000000000000000000000000000000000000000ec1000000000000000000000000125531f596152543b11ae52271e9c02f8061c5384857218873c98788f034126c668a94de39047b1945ac65f4df35f4b63839eefd000000000000000000000000e2b1f4ae493b8cb29945385553e7dd57b31a0a0400000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000004440c10f190000000000000000000000008f4bfde402d934da748b80e5db6e1b2535873f73000000000000000000000000000000000000000000000004e1003b28d928000000000000000000000000000000000000000000000000000000000000",
+            "ack": "0x4857218873c98788f034126c668a94de39047b1945ac65f4df35f4b63839eefd",
+            "amount": "90",
+            "caller": "escrow"
+        },
+        {
+            "function": "deposit",
+            "srcChain": "hhmumbai",
+            "srcRelay": "0x4BBBCFcD4FB174682710dA1b42472c8c60A5FC65",
+            "destChain": "hhmumbai",
+            "destRelay": "0x4BBBCFcD4FB174682710dA1b42472c8c60A5FC65",
+            "data": "0x0000000000000000000000004bbbcfcd4fb174682710da1b42472c8c60a5fc65000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000001200000000000000000000000000000000000000000000000000000000000000ec1000000000000000000000000125531f596152543b11ae52271e9c02f8061c5384e028dbc52889a338ecdebb8c3f5a95b31a6497f4dba4c435a6b3c756a072e97000000000000000000000000e2b1f4ae493b8cb29945385553e7dd57b31a0a0400000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000004440c10f19000000000000000000000000016c8fdd5199927597126ec5eeb27143191177e4000000000000000000000000000000000000000000000004e1003b28d928000000000000000000000000000000000000000000000000000000000000",
+            "ack": "0x4e028dbc52889a338ecdebb8c3f5a95b31a6497f4dba4c435a6b3c756a072e97",
+            "amount": "90",
+            "caller": "escrow"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "90.0",
+            "balL1": "3.989747296852660712"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "balZ": "90.0",
+            "balL1": "1.992475446896950663"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "90.0",
+            "balL1": "3.989747296852660712"
+        },
+        {
+            "function": "registerEnterprise",
+            "enterprise": "0x693a03aa"
+        },
+        {
+            "function": "registerDapp",
+            "enterprise": "0x693a03aa",
+            "limit": "1000000000000000000000"
+        },
+        {
+            "function": "registerEnterpriseUser",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "enterprise": "0x693a03aa"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "balZ": "90.0",
+            "balL1": "1.992475446896950663"
+        },
+        {
+            "function": "registerDapp",
+            "dapp": "0x2365C76e17f49c8b2827c1E004FC5CD679D0A824",
+            "enterprise": "0x693a03aa"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "balZ": "90.0",
+            "balL1": "1.992475446896950663"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "90.0",
+            "balL1": "3.989747296852660712"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x7a84a712C113001f4317dD975CCDF048Ac5Cd730",
+            "balZ": "0.0",
+            "balL1": "0.0"
+        },
+        {
+            "function": "storeValue",
+            "storedBy": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "storedValue": "10"
+        },
+        {
+            "function": "transfer",
+            "sender": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+            "receiver": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "amount": "100.0"
+        },
+        {
+            "function": "transfer",
+            "sender": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+            "receiver": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "amount": "100.0"
+        },
+        {
+            "function": "approve",
+            "approver": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "approvee": "0x09f93252C26f59Ea8702d71e5d7691b10ecCd401",
+            "amount": "100.0"
+        },
+        {
+            "function": "approve",
+            "approver": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "approvee": "0x09f93252C26f59Ea8702d71e5d7691b10ecCd401",
+            "amount": "100.0"
+        },
+        {
+            "function": "deposit",
+            "srcChain": "hhmumbai",
+            "srcRelay": "0xA3E957675aAfF220Bb24e275038b7982b8DfF2Dc",
+            "destChain": "hhmumbai",
+            "destRelay": "0xA3E957675aAfF220Bb24e275038b7982b8DfF2Dc",
+            "data": "0x000000000000000000000000a3e957675aaff220bb24e275038b7982b8dff2dc000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000001200000000000000000000000000000000000000000000000000000000000000ec100000000000000000000000074765c421d168cc7ca98055365813d29b34918ea4857218873c98788f034126c668a94de39047b1945ac65f4df35f4b63839eefd00000000000000000000000009f93252c26f59ea8702d71e5d7691b10eccd40100000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000004440c10f190000000000000000000000008f4bfde402d934da748b80e5db6e1b2535873f73000000000000000000000000000000000000000000000004e1003b28d928000000000000000000000000000000000000000000000000000000000000",
+            "ack": "0x4857218873c98788f034126c668a94de39047b1945ac65f4df35f4b63839eefd",
+            "amount": "90",
+            "caller": "escrow"
+        },
+        {
+            "function": "deposit",
+            "srcChain": "hhmumbai",
+            "srcRelay": "0xA3E957675aAfF220Bb24e275038b7982b8DfF2Dc",
+            "destChain": "hhmumbai",
+            "destRelay": "0xA3E957675aAfF220Bb24e275038b7982b8DfF2Dc",
+            "data": "0x000000000000000000000000a3e957675aaff220bb24e275038b7982b8dff2dc000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000001200000000000000000000000000000000000000000000000000000000000000ec100000000000000000000000074765c421d168cc7ca98055365813d29b34918ea4e028dbc52889a338ecdebb8c3f5a95b31a6497f4dba4c435a6b3c756a072e9700000000000000000000000009f93252c26f59ea8702d71e5d7691b10eccd40100000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000004440c10f19000000000000000000000000016c8fdd5199927597126ec5eeb27143191177e4000000000000000000000000000000000000000000000004e1003b28d928000000000000000000000000000000000000000000000000000000000000",
+            "ack": "0x4e028dbc52889a338ecdebb8c3f5a95b31a6497f4dba4c435a6b3c756a072e97",
+            "amount": "90",
+            "caller": "escrow"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "90.0",
+            "balL1": "3.989284834848961016"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "balZ": "90.0",
+            "balL1": "1.992001999893163087"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "90.0",
+            "balL1": "3.989284834848961016"
+        },
+        {
+            "function": "registerEnterprise",
+            "enterprise": "0x693a03aa"
+        },
+        {
+            "function": "registerDapp",
+            "enterprise": "0x693a03aa",
+            "limit": "1000000000000000000000"
+        },
+        {
+            "function": "storeValue",
+            "storedBy": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "storedValue": "10"
+        },
+        {
+            "function": "transfer",
+            "sender": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+            "receiver": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "amount": "100.0"
+        },
+        {
+            "function": "transfer",
+            "sender": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+            "receiver": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "amount": "100.0"
+        },
+        {
+            "function": "approve",
+            "approver": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "approvee": "0x25459Fb101EE99534603281C00F8C5b49DF1C5f9",
+            "amount": "100.0"
+        },
+        {
+            "function": "approve",
+            "approver": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "approvee": "0x25459Fb101EE99534603281C00F8C5b49DF1C5f9",
+            "amount": "100.0"
+        },
+        {
+            "function": "deposit",
+            "srcChain": "hhmumbai",
+            "srcRelay": "0xaf5Cdc0a9281bD8269E954AA329510a353325e83",
+            "destChain": "hhmumbai",
+            "destRelay": "0xaf5Cdc0a9281bD8269E954AA329510a353325e83",
+            "data": "0x000000000000000000000000af5cdc0a9281bd8269e954aa329510a353325e83000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000001200000000000000000000000000000000000000000000000000000000000000ec100000000000000000000000064856f1f887072a0920649121b26a7ff19ef713d4857218873c98788f034126c668a94de39047b1945ac65f4df35f4b63839eefd00000000000000000000000025459fb101ee99534603281c00f8c5b49df1c5f900000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000004440c10f190000000000000000000000008f4bfde402d934da748b80e5db6e1b2535873f73000000000000000000000000000000000000000000000004e1003b28d928000000000000000000000000000000000000000000000000000000000000",
+            "ack": "0x4857218873c98788f034126c668a94de39047b1945ac65f4df35f4b63839eefd",
+            "amount": "90",
+            "caller": "escrow"
+        },
+        {
+            "function": "deposit",
+            "srcChain": "hhmumbai",
+            "srcRelay": "0xaf5Cdc0a9281bD8269E954AA329510a353325e83",
+            "destChain": "hhmumbai",
+            "destRelay": "0xaf5Cdc0a9281bD8269E954AA329510a353325e83",
+            "data": "0x000000000000000000000000af5cdc0a9281bd8269e954aa329510a353325e83000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000001200000000000000000000000000000000000000000000000000000000000000ec100000000000000000000000064856f1f887072a0920649121b26a7ff19ef713d4e028dbc52889a338ecdebb8c3f5a95b31a6497f4dba4c435a6b3c756a072e9700000000000000000000000025459fb101ee99534603281c00f8c5b49df1c5f900000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000004440c10f19000000000000000000000000016c8fdd5199927597126ec5eeb27143191177e4000000000000000000000000000000000000000000000004e1003b28d928000000000000000000000000000000000000000000000000000000000000",
+            "ack": "0x4e028dbc52889a338ecdebb8c3f5a95b31a6497f4dba4c435a6b3c756a072e97",
+            "amount": "90",
+            "caller": "escrow"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "90.0",
+            "balL1": "3.988822384845261416"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "balZ": "90.0",
+            "balL1": "1.991399099888339887"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "90.0",
+            "balL1": "3.988822384845261416"
+        },
+        {
+            "function": "registerEnterprise",
+            "enterprise": "0x693a03aa"
+        },
+        {
+            "function": "registerDapp",
+            "enterprise": "0x693a03aa",
+            "limit": "1000000000000000000000"
+        },
+        {
+            "function": "registerEnterpriseUser",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "enterprise": "0x693a03aa"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "balZ": "90.0",
+            "balL1": "1.991399099888339887"
+        },
+        {
+            "function": "registerDapp",
+            "dapp": "0xfF9Deb82746e6CeC5d1911454303252A80120C2D",
+            "enterprise": "0x693a03aa"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "balZ": "90.0",
+            "balL1": "1.991399099888339887"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "90.0",
+            "balL1": "3.988822384845261416"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x7a84a712C113001f4317dD975CCDF048Ac5Cd730",
+            "balZ": "0.0",
+            "balL1": "0.0"
+        },
+        {
+            "function": "storeValue",
+            "storedBy": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "storedValue": "10"
+        },
+        {
+            "function": "transfer",
+            "sender": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+            "receiver": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "amount": "100.0"
+        },
+        {
+            "function": "transfer",
+            "sender": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+            "receiver": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "amount": "100.0"
+        },
+        {
+            "function": "approve",
+            "approver": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "approvee": "0x850ebA0f10204ba2A108B897Ad7778f0EB49E86E",
+            "amount": "100.0"
+        },
+        {
+            "function": "approve",
+            "approver": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "approvee": "0x850ebA0f10204ba2A108B897Ad7778f0EB49E86E",
+            "amount": "100.0"
+        },
+        {
+            "function": "deposit",
+            "srcChain": "hhmumbai",
+            "srcRelay": "0x65F0975809140bF6a5D2553b2b732c628281505B",
+            "destChain": "hhmumbai",
+            "destRelay": "0x65F0975809140bF6a5D2553b2b732c628281505B",
+            "data": "0x00000000000000000000000065f0975809140bf6a5d2553b2b732c628281505b000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000001200000000000000000000000000000000000000000000000000000000000000ec100000000000000000000000077b6109b13891799b8de9538bebc2c5282f809db4857218873c98788f034126c668a94de39047b1945ac65f4df35f4b63839eefd000000000000000000000000850eba0f10204ba2a108b897ad7778f0eb49e86e00000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000004440c10f190000000000000000000000008f4bfde402d934da748b80e5db6e1b2535873f73000000000000000000000000000000000000000000000004e1003b28d928000000000000000000000000000000000000000000000000000000000000",
+            "ack": "0x4857218873c98788f034126c668a94de39047b1945ac65f4df35f4b63839eefd",
+            "amount": "90",
+            "caller": "escrow"
+        },
+        {
+            "function": "deposit",
+            "srcChain": "hhmumbai",
+            "srcRelay": "0x65F0975809140bF6a5D2553b2b732c628281505B",
+            "destChain": "hhmumbai",
+            "destRelay": "0x65F0975809140bF6a5D2553b2b732c628281505B",
+            "data": "0x00000000000000000000000065f0975809140bf6a5d2553b2b732c628281505b000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000001200000000000000000000000000000000000000000000000000000000000000ec100000000000000000000000077b6109b13891799b8de9538bebc2c5282f809db4e028dbc52889a338ecdebb8c3f5a95b31a6497f4dba4c435a6b3c756a072e97000000000000000000000000850eba0f10204ba2a108b897ad7778f0eb49e86e00000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000004440c10f19000000000000000000000000016c8fdd5199927597126ec5eeb27143191177e4000000000000000000000000000000000000000000000004e1003b28d928000000000000000000000000000000000000000000000000000000000000",
+            "ack": "0x4e028dbc52889a338ecdebb8c3f5a95b31a6497f4dba4c435a6b3c756a072e97",
+            "amount": "90",
+            "caller": "escrow"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "90.0",
+            "balL1": "3.98835992284156172"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "balZ": "90.0",
+            "balL1": "1.990925652884552311"
+        },
+        null,
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "88.992131361937050896",
+            "balL1": "3.98835992284156172"
+        },
+        {
+            "function": "registerEnterprise",
+            "enterprise": "0x693a03aa"
+        },
+        {
+            "function": "registerDapp",
+            "enterprise": "0x693a03aa",
+            "limit": "1000000000000000000000"
+        },
+        {
+            "function": "registerEnterpriseUser",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "enterprise": "0x693a03aa"
+        },
+        null,
+        {
+            "function": "balanceOf",
+            "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "balZ": "88.992337550938700408",
+            "balL1": "1.990925652884552311"
+        },
+        {
+            "function": "registerDapp",
+            "dapp": "0x0Fc9DEaFf803e4Eb2fCe18811b99d6804370714e",
+            "enterprise": "0x693a03aa"
+        },
+        null,
+        {
+            "function": "balanceOf",
+            "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "balZ": "87.983952107871616864",
+            "balL1": "1.990925652884552311"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "88.992131361937050896",
+            "balL1": "3.98835992284156172"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x7a84a712C113001f4317dD975CCDF048Ac5Cd730",
+            "balZ": "0.0",
+            "balL1": "0.0"
+        },
+        {
+            "function": "storeValue",
+            "storedBy": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "storedValue": "10"
+        },
+        {
+            "function": "transfer",
+            "sender": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+            "receiver": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "amount": "100.0"
+        },
+        {
+            "function": "transfer",
+            "sender": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+            "receiver": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "amount": "100.0"
+        },
+        {
+            "function": "approve",
+            "approver": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "approvee": "0x69726B6fbEA9B2802Da430D35F8511C17Ced775c",
+            "amount": "100.0"
+        },
+        {
+            "function": "approve",
+            "approver": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "approvee": "0x69726B6fbEA9B2802Da430D35F8511C17Ced775c",
+            "amount": "100.0"
+        },
+        {
+            "function": "deposit",
+            "srcChain": "hhmumbai",
+            "srcRelay": "0x67B3b1781C15C991c6E52D39dD4fC5b08fb9359d",
+            "destChain": "hhmumbai",
+            "destRelay": "0x67B3b1781C15C991c6E52D39dD4fC5b08fb9359d",
+            "data": "0x00000000000000000000000067b3b1781c15c991c6e52d39dd4fc5b08fb9359d000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000001200000000000000000000000000000000000000000000000000000000000000ec10000000000000000000000005faac5aebca391c0446a2e89194f40a8fbaa3f994857218873c98788f034126c668a94de39047b1945ac65f4df35f4b63839eefd00000000000000000000000069726b6fbea9b2802da430d35f8511c17ced775c00000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000004440c10f190000000000000000000000008f4bfde402d934da748b80e5db6e1b2535873f73000000000000000000000000000000000000000000000004e1003b28d928000000000000000000000000000000000000000000000000000000000000",
+            "ack": "0x4857218873c98788f034126c668a94de39047b1945ac65f4df35f4b63839eefd",
+            "amount": "90",
+            "caller": "escrow"
+        },
+        {
+            "function": "deposit",
+            "srcChain": "hhmumbai",
+            "srcRelay": "0x67B3b1781C15C991c6E52D39dD4fC5b08fb9359d",
+            "destChain": "hhmumbai",
+            "destRelay": "0x67B3b1781C15C991c6E52D39dD4fC5b08fb9359d",
+            "data": "0x00000000000000000000000067b3b1781c15c991c6e52d39dd4fc5b08fb9359d000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000001200000000000000000000000000000000000000000000000000000000000000ec10000000000000000000000005faac5aebca391c0446a2e89194f40a8fbaa3f994e028dbc52889a338ecdebb8c3f5a95b31a6497f4dba4c435a6b3c756a072e9700000000000000000000000069726b6fbea9b2802da430d35f8511c17ced775c00000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000004440c10f19000000000000000000000000016c8fdd5199927597126ec5eeb27143191177e4000000000000000000000000000000000000000000000004e1003b28d928000000000000000000000000000000000000000000000000000000000000",
+            "ack": "0x4e028dbc52889a338ecdebb8c3f5a95b31a6497f4dba4c435a6b3c756a072e97",
+            "amount": "90",
+            "caller": "escrow"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "90.0",
+            "balL1": "3.987897460837862024"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "balZ": "90.0",
+            "balL1": "1.990452205880764735"
+        },
+        null,
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "88.992132427937059424",
+            "balL1": "3.987897460837862024"
+        },
+        {
+            "function": "registerEnterprise",
+            "enterprise": "0x693a03aa"
+        },
+        {
+            "function": "registerDapp",
+            "enterprise": "0x693a03aa",
+            "limit": "1000000000000000000000"
+        },
+        {
+            "function": "registerEnterpriseUser",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "enterprise": "0x693a03aa"
+        },
+        null,
+        {
+            "function": "balanceOf",
+            "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "balZ": "88.992337550938700408",
+            "balL1": "1.990452205880764735"
+        },
+        {
+            "function": "registerDapp",
+            "dapp": "0xc4A30468fAC070cF2a1406b1215DfD553D9f6138",
+            "enterprise": "0x693a03aa"
+        },
+        null,
+        {
+            "function": "balanceOf",
+            "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "balZ": "87.983951041871608336",
+            "balL1": "1.990452205880764735"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "88.992132427937059424",
+            "balL1": "3.987897460837862024"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x7a84a712C113001f4317dD975CCDF048Ac5Cd730",
+            "balZ": "0.0",
+            "balL1": "0.0"
+        },
+        {
+            "function": "storeValue",
+            "storedBy": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "storedValue": "10"
+        },
+        {
+            "function": "transfer",
+            "sender": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+            "receiver": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "amount": "100.0"
+        },
+        {
+            "function": "transfer",
+            "sender": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+            "receiver": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "amount": "100.0"
+        },
+        {
+            "function": "approve",
+            "approver": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "approvee": "0x678F6560945bb82C754e7B38d13e4Aef191cBfF2",
+            "amount": "100.0"
+        },
+        {
+            "function": "approve",
+            "approver": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "approvee": "0x678F6560945bb82C754e7B38d13e4Aef191cBfF2",
+            "amount": "100.0"
+        },
+        {
+            "function": "deposit",
+            "srcChain": "hhmumbai",
+            "srcRelay": "0x2Bf5990f6cD3c5e2D54D823D5D7779249D9ad16d",
+            "destChain": "hhmumbai",
+            "destRelay": "0x2Bf5990f6cD3c5e2D54D823D5D7779249D9ad16d",
+            "data": "0x0000000000000000000000002bf5990f6cd3c5e2d54d823d5d7779249d9ad16d000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000001200000000000000000000000000000000000000000000000000000000000000ec1000000000000000000000000b026bad90664c057f4fc385d6b37293d36f15a684857218873c98788f034126c668a94de39047b1945ac65f4df35f4b63839eefd000000000000000000000000678f6560945bb82c754e7b38d13e4aef191cbff200000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000004440c10f190000000000000000000000008f4bfde402d934da748b80e5db6e1b2535873f73000000000000000000000000000000000000000000000004e1003b28d928000000000000000000000000000000000000000000000000000000000000",
+            "ack": "0x4857218873c98788f034126c668a94de39047b1945ac65f4df35f4b63839eefd",
+            "amount": "90",
+            "caller": "escrow"
+        },
+        {
+            "function": "deposit",
+            "srcChain": "hhmumbai",
+            "srcRelay": "0x2Bf5990f6cD3c5e2D54D823D5D7779249D9ad16d",
+            "destChain": "hhmumbai",
+            "destRelay": "0x2Bf5990f6cD3c5e2D54D823D5D7779249D9ad16d",
+            "data": "0x0000000000000000000000002bf5990f6cd3c5e2d54d823d5d7779249d9ad16d000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000001200000000000000000000000000000000000000000000000000000000000000ec1000000000000000000000000b026bad90664c057f4fc385d6b37293d36f15a684e028dbc52889a338ecdebb8c3f5a95b31a6497f4dba4c435a6b3c756a072e97000000000000000000000000678f6560945bb82c754e7b38d13e4aef191cbff200000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000004440c10f19000000000000000000000000016c8fdd5199927597126ec5eeb27143191177e4000000000000000000000000000000000000000000000004e1003b28d928000000000000000000000000000000000000000000000000000000000000",
+            "ack": "0x4e028dbc52889a338ecdebb8c3f5a95b31a6497f4dba4c435a6b3c756a072e97",
+            "amount": "90",
+            "caller": "escrow"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "90.0",
+            "balL1": "3.987434998834162328"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "balZ": "90.0",
+            "balL1": "1.989978758876977159"
+        },
+        null,
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "88.992133575937068608",
+            "balL1": "3.987434998834162328"
+        },
+        {
+            "function": "registerEnterprise",
+            "enterprise": "0x693a03aa"
+        },
+        {
+            "function": "registerDapp",
+            "enterprise": "0x693a03aa",
+            "limit": "1000000000000000000000"
+        },
+        {
+            "function": "registerEnterpriseUser",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "enterprise": "0x693a03aa"
+        },
+        null,
+        {
+            "function": "balanceOf",
+            "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "balZ": "88.992337632938701064",
+            "balL1": "1.989978758876977159"
+        },
+        {
+            "function": "registerDapp",
+            "dapp": "0xBcEBb2e9dCFa1621ee5706d90bf930bc9EFE00A6",
+            "enterprise": "0x693a03aa"
+        },
+        null,
+        {
+            "function": "balanceOf",
+            "user": "0x016C8FdD5199927597126Ec5eeb27143191177e4",
+            "balZ": "87.983953337871626704",
+            "balL1": "1.989978758876977159"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8F4BFde402d934da748B80e5DB6E1B2535873f73",
+            "balZ": "88.992133575937068608",
+            "balL1": "3.987434998834162328"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x7a84a712C113001f4317dD975CCDF048Ac5Cd730",
+            "balZ": "0.0",
+            "balL1": "0.0"
         }
     ]
 }

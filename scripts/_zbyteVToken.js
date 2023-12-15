@@ -187,25 +187,6 @@ async function setUserRole(user, role, enabled, owner) {
     }
 }
 
-async function setPaymasterAddress(owner) {
-    try {
-        let contractWithSigner = await lib.getContractWithSigner(contractName, owner);
-        
-        let paymasterAddress = await lib.getAddress("ZbyteForwarderDPlat");
-        console.log("setPaymasterAddress: " + paymasterAddress);
-        const tx = await contractWithSigner.setPaymasterAddress(paymasterAddress);
-        await expect(tx.wait())
-            .to.emit(contractWithSigner,"PaymasterAddressSet")
-            .withArgs(paymasterAddress);
-
-        return {function: "setPaymasterAddress",
-            paymasterAddress: paymasterAddress}
-        } catch (error) {
-        throw(error);
-    }
-}
-
-
 async function setZbyteDPlatAddress(owner) {
     try {
         let contractWithSigner = await lib.getContractWithSigner(contractName, owner);
@@ -263,7 +244,6 @@ module.exports = {
     unpause:unpause,
     setRoleCapability:setRoleCapability,
     setUserRole:setUserRole,
-    setPaymasterAddress:setPaymasterAddress,
     approve:approve,
     setZbyteDPlatAddress:setZbyteDPlatAddress,
     mintVZbyteGasless:mintVZbyteGasless
