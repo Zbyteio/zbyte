@@ -55,6 +55,8 @@ async function receiveCall(srcChain, srcRelay, destChain, destRelay, payload, am
         const abiCoder = new ethers.AbiCoder();
         console.log("payload: ", srcChain, srcRelay, destChain, destRelay, payload, amount,owner);
         let uPlFields = abiCoder.decode(["address","bytes"],payload);
+        console.log("---1",uPlFields[0]);
+        console.log("---2",uPlFields[1]);
         let plFields = abiCoder.decode(["uint256","address","bytes32","address","bytes"],uPlFields[1]);
         console.log("uPlFields", uPlFields);
         console.log("plFields", plFields);

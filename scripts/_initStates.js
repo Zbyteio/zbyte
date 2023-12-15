@@ -65,8 +65,8 @@ async function initCoreStateForDplat(owner,chain,relay) {
         
         ret = await escrow.setZbytePriceFeeder(owner);
         retval["Escrow-setZbytePriceFeeder"] = ret;
-
-        ret = await zbytePriceFeeder.setApproveAndDepositGasCost(owner, relay, chain, "1000000000000000000");
+        1300000000000000000
+        ret = await zbytePriceFeeder.setApproveAndDepositGasCost(owner, relay, chain, "35000000000000000");
         retval["ZbytePriceFeeder-setZbytePriceFeeder"] = ret;
 
         return retval;
@@ -168,7 +168,7 @@ async function initDplatStates(owner) {
 
 
         //zbytePriceFeeder states
-        ret = await zbytePriceFeeder.setNativeEthEquivalentZbyteInGwei(owner, "41000000000");
+        ret = await zbytePriceFeeder.setNativeEthEquivalentZbyteInGwei(owner, "1350000000000");
         retval["zbytePriceFeeder-setNativeEthEquivalentZbyteInGwei"] = ret;
 
         ret = await zbytePriceFeeder.setZbytePriceInGwei(owner, "50000000000");
