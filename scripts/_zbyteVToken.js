@@ -127,6 +127,24 @@ async function approve(approver, approvee, amount) {
     }
 }
 
+async function setPaymasterAddress(owner) {
+    try {
+        let contractWithSigner = await lib.getContractWithSigner(contractName, owner);
+        
+        let paymasterAddress = await lib.getAddress("ZbyteForwarderDPlat");
+        console.log("setPaymasterAddress: " + paymasterAddress);
+        const tx = await contractWithSigner.setPaymasterAddress(paymasterAddress);
+        await expect(tx.wait())
+            .to.emit(contractWithSigner,"PaymasterAddressSet")
+            .withArgs(paymasterAddress);
+
+        return {function: "setPaymasterAddress",
+            paymasterAddress: paymasterAddress}
+        } catch (error) {
+        throw(error);
+    }
+}
+
 async function mint(owner,user,amount) {
     try {
         let contractWithSigner = await lib.getContractWithSigner(contractName, owner);
@@ -246,5 +264,6 @@ module.exports = {
     setUserRole:setUserRole,
     approve:approve,
     setZbyteDPlatAddress:setZbyteDPlatAddress,
-    mintVZbyteGasless:mintVZbyteGasless
+    mintVZbyteGasless:mintVZbyteGasless,
+    setPaymasterAddress:setPaymasterAddress
 }

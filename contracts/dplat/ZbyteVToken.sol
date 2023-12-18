@@ -25,13 +25,19 @@ contract ZbyteVToken is Ownable, Pausable, ERC20, AuthSimple, IvERC20 {
     error ZeroAddress();
     /// @notice error (0xbf064619): Contract cannot receive ether
     error CannotSendEther();
+    /// @notice error (b034fa06): The address sent for destroy is not valid
+    error InvalidDestroyAddress(address,address,address);
 
     // events
+    /// @notice event (0xa16990bf) Paymaster address is set
+    event PaymasterAddressSet(address);
     /// @notice event (0xcdb1d336) ZbyteDPlat address is set
     event ZbyteDPlatAddressSet(address);
 
     // Address to transfer 'burnt' tokens
     address private burner;
+    // Address of the paymaster (forwarder) address
+    address private paymaster;
     // Address of the DPlat contract
     address private dplat;
 
@@ -49,6 +55,17 @@ contract ZbyteVToken is Ownable, Pausable, ERC20, AuthSimple, IvERC20 {
     /// @notice Unpauses the paused contract
     function unpause() external onlyOwner whenPaused {
         _unpause();
+    }
+
+    /// @notice Set the paymaster (forwarder) address
+    /// @param paymaster_ Paymaster contract address
+    function setPaymasterAddress(address paymaster_) public onlyOwner {
+        if(paymaster_ == address(0)) {
+            revert ZeroAddress();
+        }
+        paymaster = paymaster_;
+
+        emit PaymasterAddressSet(paymaster_);
     }
 
     /// @notice Set the DPlat address
@@ -117,12 +134,15 @@ contract ZbyteVToken is Ownable, Pausable, ERC20, AuthSimple, IvERC20 {
     }
 
     /// @notice Destroy vERC20
-    /// @param from_ Address from which tokens are destroyed
+    /// @param from_ Paymaster/burner address from which tokens are destroyed
     /// @dev This is called during withdraw / reconciliation only.  Withdraw is allowed only from the paymaster or burner address
     function destroy(address from_)
         external
         requiresAuth whenNotPaused
         returns(uint256) {
+        if(!((from_ == paymaster) || (from_ == burner))) {
+            revert InvalidDestroyAddress(from_,paymaster,burner);
+        }
         uint256 _amount = this.balanceOf(from_);
         _burn(from_, _amount);
         return _amount;

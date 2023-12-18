@@ -130,6 +130,9 @@ async function initDplatStates(owner) {
         }
 
         // vzbyte set states
+        ret = await zbyteVToken.setPaymasterAddress(owner);
+        retval["zbyteVToken-setPaymasterAddress"] = ret;
+
         ret = await zbyteVToken.setRoleCapability(1,
             "mint(address to_, uint256 amount_) public returns(uint256)",
             true,'zbyt')
