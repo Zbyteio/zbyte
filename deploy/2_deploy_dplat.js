@@ -43,7 +43,7 @@ async function deployDplat() {
     ZbytePriceFeeder = await hre.deployments.deploy(
         'ZbytePriceFeeder', {
             from:deployer,
-            args: ["0x18d0420A40cE8ba8dD2dd920e2C0D472e494c181"],
+            args: [ZbyteForwarderDPlat.address],
             gasLimit: 6e6,
             deterministicDeployment: false
         })
@@ -55,7 +55,7 @@ async function deployDplat() {
             owner:deployer,
             gasLimit: 6e6,
             log: true,
-            facets: ['ZbyteDPlatBaseFacet', 'ZbyteDPlatPaymentFacet', 'ZbyteDPlatRegistrationFacet', 'ZbyteForwarderFacet']
+            facets: ['ZbyteDPlatBaseFacet', 'ZbyteDPlatPaymentFacet', 'ZbyteDPlatRegistrationFacet', 'ZbyteForwarderFacet', 'ZbyteDPlatRoyaltyFacet']
         })
     console.log('==ZbyteDPlat addr=', zbyteDPlat.address);
 }
