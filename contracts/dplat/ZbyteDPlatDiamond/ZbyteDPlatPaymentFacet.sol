@@ -23,6 +23,7 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
     /// events
     /// @notice Event(0x306f3bdb) Address of the payer, DPlat, Infra and Royalty Fee
     event ExecuteFees(address,uint256,uint256,uint256);
+    error GetRoyaltyFeeInZbyteFailed(bytes);
 
     /// @notice Determines the payer for a transaction.
     /// @notice In the absence of an enteprise policy, if a dapp or user is registered with ent,
@@ -101,6 +102,22 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
         uint256 _zbyteCharge = IZbytePriceFeeder(_dsb.zbytePriceFeeder).convertEthToEquivalentZbyte(ethChargeAmount_);
         (_payerEnterprise, _currentEnterpriseLimit, _payer) = getPayer(user_, dapp_, functionSig_, _zbyteCharge);
 
+        LibDiamond.DiamondStorage storage ds = LibDiamond.diamondStorage();
+        bytes4 functionSelector = bytes4(keccak256("getRoyaltFeeInZbyte(address,address,bytes4,address,uint256)"));
+        LibDiamond.FacetAddressAndPosition memory _facetAddressAndPosition = ds.selectorToFacetAndPosition[functionSelector];
+        bytes memory getRoyaltFeeInZbyteCall = abi.encodeWithSelector(functionSelector, dapp_,user_,functionSig_,_payer,_zbyteCharge);
+        (bool _success, bytes memory _result) = address(_facetAddressAndPosition.facetAddress).delegatecall(getRoyaltFeeInZbyteCall);
+
+        if(_success) {
+            (uint256 _royaltyFee, address _royaltyReceiver, address _royaltyPayer) = abi.decode(_result, (uint256,address,address));
+            if(_royaltyFee != 0) {
+                ZbyteVToken(payable(_dsb.zbyteVToken)).transferFrom(_royaltyPayer, _royaltyReceiver, _royaltyFee);
+            }
+        } else {
+            revert GetRoyaltyFeeInZbyteFailed(_result);
+        }
+
+
         if (_zbyteCharge != 0) {
             if(_payerEnterprise != bytes4(0)) {
                 address _enterprisePolicy = LibDPlatRegistration._doesEnterpriseHavePolicy(_payerEnterprise);
@@ -116,7 +133,6 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
 
 
     /// @dev Executes a transaction and handles Zbyte-related operations.
-    ///
     /// @param payer_ The address of the payer initiating the execution.
     /// @param executeResult_ A boolean indicating the success of the execution.
     /// @param reqValue_ The amount of Ether sent with the execution request.
