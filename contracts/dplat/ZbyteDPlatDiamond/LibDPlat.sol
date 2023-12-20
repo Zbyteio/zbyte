@@ -19,7 +19,6 @@ library LibDPlatBase {
     struct DiamondStorage {
         address zbyteVToken; 
         address zbytePriceFeeder;
-        mapping (address => uint256) royaltyZbyte;
     }
 
     /// @notice Retrieves the DiamondStorage struct for the library.
@@ -43,16 +42,6 @@ library LibDPlatBase {
     function _getZbytePriceFeeder() internal view returns (address) {
         DiamondStorage storage _dsb = diamondStorage();
         return _dsb.zbytePriceFeeder;
-    }
-
-    function _setRoyaltyInZbyte(address dapp_, uint256 amount_) internal {
-        DiamondStorage storage _dsb = diamondStorage();
-        _dsb.royaltyZbyte[dapp_] = amount_;
-    }
-
-    function _getRoyaltyInZbyte(address dapp_) internal view returns(uint256) {
-        DiamondStorage storage _dsb = diamondStorage();
-        return _dsb.royaltyZbyte[dapp_];
     }
 }
 
