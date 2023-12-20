@@ -24,11 +24,11 @@ contract ZbytePriceFeeder is IZbytePriceFeeder, ZbyteContext {
     event WorkerRegistered(address,bool);
 
     // Conversion factors
-    uint256 nativeEthEquivalentZbyteInGwei;
-    uint256 zbytePriceEquivalentInGwei;
-    uint256 burnRateInMill;
+    uint256 public nativeEthEquivalentZbyteInGwei;
+    uint256 public zbytePriceEquivalentInGwei;
+    uint256 public burnRateInMill;
     /// @notice Authorized workers
-    mapping(address => bool) authorizedWorkers;
+    mapping(address => bool) public authorizedWorkers;
 
     constructor(address forwarder_) {
         _setTrustedForwarder(forwarder_);
@@ -113,6 +113,11 @@ contract ZbytePriceFeeder is IZbytePriceFeeder, ZbyteContext {
     /// @return DPlat fee
     function getDPlatFeeInZbyte() public view returns(uint256) {
         return convertMillToZbyte(burnRateInMill);
+    }
+
+    function setPrices(uint256 nativeEthEquivalentZbyteInGwei_, uint256 zbytePriceInGwei_) external onlyAuthorized {
+        setNativeEthEquivalentZbyteInGwei(nativeEthEquivalentZbyteInGwei_);
+        setZbytePriceInGwei(zbytePriceInGwei_);
     }
 
     /// @notice Sets burn rate for invoke calls in mill
