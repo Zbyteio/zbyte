@@ -41,7 +41,7 @@ contract ZbyteForwarderCore is Ownable, MinimalForwarder, ReentrancyGuard {
     address public escrowAddress;
 
     bytes4 private approvesig = bytes4(keccak256("approve(address,uint256)"));
-    bytes4 private depositsig = bytes4(keccak256("deposit(uint256,uint256,address,uint256)"));
+    bytes4 private depositsig = bytes4(keccak256("deposit(uint256,uint256,address,uint256,uint256)"));
 
 
     /// @notice Set DPLAT ERC20 address
