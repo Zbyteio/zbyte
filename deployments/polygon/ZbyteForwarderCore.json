@@ -1,0 +1,635 @@
+{
+  "address": "0xd9CC83B69b6871c46Fc9F7902987c0cC8146Bb05",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "ZeroAddress",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "EscrowAddressSet",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "ZbyteAddressSet",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "ZbyteTokenForwarderAddressSet",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "gas",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "nonce",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct MinimalForwarder.ForwardRequest",
+          "name": "reqApprove_",
+          "type": "tuple"
+        },
+        {
+          "internalType": "bytes",
+          "name": "signatureApprove_",
+          "type": "bytes"
+        },
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "gas",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "nonce",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct MinimalForwarder.ForwardRequest",
+          "name": "reqDeposit_",
+          "type": "tuple"
+        },
+        {
+          "internalType": "bytes",
+          "name": "signatureDeposit_",
+          "type": "bytes"
+        }
+      ],
+      "name": "approveAndDeposit",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "success",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "escrowAddress",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "gas",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "nonce",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct MinimalForwarder.ForwardRequest",
+          "name": "req",
+          "type": "tuple"
+        },
+        {
+          "internalType": "bytes",
+          "name": "signature",
+          "type": "bytes"
+        }
+      ],
+      "name": "execute",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        },
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        }
+      ],
+      "name": "getNonce",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "escrow_",
+          "type": "address"
+        }
+      ],
+      "name": "setEscrowAddress",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "zbyte_",
+          "type": "address"
+        }
+      ],
+      "name": "setZbyteAddress",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "forwarder_",
+          "type": "address"
+        }
+      ],
+      "name": "setZbyteTokenForwarderAddress",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "gas",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "nonce",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct MinimalForwarder.ForwardRequest",
+          "name": "req",
+          "type": "tuple"
+        },
+        {
+          "internalType": "bytes",
+          "name": "signature",
+          "type": "bytes"
+        }
+      ],
+      "name": "verify",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "zByteAddress",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0xde29b16e9b57c4ae3c494360289f83065c4b7f5eebe7cfc2d3aa85c93cc239f1",
+  "receipt": {
+    "to": null,
+    "from": "0x4661D1e9fBf54F7EE418D64A31192346e9E3B8bc",
+    "contractAddress": "0xd9CC83B69b6871c46Fc9F7902987c0cC8146Bb05",
+    "transactionIndex": 123,
+    "gasUsed": "1247289",
+    "logsBloom": "0x0000000000000000001000000000000000000000000000000080000000000000000000000000000000000000000000000000800000000000000000000400000000000002000000000000000000000080000500000000000000010000000000000000000002000000000000000000080000000000000000008000000000000040000000000010000000000000000000000000000000000000000000000000000020008000000000000000000000000000000000000000000000000000000000c000000000000000000001000000000000000000002000000000104000000020000000000000000000000000000000000000000000000000000000000000100000",
+    "blockHash": "0x190c3bc85d3f3be9d61886863fb8310f0018a01ebf57886d810217e2d7d196f5",
+    "transactionHash": "0xde29b16e9b57c4ae3c494360289f83065c4b7f5eebe7cfc2d3aa85c93cc239f1",
+    "logs": [
+      {
+        "transactionIndex": 123,
+        "blockNumber": 51419016,
+        "transactionHash": "0xde29b16e9b57c4ae3c494360289f83065c4b7f5eebe7cfc2d3aa85c93cc239f1",
+        "address": "0xd9CC83B69b6871c46Fc9F7902987c0cC8146Bb05",
+        "topics": [
+          "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "0x0000000000000000000000004661d1e9fbf54f7ee418d64a31192346e9e3b8bc"
+        ],
+        "data": "0x",
+        "logIndex": 583,
+        "blockHash": "0x190c3bc85d3f3be9d61886863fb8310f0018a01ebf57886d810217e2d7d196f5"
+      },
+      {
+        "transactionIndex": 123,
+        "blockNumber": 51419016,
+        "transactionHash": "0xde29b16e9b57c4ae3c494360289f83065c4b7f5eebe7cfc2d3aa85c93cc239f1",
+        "address": "0x0000000000000000000000000000000000001010",
+        "topics": [
+          "0x4dfe1bbbcf077ddc3e01291eea2d5c70c2b422b415d95645b9adcfd678cb1d63",
+          "0x0000000000000000000000000000000000000000000000000000000000001010",
+          "0x0000000000000000000000004661d1e9fbf54f7ee418d64a31192346e9e3b8bc",
+          "0x000000000000000000000000048cfedf907c4c9ddd11ff882380906e78e84bbe"
+        ],
+        "data": "0x0000000000000000000000000000000000000000000000000006a59aa6aa77000000000000000000000000000000000000000000000000003e20ec113441089700000000000000000000000000000000000000000000172dae934ad2f4bc9bec0000000000000000000000000000000000000000000000003e1a46768d96919700000000000000000000000000000000000000000000172dae99f06d9b6712ec",
+        "logIndex": 584,
+        "blockHash": "0x190c3bc85d3f3be9d61886863fb8310f0018a01ebf57886d810217e2d7d196f5"
+      }
+    ],
+    "blockNumber": 51419016,
+    "cumulativeGasUsed": "15330816",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "8a3f210ebc58bf3454af88b7a958a338",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"ZeroAddress\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"EscrowAddressSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"ZbyteAddressSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"ZbyteTokenForwarderAddressSet\",\"type\":\"event\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"gas\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"internalType\":\"struct MinimalForwarder.ForwardRequest\",\"name\":\"reqApprove_\",\"type\":\"tuple\"},{\"internalType\":\"bytes\",\"name\":\"signatureApprove_\",\"type\":\"bytes\"},{\"components\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"gas\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"internalType\":\"struct MinimalForwarder.ForwardRequest\",\"name\":\"reqDeposit_\",\"type\":\"tuple\"},{\"internalType\":\"bytes\",\"name\":\"signatureDeposit_\",\"type\":\"bytes\"}],\"name\":\"approveAndDeposit\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"success\",\"type\":\"bool\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"escrowAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"gas\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"internalType\":\"struct MinimalForwarder.ForwardRequest\",\"name\":\"req\",\"type\":\"tuple\"},{\"internalType\":\"bytes\",\"name\":\"signature\",\"type\":\"bytes\"}],\"name\":\"execute\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"},{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"}],\"name\":\"getNonce\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"escrow_\",\"type\":\"address\"}],\"name\":\"setEscrowAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"zbyte_\",\"type\":\"address\"}],\"name\":\"setZbyteAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"forwarder_\",\"type\":\"address\"}],\"name\":\"setZbyteTokenForwarderAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"gas\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"internalType\":\"struct MinimalForwarder.ForwardRequest\",\"name\":\"req\",\"type\":\"tuple\"},{\"internalType\":\"bytes\",\"name\":\"signature\",\"type\":\"bytes\"}],\"name\":\"verify\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"zByteAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"The Zbyte core forwarder contract.\",\"kind\":\"dev\",\"methods\":{\"approveAndDeposit((address,address,uint256,uint256,uint256,bytes),bytes,(address,address,uint256,uint256,uint256,bytes),bytes)\":{\"details\":\"Allows gasless approve+deposit of DPLAT token to be used at https://dplat.zbyte.io\",\"params\":{\"reqApprove_\":\"ForwardRequest for the approve call\",\"reqDeposit_\":\"ForwardRequest for the deposit call\",\"signatureApprove_\":\"Signature of the approve call params\",\"signatureDeposit_\":\"Signature of the deposit call params\"},\"returns\":{\"success\":\"returns true of approve and deposit are successful\"}},\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.\"},\"setEscrowAddress(address)\":{\"params\":{\"escrow_\":\"Zbyte Escrow contract address\"}},\"setZbyteAddress(address)\":{\"params\":{\"zbyte_\":\"DPLAT ERC20 contact address\"}},\"setZbyteTokenForwarderAddress(address)\":{\"params\":{\"forwarder_\":\"DPLAT ERC20 forwarder contact address\"}},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"}},\"title\":\"The Zbyte core forwarder contract\",\"version\":1},\"userdoc\":{\"errors\":{\"ZeroAddress()\":[{\"notice\":\"error (0xd92e233d): Address is address(0)\"}]},\"events\":{\"EscrowAddressSet(address)\":{\"notice\":\"event (0x14229a64) Escrow address is set\"},\"ZbyteAddressSet(address)\":{\"notice\":\"event (0xa6cc9cbb): DPLAT address is set\"},\"ZbyteTokenForwarderAddressSet(address)\":{\"notice\":\"event (0x0a787863): Token forwarder address is set\"}},\"kind\":\"user\",\"methods\":{\"approveAndDeposit((address,address,uint256,uint256,uint256,bytes),bytes,(address,address,uint256,uint256,uint256,bytes),bytes)\":{\"notice\":\"Perform approve and depost of Zbyte in single call\"},\"escrowAddress()\":{\"notice\":\"Escrow contract address\"},\"setEscrowAddress(address)\":{\"notice\":\"Set Zbyte Escrow address\"},\"setZbyteAddress(address)\":{\"notice\":\"Set DPLAT ERC20 address\"},\"setZbyteTokenForwarderAddress(address)\":{\"notice\":\"Set DPLAT ERC20 Forwarder address\"},\"zByteAddress()\":{\"notice\":\"DPLAT ERC20 contract address\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/core/ZbyteForwarderCore.sol\":\"ZbyteForwarderCore\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[],\"viaIR\":true},\"sources\":{\"@openzeppelin/contracts/access/Ownable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity ^0.8.0;\\n\\nimport \\\"../utils/Context.sol\\\";\\n\\n/**\\n * @dev Contract module which provides a basic access control mechanism, where\\n * there is an account (an owner) that can be granted exclusive access to\\n * specific functions.\\n *\\n * By default, the owner account will be the one that deploys the contract. This\\n * can later be changed with {transferOwnership}.\\n *\\n * This module is used through inheritance. It will make available the modifier\\n * `onlyOwner`, which can be applied to your functions to restrict their use to\\n * the owner.\\n */\\nabstract contract Ownable is Context {\\n    address private _owner;\\n\\n    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);\\n\\n    /**\\n     * @dev Initializes the contract setting the deployer as the initial owner.\\n     */\\n    constructor() {\\n        _setOwner(_msgSender());\\n    }\\n\\n    /**\\n     * @dev Returns the address of the current owner.\\n     */\\n    function owner() public view virtual returns (address) {\\n        return _owner;\\n    }\\n\\n    /**\\n     * @dev Throws if called by any account other than the owner.\\n     */\\n    modifier onlyOwner() {\\n        require(owner() == _msgSender(), \\\"Ownable: caller is not the owner\\\");\\n        _;\\n    }\\n\\n    /**\\n     * @dev Leaves the contract without owner. It will not be possible to call\\n     * `onlyOwner` functions anymore. Can only be called by the current owner.\\n     *\\n     * NOTE: Renouncing ownership will leave the contract without an owner,\\n     * thereby removing any functionality that is only available to the owner.\\n     */\\n    function renounceOwnership() public virtual onlyOwner {\\n        _setOwner(address(0));\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Can only be called by the current owner.\\n     */\\n    function transferOwnership(address newOwner) public virtual onlyOwner {\\n        require(newOwner != address(0), \\\"Ownable: new owner is the zero address\\\");\\n        _setOwner(newOwner);\\n    }\\n\\n    function _setOwner(address newOwner) private {\\n        address oldOwner = _owner;\\n        _owner = newOwner;\\n        emit OwnershipTransferred(oldOwner, newOwner);\\n    }\\n}\\n\",\"keccak256\":\"0x6bb804a310218875e89d12c053e94a13a4607cdf7cc2052f3e52bd32a0dc50a1\",\"license\":\"MIT\"},\"@openzeppelin/contracts/metatx/MinimalForwarder.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity ^0.8.0;\\n\\nimport \\\"../utils/cryptography/ECDSA.sol\\\";\\nimport \\\"../utils/cryptography/draft-EIP712.sol\\\";\\n\\n/**\\n * @dev Simple minimal forwarder to be used together with an ERC2771 compatible contract. See {ERC2771Context}.\\n */\\ncontract MinimalForwarder is EIP712 {\\n    using ECDSA for bytes32;\\n\\n    struct ForwardRequest {\\n        address from;\\n        address to;\\n        uint256 value;\\n        uint256 gas;\\n        uint256 nonce;\\n        bytes data;\\n    }\\n\\n    bytes32 private constant _TYPEHASH =\\n        keccak256(\\\"ForwardRequest(address from,address to,uint256 value,uint256 gas,uint256 nonce,bytes data)\\\");\\n\\n    mapping(address => uint256) private _nonces;\\n\\n    constructor() EIP712(\\\"MinimalForwarder\\\", \\\"0.0.1\\\") {}\\n\\n    function getNonce(address from) public view returns (uint256) {\\n        return _nonces[from];\\n    }\\n\\n    function verify(ForwardRequest calldata req, bytes calldata signature) public view returns (bool) {\\n        address signer = _hashTypedDataV4(\\n            keccak256(abi.encode(_TYPEHASH, req.from, req.to, req.value, req.gas, req.nonce, keccak256(req.data)))\\n        ).recover(signature);\\n        return _nonces[req.from] == req.nonce && signer == req.from;\\n    }\\n\\n    function execute(ForwardRequest calldata req, bytes calldata signature)\\n        public\\n        payable\\n        returns (bool, bytes memory)\\n    {\\n        require(verify(req, signature), \\\"MinimalForwarder: signature does not match request\\\");\\n        _nonces[req.from] = req.nonce + 1;\\n\\n        (bool success, bytes memory returndata) = req.to.call{gas: req.gas, value: req.value}(\\n            abi.encodePacked(req.data, req.from)\\n        );\\n        // Validate that the relayer has sent enough gas for the call.\\n        // See https://ronan.eth.link/blog/ethereum-gas-dangers/\\n        assert(gasleft() > req.gas / 63);\\n\\n        return (success, returndata);\\n    }\\n}\\n\",\"keccak256\":\"0xf7ba4a4a7c722c5e739d2ac3e7c2c3a7d6ebd8eae144d36612d4821db2d608db\",\"license\":\"MIT\"},\"@openzeppelin/contracts/security/ReentrancyGuard.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity ^0.8.0;\\n\\n/**\\n * @dev Contract module that helps prevent reentrant calls to a function.\\n *\\n * Inheriting from `ReentrancyGuard` will make the {nonReentrant} modifier\\n * available, which can be applied to functions to make sure there are no nested\\n * (reentrant) calls to them.\\n *\\n * Note that because there is a single `nonReentrant` guard, functions marked as\\n * `nonReentrant` may not call one another. This can be worked around by making\\n * those functions `private`, and then adding `external` `nonReentrant` entry\\n * points to them.\\n *\\n * TIP: If you would like to learn more about reentrancy and alternative ways\\n * to protect against it, check out our blog post\\n * https://blog.openzeppelin.com/reentrancy-after-istanbul/[Reentrancy After Istanbul].\\n */\\nabstract contract ReentrancyGuard {\\n    // Booleans are more expensive than uint256 or any type that takes up a full\\n    // word because each write operation emits an extra SLOAD to first read the\\n    // slot's contents, replace the bits taken up by the boolean, and then write\\n    // back. This is the compiler's defense against contract upgrades and\\n    // pointer aliasing, and it cannot be disabled.\\n\\n    // The values being non-zero value makes deployment a bit more expensive,\\n    // but in exchange the refund on every call to nonReentrant will be lower in\\n    // amount. Since refunds are capped to a percentage of the total\\n    // transaction's gas, it is best to keep them low in cases like this one, to\\n    // increase the likelihood of the full refund coming into effect.\\n    uint256 private constant _NOT_ENTERED = 1;\\n    uint256 private constant _ENTERED = 2;\\n\\n    uint256 private _status;\\n\\n    constructor() {\\n        _status = _NOT_ENTERED;\\n    }\\n\\n    /**\\n     * @dev Prevents a contract from calling itself, directly or indirectly.\\n     * Calling a `nonReentrant` function from another `nonReentrant`\\n     * function is not supported. It is possible to prevent this from happening\\n     * by making the `nonReentrant` function external, and make it call a\\n     * `private` function that does the actual work.\\n     */\\n    modifier nonReentrant() {\\n        // On the first call to nonReentrant, _notEntered will be true\\n        require(_status != _ENTERED, \\\"ReentrancyGuard: reentrant call\\\");\\n\\n        // Any calls to nonReentrant after this point will fail\\n        _status = _ENTERED;\\n\\n        _;\\n\\n        // By storing the original value once again, a refund is triggered (see\\n        // https://eips.ethereum.org/EIPS/eip-2200)\\n        _status = _NOT_ENTERED;\\n    }\\n}\\n\",\"keccak256\":\"0x842ccf9a6cd33e17b7acef8372ca42090755217b358fe0c44c98e951ea549d3a\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/Context.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity ^0.8.0;\\n\\n/**\\n * @dev Provides information about the current execution context, including the\\n * sender of the transaction and its data. While these are generally available\\n * via msg.sender and msg.data, they should not be accessed in such a direct\\n * manner, since when dealing with meta-transactions the account sending and\\n * paying for execution may not be the actual sender (as far as an application\\n * is concerned).\\n *\\n * This contract is only required for intermediate, library-like contracts.\\n */\\nabstract contract Context {\\n    function _msgSender() internal view virtual returns (address) {\\n        return msg.sender;\\n    }\\n\\n    function _msgData() internal view virtual returns (bytes calldata) {\\n        return msg.data;\\n    }\\n}\\n\",\"keccak256\":\"0x90565a39ae45c80f0468dc96c7b20d0afc3055f344c8203a0c9258239f350b9f\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/cryptography/ECDSA.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity ^0.8.0;\\n\\n/**\\n * @dev Elliptic Curve Digital Signature Algorithm (ECDSA) operations.\\n *\\n * These functions can be used to verify that a message was signed by the holder\\n * of the private keys of a given address.\\n */\\nlibrary ECDSA {\\n    enum RecoverError {\\n        NoError,\\n        InvalidSignature,\\n        InvalidSignatureLength,\\n        InvalidSignatureS,\\n        InvalidSignatureV\\n    }\\n\\n    function _throwError(RecoverError error) private pure {\\n        if (error == RecoverError.NoError) {\\n            return; // no error: do nothing\\n        } else if (error == RecoverError.InvalidSignature) {\\n            revert(\\\"ECDSA: invalid signature\\\");\\n        } else if (error == RecoverError.InvalidSignatureLength) {\\n            revert(\\\"ECDSA: invalid signature length\\\");\\n        } else if (error == RecoverError.InvalidSignatureS) {\\n            revert(\\\"ECDSA: invalid signature 's' value\\\");\\n        } else if (error == RecoverError.InvalidSignatureV) {\\n            revert(\\\"ECDSA: invalid signature 'v' value\\\");\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the address that signed a hashed message (`hash`) with\\n     * `signature` or error string. This address can then be used for verification purposes.\\n     *\\n     * The `ecrecover` EVM opcode allows for malleable (non-unique) signatures:\\n     * this function rejects them by requiring the `s` value to be in the lower\\n     * half order, and the `v` value to be either 27 or 28.\\n     *\\n     * IMPORTANT: `hash` _must_ be the result of a hash operation for the\\n     * verification to be secure: it is possible to craft signatures that\\n     * recover to arbitrary addresses for non-hashed data. A safe way to ensure\\n     * this is by receiving a hash of the original message (which may otherwise\\n     * be too long), and then calling {toEthSignedMessageHash} on it.\\n     *\\n     * Documentation for signature generation:\\n     * - with https://web3js.readthedocs.io/en/v1.3.4/web3-eth-accounts.html#sign[Web3.js]\\n     * - with https://docs.ethers.io/v5/api/signer/#Signer-signMessage[ethers]\\n     *\\n     * _Available since v4.3._\\n     */\\n    function tryRecover(bytes32 hash, bytes memory signature) internal pure returns (address, RecoverError) {\\n        // Check the signature length\\n        // - case 65: r,s,v signature (standard)\\n        // - case 64: r,vs signature (cf https://eips.ethereum.org/EIPS/eip-2098) _Available since v4.1._\\n        if (signature.length == 65) {\\n            bytes32 r;\\n            bytes32 s;\\n            uint8 v;\\n            // ecrecover takes the signature parameters, and the only way to get them\\n            // currently is to use assembly.\\n            assembly {\\n                r := mload(add(signature, 0x20))\\n                s := mload(add(signature, 0x40))\\n                v := byte(0, mload(add(signature, 0x60)))\\n            }\\n            return tryRecover(hash, v, r, s);\\n        } else if (signature.length == 64) {\\n            bytes32 r;\\n            bytes32 vs;\\n            // ecrecover takes the signature parameters, and the only way to get them\\n            // currently is to use assembly.\\n            assembly {\\n                r := mload(add(signature, 0x20))\\n                vs := mload(add(signature, 0x40))\\n            }\\n            return tryRecover(hash, r, vs);\\n        } else {\\n            return (address(0), RecoverError.InvalidSignatureLength);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the address that signed a hashed message (`hash`) with\\n     * `signature`. This address can then be used for verification purposes.\\n     *\\n     * The `ecrecover` EVM opcode allows for malleable (non-unique) signatures:\\n     * this function rejects them by requiring the `s` value to be in the lower\\n     * half order, and the `v` value to be either 27 or 28.\\n     *\\n     * IMPORTANT: `hash` _must_ be the result of a hash operation for the\\n     * verification to be secure: it is possible to craft signatures that\\n     * recover to arbitrary addresses for non-hashed data. A safe way to ensure\\n     * this is by receiving a hash of the original message (which may otherwise\\n     * be too long), and then calling {toEthSignedMessageHash} on it.\\n     */\\n    function recover(bytes32 hash, bytes memory signature) internal pure returns (address) {\\n        (address recovered, RecoverError error) = tryRecover(hash, signature);\\n        _throwError(error);\\n        return recovered;\\n    }\\n\\n    /**\\n     * @dev Overload of {ECDSA-tryRecover} that receives the `r` and `vs` short-signature fields separately.\\n     *\\n     * See https://eips.ethereum.org/EIPS/eip-2098[EIP-2098 short signatures]\\n     *\\n     * _Available since v4.3._\\n     */\\n    function tryRecover(\\n        bytes32 hash,\\n        bytes32 r,\\n        bytes32 vs\\n    ) internal pure returns (address, RecoverError) {\\n        bytes32 s;\\n        uint8 v;\\n        assembly {\\n            s := and(vs, 0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff)\\n            v := add(shr(255, vs), 27)\\n        }\\n        return tryRecover(hash, v, r, s);\\n    }\\n\\n    /**\\n     * @dev Overload of {ECDSA-recover} that receives the `r and `vs` short-signature fields separately.\\n     *\\n     * _Available since v4.2._\\n     */\\n    function recover(\\n        bytes32 hash,\\n        bytes32 r,\\n        bytes32 vs\\n    ) internal pure returns (address) {\\n        (address recovered, RecoverError error) = tryRecover(hash, r, vs);\\n        _throwError(error);\\n        return recovered;\\n    }\\n\\n    /**\\n     * @dev Overload of {ECDSA-tryRecover} that receives the `v`,\\n     * `r` and `s` signature fields separately.\\n     *\\n     * _Available since v4.3._\\n     */\\n    function tryRecover(\\n        bytes32 hash,\\n        uint8 v,\\n        bytes32 r,\\n        bytes32 s\\n    ) internal pure returns (address, RecoverError) {\\n        // EIP-2 still allows signature malleability for ecrecover(). Remove this possibility and make the signature\\n        // unique. Appendix F in the Ethereum Yellow paper (https://ethereum.github.io/yellowpaper/paper.pdf), defines\\n        // the valid range for s in (301): 0 < s < secp256k1n \\u00f7 2 + 1, and for v in (302): v \\u2208 {27, 28}. Most\\n        // signatures from current libraries generate a unique signature with an s-value in the lower half order.\\n        //\\n        // If your library generates malleable signatures, such as s-values in the upper range, calculate a new s-value\\n        // with 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141 - s1 and flip v from 27 to 28 or\\n        // vice versa. If your library also generates signatures with 0/1 for v instead 27/28, add 27 to v to accept\\n        // these malleable signatures as well.\\n        if (uint256(s) > 0x7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5D576E7357A4501DDFE92F46681B20A0) {\\n            return (address(0), RecoverError.InvalidSignatureS);\\n        }\\n        if (v != 27 && v != 28) {\\n            return (address(0), RecoverError.InvalidSignatureV);\\n        }\\n\\n        // If the signature is valid (and not malleable), return the signer address\\n        address signer = ecrecover(hash, v, r, s);\\n        if (signer == address(0)) {\\n            return (address(0), RecoverError.InvalidSignature);\\n        }\\n\\n        return (signer, RecoverError.NoError);\\n    }\\n\\n    /**\\n     * @dev Overload of {ECDSA-recover} that receives the `v`,\\n     * `r` and `s` signature fields separately.\\n     */\\n    function recover(\\n        bytes32 hash,\\n        uint8 v,\\n        bytes32 r,\\n        bytes32 s\\n    ) internal pure returns (address) {\\n        (address recovered, RecoverError error) = tryRecover(hash, v, r, s);\\n        _throwError(error);\\n        return recovered;\\n    }\\n\\n    /**\\n     * @dev Returns an Ethereum Signed Message, created from a `hash`. This\\n     * produces hash corresponding to the one signed with the\\n     * https://eth.wiki/json-rpc/API#eth_sign[`eth_sign`]\\n     * JSON-RPC method as part of EIP-191.\\n     *\\n     * See {recover}.\\n     */\\n    function toEthSignedMessageHash(bytes32 hash) internal pure returns (bytes32) {\\n        // 32 is the length in bytes of hash,\\n        // enforced by the type signature above\\n        return keccak256(abi.encodePacked(\\\"\\\\x19Ethereum Signed Message:\\\\n32\\\", hash));\\n    }\\n\\n    /**\\n     * @dev Returns an Ethereum Signed Typed Data, created from a\\n     * `domainSeparator` and a `structHash`. This produces hash corresponding\\n     * to the one signed with the\\n     * https://eips.ethereum.org/EIPS/eip-712[`eth_signTypedData`]\\n     * JSON-RPC method as part of EIP-712.\\n     *\\n     * See {recover}.\\n     */\\n    function toTypedDataHash(bytes32 domainSeparator, bytes32 structHash) internal pure returns (bytes32) {\\n        return keccak256(abi.encodePacked(\\\"\\\\x19\\\\x01\\\", domainSeparator, structHash));\\n    }\\n}\\n\",\"keccak256\":\"0xbc991a1cf357ce19480831a40792c814238a3b5458134703682abd8aa39719fb\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity ^0.8.0;\\n\\nimport \\\"./ECDSA.sol\\\";\\n\\n/**\\n * @dev https://eips.ethereum.org/EIPS/eip-712[EIP 712] is a standard for hashing and signing of typed structured data.\\n *\\n * The encoding specified in the EIP is very generic, and such a generic implementation in Solidity is not feasible,\\n * thus this contract does not implement the encoding itself. Protocols need to implement the type-specific encoding\\n * they need in their contracts using a combination of `abi.encode` and `keccak256`.\\n *\\n * This contract implements the EIP 712 domain separator ({_domainSeparatorV4}) that is used as part of the encoding\\n * scheme, and the final step of the encoding to obtain the message digest that is then signed via ECDSA\\n * ({_hashTypedDataV4}).\\n *\\n * The implementation of the domain separator was designed to be as efficient as possible while still properly updating\\n * the chain id to protect against replay attacks on an eventual fork of the chain.\\n *\\n * NOTE: This contract implements the version of the encoding known as \\\"v4\\\", as implemented by the JSON RPC method\\n * https://docs.metamask.io/guide/signing-data.html[`eth_signTypedDataV4` in MetaMask].\\n *\\n * _Available since v3.4._\\n */\\nabstract contract EIP712 {\\n    /* solhint-disable var-name-mixedcase */\\n    // Cache the domain separator as an immutable value, but also store the chain id that it corresponds to, in order to\\n    // invalidate the cached domain separator if the chain id changes.\\n    bytes32 private immutable _CACHED_DOMAIN_SEPARATOR;\\n    uint256 private immutable _CACHED_CHAIN_ID;\\n\\n    bytes32 private immutable _HASHED_NAME;\\n    bytes32 private immutable _HASHED_VERSION;\\n    bytes32 private immutable _TYPE_HASH;\\n\\n    /* solhint-enable var-name-mixedcase */\\n\\n    /**\\n     * @dev Initializes the domain separator and parameter caches.\\n     *\\n     * The meaning of `name` and `version` is specified in\\n     * https://eips.ethereum.org/EIPS/eip-712#definition-of-domainseparator[EIP 712]:\\n     *\\n     * - `name`: the user readable name of the signing domain, i.e. the name of the DApp or the protocol.\\n     * - `version`: the current major version of the signing domain.\\n     *\\n     * NOTE: These parameters cannot be changed except through a xref:learn::upgrading-smart-contracts.adoc[smart\\n     * contract upgrade].\\n     */\\n    constructor(string memory name, string memory version) {\\n        bytes32 hashedName = keccak256(bytes(name));\\n        bytes32 hashedVersion = keccak256(bytes(version));\\n        bytes32 typeHash = keccak256(\\n            \\\"EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)\\\"\\n        );\\n        _HASHED_NAME = hashedName;\\n        _HASHED_VERSION = hashedVersion;\\n        _CACHED_CHAIN_ID = block.chainid;\\n        _CACHED_DOMAIN_SEPARATOR = _buildDomainSeparator(typeHash, hashedName, hashedVersion);\\n        _TYPE_HASH = typeHash;\\n    }\\n\\n    /**\\n     * @dev Returns the domain separator for the current chain.\\n     */\\n    function _domainSeparatorV4() internal view returns (bytes32) {\\n        if (block.chainid == _CACHED_CHAIN_ID) {\\n            return _CACHED_DOMAIN_SEPARATOR;\\n        } else {\\n            return _buildDomainSeparator(_TYPE_HASH, _HASHED_NAME, _HASHED_VERSION);\\n        }\\n    }\\n\\n    function _buildDomainSeparator(\\n        bytes32 typeHash,\\n        bytes32 nameHash,\\n        bytes32 versionHash\\n    ) private view returns (bytes32) {\\n        return keccak256(abi.encode(typeHash, nameHash, versionHash, block.chainid, address(this)));\\n    }\\n\\n    /**\\n     * @dev Given an already https://eips.ethereum.org/EIPS/eip-712#definition-of-hashstruct[hashed struct], this\\n     * function returns the hash of the fully encoded EIP712 message for this domain.\\n     *\\n     * This hash can be used together with {ECDSA-recover} to obtain the signer of a message. For example:\\n     *\\n     * ```solidity\\n     * bytes32 digest = _hashTypedDataV4(keccak256(abi.encode(\\n     *     keccak256(\\\"Mail(address to,string contents)\\\"),\\n     *     mailTo,\\n     *     keccak256(bytes(mailContents))\\n     * )));\\n     * address signer = ECDSA.recover(digest, signature);\\n     * ```\\n     */\\n    function _hashTypedDataV4(bytes32 structHash) internal view virtual returns (bytes32) {\\n        return ECDSA.toTypedDataHash(_domainSeparatorV4(), structHash);\\n    }\\n}\\n\",\"keccak256\":\"0xba18d725602452307e5b278ed4566616c63792d89f3a0388a6f285428c26e681\",\"license\":\"MIT\"},\"contracts/core/ZbyteForwarderCore.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\n// --.. -... -.-- - . \\n// \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557 \\u2588\\u2588\\u2557   \\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\n// \\u255a\\u2550\\u2550\\u2588\\u2588\\u2588\\u2554\\u255d\\u2588\\u2588\\u2554\\u2550\\u2550\\u2588\\u2588\\u2557\\u255a\\u2588\\u2588\\u2557 \\u2588\\u2588\\u2554\\u255d\\u255a\\u2550\\u2550\\u2588\\u2588\\u2554\\u2550\\u2550\\u255d\\u2588\\u2588\\u2554\\u2550\\u2550\\u2550\\u2550\\u255d\\n//   \\u2588\\u2588\\u2588\\u2554\\u255d \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2554\\u255d \\u255a\\u2588\\u2588\\u2588\\u2588\\u2554\\u255d    \\u2588\\u2588\\u2551   \\u2588\\u2588\\u2588\\u2588\\u2588\\u2557  \\n//  \\u2588\\u2588\\u2588\\u2554\\u255d  \\u2588\\u2588\\u2554\\u2550\\u2550\\u2588\\u2588\\u2557  \\u255a\\u2588\\u2588\\u2554\\u255d     \\u2588\\u2588\\u2551   \\u2588\\u2588\\u2554\\u2550\\u2550\\u255d  \\n// \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2554\\u255d   \\u2588\\u2588\\u2551      \\u2588\\u2588\\u2551   \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\n// \\u255a\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u255d\\u255a\\u2550\\u2550\\u2550\\u2550\\u2550\\u255d    \\u255a\\u2550\\u255d      \\u255a\\u2550\\u255d   \\u255a\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u255d\\n// --.. -... -.-- - . \\n\\npragma solidity ^0.8.9;\\n\\nimport \\\"@openzeppelin/contracts/metatx/MinimalForwarder.sol\\\";\\nimport \\\"@openzeppelin/contracts/access/Ownable.sol\\\";\\nimport \\\"@openzeppelin/contracts/security/ReentrancyGuard.sol\\\";\\n\\n/// @title The Zbyte core forwarder contract\\n/// @dev The Zbyte core forwarder contract.\\ncontract ZbyteForwarderCore is Ownable, MinimalForwarder, ReentrancyGuard {\\n\\n    // errors\\n    /// @notice error (0xd92e233d): Address is address(0)\\n    error ZeroAddress();\\n\\n    // events\\n    /// @notice event (0xa6cc9cbb): DPLAT address is set\\n    event ZbyteAddressSet(address);\\n    /// @notice event (0x0a787863): Token forwarder address is set\\n    event ZbyteTokenForwarderAddressSet(address);\\n    /// @notice event (0x14229a64) Escrow address is set\\n    event EscrowAddressSet(address);\\n\\n    // DPLAT ERC20 address\\n    /// @notice DPLAT ERC20 contract address\\n    address public zByteAddress;\\n    /// @notice Forwarder of ERC20 token contract\\n    MinimalForwarder zbyteTokenForwarder;\\n    // Escrow address\\n    /// @notice Escrow contract address\\n    address public escrowAddress;\\n\\n    bytes4 private approvesig = bytes4(keccak256(\\\"approve(address,uint256)\\\"));\\n    bytes4 private depositsig = bytes4(keccak256(\\\"deposit(uint256,uint256,address,uint256,uint256)\\\"));\\n\\n\\n    /// @notice Set DPLAT ERC20 address\\n    /// @param zbyte_ DPLAT ERC20 contact address\\n    function setZbyteAddress(address zbyte_) public onlyOwner {\\n        if(zbyte_ == address(0)) {\\n            revert ZeroAddress();\\n        }\\n        zByteAddress = zbyte_;\\n\\n        emit ZbyteAddressSet(zbyte_);\\n    }\\n\\n    /// @notice Set DPLAT ERC20 Forwarder address\\n    /// @param forwarder_ DPLAT ERC20 forwarder contact address\\n    function setZbyteTokenForwarderAddress(address forwarder_) public onlyOwner {\\n        if(forwarder_ == address(0)) {\\n            revert ZeroAddress();\\n        }\\n        zbyteTokenForwarder = MinimalForwarder(forwarder_);\\n\\n        emit ZbyteTokenForwarderAddressSet(forwarder_);\\n    }\\n\\n    /// @notice Set Zbyte Escrow address\\n    /// @param escrow_ Zbyte Escrow contract address\\n    function setEscrowAddress(address escrow_) public onlyOwner {\\n        if(escrow_ == address(0)) {\\n            revert ZeroAddress();\\n        }\\n        escrowAddress = escrow_;\\n\\n        emit EscrowAddressSet(escrow_);\\n    }\\n\\n    /// @notice Perform approve and depost of Zbyte in single call\\n    /// @param reqApprove_ ForwardRequest for the approve call\\n    /// @param signatureApprove_ Signature of the approve call params\\n    /// @param reqDeposit_ ForwardRequest for the deposit call\\n    /// @param signatureDeposit_ Signature of the deposit call params\\n    /// @return success returns true of approve and deposit are successful\\n    /// @dev Allows gasless approve+deposit of DPLAT token to be used at https://dplat.zbyte.io\\n    function approveAndDeposit(ForwardRequest calldata reqApprove_, bytes calldata signatureApprove_,\\n                     ForwardRequest calldata reqDeposit_, bytes calldata signatureDeposit_)\\n        public\\n        payable\\n        nonReentrant\\n        returns (bool success)\\n    {\\n        bytes memory _returndata;\\n        require(reqApprove_.from == reqDeposit_.from, \\\"approveAndDeposit: Invalid from addresses\\\");\\n        require(reqApprove_.to == address(zByteAddress)\\n                && bytes4(reqApprove_.data[:4]) == approvesig\\n                && address(bytes20(reqApprove_.data[16:36])) == escrowAddress, \\\"approveAndDeposit: Invalid approve data\\\");\\n        require(reqDeposit_.to == address(escrowAddress)\\n                && bytes4(reqDeposit_.data[:4]) == depositsig, \\\"approveAndDeposit: Invalid deposit data\\\");\\n\\n        (success, _returndata) = zbyteTokenForwarder.execute(reqApprove_, signatureApprove_);\\n        require(success,\\\"Approve fail\\\");\\n        (success, _returndata) = execute(reqDeposit_, signatureDeposit_);\\n        require(success, \\\"Deposit fail\\\");\\n\\n        return success;\\n    }\\n}\\n\",\"keccak256\":\"0x38d214c96340427df47499c562d9401c3d63a0a6e6ba1f63ac7bcb0190f4573c\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x610120806040523461018d5761001481610192565b60108152602081016f26b4b734b6b0b62337b93bb0b93232b960811b8152602060405161004081610192565b600580825264302e302e3160d81b9290910191825260008054336001600160a01b03198216811783556040519496929592916001600160a01b03167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e08780a35190209320908360c0528160e0524660a05260208101917f8b73c3c69bb8fe3d512ecc4cf759cc79239f7b179b0ffacaa9a75d522b39400f94858452604083015260608201524660808201523060a082015260a0815260c081019281841060018060401b0385111761017957506040839052519020608052610100918252600160025560058054600160a01b600160e01b031916678171e009095ea7b360a01b17905561144391826101c4833960805182610db3015260a05182610d8d015260c05182610e02015260e05182610e2801525181610ddf0152f35b634e487b7160e01b81526041600452602490fd5b600080fd5b604081019081106001600160401b038211176101ad57604052565b634e487b7160e01b600052604160045260246000fdfe60806040526004361015610013575b600080fd5b60003560e01c80630d5defa4146101035780632d0335ab146100fa5780633c7cc47f146100f157806347153f82146100e85780634cbd545b146100df578063715018a6146100d657806388507dd9146100cd5780638da5cb5b146100c4578063bf5d3bdb146100bb578063d91b05ea146100b2578063ddeb63b5146100a95763f2fde38b146100a157600080fd5b61000e61057c565b5061000e6104fc565b5061000e61045f565b5061000e61043b565b5061000e610411565b5061000e6103e7565b5061000e610384565b5061000e610304565b5061000e6102b5565b5061000e61017c565b5061000e61013e565b503461000e57600036600319011261000e576005546040516001600160a01b039091168152602090f35b6001600160a01b0381160361000e57565b503461000e57602036600319011261000e5760043561015c8161012d565b60018060a01b031660005260016020526020604060002054604051908152f35b503461000e57602036600319011261000e5760043561019a8161012d565b6000546001600160a01b0391906101b49083163314610619565b1680156101fc576020817f0a78786348545c2d10229077222badfe195072a03160ed74499017f4b5d81a95926001600160601b0360a01b6004541617600455604051908152a1005b60405163d92e233d60e01b8152600490fd5b908160c091031261000e5790565b9181601f8401121561000e5782359167ffffffffffffffff831161000e576020838186019501011161000e57565b90604060031983011261000e5767ffffffffffffffff60043581811161000e57836102779160040161020e565b9260243591821161000e5761028e9160040161021c565b9091565b60005b8381106102a55750506000910152565b8181015183820152602001610295565b5060606102ca6102c43661024a565b91610964565b919060405192839115158252604060208301526102f68151809281604086015260208686019101610292565b601f01601f19168101030190f35b503461000e57602036600319011261000e576004356103228161012d565b6000546001600160a01b03919061033c9083163314610619565b1680156101fc576020817fa6cc9cbb302218c8a69564f6147ebefe781999970cc7221c7080024ec2a24c86926001600160601b0360a01b6003541617600355604051908152a1005b503461000e576000806003193601126103e457805481906001600160a01b038116906103b1338314610619565b6001600160a01b03191682557f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e08280a380f35b80fd5b503461000e57600036600319011261000e576003546040516001600160a01b039091168152602090f35b503461000e57600036600319011261000e576000546040516001600160a01b039091168152602090f35b503461000e57602061045561044f3661024a565b91610793565b6040519015158152f35b50608036600319011261000e5767ffffffffffffffff60043581811161000e5761048d90369060040161020e565b9060243581811161000e576104a690369060040161021c565b9260443583811161000e576104bf90369060040161020e565b60643593841161000e576104f8946104de6104e695369060040161021c565b949093610e7c565b60405190151581529081906020820190565b0390f35b503461000e57602036600319011261000e5760043561051a8161012d565b6000546001600160a01b0391906105349083163314610619565b1680156101fc576020817f14229a64f0a7328601813f0f794bb1dbc59363f1ed61c2f957d00517e6140e18926001600160601b0360a01b6005541617600555604051908152a1005b503461000e57602036600319011261000e5760043561059a8161012d565b6000546001600160a01b03906105b39082163314610619565b8116156105c5576105c390610664565b005b60405162461bcd60e51b815260206004820152602660248201527f4f776e61626c653a206e6577206f776e657220697320746865207a65726f206160448201526564647265737360d01b6064820152608490fd5b1561062057565b606460405162461bcd60e51b815260206004820152602060248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e65726044820152fd5b600080546001600160a01b039283166001600160a01b03198216811783559216907f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09080a3565b356106b58161012d565b90565b903590601e198136030182121561000e570180359067ffffffffffffffff821161000e5760200191813603831361000e57565b50634e487b7160e01b600052604160045260246000fd5b90601f8019910116810190811067ffffffffffffffff82111761072457604052565b61072c6106eb565b604052565b60209067ffffffffffffffff811161074f575b601f01601f19160190565b6107576106eb565b610744565b92919261076882610731565b916107766040519384610702565b82948184528183011161000e578281602093846000960137010152565b91610877906108718435936107a78561012d565b6108696107b6602088016106ab565b876108616080820135986108536107da6107d360a08601866106b8565b369161075c565b602081519101208b604051958694602086019860406060840135930135918a9260c09491979695929760e08501987fdd8f4b70b0f4393e889bd39128a30628a78b61816a9eb8199759e7a349657e48865260018060a01b0380921660208701521660408501526060840152608083015260a08201520152565b03601f198101835282610702565b519020610d34565b92369161075c565b90610a59565b9061089e610884846106ab565b6001600160a01b0316600090815260016020526040902090565b541491826108ab57505090565b6108c69192506108ba906106ab565b6001600160a01b031690565b6001600160a01b039091161490565b90600182018092116108e357565b634e487b7160e01b600052601160045260246000fd5b826014949392823701906001600160601b03199060601b1681520190565b3d15610942573d9061092882610731565b916109366040519384610702565b82523d6000602084013e565b606090565b1561094e57565b634e487b7160e01b600052600160045260246000fd5b92916109709184610793565b156109f95761098260808301356108d5565b61098e610884846106ab565b5560008061099e602085016106ab565b9360406060820135956109b460a08401846106b8565b6109d76109c3869593956106ab565b9161085384519384926020840198896108f9565b519301359087f16109f56109e9610917565b93603f5a910410610947565b9190565b60405162461bcd60e51b815260206004820152603260248201527f4d696e696d616c466f727761726465723a207369676e617475726520646f6573604482015271081b9bdd081b585d18da081c995c5d595cdd60721b6064820152608490fd5b6106b591610a6691610c0f565b919091610a8e565b60051115610a7857565b634e487b7160e01b600052602160045260246000fd5b610a9781610a6e565b80610a9f5750565b610aa881610a6e565b60018103610af55760405162461bcd60e51b815260206004820152601860248201527f45434453413a20696e76616c6964207369676e617475726500000000000000006044820152606490fd5b610afe81610a6e565b60028103610b4b5760405162461bcd60e51b815260206004820152601f60248201527f45434453413a20696e76616c6964207369676e6174757265206c656e677468006044820152606490fd5b610b5481610a6e565b60038103610bac5760405162461bcd60e51b815260206004820152602260248201527f45434453413a20696e76616c6964207369676e6174757265202773272076616c604482015261756560f01b6064820152608490fd5b80610bb8600492610a6e565b14610bbf57565b60405162461bcd60e51b815260206004820152602260248201527f45434453413a20696e76616c6964207369676e6174757265202776272076616c604482015261756560f01b6064820152608490fd5b815160418103610c3857509061028e916020820151906060604084015193015160001a90610c7e565b604003610c6757602082015160409092015161028e926001600160ff1b03821692909160ff1c601b0190610c7e565b5050600090600290565b506040513d6000823e3d90fd5b9291907f7fffffffffffffffffffffffffffffff5d576e7357a4501ddfe92f46681b20a08311610d285760ff16601b81141580610d1d575b610d11579160809493916020936040519384528484015260408301526060820152600093849182805260015afa15610d04575b81516001600160a01b03811615610cfe579190565b50600190565b610d0c610c71565b610ce9565b50505050600090600490565b50601c811415610cb6565b50505050600090600390565b610d3c610d8a565b9060405190602082019261190160f01b845260228301526042820152604281526080810181811067ffffffffffffffff821117610d7d575b60405251902090565b610d856106eb565b610d74565b467f000000000000000000000000000000000000000000000000000000000000000003610dd5577f000000000000000000000000000000000000000000000000000000000000000090565b60405160208101907f000000000000000000000000000000000000000000000000000000000000000082527f000000000000000000000000000000000000000000000000000000000000000060408201527f000000000000000000000000000000000000000000000000000000000000000060608201524660808201523060a082015260a0815260c0810181811067ffffffffffffffff821117610d7d5760405251902090565b949392919094600280541461107f576000610f7692610f5c92610f7b9860028055610f27610ea9836106ab565b610ec9610eb86108ba8b6106ab565b6001600160a01b03928316146110c4565b610ed5602085016106ab565b6003548290610eec906001600160a01b03166108ba565b91161480611049575b80610ffc575b610f049061119e565b610f1060208a016106ab565b600554918083169116149081610fc1575b506111fa565b6004548490610f3e906001600160a01b03166108ba565b926040519687958694859363238a9fc160e11b8552600485016112e7565b03925af1908115610fb4575b600091610f92575b50611397565b610964565b50610f85816113d2565b90610f906001600255565b565b610fad913d8091833e610fa58183610702565b810190611256565b5038610f70565b610fbc610c71565b610f68565b9050610fe2610fdc610fd660a08c018c6106b8565b90611122565b90611141565b6001600160e01b031990811660209290921b161438610f21565b50610f0461102861102261101c61101660a08901896106b8565b90611130565b9061116d565b60601c90565b600554839061103f906001600160a01b03166108ba565b9116149050610efb565b5061105d610fdc610fd660a08701876106b8565b60055460401b6001600160e01b0319166001600160e01b031990911614610ef5565b60405162461bcd60e51b815260206004820152601f60248201527f5265656e7472616e637947756172643a207265656e7472616e742063616c6c006044820152606490fd5b156110cb57565b60405162461bcd60e51b815260206004820152602960248201527f617070726f7665416e644465706f7369743a20496e76616c69642066726f6d2060448201526861646472657373657360b81b6064820152608490fd5b9060041161000e5790600490565b9060241161000e5760100190601490565b6001600160e01b0319903581811693926004811061115e57505050565b60040360031b82901b16169150565b6bffffffffffffffffffffffff19903581811693926014811061118f57505050565b60140360031b82901b16169150565b156111a557565b60405162461bcd60e51b815260206004820152602760248201527f617070726f7665416e644465706f7369743a20496e76616c696420617070726f6044820152667665206461746160c81b6064820152608490fd5b1561120157565b60405162461bcd60e51b815260206004820152602760248201527f617070726f7665416e644465706f7369743a20496e76616c6964206465706f736044820152666974206461746160c81b6064820152608490fd5b919060408382031261000e578251801515810361000e579260208101519067ffffffffffffffff821161000e570181601f8201121561000e57805161129a81610731565b926112a86040519485610702565b8184526020828401011161000e576106b59160208085019101610292565b908060209392818452848401376000828201840152601f01601f1916010190565b9192906040835280356112f98161012d565b6001600160a01b03908116604085015260208201356113178161012d565b16606084015260408101356080840152606081013560a0840152608081013560c084015260a0810135601e198236030181121561000e5701926020843594019367ffffffffffffffff811161000e57803603851361000e576106b5946113899160c060e08701526101008601916112c6565b9260208185039101526112c6565b1561139e57565b60405162461bcd60e51b815260206004820152600c60248201526b105c1c1c9bdd994819985a5b60a21b6044820152606490fd5b156113d957565b60405162461bcd60e51b815260206004820152600c60248201526b11195c1bdcda5d0819985a5b60a21b6044820152606490fdfea2646970667358221220a59bd007dbb10b50de2fb99d68502ee7b4ec598a48c5d40f80f7ed03a65498a264736f6c63430008110033",
+  "deployedBytecode": "0x60806040526004361015610013575b600080fd5b60003560e01c80630d5defa4146101035780632d0335ab146100fa5780633c7cc47f146100f157806347153f82146100e85780634cbd545b146100df578063715018a6146100d657806388507dd9146100cd5780638da5cb5b146100c4578063bf5d3bdb146100bb578063d91b05ea146100b2578063ddeb63b5146100a95763f2fde38b146100a157600080fd5b61000e61057c565b5061000e6104fc565b5061000e61045f565b5061000e61043b565b5061000e610411565b5061000e6103e7565b5061000e610384565b5061000e610304565b5061000e6102b5565b5061000e61017c565b5061000e61013e565b503461000e57600036600319011261000e576005546040516001600160a01b039091168152602090f35b6001600160a01b0381160361000e57565b503461000e57602036600319011261000e5760043561015c8161012d565b60018060a01b031660005260016020526020604060002054604051908152f35b503461000e57602036600319011261000e5760043561019a8161012d565b6000546001600160a01b0391906101b49083163314610619565b1680156101fc576020817f0a78786348545c2d10229077222badfe195072a03160ed74499017f4b5d81a95926001600160601b0360a01b6004541617600455604051908152a1005b60405163d92e233d60e01b8152600490fd5b908160c091031261000e5790565b9181601f8401121561000e5782359167ffffffffffffffff831161000e576020838186019501011161000e57565b90604060031983011261000e5767ffffffffffffffff60043581811161000e57836102779160040161020e565b9260243591821161000e5761028e9160040161021c565b9091565b60005b8381106102a55750506000910152565b8181015183820152602001610295565b5060606102ca6102c43661024a565b91610964565b919060405192839115158252604060208301526102f68151809281604086015260208686019101610292565b601f01601f19168101030190f35b503461000e57602036600319011261000e576004356103228161012d565b6000546001600160a01b03919061033c9083163314610619565b1680156101fc576020817fa6cc9cbb302218c8a69564f6147ebefe781999970cc7221c7080024ec2a24c86926001600160601b0360a01b6003541617600355604051908152a1005b503461000e576000806003193601126103e457805481906001600160a01b038116906103b1338314610619565b6001600160a01b03191682557f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e08280a380f35b80fd5b503461000e57600036600319011261000e576003546040516001600160a01b039091168152602090f35b503461000e57600036600319011261000e576000546040516001600160a01b039091168152602090f35b503461000e57602061045561044f3661024a565b91610793565b6040519015158152f35b50608036600319011261000e5767ffffffffffffffff60043581811161000e5761048d90369060040161020e565b9060243581811161000e576104a690369060040161021c565b9260443583811161000e576104bf90369060040161020e565b60643593841161000e576104f8946104de6104e695369060040161021c565b949093610e7c565b60405190151581529081906020820190565b0390f35b503461000e57602036600319011261000e5760043561051a8161012d565b6000546001600160a01b0391906105349083163314610619565b1680156101fc576020817f14229a64f0a7328601813f0f794bb1dbc59363f1ed61c2f957d00517e6140e18926001600160601b0360a01b6005541617600555604051908152a1005b503461000e57602036600319011261000e5760043561059a8161012d565b6000546001600160a01b03906105b39082163314610619565b8116156105c5576105c390610664565b005b60405162461bcd60e51b815260206004820152602660248201527f4f776e61626c653a206e6577206f776e657220697320746865207a65726f206160448201526564647265737360d01b6064820152608490fd5b1561062057565b606460405162461bcd60e51b815260206004820152602060248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e65726044820152fd5b600080546001600160a01b039283166001600160a01b03198216811783559216907f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09080a3565b356106b58161012d565b90565b903590601e198136030182121561000e570180359067ffffffffffffffff821161000e5760200191813603831361000e57565b50634e487b7160e01b600052604160045260246000fd5b90601f8019910116810190811067ffffffffffffffff82111761072457604052565b61072c6106eb565b604052565b60209067ffffffffffffffff811161074f575b601f01601f19160190565b6107576106eb565b610744565b92919261076882610731565b916107766040519384610702565b82948184528183011161000e578281602093846000960137010152565b91610877906108718435936107a78561012d565b6108696107b6602088016106ab565b876108616080820135986108536107da6107d360a08601866106b8565b369161075c565b602081519101208b604051958694602086019860406060840135930135918a9260c09491979695929760e08501987fdd8f4b70b0f4393e889bd39128a30628a78b61816a9eb8199759e7a349657e48865260018060a01b0380921660208701521660408501526060840152608083015260a08201520152565b03601f198101835282610702565b519020610d34565b92369161075c565b90610a59565b9061089e610884846106ab565b6001600160a01b0316600090815260016020526040902090565b541491826108ab57505090565b6108c69192506108ba906106ab565b6001600160a01b031690565b6001600160a01b039091161490565b90600182018092116108e357565b634e487b7160e01b600052601160045260246000fd5b826014949392823701906001600160601b03199060601b1681520190565b3d15610942573d9061092882610731565b916109366040519384610702565b82523d6000602084013e565b606090565b1561094e57565b634e487b7160e01b600052600160045260246000fd5b92916109709184610793565b156109f95761098260808301356108d5565b61098e610884846106ab565b5560008061099e602085016106ab565b9360406060820135956109b460a08401846106b8565b6109d76109c3869593956106ab565b9161085384519384926020840198896108f9565b519301359087f16109f56109e9610917565b93603f5a910410610947565b9190565b60405162461bcd60e51b815260206004820152603260248201527f4d696e696d616c466f727761726465723a207369676e617475726520646f6573604482015271081b9bdd081b585d18da081c995c5d595cdd60721b6064820152608490fd5b6106b591610a6691610c0f565b919091610a8e565b60051115610a7857565b634e487b7160e01b600052602160045260246000fd5b610a9781610a6e565b80610a9f5750565b610aa881610a6e565b60018103610af55760405162461bcd60e51b815260206004820152601860248201527f45434453413a20696e76616c6964207369676e617475726500000000000000006044820152606490fd5b610afe81610a6e565b60028103610b4b5760405162461bcd60e51b815260206004820152601f60248201527f45434453413a20696e76616c6964207369676e6174757265206c656e677468006044820152606490fd5b610b5481610a6e565b60038103610bac5760405162461bcd60e51b815260206004820152602260248201527f45434453413a20696e76616c6964207369676e6174757265202773272076616c604482015261756560f01b6064820152608490fd5b80610bb8600492610a6e565b14610bbf57565b60405162461bcd60e51b815260206004820152602260248201527f45434453413a20696e76616c6964207369676e6174757265202776272076616c604482015261756560f01b6064820152608490fd5b815160418103610c3857509061028e916020820151906060604084015193015160001a90610c7e565b604003610c6757602082015160409092015161028e926001600160ff1b03821692909160ff1c601b0190610c7e565b5050600090600290565b506040513d6000823e3d90fd5b9291907f7fffffffffffffffffffffffffffffff5d576e7357a4501ddfe92f46681b20a08311610d285760ff16601b81141580610d1d575b610d11579160809493916020936040519384528484015260408301526060820152600093849182805260015afa15610d04575b81516001600160a01b03811615610cfe579190565b50600190565b610d0c610c71565b610ce9565b50505050600090600490565b50601c811415610cb6565b50505050600090600390565b610d3c610d8a565b9060405190602082019261190160f01b845260228301526042820152604281526080810181811067ffffffffffffffff821117610d7d575b60405251902090565b610d856106eb565b610d74565b467f000000000000000000000000000000000000000000000000000000000000000003610dd5577f000000000000000000000000000000000000000000000000000000000000000090565b60405160208101907f000000000000000000000000000000000000000000000000000000000000000082527f000000000000000000000000000000000000000000000000000000000000000060408201527f000000000000000000000000000000000000000000000000000000000000000060608201524660808201523060a082015260a0815260c0810181811067ffffffffffffffff821117610d7d5760405251902090565b949392919094600280541461107f576000610f7692610f5c92610f7b9860028055610f27610ea9836106ab565b610ec9610eb86108ba8b6106ab565b6001600160a01b03928316146110c4565b610ed5602085016106ab565b6003548290610eec906001600160a01b03166108ba565b91161480611049575b80610ffc575b610f049061119e565b610f1060208a016106ab565b600554918083169116149081610fc1575b506111fa565b6004548490610f3e906001600160a01b03166108ba565b926040519687958694859363238a9fc160e11b8552600485016112e7565b03925af1908115610fb4575b600091610f92575b50611397565b610964565b50610f85816113d2565b90610f906001600255565b565b610fad913d8091833e610fa58183610702565b810190611256565b5038610f70565b610fbc610c71565b610f68565b9050610fe2610fdc610fd660a08c018c6106b8565b90611122565b90611141565b6001600160e01b031990811660209290921b161438610f21565b50610f0461102861102261101c61101660a08901896106b8565b90611130565b9061116d565b60601c90565b600554839061103f906001600160a01b03166108ba565b9116149050610efb565b5061105d610fdc610fd660a08701876106b8565b60055460401b6001600160e01b0319166001600160e01b031990911614610ef5565b60405162461bcd60e51b815260206004820152601f60248201527f5265656e7472616e637947756172643a207265656e7472616e742063616c6c006044820152606490fd5b156110cb57565b60405162461bcd60e51b815260206004820152602960248201527f617070726f7665416e644465706f7369743a20496e76616c69642066726f6d2060448201526861646472657373657360b81b6064820152608490fd5b9060041161000e5790600490565b9060241161000e5760100190601490565b6001600160e01b0319903581811693926004811061115e57505050565b60040360031b82901b16169150565b6bffffffffffffffffffffffff19903581811693926014811061118f57505050565b60140360031b82901b16169150565b156111a557565b60405162461bcd60e51b815260206004820152602760248201527f617070726f7665416e644465706f7369743a20496e76616c696420617070726f6044820152667665206461746160c81b6064820152608490fd5b1561120157565b60405162461bcd60e51b815260206004820152602760248201527f617070726f7665416e644465706f7369743a20496e76616c6964206465706f736044820152666974206461746160c81b6064820152608490fd5b919060408382031261000e578251801515810361000e579260208101519067ffffffffffffffff821161000e570181601f8201121561000e57805161129a81610731565b926112a86040519485610702565b8184526020828401011161000e576106b59160208085019101610292565b908060209392818452848401376000828201840152601f01601f1916010190565b9192906040835280356112f98161012d565b6001600160a01b03908116604085015260208201356113178161012d565b16606084015260408101356080840152606081013560a0840152608081013560c084015260a0810135601e198236030181121561000e5701926020843594019367ffffffffffffffff811161000e57803603851361000e576106b5946113899160c060e08701526101008601916112c6565b9260208185039101526112c6565b1561139e57565b60405162461bcd60e51b815260206004820152600c60248201526b105c1c1c9bdd994819985a5b60a21b6044820152606490fd5b156113d957565b60405162461bcd60e51b815260206004820152600c60248201526b11195c1bdcda5d0819985a5b60a21b6044820152606490fdfea2646970667358221220a59bd007dbb10b50de2fb99d68502ee7b4ec598a48c5d40f80f7ed03a65498a264736f6c63430008110033",
+  "devdoc": {
+    "details": "The Zbyte core forwarder contract.",
+    "kind": "dev",
+    "methods": {
+      "approveAndDeposit((address,address,uint256,uint256,uint256,bytes),bytes,(address,address,uint256,uint256,uint256,bytes),bytes)": {
+        "details": "Allows gasless approve+deposit of DPLAT token to be used at https://dplat.zbyte.io",
+        "params": {
+          "reqApprove_": "ForwardRequest for the approve call",
+          "reqDeposit_": "ForwardRequest for the deposit call",
+          "signatureApprove_": "Signature of the approve call params",
+          "signatureDeposit_": "Signature of the deposit call params"
+        },
+        "returns": {
+          "success": "returns true of approve and deposit are successful"
+        }
+      },
+      "owner()": {
+        "details": "Returns the address of the current owner."
+      },
+      "renounceOwnership()": {
+        "details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
+      },
+      "setEscrowAddress(address)": {
+        "params": {
+          "escrow_": "Zbyte Escrow contract address"
+        }
+      },
+      "setZbyteAddress(address)": {
+        "params": {
+          "zbyte_": "DPLAT ERC20 contact address"
+        }
+      },
+      "setZbyteTokenForwarderAddress(address)": {
+        "params": {
+          "forwarder_": "DPLAT ERC20 forwarder contact address"
+        }
+      },
+      "transferOwnership(address)": {
+        "details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+      }
+    },
+    "title": "The Zbyte core forwarder contract",
+    "version": 1
+  },
+  "userdoc": {
+    "errors": {
+      "ZeroAddress()": [
+        {
+          "notice": "error (0xd92e233d): Address is address(0)"
+        }
+      ]
+    },
+    "events": {
+      "EscrowAddressSet(address)": {
+        "notice": "event (0x14229a64) Escrow address is set"
+      },
+      "ZbyteAddressSet(address)": {
+        "notice": "event (0xa6cc9cbb): DPLAT address is set"
+      },
+      "ZbyteTokenForwarderAddressSet(address)": {
+        "notice": "event (0x0a787863): Token forwarder address is set"
+      }
+    },
+    "kind": "user",
+    "methods": {
+      "approveAndDeposit((address,address,uint256,uint256,uint256,bytes),bytes,(address,address,uint256,uint256,uint256,bytes),bytes)": {
+        "notice": "Perform approve and depost of Zbyte in single call"
+      },
+      "escrowAddress()": {
+        "notice": "Escrow contract address"
+      },
+      "setEscrowAddress(address)": {
+        "notice": "Set Zbyte Escrow address"
+      },
+      "setZbyteAddress(address)": {
+        "notice": "Set DPLAT ERC20 address"
+      },
+      "setZbyteTokenForwarderAddress(address)": {
+        "notice": "Set DPLAT ERC20 Forwarder address"
+      },
+      "zByteAddress()": {
+        "notice": "DPLAT ERC20 contract address"
+      }
+    },
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 7,
+        "contract": "contracts/core/ZbyteForwarderCore.sol:ZbyteForwarderCore",
+        "label": "_owner",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      },
+      {
+        "astId": 135,
+        "contract": "contracts/core/ZbyteForwarderCore.sol:ZbyteForwarderCore",
+        "label": "_nonces",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_mapping(t_address,t_uint256)"
+      },
+      {
+        "astId": 377,
+        "contract": "contracts/core/ZbyteForwarderCore.sol:ZbyteForwarderCore",
+        "label": "_status",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 3184,
+        "contract": "contracts/core/ZbyteForwarderCore.sol:ZbyteForwarderCore",
+        "label": "zByteAddress",
+        "offset": 0,
+        "slot": "3",
+        "type": "t_address"
+      },
+      {
+        "astId": 3188,
+        "contract": "contracts/core/ZbyteForwarderCore.sol:ZbyteForwarderCore",
+        "label": "zbyteTokenForwarder",
+        "offset": 0,
+        "slot": "4",
+        "type": "t_contract(MinimalForwarder)274"
+      },
+      {
+        "astId": 3191,
+        "contract": "contracts/core/ZbyteForwarderCore.sol:ZbyteForwarderCore",
+        "label": "escrowAddress",
+        "offset": 0,
+        "slot": "5",
+        "type": "t_address"
+      },
+      {
+        "astId": 3199,
+        "contract": "contracts/core/ZbyteForwarderCore.sol:ZbyteForwarderCore",
+        "label": "approvesig",
+        "offset": 20,
+        "slot": "5",
+        "type": "t_bytes4"
+      },
+      {
+        "astId": 3207,
+        "contract": "contracts/core/ZbyteForwarderCore.sol:ZbyteForwarderCore",
+        "label": "depositsig",
+        "offset": 24,
+        "slot": "5",
+        "type": "t_bytes4"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_bytes4": {
+        "encoding": "inplace",
+        "label": "bytes4",
+        "numberOfBytes": "4"
+      },
+      "t_contract(MinimalForwarder)274": {
+        "encoding": "inplace",
+        "label": "contract MinimalForwarder",
+        "numberOfBytes": "20"
+      },
+      "t_mapping(t_address,t_uint256)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => uint256)",
+        "numberOfBytes": "32",
+        "value": "t_uint256"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}
