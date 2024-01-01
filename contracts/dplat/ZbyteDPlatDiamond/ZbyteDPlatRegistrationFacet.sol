@@ -30,8 +30,8 @@ contract ZbyteDPlatRegistrationFacet is ZbyteContextDiamond {
     event ZbyteDPlatEnterpriseUserRegistered(address,bytes4);
     /// @notice event (0x822d049d): Zbyte DPlat dapp is registered.
     event ZbyteDPlatDappRegistered(address,bytes4);
-    /// @notice event (0xf9d1da16): Zbyte DPlat enterprise limit is set.
-    event ZbyteDPlatEnterpriseLimitSet(bytes4,uint256);
+    /// @notice event (0x75ee1f8e): Zbyte DPlat enterprise limit is set.
+    event ZbyteDPlatEnterpriseLimitSet(bytes4,uint256,uint256);
 
     ///errors
     /// @notice error (0x74f7822a): Provider already registered.
@@ -309,6 +309,9 @@ contract ZbyteDPlatRegistrationFacet is ZbyteContextDiamond {
         if (_enterpriseProvider == address(0)) revert EnterpriseNotRegistered(enterprise_);
 
         LibDPlatRegistration._setEntepriseLimit(enterprise_, amount_);
-        emit ZbyteDPlatEnterpriseLimitSet(enterprise_, amount_);
+    }
+
+    function getEnterpriseLimit(bytes4 enterprise_) public view returns(uint256) {
+        return LibDPlatRegistration._getEnterpriseLimit(enterprise_);
     }
 }

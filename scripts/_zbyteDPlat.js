@@ -182,16 +182,19 @@ async function registerDapp(providerAgent, dapp, enterprise) {
 
 async function setEnterpriseLimit(providerAgent, enterprise, limit) {
     try {
+        let contract = await lib.getContract(contractName);
         let contractWithSigner = await lib.getContractWithSigner(contractName, providerAgent);
         var entHash = keccak256(toUtf8Bytes(enterprise)).slice(0, 10)
 
         var limit_bn = limit +'0'.repeat(18)
+        var currentLimit = await contract.getEnterpriseLimit(entHash);
+        console.log("currentLimit: ", currentLimit);
         console.log("setEnterpriseLimit: ", entHash, limit_bn);
 
         const tx = await contractWithSigner.setEnterpriseLimit(entHash, limit_bn);
         await expect(tx.wait())
         .to.emit(contractWithSigner,"ZbyteDPlatEnterpriseLimitSet")
-        .withArgs(entHash,limit_bn);
+        .withArgs(entHash,currentLimit,limit_bn);
         return { "function": "registerDapp",
                  "enterprise": entHash,
                  "limit": limit_bn

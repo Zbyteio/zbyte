@@ -269,7 +269,6 @@ abstract contract EscrowERC20 is ZbyteContext, IEscrowERC20, ReentrancyGuard {
                             bool success_,
                             uint256  retval_)
         internal
-        nonReentrant
         onlyRelay returns(uint256) {
         PendingAction storage _pAction = pendingAction[ack_];
         address _nAddress = _pAction.nAddress;

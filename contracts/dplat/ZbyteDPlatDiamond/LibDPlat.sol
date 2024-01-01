@@ -14,9 +14,14 @@ pragma solidity ^0.8.9;
 /// @notice Library for DPlat base storage and functions
 /// @dev Library for DPlat base storage and functions
 library LibDPlatBase {
+    /// @notice To record PreExecute states 
+    struct PreExecStates {
+        bytes4 enterprise;
+    }
 
     /// @notice Diamond storage for DPlat Base struct
     struct DiamondStorage {
+        PreExecStates preExecuteStates;
         address zbyteVToken; 
         address zbytePriceFeeder;
     }
@@ -39,15 +44,40 @@ library LibDPlatBase {
         return _dsb.zbyteVToken;
     }
 
+    /**
+    * @dev Retrieves the address of the Zbyte price feeder from DiamondStorage.
+    * @return The address of the Zbyte price feeder.
+    */
     function _getZbytePriceFeeder() internal view returns (address) {
         DiamondStorage storage _dsb = diamondStorage();
         return _dsb.zbytePriceFeeder;
     }
+
+    /**
+    * @dev Sets the pre-execution states with the specified enterprise identifier.
+    * @param enterprise_ The enterprise identifier to be set in the pre-execution states.
+    */
+    function _setPreExecStates(bytes4 enterprise_) internal {
+        DiamondStorage storage _dsb = diamondStorage();
+        _dsb.preExecuteStates.enterprise = enterprise_;
+    }
+
+    /**
+    * @dev Retrieves the pre-execution states from DiamondStorage.
+    * @return The pre-execution states stored in DiamondStorage.
+    */
+    function _getPreExecStates() internal view returns (PreExecStates memory) {
+        DiamondStorage storage _dsb = diamondStorage();
+        return _dsb.preExecuteStates;
+    }
+
 }
 
 /// @notice Library for DPlat registration storage and functions
 /// @dev Library for DPlat registration storage and functions
 library LibDPlatRegistration {
+    /// @notice event (0x75ee1f8e): Zbyte DPlat enterprise limit is set.
+    event ZbyteDPlatEnterpriseLimitSet(bytes4,uint256,uint256);
 
     /// @notice Diamond storage for DPlat registration struct
     struct DiamondStorage {
@@ -84,7 +114,9 @@ library LibDPlatRegistration {
     /// @param amount_ The limit amount to set.
     function _setEntepriseLimit(bytes4 enterprise_, uint256 amount_) internal {
         DiamondStorage storage _dsp = diamondStorage();
+        uint256 _currentEnterpriseLimit = _dsp.enterpriseLimit[enterprise_];
         _dsp.enterpriseLimit[enterprise_] = amount_;
+        emit ZbyteDPlatEnterpriseLimitSet(enterprise_,_currentEnterpriseLimit,amount_);
     }
 
     /// @notice Checks if an enterprise has a registered policy and retrieves the policy address.
