@@ -25,9 +25,15 @@ async function fwdExec(fwd,req,sign,submitter) {
   const contractWithSigner = await lib.getContractWithSigner(fwd,submitter);
   var result = await contractWithSigner.verify(req,sign);
   console.log("verify:",result);
+  var call_result;
   if (result == true) {
-    var call_result = await contractWithSigner.execute(req,sign);
-    console.log("execute:",call_result);
+    if (fwd == "ZbyteForwarderDPlat") {
+      call_result = await contractWithSigner.zbyteExecute(req,sign);
+    } else {
+      call_result = await contractWithSigner.execute(req,sign);
+    }
+    //console.log("execute:",call_result);
+    return call_result;
   }
 }
 

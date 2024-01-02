@@ -39,6 +39,9 @@ async function deployCore() {
             deterministicDeployment: false
         })
     console.log('==RelayWrapper addr=', RelayWrapper.address);
+    return {
+        function: "deployCore"
+    }
 }
 
 module.exports = deployCore

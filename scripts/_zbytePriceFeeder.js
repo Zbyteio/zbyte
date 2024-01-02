@@ -27,6 +27,21 @@ async function setNativeEthEquivalentZbyteInGwei(owner, nativeEthEquivalentZbyte
     }
 }
 
+async function nativeEthEquivalentZbyteInGwei() {
+    try {
+        let contract = await lib.getContract(contractName);
+
+        const ret = await contract.nativeEthEquivalentZbyteInGwei();
+
+        return { function: "nativeEthEquivalentZbyteInGwei",
+                 "value": ret
+               }
+    } catch (error) {
+        console.log(error);
+        throw(error);
+    }
+}
+
 async function setZbytePriceInGwei(owner, zbytePriceInGwei_) {
     try {
         let contractWithSigner = await lib.getContractWithSigner(contractName, owner);
@@ -63,17 +78,17 @@ async function setBurnRateInMill(owner, burnRateInMill_) {
     }
 }
 
-async function registerWorker(owner) {
+async function registerWorker(owner,worker) {
     try {
         let contractWithSigner = await lib.getContractWithSigner(contractName, owner);
 
-        const tx = await contractWithSigner.registerWorker(await lib.getAddress(owner), true);
+        const tx = await contractWithSigner.registerWorker(await lib.getAddress(worker), true);
         await expect(tx.wait())
         .to.emit(contractWithSigner,"WorkerRegistered")
-        .withArgs(await lib.getAddress(owner), true);
+        .withArgs(await lib.getAddress(worker), true);
 
         return { function: "registerWorker",
-                 "worker": await lib.getAddress(owner)
+                 "worker": await lib.getAddress(worker)
                }
     } catch (error) {
         console.log(error);
@@ -85,5 +100,6 @@ module.exports = {
 "setZbytePriceInGwei":setZbytePriceInGwei,
 "setNativeEthEquivalentZbyteInGwei":setNativeEthEquivalentZbyteInGwei,
 "setBurnRateInMill":setBurnRateInMill,
-"registerWorker":registerWorker
+"registerWorker":registerWorker,
+nativeEthEquivalentZbyteInGwei:nativeEthEquivalentZbyteInGwei
 }

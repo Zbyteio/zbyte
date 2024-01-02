@@ -1,66 +1,69 @@
-# terminal 1 - mumbai local
-rm -rf deployments/hhmumbai/* && npx hardhat node --fork https://rpc-mumbai.maticvigil.com/ --port 4545 --config hhmumbai.config.js
+# term1 - start hhmumbai
+dplat_env hhmumbai hhmumbai.config.js
+cd /home/main/dropbox/zbyte/zbyte_release/dplat
+npx hardhat clean && npx hardhat compile
+npx hardhat node --fork https://rpc-mumbai.maticvigil.com/ --port 4545 --config hhmumbai.config.js
 
-# terminal 2- fuji local
-rm -rf  deployments/hhfuji/* && npx hardhat node --fork https://api.avax-test.network/ext/bc/C/rpc --port 3545 --config hhfuji.config.js
+# term2 - deploy DPLAT and transfer to ZBYTE_MAIN_WALLET
+dplat_env hhmumbai hhmumbai.config.js
+export ZBYTE_MAIN_WALLET=0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075
+# deploy contracts and copy json to zbyte project
+rm -rf deployments/hhmumbai
+npx hardhat dplatDeploy --api core --owner dplat --network $CORE --config $CONFIG
+npx hardhat dplatToken --api renounceOwnership --owner dplat  --network $CORE  --config $CONFIG
+cd ../zbyte &&  if [ ! -e "deployments.dplat" ]; then ln -s deployments deployments.dplat; fi && cd -
+mkdir -p ../zbyte/deployments.dplat/$CORE
+cp deployments/$CORE/DPlatToken.json ../zbyte/deployments.dplat/$CORE/ZbyteToken.json
+cp deployments/$CORE/DPlatForwarder.json ../zbyte/deployments.dplat/$CORE/ZbyteTokenForwarder.json
+cp deployments/$CORE/.chainId ../zbyte/deployments.dplat/$CORE/.chainId
+# transfer DPLAT to accounts for use in zbyte project
+npx hardhat dplatToken --api transfer --receiver $ZBYTE_MAIN_WALLET --amount 1000 --sender dplat  --network $CORE  --config $CONFIG
+npx hardhat dplatToken --api approve --approver dplat --approvee user1 --amount 1000 --network $CORE --config $CONFIG
+npx hardhat dplatToken --api tfrFromForwarder --approvee user1 --sender dplat --receiver $ZBYTE_MAIN_WALLET --amount 1000 --network $CORE --config $CONFIG
+# Note: ZBYTE_MAIN_WALLET is not part of the keys coming from mnemonic.  L1 balance seen here is mumbai balance
+npx hardhat dplatToken --api balanceOf --account $ZBYTE_MAIN_WALLET --network $CORE  --config $CONFIG
 
-# terminal 3 deploy and init
-    export CORE=hhmumbai
-    npx hardhat zDeploy --api core --owner zbyt --network $CORE --config $CORE.config.js
-    npx hardhat zDeploy --api initCoreStates --owner zbyt --network $CORE --config $CORE.config.js
-    export DPLAT=hhmumbai
-    npx hardhat zDeploy --api dplat --owner zbyt --network $DPLAT --config $DPLAT.config.js
-    npx hardhat zDeploy --api dapp --owner comd --network $DPLAT --config $DPLAT.config.js
-    npx hardhat zDeploy --api initDplatStates --owner zbyt --network $DPLAT --config $DPLAT.config.js
-    npx hardhat zDeploy --api initCoreStateForDplat --owner zbyt --relay ZbyteRelay --network $CORE --config $CORE.config.js
-    npx hardhat zDeploy --api initDappStates --owner zbyt --network $DPLAT --config $DPLAT.config.js
-    export DPLAT=hhfuji
-    npx hardhat zDeploy --api dplat --owner zbyt --network $DPLAT --config $DPLAT.config.js
-    npx hardhat zDeploy --api dapp --owner comd --network $DPLAT --config $DPLAT.config.js
-    npx hardhat zDeploy --api initDplatStates --owner zbyt --network $DPLAT --config $DPLAT.config.js
-    npx hardhat zDeploy --api initCoreStateForDplat --owner zbyt --relay ZbyteRelay --network $CORE --config $CORE.config.js
-    npx hardhat zDeploy --api initDappStates --owner zbyt --network $DPLAT --config $DPLAT.config.js
+# fund comu
+npx hardhat dplatToken --api transferL1 --receiver 0x4C73728Eb0e83091Ec747e6e2Ead3504919B3f75 --amount 1 --sender dplat --network $CORE  --config $CONFIG
+# fund wrkr
+npx hardhat dplatToken --api transferL1 --receiver 0x3774Ea2aB7B94fa2eDf7E72a2f051fe1EdC520F2 --amount 1 --sender dplat --network $CORE  --config $CONFIG
 
-# terminal 5 relay events on hhmumbai
-rm -rf test/.result.json&& rm -rf test/.resultAck.json && export CORE=hhmumbai && export DPLAT=hhmumbai && npx hardhat run tasks/relayEventListener.js --network $CORE --config $CORE.config.js
-# terminal 6 relay events on hhfuji
-export CORE=hhmumbai && export DPLAT=hhfuji && npx hardhat run tasks/relayEventListener.js --network $DPLAT --config $DPLAT.config.js
 
-# terminal 3 deposit/withdraw
-    export CORE=hhmumbai
-    export DPLAT=hhmumbai
+# -----------------------------------------------
+export DAO_ADDRESS_CORE=0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174
+export DAO_ADDRESS_DPLAT=0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174
+npx hardhat clean && npx hardhat compile
+# term 3 Dplat contracts on core chain
+# run for hhmumbai-hhmumbai, hhmumbai-hhfuji
+zbyte_env hhmumbai hhmumbai.config.js hhmumbai hhmumbai.config.js
+npx hardhat zbyteToken --api balanceOf --account zbyt  --network $CORE  --config $CCONFIG
+npx hardhat zbyteToken --api balanceOf --account comu  --network $CORE  --config $CCONFIG
+# deploy dplat contracts and init states    
+#cd deployments/$CORE && shopt -s extglob && rm -rf -v !(ZbyteToken.json|ZbyteTokenForwarder.json) && cd -
+find ./deployments/$CORE -type f ! -name '*ZbyteToken*'  ! -name '.chainId' -delete
+npx hardhat zDeploy --api core --owner zbyt --network $CORE --config $CCONFIG
+npx hardhat zDeploy --api initCoreStates --owner zbyt --network $CORE --config $CCONFIG
 
-    export CORE=hhmumbai
-    export DPLAT=hhfuji
 
-    npx hardhat zbyteToken --api mint --receiver comp --amount 100 --owner zbyt  --network $CORE --config $CORE.config.js 
-    npx hardhat zbyteToken --api transfer --receiver comd --amount 100 --sender comp  --network $CORE  --config $CORE.config.js 
-    npx hardhat zbyteToken --api approve --approver comd --approvee ZbyteEscrow --amount 100 --network $CORE --config $CORE.config.js 
-    npx hardhat zbyteToken --api balanceOf --account comd   --network $CORE  --config $CORE.config.js 
-    npx hardhat zbyteToken --api balanceOf --account comp   --network $CORE  --config $CORE.config.js 
-    # comp = 0(Z), comd = 100(Z) 
+# term 3 Dplat contracts on dplat chain
+npx hardhat zDeploy --api dplat --owner zbyt --network $DPLAT --config $DCONFIG
+# < TODO: Review dplat init states >
+npx hardhat zDeploy --api initDplatStates --owner zbyt --network $DPLAT --config $DCONFIG
+npx hardhat zDeploy --api initCoreStateForDplat --owner zbyt --relay ZbyteRelay --network $CORE --config $CCONFIG
 
-    npx hardhat zbyteToken --api balanceOf --account comd   --network $CORE  --config $CORE.config.js 
-    npx hardhat zbyteVToken --api balanceOf --account comd   --network $DPLAT  --config $DPLAT.config.js 
-    npx hardhat zbyteEscrow --api deposit --relay ZbyteRelay --receiver comd --amount 100 --sender comd  --network $CORE --config $CORE.config.js 
-    npx hardhat zbyteToken --api balanceOf --account comd   --network $CORE  --config $CORE.config.js 
-    npx hardhat zbyteVToken --api balanceOf --account comd   --network $DPLAT  --config $DPLAT.config.js 
-    # comd = 0 (Z), 100 (vZ)
+# fund workers
+npx hardhat zbyteToken --api balanceOf --account wrkr --network $CORE  --config $CCONFIG
 
-    npx hardhat zbyteToken --api mint --receiver comp --amount 100 --owner zbyt  --network $CORE --config $CORE.config.js 
-    npx hardhat zbyteToken --api balanceOf --account comp  --network $CORE  --config $CORE.config.js 
-    npx hardhat zbyteToken --api approve --approver comp --approvee ZbyteEscrow --amount 100 --network $CORE --config $CORE.config.js 
-    npx hardhat zbyteEscrow --api deposit --relay ZbyteRelay --receiver ZbyteForwarderDplat --amount 100 --sender comp  --network $CORE --config $CORE.config.js 
-    npx hardhat zbyteToken --api balanceOf --account comp  --network $CORE  --config $CORE.config.js 
-    npx hardhat zbyteVToken --api balanceOf --account ZbyteForwarderDplat  --network $DPLAT  --config $DPLAT.config.js 
-    # comp = 0 (Z), ZbyteForwarderDplat = 100 (vZ)
+# transfer ownership
+npx hardhat zDeploy --api transferOwnershipCore --owner zbyt --newowner $DAO_ADDRESS_CORE --network $CORE --config $CCONFIG
+npx hardhat zDeploy --api transferOwnershipDplat --owner zbyt --newowner $DAO_ADDRESS_DPLAT --network $DPLAT --config $DCONFIG
 
-    npx hardhat zbyteEscrow --api withdraw --relay ZbyteRelay --paymaster ZbyteForwarderDplat --receiver comp --owner zbyt  --network $CORE --config $CORE.config.js 
-    npx hardhat zbyteToken --api balanceOf --account comp  --network $CORE  --config $CORE.config.js 
-    npx hardhat zbyteVToken --api balanceOf --account ZbyteForwarderDplat  --network $DPLAT  --config $DPLAT.config.js 
-    # comp = 100(Z), ZbyteForwarderDplat 0 (vZ)
+# start test cases
+npx hardhat test test/zbyte.case1.test.js --network $DPLAT --config $DCONFIG
 
-    # comd: 0(Z), 100(vZ) 0n that chain!
-    # comp: 100(Z), 0 (vZ)
-    # ZFwd: 0 (Z), 0 (vZ)
+# flags: user_is_ent, dapp_is_ent, prov_fund > amount, amount > charge, get_payer_view == actual_payer, 
+#          dapp_call_fails, dapp_call_reverts, #ent_has_policy, royalty
+# repeat for: prov_is_zblocks, prov_is_os_user
+# dynamic values: zbyte_price, l1_price, # burn_amt, minProc, postExec
+# check for: zbyte/vzbyte/l1 before and after for: user, fwdc, fwdd, escrow, burn, worker
 

@@ -81,13 +81,15 @@ async function approveAndDeposit(relay,user,receiver,amount,dPlatChain,worker) {
         const userAddress = await lib.getAddress(user);
         const receiverAddress = await lib.getAddress(receiver);
 
+        console.log("approveAndDeposit:"+relay+","+userAddress+","+receiverAddress+","+amount);
+
         const zbyteForwarderCoreContractWithSigner = await lib.getContractWithSigner('ZbyteForwarderCore', worker);
 
         let amountWei = ethers.parseUnits(amount, 18);
 
         let retApprove = await fwdExecCore.executeViaForwarder('ZbyteTokenForwarder', 'ZbyteToken', user, 'approve', [await lib.getAddress('ZbyteEscrow'), amountWei]);
         //let retExecuteApprove = await fwdExecCore.executeViaForwarder('ZbyteForwarderCore', 'ZbyteTokenForwarder', user, 'execute', [retApprove.req, retApprove.sign]);
-        let retDeposit = await fwdExecCore.executeViaForwarder('ZbyteForwarderCore', 'ZbyteEscrow', user, 'deposit', [constants.relayNameToId[relay], lib.nameToChainId(dPlatChain), receiverAddress, amountWei]);
+        let retDeposit = await fwdExecCore.executeViaForwarder('ZbyteForwarderCore', 'ZbyteEscrow', user, 'deposit', [constants.relayNameToId[relay], lib.nameToChainId(dPlatChain), receiverAddress, 0,amountWei]);
 
         const tx = await zbyteForwarderCoreContractWithSigner.approveAndDeposit(retApprove.req, retApprove.sign, retDeposit.req, retDeposit.sign, {gasLimit:10000000});
         await expect(tx.wait())
@@ -97,6 +99,8 @@ async function approveAndDeposit(relay,user,receiver,amount,dPlatChain,worker) {
         .to.emit(zbyteTokenContract,"Transfer")
         .withArgs(userAddress, await lib.getAddress('ZbyteEscrow'), amountWei);
         await expect(tx.wait())
+        return { function: "approveAndDeposit"
+               }
     } catch (error) {
         console.log(error);
         throw(error);

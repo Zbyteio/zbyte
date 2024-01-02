@@ -58,6 +58,9 @@ async function deployDplat() {
             facets: ['ZbyteDPlatBaseFacet', 'ZbyteDPlatPaymentFacet', 'ZbyteDPlatRegistrationFacet', 'ZbyteForwarderFacet', 'ZbyteDPlatRoyaltyFacet']
         })
     console.log('==ZbyteDPlat addr=', zbyteDPlat.address);
+    return {
+        function: "deployDplat"
+    }
 }
 
 module.exports = deployDplat

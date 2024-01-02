@@ -30,6 +30,9 @@ task("zDeploy", "Deploy contracts")
 .addParam("api", "API to call")
 .addOptionalParam("owner", "owner of the contract to be called")
 .addOptionalParam("relay","Relay name")
+.addOptionalParam("newowner", "new owner")
+.addOptionalParam("dapp","name of dapp")
+.addOptionalParam("deployer","deployer")
 .setAction(
     async (taskArgs, hre) => {
         let retval;
@@ -41,7 +44,7 @@ task("zDeploy", "Deploy contracts")
             retval = await deployDplat(taskArgs.owner);
         } else if(taskArgs.api == "dapp") {
             const deployDapp = require("../deploy/3_deploy_dapp.js");
-            retval = await deployDapp(taskArgs.owner);
+            retval = await deployDapp(taskArgs.dapp, taskArgs.deployer);
         } else if(taskArgs.api == "initCoreStates") {
             const init = require("../scripts/_initStates.js");
             retval = await init.initCoreStates(taskArgs.owner);
@@ -50,13 +53,38 @@ task("zDeploy", "Deploy contracts")
             retval = await init.initDplatStates(taskArgs.owner);
         } else if(taskArgs.api == "initDappStates") {
             const init = require("../scripts/_initStates.js");
-            retval = await init.initDappStates();
+            retval = await init.initDappStates(taskArgs.dapp, taskArgs.owner);
         } else if(taskArgs.api == "initCoreStateForDplat") {
             const init = require("../scripts/_initStates.js");
             const dplatChain = process.env.DPLAT
             retval = await init.initCoreStateForDplat(taskArgs.owner,dplatChain,taskArgs.relay);
+        } else if(taskArgs.api == "transferOwnershipCore") {
+            retval = {};
+            const init = require("../scripts/_initStates.js")
+
+            ret = await init.transferOwnership("ZbyteForwarderCore",taskArgs.owner, taskArgs.newowner);
+            retval["ZbyteForwardercore-transferOwnership"] = ret;
+            ret = await init.transferOwnership("ZbyteEscrow",taskArgs.owner, taskArgs.newowner);
+            retval["zbyteEscrow-transferOwnership"] = ret;
+            ret = await init.transferOwnership("RelayWrapper",taskArgs.owner, taskArgs.newowner);
+            retval["RelayWrapper-transferOwnership"] = ret;
+
+        } else if(taskArgs.api == "transferOwnershipDplat") {
+            retval = {};
+            const init = require("../scripts/_initStates.js")
+
+            ret = await init.transferOwnership("ZbyteRelay",taskArgs.owner, taskArgs.newowner);
+            retval["ZbyteRelay-transferOwnership"] = ret;
+            ret = await init.transferOwnership("ZbyteForwarderDPlat",taskArgs.owner, taskArgs.newowner);
+            retval["ZbyteForwardercore-transferOwnership"] = ret;
+            ret = await init.transferOwnership("ZbyteVToken",taskArgs.owner, taskArgs.newowner);
+            retval["ZbyteVToken-transferOwnership"] = ret;
+            ret = await init.transferOwnership("ZbyteDPlat",taskArgs.owner, taskArgs.newowner);
+            retval["ZbyteDplat-transferOwnership"] = ret;
+            ret = await init.transferOwnership("ZbytePriceFeeder",taskArgs.owner, taskArgs.newowner);
+            retval["ZbytePriceFeeder-transferOwnership"] = ret;
         }
-        //require("../scripts/lib.js").logResult(retval)
+        require("../scripts/lib.js").logResult(retval)
     });
 
 /*
@@ -197,6 +225,8 @@ task("zbyteVToken", "vZbyte Token Tasks")
     });
 
 /*
+npx hardhat zbyteDPlat --api registerProvider --provider prov --network $DPLAT  --config $DCONFIG
+npx hardhat zbyteDPlat --api registerProviderAgent --provideragent paag --network $DPLAT  --config $DCONFIG
 npx hardhat zbyteDPlat --api registerEnterprise --provideragent paag --enterprise "XYZ.com"   --network $DPLAT  --config $DCONFIG
 npx hardhat zbyteDPlat --api registerEnterpriseUser --enterpriseuser entd  --provideragent paag --enterprise "XYZ.com"   --network $DPLAT  --config $DCONFIG
 cat test/.result.json 
@@ -207,6 +237,7 @@ task("zbyteDPlat", "ZbyteDPlat Tasks")
 .addOptionalParam("enterpriseuser","enterprise user")
 .addOptionalParam("enterprisedapp","enterprise dapp")
 .addOptionalParam("provideragent","provider agent")
+.addOptionalParam("provider","provider")
 .addOptionalParam("limit","enterprise limit")
 .setAction(
     async (taskArgs, hre) => {
@@ -220,6 +251,10 @@ task("zbyteDPlat", "ZbyteDPlat Tasks")
             retval = await zbyteDPlat.registerDapp(taskArgs.provideragent, taskArgs.enterprisedapp, taskArgs.enterprise);
         } else if(taskArgs.api == "setEnterpriseLimit") {
             retval = await zbyteDPlat.setEnterpriseLimit(taskArgs.provideragent, taskArgs.enterprise, taskArgs.limit);
+        } else if(taskArgs.api == "registerProvider") {
+            retval = await zbyteDPlat.registerProvider(taskArgs.provider);
+        } else if(taskArgs.api == "registerProviderAgent") {
+            retval = await zbyteDPlat.registerProviderAgent(taskArgs.provider,taskArgs.provideragent);
         }
         require("../scripts/lib.js").logResult(retval)
     });
@@ -243,5 +278,26 @@ task("DStore", "SampleDstoreDapp Tasks")
         } else if(taskArgs.api == "dstoregl") {
             retval = await dStore.storeValueViaFwd(taskArgs.submitter, taskArgs.user, taskArgs.value);
         }
+        require("../scripts/lib.js").logResult(retval)
+    });
+
+
+task("DApp", "Dapp invoke Tasks")
+.addParam("api","api to call")
+.addOptionalParam("dapp", "dapp to call")
+.addOptionalParam("invoker", "invoker")
+.addOptionalParam("fnname", "function name")
+.addOptionalParam("fnparam","function params")
+.setAction(
+    async (taskArgs, hre) => {
+        const dapp = require("../scripts/_dapp.js")
+        let retval;
+        if(taskArgs.api == "invoke") {
+            retval = await dapp.invoke(taskArgs.dapp, taskArgs.invoker, taskArgs.fnname, taskArgs.fnparam);
+        } else if(taskArgs.api == "invokeView") {
+            retval = await dapp.invokeView(taskArgs.dapp, taskArgs.fnname, taskArgs.fnparam);
+        } else if(taskArgs.api == "invokeViaForwarder") {
+            retval = await dapp.invokeViaForwarder(taskArgs.dapp, taskArgs.invoker,taskArgs.fnname, taskArgs.fnparam);
+        } 
         require("../scripts/lib.js").logResult(retval)
     });

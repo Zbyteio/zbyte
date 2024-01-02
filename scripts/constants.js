@@ -53,6 +53,7 @@ const relayNameToId = {
     'Axelar':1
 }
 const logFile = "./test/.result.json"
+const latestFile = "./test/.latest.json"
 const logAckFile = "./test/.resultAck.json"
 const core = 'hhmumbai'
 
@@ -62,6 +63,7 @@ module.exports = {
     namedAccountToIndex:namedAccountToIndex,
     relayNameToId:relayNameToId,
     logFile:logFile,
+    latestFile:latestFile,
     logAckFile:logAckFile,
     core:core
 }

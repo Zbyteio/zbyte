@@ -47,7 +47,7 @@ async function getContractArtifacts(name) {
 
 async function getAddress(user) {
     if((user.startsWith('0x')) && (user.length == 42)) {
-            return ethers.utils.getAddress(user);
+            return ethers.getAddress(user);
     }
     const unNamedAccounts = await hre.getUnnamedAccounts();
     if (user in constants.namedAccountToIndex) {

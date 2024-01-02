@@ -110,14 +110,8 @@ async function initDplatStates(owner) {
         ret = await zbyteDPlat.setZbyteForwarderDPlat('zbyt');
         retval["zbyteFwdDPlat-setZbyteForwarderDPlat"] = ret;
 
-        ret = await zbyteDPlat.registerProvider('prov');
-        retval["zbyteFwdDPlat-registerProvider"] = ret;
-
-        ret = await zbyteDPlat.registerProviderAgent('prov', 'paag');
-        retval["zbyteFwdDPlat-registerProviderAgent"] = ret;
-
         ret = await zbyteDPlat.setZbytePriceFeeder('zbyt');
-        retval["zbyteFwdDPlat-registerProviderAgent"] = ret;
+        retval["zbyteFwdDPlat-setZbytePriceFeeder"] = ret;
 
         // zbyte relay set states
         ret = await zbyteRelay.addRelayApprovee('zbyt',owner);
@@ -166,16 +160,16 @@ async function initDplatStates(owner) {
 
 
         //zbytePriceFeeder states
-        ret = await zbytePriceFeeder.registerWorker(owner);
+        ret = await zbytePriceFeeder.registerWorker(owner,'wrkr');
         retval["zbytePriceFeeder-registerWorker"] = ret;
 
-        ret = await zbytePriceFeeder.setNativeEthEquivalentZbyteInGwei(owner, "41000000000");
+        ret = await zbytePriceFeeder.setNativeEthEquivalentZbyteInGwei('wrkr', "9000000000"); // 1L1=0.9$
         retval["zbytePriceFeeder-setNativeEthEquivalentZbyteInGwei"] = ret;
 
-        ret = await zbytePriceFeeder.setZbytePriceInGwei(owner, "50000000000");
+        ret = await zbytePriceFeeder.setZbytePriceInGwei('wrkr', "10000000000"); // 1DPLAT=0.1$
         retval["zbytePriceFeeder-setZbytePriceInGwei"] = ret;
 
-        ret = await zbytePriceFeeder.setBurnRateInMill(owner, "20");
+        ret = await zbytePriceFeeder.setBurnRateInMill(owner, "20"); // burn=0.02$
         retval["zbytePriceFeeder-setBurnRateInMill"] = ret;
 
         return retval;
@@ -185,13 +179,15 @@ async function initDplatStates(owner) {
     }
 }
 
-async function initDappStates() {
+async function initDappStates(dapp, owner) {
     if (!(lib.isDplatChain())) {
         console.log("Fail: current chain:",hre.network.name);
         return;
     }
     try {
-        let retval = {};
+        let retval = {
+            function: "initDappStates"
+        };
 
         return retval;
     } catch (error) {
@@ -200,9 +196,29 @@ async function initDappStates() {
     }
 }
 
+async function transferOwnership(cname, owner,newOwner) {
+    try {
+        let contractWithSigner = await lib.getContractWithSigner(cname, owner);
+
+        let ownerAddress = await lib.getAddress(owner);
+        let newOwnerAddress = await lib.getAddress(newOwner);
+        console.log("transferOwnership: " + cname + "," + ownerAddress + "," + newOwnerAddress);
+        const tx = await contractWithSigner.transferOwnership(newOwnerAddress);
+        await expect(tx.wait())
+                .to.emit(contractWithSigner,"OwnershipTransferred")
+                .withArgs(ownerAddress,newOwnerAddress);
+        return {function: "transferOwnership",
+                prevowner: ownerAddress,
+                newowner: newOwnerAddress}
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 module.exports = {
     initCoreStates: initCoreStates,
     initCoreStateForDplat:initCoreStateForDplat,
     initDplatStates:initDplatStates,
-    initDappStates:initDappStates
+    initDappStates:initDappStates,
+    transferOwnership:transferOwnership
 }

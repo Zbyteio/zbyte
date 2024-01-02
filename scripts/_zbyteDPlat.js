@@ -102,7 +102,6 @@ async function registerProviderAgent(provider, providerAgent) {
         console.log("registerProviderAgent: " + providerAgentAddress);
         const tx = await contractWithSigner.registerProviderAgent(providerAgentAddress);
 
-        console.log("registerProviderAgent: ", tx.hash);
         await expect(tx.wait())
         .to.emit(contractWithSigner,"ZbyteDPlatProviderAgentRegistered")
         .withArgs(providerAgentAddress,providerAddress);
@@ -120,15 +119,17 @@ async function registerEnterprise(providerAgent, enterprise) {
         let contractWithSigner = await lib.getContractWithSigner(contractName, providerAgent);
         var entHash = keccak256(toUtf8Bytes(enterprise)).slice(0, 10)
         const providerAgentAddress = await lib.getAddress(providerAgent);
-        var providerAddress = await lib.getAddress('prov');
-        console.log("registerEnterprise: ", entHash, providerAgentAddress);
+        const providerAddress = await isProviderAgentRegistered(providerAgent);
+
+        console.log("registerEnterprise: ", entHash, providerAgentAddress,providerAddress.providerAddress);
 
         const tx = await contractWithSigner.registerEnterprise(entHash);
         await expect(tx.wait())
         .to.emit(contractWithSigner,"ZbyteDPlatEnterpriseRegistered")
-        .withArgs(entHash,providerAddress);
+        .withArgs(entHash,providerAddress.providerAddress);
         return { "function": "registerEnterprise",
-                 "enterprise": entHash
+                 "enterprise": entHash,
+                 "providerAddress": providerAddress.providerAddress
                }
     } catch (error) {
         console.log(error);
@@ -248,6 +249,50 @@ async function setZbytePriceFeeder(owner) {
     }
 }
 
+async function isProviderAgentRegistered(agent) {
+    try {
+        let contract = await lib.getContract(contractName);
+        const agentAddress = await lib.getAddress(agent);
+        console.log("isProviderAgentRegistered: " + agentAddress);
+
+        const providerAddress = await contract.isProviderAgentRegistered(agentAddress);
+
+        return { function: "isProviderAgentRegistered",
+                agentAddress : agentAddress,
+                providerAddress: providerAddress
+               }
+    } catch (error) {
+        console.log(error);
+        throw(error);
+    }
+}
+
+async function getPayer(user,dapp,fn,amount) {
+    try {
+        let cArtifacts = await lib.getContractArtifacts(dapp);
+        let ABI = cArtifacts.abi;
+        let iface = new ethers.Interface(ABI);
+        const fnSig = iface.getFunction(fn).selector
+
+        let contract = await lib.getContract(contractName);
+        const userAddress = await lib.getAddress(user);
+        const dappAddress = await lib.getAddress(dapp);
+        const amountWei = ethers.parseUnits(amount,18);
+        console.log("getPayer: " + userAddress, dappAddress,fnSig,amountWei);
+
+        const ret = await contract.getPayer(userAddress,dappAddress,fnSig,amountWei);
+
+        return { function: "getPayer",
+                ent : ret[0],
+                limit: ret[1],
+                provider: ret[2]
+               }
+    } catch (error) {
+        console.log(error);
+        throw(error);
+    }
+}
+
 module.exports = {
     "setZbyteVToken":setZbyteVToken,
     "setZbyteValueInNativeEthGwei":setZbyteValueInNativeEthGwei,
@@ -259,5 +304,7 @@ module.exports = {
     "registerDapp":registerDapp,
     "setEnterpriseLimit":setEnterpriseLimit,
     "setZbyteBurnFactor":setZbyteBurnFactor,
-    "setZbytePriceFeeder":setZbytePriceFeeder
+    "setZbytePriceFeeder":setZbytePriceFeeder,
+    isProviderAgentRegistered:isProviderAgentRegistered,
+    getPayer:getPayer
 }
