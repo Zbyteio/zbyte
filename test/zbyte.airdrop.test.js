@@ -157,6 +157,10 @@ describe("Zbyte airdrop test (call only via fwd)", function () {
         expect(verifyResult({function:"deployDapp",dapp: dapp}, retval)).to.eq(true);
     })
     it("init Dapp States", async function () {
+        const invokeDapp = require("../scripts/_dapp.js")
+        retval = await invokeDapp.setTrustedForwarder(deployer,'ZbyteForwarderDPlat');
+        expect(verifyResult({function:"setTrustedForwarder"}, retval)).to.eq(true);
+
         const initDapp = require("../scripts/_initStates.js");
         retval = await initDapp.initDappStates(dapp, deployer);
         expect(verifyResult({function:"initDappStates"}, retval)).to.eq(true);
