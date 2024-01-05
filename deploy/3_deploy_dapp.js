@@ -41,14 +41,13 @@ async function deployDapp(dapp,depl) {
             })
         console.log('==ZbyteDUSDT addr=', ZbyteDUSDT.address);
 
-        let fwdDplatAddress = await lib.getAddress('ZbyteForwarderDPlat');
         let dusdtAddress = ZbyteDUSDT.address;
         let dusdtPerToken = ethers.parseUnits('1',18); // change for mainnet
         let distributorAddress = await lib.getAddress('prov'); 
         ZbyteAirdropNFT = await hre.deployments.deploy(
             'ZbyteAirdropNFT', {
                 from:deployer,
-                args: [fwdDplatAddress,dusdtAddress,dusdtPerToken,
+                args: [dusdtAddress,dusdtPerToken,
                             distributorAddress,"https://zbyte.io/"],
                 gasLimit: 6e6,
                 deterministicDeployment: false

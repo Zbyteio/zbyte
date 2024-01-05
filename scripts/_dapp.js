@@ -112,9 +112,9 @@ async function invokeViaForwarder(dapp,invoker,functionName,functionParams) {
 
 }
 
-async function setTrustedForwarder(owner,forwarder) {
+async function setTrustedForwarder(dappName, owner,forwarder) {
     try {
-        let contractWithSigner = await lib.getContractWithSigner(contractName, owner);
+        let contractWithSigner = await lib.getContractWithSigner(dappName, owner);
         let forwarderAddress = await lib.getAddress(forwarder);
         console.log("setTrustedForwarder: " + forwarderAddress,owner);
         const tx = await contractWithSigner.setTrustedForwarder(forwarderAddress);
