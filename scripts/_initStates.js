@@ -91,10 +91,10 @@ async function initDplatStates(owner) {
         */
 
         // set forwarder dplat states
-        ret = await zbyteFwdDPlat.setMinProcessingGas('zbyt', 42000);
+        ret = await zbyteFwdDPlat.setMinProcessingGas('zbyt', 25000);
         retval["zbyteFwdDPlat-setMinProcessingGas"] = ret;
 
-        ret = await zbyteFwdDPlat.setPostExecGas('zbyt', 70000);
+        ret = await zbyteFwdDPlat.setPostExecGas('zbyt', 55000);
         retval["zbyteFwdDPlat-setPostExecGas"] = ret;
 
         ret = await zbyteFwdDPlat.setZbyteDPlat('zbyt');

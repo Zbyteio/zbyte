@@ -44,7 +44,7 @@ contract ZbyteDPlatRoyaltyFacet is ZbyteContextDiamond {
      * @return uint256 The royalty fee in Zbyte.
      * @return address The address of the payer.
      */
-    function getRoyaltFeeInZbyte(
+    function getRoyaltyFeeInZbyte(
         address dapp_,
         address user_,
         bytes4 functionSig_,

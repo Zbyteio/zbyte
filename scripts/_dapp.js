@@ -78,6 +78,7 @@ async function invokeView(dapp,functionName,functionParams) {
         let ret = await _makeCallView(req);
         console.log(ret);
         return {function: "invokeView",
+                
                 dapp: dappAddress,
                 fnName: functionName,
                 fnParams: functionParams,
@@ -105,7 +106,8 @@ async function invokeViaForwarder(dapp,invoker,functionName,functionParams) {
                 dapp: dappAddress,
                 invoker: invokerAddress,
                 fnName: functionName,
-                fnParams: functionParams}
+                fnParams: functionParams,
+                txHash: receipt.hash}
     } catch (error) {
         console.log(error);
     }

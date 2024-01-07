@@ -118,10 +118,10 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
         (_feePayerEnterprise, _currentEnterprisePayLimit, _feePayer) = getPayer(user_, dapp_, functionSig_, _infraFee + _dPlatFee);
 
         LibDiamond.DiamondStorage storage ds = LibDiamond.diamondStorage();
-        bytes4 functionSelector = bytes4(keccak256("getRoyaltFeeInZbyte(address,address,bytes4,address,uint256)"));
+        bytes4 functionSelector = bytes4(keccak256("getRoyaltyFeeInZbyte(address,address,bytes4,address,uint256)"));
         LibDiamond.FacetAddressAndPosition memory _facetAddressAndPosition = ds.selectorToFacetAndPosition[functionSelector];
-        bytes memory getRoyaltFeeInZbyteCall = abi.encodeWithSelector(functionSelector, dapp_,user_,functionSig_,_feePayer,_infraFee + _dPlatFee);
-        (bool _success, bytes memory _result) = address(_facetAddressAndPosition.facetAddress).delegatecall(getRoyaltFeeInZbyteCall);
+        bytes memory getRoyaltyFeeInZbyteCall = abi.encodeWithSelector(functionSelector, dapp_,user_,functionSig_,_feePayer,_infraFee + _dPlatFee);
+        (bool _success, bytes memory _result) = address(_facetAddressAndPosition.facetAddress).delegatecall(getRoyaltyFeeInZbyteCall);
 
         if(_success) {
             (_royaltyFee, _royaltyReceiver, _royaltyPayer) = abi.decode(_result, (uint256,address,address));
@@ -180,9 +180,11 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
         uint256 _refundEth = gasConsumedEth_ > preChargeEth_ ? 0 : preChargeEth_ - gasConsumedEth_;
 
         uint256 _infraFeePreCharge = IZbytePriceFeeder(_dsb.zbytePriceFeeder).convertEthToEquivalentZbyte(preChargeEth_);
+        uint256 _infraFeeCharge;
+        uint256 _infraFeePreChargeRefund;
 
         if(_chargeEth != 0) {
-            uint256 _infraFeeCharge = IZbytePriceFeeder(_dsb.zbytePriceFeeder).convertEthToEquivalentZbyte(_chargeEth);
+            _infraFeeCharge = IZbytePriceFeeder(_dsb.zbytePriceFeeder).convertEthToEquivalentZbyte(_chargeEth);
             ZbyteVToken(payable(_dsb.zbyteVToken)).transfer(msg.sender, _infraFeePreCharge);
             ZbyteVToken(payable(_dsb.zbyteVToken)).transferFrom(payer_, msg.sender, _infraFeeCharge);
             if(_preExecStates.enterprise != bytes4(0)) {
@@ -193,7 +195,7 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
         }
 
         if(_refundEth != 0) {
-            uint256 _infraFeePreChargeRefund = IZbytePriceFeeder(_dsb.zbytePriceFeeder).convertEthToEquivalentZbyte(_refundEth);
+            _infraFeePreChargeRefund = IZbytePriceFeeder(_dsb.zbytePriceFeeder).convertEthToEquivalentZbyte(_refundEth);
             ZbyteVToken(payable(_dsb.zbyteVToken)).transfer(payer_, _infraFeePreChargeRefund);
             ZbyteVToken(payable(_dsb.zbyteVToken)).transfer(msg.sender, _infraFeePreCharge - _infraFeePreChargeRefund);
             if(_preExecStates.enterprise != bytes4(0)) {
@@ -203,6 +205,6 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
             _infraFee = _infraFeePreCharge - _infraFeePreChargeRefund;
         }
 
-        emit PostExecFees(payer_, _infraFeePreCharge, _chargeEth, _refundEth);
+        emit PostExecFees(payer_, _infraFee, _infraFeeCharge, _refundEth);
     }
 }

@@ -102,6 +102,28 @@ function chainIdToName(chainId) {
     }
 }
 
+async function getTransactionReceipt(txHash) {
+    return await ethers.provider.getTransactionReceipt(txHash);
+}
+
+async function parseSpecificEvent(txHash, contract, eventName) {
+    const receipt = await getTransactionReceipt(txHash);
+    const cArtifacts = await getContractArtifacts(contract);
+    const interface = new ethers.Interface(cArtifacts.abi);
+    const eventInterface = interface.getEvent(eventName);
+
+    if (receipt && receipt.logs) {
+        for(var i = 0; i < receipt.logs.length; i++){
+            if (receipt.logs[i].topics[0] === eventInterface.topicHash) {
+                console.log(contract, eventName, interface.parseLog(receipt.logs[i]).args);
+                return interface.parseLog(receipt.logs[i]).args;
+            }
+        }
+    } else {
+      console.log('No logs found for the transaction.');
+    }
+}
+
 function _logData(newData,file) {
     let data;
     if(fs.existsSync(file)) {
@@ -139,5 +161,7 @@ module.exports = {
     chainIdToName:chainIdToName,
     logResult:logResult,
     logAck:logAck,
-    transferL1:transferL1
+    transferL1:transferL1,
+    getTransactionReceipt:getTransactionReceipt,
+    parseSpecificEvent:parseSpecificEvent
 }

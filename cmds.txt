@@ -1,8 +1,9 @@
 # term1 - start hhmumbai
 dplat_env hhmumbai hhmumbai.config.js
-cd /home/main/dropbox/zbyte/zbyte_release/dplat
+#cd /home/main/dropbox/zbyte/zbyte_release/dplat
 npx hardhat clean && npx hardhat compile
-npx hardhat node --fork https://rpc-mumbai.maticvigil.com/ --port 4545 --config hhmumbai.config.js
+npx hardhat node --fork https://polygon-mumbai.infura.io/v3/c4adc113c65d419fa4aa11d536d51e2c --port 4545 --config hhmumbai.config.js
+
 
 # term2 - deploy DPLAT and transfer to ZBYTE_MAIN_WALLET
 dplat_env hhmumbai hhmumbai.config.js
@@ -32,10 +33,10 @@ npx hardhat dplatToken --api transferL1 --receiver 0x3774Ea2aB7B94fa2eDf7E72a2f0
 # -----------------------------------------------
 export DAO_ADDRESS_CORE=0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174
 export DAO_ADDRESS_DPLAT=0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174
+zbyte_env hhmumbai hhmumbai.config.js hhmumbai hhmumbai.config.js
 npx hardhat clean && npx hardhat compile
 # term 3 Dplat contracts on core chain
 # run for hhmumbai-hhmumbai, hhmumbai-hhfuji
-zbyte_env hhmumbai hhmumbai.config.js hhmumbai hhmumbai.config.js
 npx hardhat zbyteToken --api balanceOf --account zbyt  --network $CORE  --config $CCONFIG
 npx hardhat zbyteToken --api balanceOf --account comu  --network $CORE  --config $CCONFIG
 # deploy dplat contracts and init states    

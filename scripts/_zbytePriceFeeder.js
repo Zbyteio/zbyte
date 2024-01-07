@@ -42,6 +42,21 @@ async function nativeEthEquivalentZbyteInGwei() {
     }
 }
 
+async function convertEthToEquivalentZbyte(ethAmount) {
+    try {
+        let contract = await lib.getContract(contractName);
+
+        const ret = await contract.convertEthToEquivalentZbyte(ethAmount);
+
+        return { function: "convertEthToEquivalentZbyte",
+                 "value": ret
+               }
+    } catch (error) {
+        console.log(error);
+        throw(error);
+    }
+}
+
 async function setZbytePriceInGwei(owner, zbytePriceInGwei_) {
     try {
         let contractWithSigner = await lib.getContractWithSigner(contractName, owner);
@@ -101,5 +116,6 @@ module.exports = {
 "setNativeEthEquivalentZbyteInGwei":setNativeEthEquivalentZbyteInGwei,
 "setBurnRateInMill":setBurnRateInMill,
 "registerWorker":registerWorker,
-nativeEthEquivalentZbyteInGwei:nativeEthEquivalentZbyteInGwei
+nativeEthEquivalentZbyteInGwei:nativeEthEquivalentZbyteInGwei,
+convertEthToEquivalentZbyte:convertEthToEquivalentZbyte
 }

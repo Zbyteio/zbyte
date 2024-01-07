@@ -33,6 +33,8 @@ contract ZbyteVToken is Ownable, Pausable, ERC20, AuthSimple, IvERC20 {
     event PaymasterAddressSet(address);
     /// @notice event (0xcdb1d336) ZbyteDPlat address is set
     event ZbyteDPlatAddressSet(address);
+    /// @notice event (0x5cedee88) Allow user swap is set
+    event AllowUserSwapSet(bool);
 
     // Address to transfer 'burnt' tokens
     address private burner;
@@ -40,6 +42,8 @@ contract ZbyteVToken is Ownable, Pausable, ERC20, AuthSimple, IvERC20 {
     address private paymaster;
     // Address of the DPlat contract
     address private dplat;
+    // Allow users for swaping vZBYT back to ZBYT
+    bool allowUserSwap;
 
     /// @notice ZBYT ERC20 constructor
     /// @param burner_ Burn account address (Tokens are locked here, not destroyed)
@@ -77,6 +81,13 @@ contract ZbyteVToken is Ownable, Pausable, ERC20, AuthSimple, IvERC20 {
         dplat = dplat_;
 
         emit ZbyteDPlatAddressSet(dplat_);
+    }
+
+    /// @notice Set allow user swap from vZBYT to ZBYT
+    /// @param allowUserSwap_ DPlat contract address
+    function setAllowUserSwap(bool allowUserSwap_) public onlyOwner {
+        allowUserSwap = allowUserSwap_;
+        emit AllowUserSwapSet(allowUserSwap_);
     }
 
     /// @notice Transfer vERC20 from caller's account to receiver's account
@@ -140,7 +151,7 @@ contract ZbyteVToken is Ownable, Pausable, ERC20, AuthSimple, IvERC20 {
         external
         requiresAuth whenNotPaused
         returns(uint256) {
-        if(!((from_ == paymaster) || (from_ == burner))) {
+        if(! ( (from_ == paymaster) || (from_ == burner) || (allowUserSwap) ) ) {
             revert InvalidDestroyAddress(from_,paymaster,burner);
         }
         uint256 _amount = this.balanceOf(from_);
