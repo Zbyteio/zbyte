@@ -693,15 +693,14 @@ describe("Zbyte getPayer test", function () {
 })
 
 
-/*
 describe("Zbyte case8 test", function () {
     const dapp = 'SampleDstoreDapp'
-    const deployer = 'entp'
-    const invoker = 'entd'
+    const deployer = 'zblp'
+    const invoker = 'paag'
     const fnnameWrite = 'storeValue'
     const fnWriteparam = "14";
     const fnnameVerify = 'storedValue'
-    const fnVerifyParam = "0x000000000000000000000000000000000000000000000000000000000000000d"
+    const fnVerifyParam = "0x000000000000000000000000000000000000000000000000000000000000000e"
 
     const relay = "ZbyteRelay"
     const sender = 'zbyt'
@@ -730,13 +729,13 @@ describe("Zbyte case8 test", function () {
         var balances = await readBalances([deployer,invoker])
         expect(ethers.toBigInt(ethers.parseUnits(balances[receiver]['balVZ'],18)))
             .to.greaterThanOrEqual(ethers.toBigInt(ethers.parseUnits(amount,18)));
+        console.log(balances)
     })
 
     it("set the deployer as payer", async function () {
         const zbyteDPlat = require("../scripts/_zbyteDPlat.js")
         await zbyteDPlat.registerProvider(deployer);
-        await zbyteDPlat.registerEnterprise(deployer, "enterprise dev");
-        await zbyteDPlat.deregisterEnterpriseUser(deployer,invoker);
+        await zbyteDPlat.registerEnterprise(deployer, "enterprise XYZ");
     })
 
     it("store value ent user open source dapp", async function () {
@@ -744,25 +743,23 @@ describe("Zbyte case8 test", function () {
         const priceFeeder = require("../scripts/_zbytePriceFeeder.js");
         const zbyteDPlat = require("../scripts/_zbyteDPlat.js")
 
-        /// Provider should be the registered user's enterprise provider
         var ret = await zbyteDPlat.getPayer(invoker, 'SampleDstoreDapp', 'storeValue', '10');
         expect(ret.provider).to.eq(await lib.getAddress(invoker));
 
-        await zbyteDPlat.registerEnterpriseUser(deployer, invoker,"enterprise dev");
+        await zbyteDPlat.registerEnterpriseUser(deployer, invoker,"enterprise XYZ");
         ret = await zbyteDPlat.getPayer(invoker, 'SampleDstoreDapp', 'storeValue', '10');
         expect(ret.provider).to.eq(await lib.getAddress(invoker));
 
-        await zbyteDPlat.setEnterpriseLimit(deployer,"enterprise dev",amount);
+        await zbyteDPlat.setEnterpriseLimit(deployer,"enterprise XYZ",amount);
         ret = await zbyteDPlat.getPayer(invoker, 'SampleDstoreDapp', 'storeValue', '10');
         expect(ret.provider).to.eq(await lib.getAddress(deployer));
 
         ret = await zbyteDPlat.getPayer("hold", 'SampleDstoreDapp', 'storeValue', '10');
         expect(ret.provider).to.eq(await lib.getAddress("hold"));
 
-        await zbyteDPlat.registerDapp(deployer,'SampleDstoreDapp','enterprise dev');
+        await zbyteDPlat.registerDapp(deployer,'SampleDstoreDapp','enterprise XYZ');
         ret = await zbyteDPlat.getPayer("comu", 'SampleDstoreDapp', 'storeValue', '10');
         expect(ret.provider).to.eq(await lib.getAddress(deployer));
         console.log("getPayer ret: ", ret);
     })
 })
-*/
