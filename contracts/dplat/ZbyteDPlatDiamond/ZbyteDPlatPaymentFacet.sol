@@ -100,6 +100,7 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
         bytes4 functionSig_,
         uint256 ethChargeAmount_
     ) public onlyForwarder returns(address) {
+        LibDPlatBase._setPreExecStates(bytes4(0), 0, address(0), address(0), address(0), bytes4(0));
         LibDPlatBase.DiamondStorage storage _dsb = LibDPlatBase.diamondStorage();
         uint256 _dPlatFee = IZbytePriceFeeder(_dsb.zbytePriceFeeder).getDPlatFeeInZbyte();
         uint256 _infraFee = IZbytePriceFeeder(_dsb.zbytePriceFeeder).convertEthToEquivalentZbyte(ethChargeAmount_);
@@ -110,6 +111,7 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
         bytes4  _feePayerEnterprise;
         uint256 _currentEnterprisePayLimit;
         address _feePayer;
+        uint256 _enterpriseEligibilityGas;
         (_feePayerEnterprise, _currentEnterprisePayLimit, _feePayer) = getPayer(user_, dapp_, functionSig_, _infraFee + _dPlatFee);
 
         LibDiamond.DiamondStorage storage ds = LibDiamond.diamondStorage();
@@ -125,16 +127,18 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
         }
 
         uint256 _totalCharge = _infraFee + _dPlatFee;
+        address _enterprisePolicy;
         if(_infraFee != 0 || _dPlatFee != 0 || _royaltyFee != 0) {
             if(_feePayerEnterprise != bytes4(0)) {
                 if (_royaltyPayer == _feePayer) 
                     _totalCharge += _royaltyFee;
 
-                address _enterprisePolicy = LibDPlatRegistration._doesEnterpriseHavePolicy(_feePayerEnterprise);
+                _enterprisePolicy = LibDPlatRegistration._doesEnterpriseHavePolicy(_feePayerEnterprise);
+                uint256 _startGas = gasleft();
                 if(_enterprisePolicy != address(0)) {
-                    IEnterprisePaymentPolicy(_enterprisePolicy).updateEnterpriseEligibility(user_, dapp_, functionSig_, _totalCharge);
+                    IEnterprisePaymentPolicy(_enterprisePolicy).updateEnterpriseEligibility(user_, dapp_, functionSig_, int256(_totalCharge));
                 }
-
+                _enterpriseEligibilityGas = _startGas - gasleft();
                 LibDPlatRegistration._setEntepriseLimit(_feePayerEnterprise, _currentEnterprisePayLimit - (_totalCharge));
             }
             if(_infraFee != 0)
@@ -145,7 +149,7 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
                 ZbyteVToken(payable(_dsb.zbyteVToken)).transferFrom(_royaltyPayer, _royaltyReceiver, _royaltyFee);
         }
 
-        LibDPlatBase._setPreExecStates(_feePayerEnterprise);
+        LibDPlatBase._setPreExecStates(_feePayerEnterprise, _enterpriseEligibilityGas, _enterprisePolicy, user_, dapp_, functionSig_);
         emit PreExecFees(_feePayer, _feePayerEnterprise, _infraFee, _dPlatFee, _royaltyFee);
         return _feePayer;
     }
@@ -171,6 +175,8 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
         if (executeResult_) {
             gasConsumedEth_ += reqValue_;
         }       
+        gasConsumedEth_ += _preExecStates.enterpriseEligibilityGas * tx.gasprice;
+        
         uint256 _chargeEth = gasConsumedEth_ >= preChargeEth_ ? gasConsumedEth_ - preChargeEth_ : 0;
         uint256 _refundEth = gasConsumedEth_ > preChargeEth_ ? 0 : preChargeEth_ - gasConsumedEth_;
 
@@ -182,10 +188,6 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
             _infraFeeCharge = IZbytePriceFeeder(_dsb.zbytePriceFeeder).convertEthToEquivalentZbyte(_chargeEth);
             ZbyteVToken(payable(_dsb.zbyteVToken)).transfer(msg.sender, _infraFeePreCharge);
             ZbyteVToken(payable(_dsb.zbyteVToken)).transferFrom(payer_, msg.sender, _infraFeeCharge);
-            if(_preExecStates.enterprise != bytes4(0)) {
-                uint256 _currentEnterpriseLimit = LibDPlatRegistration._getEnterpriseLimit(_preExecStates.enterprise);
-                LibDPlatRegistration._setEntepriseLimit(_preExecStates.enterprise, _currentEnterpriseLimit - (_infraFeeCharge));
-            }
             _infraFee = _infraFeePreCharge + _infraFeeCharge;
         }
 
@@ -193,13 +195,25 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
             _infraFeePreChargeRefund = IZbytePriceFeeder(_dsb.zbytePriceFeeder).convertEthToEquivalentZbyte(_refundEth);
             ZbyteVToken(payable(_dsb.zbyteVToken)).transfer(payer_, _infraFeePreChargeRefund);
             ZbyteVToken(payable(_dsb.zbyteVToken)).transfer(msg.sender, _infraFeePreCharge - _infraFeePreChargeRefund);
-            if(_preExecStates.enterprise != bytes4(0)) {
-                uint256 _currentEnterpriseLimit = LibDPlatRegistration._getEnterpriseLimit(_preExecStates.enterprise);
-                LibDPlatRegistration._setEntepriseLimit(_preExecStates.enterprise, _currentEnterpriseLimit + (_infraFeePreChargeRefund));
-            }
             _infraFee = _infraFeePreCharge - _infraFeePreChargeRefund;
         }
 
+        if (_preExecStates.enterprise != bytes4(0)) {
+                uint256 _currentEnterpriseLimit = LibDPlatRegistration._getEnterpriseLimit(_preExecStates.enterprise);
+                if(_chargeEth != 0) {
+                    LibDPlatRegistration._setEntepriseLimit(_preExecStates.enterprise, _currentEnterpriseLimit - (_infraFeeCharge));
+                    if (_preExecStates.enterprisePolicy != address(0)) {
+                        IEnterprisePaymentPolicy(_preExecStates.enterprisePolicy).updateEnterpriseEligibility(_preExecStates.user, _preExecStates.dapp, _preExecStates.functionSig, int256(_infraFeeCharge));
+                    }
+                }
+
+                if(_refundEth != 0) {
+                    LibDPlatRegistration._setEntepriseLimit(_preExecStates.enterprise, _currentEnterpriseLimit + (_infraFeePreChargeRefund));
+                    if (_preExecStates.enterprisePolicy != address(0)) {
+                        IEnterprisePaymentPolicy(_preExecStates.enterprisePolicy).updateEnterpriseEligibility(_preExecStates.user, _preExecStates.dapp, _preExecStates.functionSig, -int256(_infraFeePreChargeRefund));
+                    }
+                }
+        }
         emit PostExecFees(payer_, _infraFee, _infraFeeCharge, _refundEth);
     }
 }

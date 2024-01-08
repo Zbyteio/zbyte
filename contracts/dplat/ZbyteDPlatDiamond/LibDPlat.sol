@@ -17,6 +17,11 @@ library LibDPlatBase {
     /// @notice To record PreExecute states 
     struct PreExecStates {
         bytes4 enterprise;
+        address enterprisePolicy;
+        uint256 enterpriseEligibilityGas;
+        address user;
+        address dapp;
+        bytes4 functionSig;
     }
 
     /// @notice Diamond storage for DPlat Base struct
@@ -57,9 +62,14 @@ library LibDPlatBase {
     * @dev Sets the pre-execution states with the specified enterprise identifier.
     * @param enterprise_ The enterprise identifier to be set in the pre-execution states.
     */
-    function _setPreExecStates(bytes4 enterprise_) internal {
+    function _setPreExecStates(bytes4 enterprise_, uint256 enterpriseEligibilityGas_, address enterprisePolicy_, address user_, address dapp_, bytes4 functionSig_) internal {
         DiamondStorage storage _dsb = diamondStorage();
         _dsb.preExecuteStates.enterprise = enterprise_;
+        _dsb.preExecuteStates.enterpriseEligibilityGas = enterpriseEligibilityGas_;
+        _dsb.preExecuteStates.enterprisePolicy = enterprisePolicy_;
+        _dsb.preExecuteStates.user = user_;
+        _dsb.preExecuteStates.dapp = dapp_;
+        _dsb.preExecuteStates.functionSig = functionSig_;
     }
 
     /**
