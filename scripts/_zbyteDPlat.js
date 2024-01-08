@@ -314,6 +314,27 @@ async function deregisterDapp(providerAgent, dapp) {
     }
 }
 
+async function deregisterEnterpriseUser(providerAgent, user) {
+    try {
+        let contractWithSigner = await lib.getContractWithSigner(contractName, providerAgent);
+
+        const userAddress = await lib.getAddress(user);
+        console.log("deregisterEnterpriseUser: ", userAddress);
+
+        const tx = await contractWithSigner.deregisterEnterpriseUser(userAddress);
+        await expect(tx.wait())
+        .to.emit(contractWithSigner,"ZbyteDPlatEnterpriseUserRegistered")
+        .withArgs(userAddress, "0x00000000");
+        return { "function": "deregisterEnterpriseUser",
+                 "dapp": userAddress,
+                 "enterprise": "0x00000000"
+               }
+    } catch (error) {
+        console.log(error);
+        throw(error);
+    }
+}
+
 module.exports = {
     "setZbyteVToken":setZbyteVToken,
     "setZbyteValueInNativeEthGwei":setZbyteValueInNativeEthGwei,
@@ -328,5 +349,6 @@ module.exports = {
     "setZbytePriceFeeder":setZbytePriceFeeder,
     isProviderAgentRegistered:isProviderAgentRegistered,
     getPayer:getPayer,
-    deregisterDapp:deregisterDapp
+    deregisterDapp:deregisterDapp,
+    deregisterEnterpriseUser:deregisterEnterpriseUser
 }

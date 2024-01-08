@@ -89,11 +89,6 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
         return (bytes4(0), uint256(0), user_);
     }
 
-
-    function _chargeAndUpdate() internal {
-
-    }
-
     /// @notice Pre Execution (Finds the payer and charges in ZbyteVToken)
     /// @param dapp_ The Dapp's address.
     /// @param user_ The user's address.

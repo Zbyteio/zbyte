@@ -70,6 +70,9 @@ describe("Zbyte case1 test", function () {
         expect(verifyResult({function:"deployDapp",dapp: dapp}, retval)).to.eq(true);
     })
     it("init Dapp States", async function () {
+        const invokeDapp = require("../scripts/_dapp.js")
+        retval = await invokeDapp.setTrustedForwarder(dapp,deployer,'ZbyteForwarderDPlat');
+        expect(verifyResult({function:"setTrustedForwarder"}, retval)).to.eq(true);
         const initDapp = require("../scripts/_initStates.js");
         retval = await initDapp.initDappStates(dapp, deployer);
         expect(verifyResult({function:"initDappStates"}, retval)).to.eq(true);
@@ -91,15 +94,18 @@ describe("Zbyte case1 test", function () {
     })
 })
 
+/* deployer deploys dapp, invoker invokes fnnameWrite via ZbyteFwdDPlat but does not have vZBYT 
+        call fails
+*/
 describe("Zbyte case2 test", function () {
-    /* deployer deploys dapp, invoker invokes fnnameWrite via ZbyteFwdDPlat but does not have vZBYT */
+
     const dapp = 'SampleDstoreDapp'
     const deployer = 'comd'
     const invoker = 'comu'
     const fnnameWrite = 'storeValue'
     const fnWriteparam = "11";
     const fnnameVerify = 'storedValue'
-    const fnVerifyParam = "0x000000000000000000000000000000000000000000000000000000000000000b"
+    const fnVerifyParam = "0x000000000000000000000000000000000000000000000000000000000000000a"
     
     before(async function () {
     })
@@ -109,9 +115,6 @@ describe("Zbyte case2 test", function () {
         expect(verifyResult({function:"deployDapp",dapp: dapp}, retval)).to.eq(true);
     })
     it("init Dapp States", async function () {
-        const initDapp = require("../scripts/_initStates.js");
-        retval = await initDapp.initDappStates(dapp, deployer);
-        expect(verifyResult({function:"initDappStates"}, retval)).to.eq(true);
     })
     it("store value", async function () {
         const invokeDapp = require("../scripts/_dapp.js")
@@ -124,10 +127,20 @@ describe("Zbyte case2 test", function () {
         expect(balancesBefore[invoker]['balL1']).to.eq(balancesAfter[invoker]['balL1']);
         expect(balancesBefore[deployer]['balL1']).to.eq(balancesAfter[deployer]['balL1']);
     })
+    it("read value", async function () {
+        const invokeDapp = require("../scripts/_dapp.js")
+        retval = await invokeDapp.invokeView(dapp, fnnameVerify);    
+        expect(verifyResult({function:"invokeView", dapp: await lib.getAddress(dapp),
+                    result:fnVerifyParam}, retval)).to.eq(true);
+    })
 })
 
+/* deployer deploys dapp, invoker invokes fnnameWrite via ZbyteFwdDPlat and pays in vZBYT
+        Dapp is from opensource user, Dapp not registered with DPlat.  Fwd in dapp should be ZbyteForwarderDPlat
+        User is opensource, calls Dapp and pays in DPLAT
+*/
 describe("Zbyte case3 test", function () {
-    /* deployer deploys dapp, invoker invokes fnnameWrite via ZbyteFwdDPlat and pays in vZBYT */
+
     const dapp = 'SampleDstoreDapp'
     const deployer = 'comd'
     const invoker = 'comu'
@@ -150,9 +163,6 @@ describe("Zbyte case3 test", function () {
         expect(verifyResult({function:"deployDapp",dapp: dapp}, retval)).to.eq(true);
     })
     it("init Dapp States", async function () {
-        const initDapp = require("../scripts/_initStates.js");
-        retval = await initDapp.initDappStates(dapp, deployer);
-        expect(verifyResult({function:"initDappStates"}, retval)).to.eq(true);
     })
     it("deposit vZBYT for comu", async function () {
         const zbyteFwdCore = require("../scripts/_zbyteForwarderCore.js")
@@ -201,6 +211,12 @@ describe("Zbyte case3 test", function () {
     })
 })
 
+/* deployer deploys dapp, invoker invokes fnnameWrite via ZbyteFwdDPlat
+        Dapp is from opensource user, Fwd in dapp should be ZbyteForwarderDPlat
+        deployer registers dapp with DPlat, creates provider, enterprise, etc
+        User is opensource, calls Dapp.
+        deployer's provider pays for the call in DPLAT
+*/
 describe("Zbyte case4 test", function () {
     /* deployer deploys dapp, invoker invokes fnnameWrite via ZbyteFwdDPlat. deployer pays for all calls in vZBYT */
     const dapp = 'SampleDstoreDapp'
@@ -225,9 +241,6 @@ describe("Zbyte case4 test", function () {
         expect(verifyResult({function:"deployDapp",dapp: dapp}, retval)).to.eq(true);
     })
     it("init Dapp States", async function () {
-        const initDapp = require("../scripts/_initStates.js");
-        retval = await initDapp.initDappStates(dapp, deployer);
-        expect(verifyResult({function:"initDappStates"}, retval)).to.eq(true);
     })
     it("deposit vZBYT for comd", async function () {
         const zbyteFwdCore = require("../scripts/_zbyteForwarderCore.js")
@@ -249,7 +262,7 @@ describe("Zbyte case4 test", function () {
         await zbyteDPlat.setEnterpriseLimit(deployer,"community dev",amount);
     })
 
-    it("store value ent user open source dapp", async function () {
+    it("store value com user open source dapp", async function () {
         const invokeDapp = require("../scripts/_dapp.js")
         const priceFeeder = require("../scripts/_zbytePriceFeeder.js");
         const zbyteDPlat = require("../scripts/_zbyteDPlat.js")
@@ -296,8 +309,283 @@ describe("Zbyte case4 test", function () {
     })
 })
 
+
+/* Enterprise deployer deploys dapp, invoker invokes fnnameWrite via ZbyteFwdDPlat
+        Dapp is from ent user, Fwd in dapp should be ZbyteForwarderDPlat
+        enterprise, provider is created.
+        dapp is registered to the enterprise.
+        User is opensource, calls Dapp.
+        dapp's ent provider pays for the call in DPLAT
+*/
+describe("Zbyte case5 test", function () {
+    const dapp = 'SampleDstoreDapp'
+    const deployer = 'entd'
+    const invoker = 'comu'
+    const fnnameWrite = 'storeValue'
+    const fnWriteparam = "13";
+    const fnnameVerify = 'storedValue'
+    const fnVerifyParam = "0x000000000000000000000000000000000000000000000000000000000000000d"
+    const relay = "ZbyteRelay"
+
+    const ent = "ABC Enterprise"
+    const entProvider = 'entp'
+    const sender = 'zbyt'
+    const receiver = entProvider;
+    const amount = "100"
+    const worker = 'wrkr'
+    
+    before(async function () {
+    })
+    it("deploy Dapp", async function () {
+        const deployDapp = require("../deploy/3_deploy_dapp.js");
+        retval = await deployDapp(dapp, deployer);
+        expect(verifyResult({function:"deployDapp",dapp: dapp}, retval)).to.eq(true);
+    })
+    it("init Dapp States", async function () {
+    })
+    it("deposit vZBYT for entp", async function () {
+        const zbyteFwdCore = require("../scripts/_zbyteForwarderCore.js")
+        const dplatChain = process.env.DPLAT
+        retval = await zbyteFwdCore.approveAndDeposit(relay,sender,
+            entProvider,amount,dplatChain,worker);
+        expect(verifyResult({function:"approveAndDeposit"}, retval)).to.eq(true);
+        var balances = await readBalances([entProvider,invoker])
+        expect(ethers.toBigInt(ethers.parseUnits(balances[entProvider]['balVZ'],18)))
+            .to.greaterThanOrEqual(ethers.toBigInt(ethers.parseUnits(amount,18)));
+    })
+    it("register enterprise provider and enterprise", async function () {
+        const zbyteDPlat = require("../scripts/_zbyteDPlat.js")
+        await zbyteDPlat.registerProvider(entProvider);
+        //await zbyteDPlat.registerProviderAgent(deployer,deployer);
+        await zbyteDPlat.registerEnterprise(entProvider,ent);
+        await zbyteDPlat.registerDapp(entProvider,dapp,ent);
+        await zbyteDPlat.setEnterpriseLimit(entProvider,ent,amount);
+    })
+    it("store value", async function () {
+        const invokeDapp = require("../scripts/_dapp.js")
+        const priceFeeder = require("../scripts/_zbytePriceFeeder.js");
+        const zbyteDPlat = require("../scripts/_zbyteDPlat.js")
+
+        const ret = await zbyteDPlat.getPayer(invoker,dapp,
+        fnnameWrite,fnWriteparam);
+        expect(ret.provider).to.eq(await lib.getAddress(entProvider));
+
+        var balancesBefore = await readBalances([entProvider,invoker,'ZbyteDPlat',worker])
+        retval = await invokeDapp.invokeViaForwarder(dapp, invoker,fnnameWrite, fnWriteparam);
+
+        expect(verifyResult({function:"invokeViaForwarder", dapp: await lib.getAddress(dapp)}, retval)).to.eq(true);
+        var balancesAfter = await readBalances([entProvider,invoker,'ZbyteDPlat',worker])
+        // L1: only wrkr l1 should reduce
+        // vZ: tokens reduced in comd = sum of tokens added to burn and fwdDplat
+        expect(balancesBefore[invoker]['balL1']).to.eq(balancesAfter[invoker]['balL1']);
+        expect(balancesBefore[entProvider]['balL1']).to.eq(balancesAfter[entProvider]['balL1']);
+
+        // deployerZbyteOut = fwdZbyteIn+burnZbyteIn
+        var entProviderZbyteOut = ethers.toBigInt(ethers.parseUnits(balancesBefore[entProvider]['balVZ'],18))
+                -ethers.toBigInt(ethers.parseUnits(balancesAfter[entProvider]['balVZ'],18))
+        var fwdZbyteIn = ethers.toBigInt(ethers.parseUnits(balancesAfter['ZbyteForwarderDPlat']['balVZ'],18))
+                -ethers.toBigInt(ethers.parseUnits(balancesBefore['ZbyteForwarderDPlat']['balVZ'],18))
+        var burnZbyteIn = ethers.toBigInt(ethers.parseUnits(balancesAfter['burn']['balVZ'],18))
+                -ethers.toBigInt(ethers.parseUnits(balancesBefore['burn']['balVZ'],18))
+        console.log(entProviderZbyteOut,fwdZbyteIn,burnZbyteIn)
+        expect(entProviderZbyteOut).eq(fwdZbyteIn+burnZbyteIn);
+
+        // toZbyte(workerL1Out) >= deployerrZbyteOut
+        const feeData = await ethers.provider.getFeeData()
+        var workerL1Out = ethers.toBigInt(ethers.parseUnits(balancesBefore[worker]['balL1'],18))
+            -ethers.toBigInt(ethers.parseUnits(balancesAfter[worker]['balL1'],18))
+        var workerZbyteOut = (await priceFeeder.convertEthToEquivalentZbyte(workerL1Out)).value;
+        console.log("workerZbyteOut: ", workerZbyteOut);
+        expect(workerZbyteOut).lessThanOrEqual(entProviderZbyteOut);
+        console.log("Worker Gain%",(fwdZbyteIn - workerZbyteOut) * BigInt(100) / workerZbyteOut);
+    })
+    it("read value", async function () {
+        const invokeDapp = require("../scripts/_dapp.js")
+        retval = await invokeDapp.invokeView(dapp, fnnameVerify);    
+        expect(verifyResult({function:"invokeView", dapp: await lib.getAddress(dapp),
+                    result:fnVerifyParam}, retval)).to.eq(true);
+    })
+})
+
+
+/* Enterprise deployer deploys dapp, invoker invokes fnnameWrite via ZbyteFwdDPlat
+        Dapp is from ent user, Fwd in dapp should be ZbyteForwarderDPlat
+        dapp is deregistered from ent
+        User is opensource, calls Dapp. user pays in DPLAT
+*/
+describe("Zbyte case6 test", function () {
+    const dapp = 'SampleDstoreDapp'
+    const deployer = 'entd'
+    const invoker = 'comu'
+    const fnnameWrite = 'storeValue'
+    const fnWriteparam = "14";
+    const fnnameVerify = 'storedValue'
+    const fnVerifyParam = "0x000000000000000000000000000000000000000000000000000000000000000e"
+    const relay = "ZbyteRelay"
+
+    const ent = "ABC Enterprise"
+    const entProvider = 'entp'
+    const sender = 'zbyt'
+    const receiver = entProvider;
+    const amount = "100"
+    const worker = 'wrkr'
+    
+    before(async function () {
+    })
+    it("deploy Dapp", async function () {
+    })
+    it("init Dapp States", async function () {
+    })
+    it("deposit vZBYT for entp", async function () {
+        const zbyteFwdCore = require("../scripts/_zbyteForwarderCore.js")
+        const dplatChain = process.env.DPLAT
+        retval = await zbyteFwdCore.approveAndDeposit(relay,sender,
+            entProvider,amount,dplatChain,worker);
+        expect(verifyResult({function:"approveAndDeposit"}, retval)).to.eq(true);
+        var balances = await readBalances([entProvider,invoker])
+        expect(ethers.toBigInt(ethers.parseUnits(balances[entProvider]['balVZ'],18)))
+            .to.greaterThanOrEqual(ethers.toBigInt(ethers.parseUnits(amount,18)));
+    })
+    it("unregister dapp", async function () {
+        const zbyteDPlat = require("../scripts/_zbyteDPlat.js")
+        await zbyteDPlat.deregisterDapp(entProvider,dapp);
+        await zbyteDPlat.deregisterEnterpriseUser('comd','comu');
+    })
+    it("store value", async function () {
+        const invokeDapp = require("../scripts/_dapp.js")
+        const priceFeeder = require("../scripts/_zbytePriceFeeder.js");
+        const zbyteDPlat = require("../scripts/_zbyteDPlat.js")
+
+        const ret = await zbyteDPlat.getPayer(invoker,dapp,
+        fnnameWrite,fnWriteparam);
+        expect(ret.provider).to.eq(await lib.getAddress(invoker));
+
+        var balancesBefore = await readBalances([entProvider,invoker,'ZbyteDPlat',worker])
+        retval = await invokeDapp.invokeViaForwarder(dapp, invoker,fnnameWrite, fnWriteparam);
+
+        expect(verifyResult({function:"invokeViaForwarder", dapp: await lib.getAddress(dapp)}, retval)).to.eq(true);
+        var balancesAfter = await readBalances([entProvider,invoker,'ZbyteDPlat',worker])
+        // L1: only wrkr l1 should reduce
+        // vZ: tokens reduced in comd = sum of tokens added to burn and fwdDplat
+        expect(balancesBefore[invoker]['balL1']).to.eq(balancesAfter[invoker]['balL1']);
+        expect(balancesBefore[entProvider]['balL1']).to.eq(balancesAfter[entProvider]['balL1']);
+
+        // deployerZbyteOut = fwdZbyteIn+burnZbyteIn
+        var invokerZbyteOut = ethers.toBigInt(ethers.parseUnits(balancesBefore[invoker]['balVZ'],18))
+                -ethers.toBigInt(ethers.parseUnits(balancesAfter[invoker]['balVZ'],18))
+        var fwdZbyteIn = ethers.toBigInt(ethers.parseUnits(balancesAfter['ZbyteForwarderDPlat']['balVZ'],18))
+                -ethers.toBigInt(ethers.parseUnits(balancesBefore['ZbyteForwarderDPlat']['balVZ'],18))
+        var burnZbyteIn = ethers.toBigInt(ethers.parseUnits(balancesAfter['burn']['balVZ'],18))
+                -ethers.toBigInt(ethers.parseUnits(balancesBefore['burn']['balVZ'],18))
+        console.log(invokerZbyteOut,fwdZbyteIn,burnZbyteIn)
+        expect(invokerZbyteOut).eq(fwdZbyteIn+burnZbyteIn);
+
+        // toZbyte(workerL1Out) >= deployerrZbyteOut
+        const feeData = await ethers.provider.getFeeData()
+        var workerL1Out = ethers.toBigInt(ethers.parseUnits(balancesBefore[worker]['balL1'],18))
+            -ethers.toBigInt(ethers.parseUnits(balancesAfter[worker]['balL1'],18))
+        var workerZbyteOut = (await priceFeeder.convertEthToEquivalentZbyte(workerL1Out)).value;
+        console.log("workerZbyteOut: ", workerZbyteOut);
+        expect(workerZbyteOut).lessThanOrEqual(invokerZbyteOut);
+        console.log("Worker Gain%",(fwdZbyteIn - workerZbyteOut) * BigInt(100) / workerZbyteOut);
+    })
+    it("read value", async function () {
+        const invokeDapp = require("../scripts/_dapp.js")
+        retval = await invokeDapp.invokeView(dapp, fnnameVerify);    
+        expect(verifyResult({function:"invokeView", dapp: await lib.getAddress(dapp),
+                    result:fnVerifyParam}, retval)).to.eq(true);
+    })
+})
+
+/* Enterprise deployer deploys dapp, invoker invokes fnnameWrite via ZbyteFwdDPlat
+        Dapp is from ent user, Fwd in dapp should be ZbyteForwarderDPlat
+        user is ent user, dapp's ent provider pays for the call in DPLAT
+*/
+describe("Zbyte case7 test", function () {
+    const dapp = 'SampleDstoreDapp'
+    const invoker = 'entd'
+    const fnnameWrite = 'storeValue'
+    const fnWriteparam = "15";
+    const fnnameVerify = 'storedValue'
+    const fnVerifyParam = "0x000000000000000000000000000000000000000000000000000000000000000f"
+    const relay = "ZbyteRelay"
+
+    const ent = "ABC Enterprise"
+    const entProvider = 'entp'
+    const sender = 'zbyt'
+    const receiver = entProvider;
+    const amount = "100"
+    const worker = 'wrkr'
+    
+    before(async function () {
+    })
+    it("deploy Dapp", async function () {
+    })
+    it("init Dapp States", async function () {
+    })
+    it("deposit vZBYT for entp", async function () {
+        const zbyteFwdCore = require("../scripts/_zbyteForwarderCore.js")
+        const dplatChain = process.env.DPLAT
+        retval = await zbyteFwdCore.approveAndDeposit(relay,sender,
+            entProvider,amount,dplatChain,worker);
+        expect(verifyResult({function:"approveAndDeposit"}, retval)).to.eq(true);
+        var balances = await readBalances([entProvider,invoker])
+        expect(ethers.toBigInt(ethers.parseUnits(balances[entProvider]['balVZ'],18)))
+            .to.greaterThanOrEqual(ethers.toBigInt(ethers.parseUnits(amount,18)));
+    })
+    it("register entd", async function () {
+        const zbyteDPlat = require("../scripts/_zbyteDPlat.js")
+        await zbyteDPlat.registerEnterpriseUser(entProvider,invoker,ent);
+    })
+    it("store value", async function () {
+        const invokeDapp = require("../scripts/_dapp.js")
+        const priceFeeder = require("../scripts/_zbytePriceFeeder.js");
+        const zbyteDPlat = require("../scripts/_zbyteDPlat.js")
+
+        const ret = await zbyteDPlat.getPayer(invoker,dapp,
+        fnnameWrite,fnWriteparam);
+        expect(ret.provider).to.eq(await lib.getAddress(entProvider));
+
+        var balancesBefore = await readBalances([entProvider,invoker,'ZbyteDPlat',worker])
+        retval = await invokeDapp.invokeViaForwarder(dapp, invoker,fnnameWrite, fnWriteparam);
+
+        expect(verifyResult({function:"invokeViaForwarder", dapp: await lib.getAddress(dapp)}, retval)).to.eq(true);
+        var balancesAfter = await readBalances([entProvider,invoker,'ZbyteDPlat',worker])
+        // L1: only wrkr l1 should reduce
+        // vZ: tokens reduced in comd = sum of tokens added to burn and fwdDplat
+        expect(balancesBefore[invoker]['balL1']).to.eq(balancesAfter[invoker]['balL1']);
+        expect(balancesBefore[entProvider]['balL1']).to.eq(balancesAfter[entProvider]['balL1']);
+
+        // deployerZbyteOut = fwdZbyteIn+burnZbyteIn
+        var entProviderZbyteOut = ethers.toBigInt(ethers.parseUnits(balancesBefore[entProvider]['balVZ'],18))
+                -ethers.toBigInt(ethers.parseUnits(balancesAfter[entProvider]['balVZ'],18))
+        var fwdZbyteIn = ethers.toBigInt(ethers.parseUnits(balancesAfter['ZbyteForwarderDPlat']['balVZ'],18))
+                -ethers.toBigInt(ethers.parseUnits(balancesBefore['ZbyteForwarderDPlat']['balVZ'],18))
+        var burnZbyteIn = ethers.toBigInt(ethers.parseUnits(balancesAfter['burn']['balVZ'],18))
+                -ethers.toBigInt(ethers.parseUnits(balancesBefore['burn']['balVZ'],18))
+        console.log(entProviderZbyteOut,fwdZbyteIn,burnZbyteIn)
+        expect(entProviderZbyteOut).eq(fwdZbyteIn+burnZbyteIn);
+
+        // toZbyte(workerL1Out) >= deployerrZbyteOut
+        const feeData = await ethers.provider.getFeeData()
+        var workerL1Out = ethers.toBigInt(ethers.parseUnits(balancesBefore[worker]['balL1'],18))
+            -ethers.toBigInt(ethers.parseUnits(balancesAfter[worker]['balL1'],18))
+        var workerZbyteOut = (await priceFeeder.convertEthToEquivalentZbyte(workerL1Out)).value;
+        console.log("workerZbyteOut: ", workerZbyteOut);
+        expect(workerZbyteOut).lessThanOrEqual(entProviderZbyteOut);
+        console.log("Worker Gain%",(fwdZbyteIn - workerZbyteOut) * BigInt(100) / workerZbyteOut);
+    })
+    it("read value", async function () {
+        const invokeDapp = require("../scripts/_dapp.js")
+        retval = await invokeDapp.invokeView(dapp, fnnameVerify);    
+        expect(verifyResult({function:"invokeView", dapp: await lib.getAddress(dapp),
+                    result:fnVerifyParam}, retval)).to.eq(true);
+    })
+})
+
+
 describe("Zbyte getPayer test", function () {
-    /* deployer registers dapp, invoker invokes fnnameWrite via ZbyteFwdDPlat. deployer pays for all calls in vZBYT */
+
     const dapp = 'SampleDstoreDapp'
     const deployer = 'comd'
     const invoker = 'entd'
@@ -320,9 +608,6 @@ describe("Zbyte getPayer test", function () {
         expect(verifyResult({function:"deployDapp",dapp: dapp}, retval)).to.eq(true);
     })
     it("init Dapp States", async function () {
-        const initDapp = require("../scripts/_initStates.js");
-        retval = await initDapp.initDappStates(dapp, deployer);
-        expect(verifyResult({function:"initDappStates"}, retval)).to.eq(true);
     })
     it("deposit vZBYT for comd", async function () {
         const zbyteFwdCore = require("../scripts/_zbyteForwarderCore.js")
@@ -407,8 +692,9 @@ describe("Zbyte getPayer test", function () {
     })
 })
 
-describe("Zbyte case5 test", function () {
-    /* deployer registers dapp, invoker invokes fnnameWrite via ZbyteFwdDPlat. deployer pays for all calls in vZBYT */
+
+/*
+describe("Zbyte case8 test", function () {
     const dapp = 'SampleDstoreDapp'
     const deployer = 'entp'
     const invoker = 'entd'
@@ -450,6 +736,7 @@ describe("Zbyte case5 test", function () {
         const zbyteDPlat = require("../scripts/_zbyteDPlat.js")
         await zbyteDPlat.registerProvider(deployer);
         await zbyteDPlat.registerEnterprise(deployer, "enterprise dev");
+        await zbyteDPlat.deregisterEnterpriseUser(deployer,invoker);
     })
 
     it("store value ent user open source dapp", async function () {
@@ -478,3 +765,4 @@ describe("Zbyte case5 test", function () {
         console.log("getPayer ret: ", ret);
     })
 })
+*/
