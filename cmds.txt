@@ -1,8 +1,8 @@
 # term1 - start hhmumbai
 dplat_env hhmumbai hhmumbai.config.js
-#cd /home/main/dropbox/zbyte/zbyte_release/dplat
+cd /home/main/dropbox/zbyte/zbyte_release/dplat
 npx hardhat clean && npx hardhat compile
-npx hardhat node --fork https://polygon-mumbai.infura.io/v3/c4adc113c65d419fa4aa11d536d51e2c --port 4545 --config hhmumbai.config.js
+npx hardhat node --fork https://rpc-mumbai.maticvigil.com/ --port 4545 --config hhmumbai.config.js
 
 
 # term2 - deploy DPLAT and transfer to ZBYTE_MAIN_WALLET
@@ -28,15 +28,20 @@ npx hardhat dplatToken --api balanceOf --account $ZBYTE_MAIN_WALLET --network $C
 npx hardhat dplatToken --api transferL1 --receiver 0x4C73728Eb0e83091Ec747e6e2Ead3504919B3f75 --amount 1 --sender dplat --network $CORE  --config $CONFIG
 # fund wrkr
 npx hardhat dplatToken --api transferL1 --receiver 0x3774Ea2aB7B94fa2eDf7E72a2f051fe1EdC520F2 --amount 1 --sender dplat --network $CORE  --config $CONFIG
-
+# fund ent provider
+npx hardhat dplatToken --api transferL1 --receiver 0x7a84a712C113001f4317dD975CCDF048Ac5Cd730 --amount 1 --sender dplat --network $CORE  --config $CONFIG
+# fund zblp
+npx hardhat dplatToken --api transferL1 --receiver 0x134a59325E86Bc0E20bEDaa320df1507d53F37DA --amount 1 --sender dplat --network $CORE  --config $CONFIG
 
 # -----------------------------------------------
+
 export DAO_ADDRESS_CORE=0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174
 export DAO_ADDRESS_DPLAT=0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174
-zbyte_env hhmumbai hhmumbai.config.js hhmumbai hhmumbai.config.js
-npx hardhat clean && npx hardhat compile
+
 # term 3 Dplat contracts on core chain
 # run for hhmumbai-hhmumbai, hhmumbai-hhfuji
+zbyte_env hhmumbai hhmumbai.config.js hhmumbai hhmumbai.config.js
+npx hardhat clean && npx hardhat compile
 npx hardhat zbyteToken --api balanceOf --account zbyt  --network $CORE  --config $CCONFIG
 npx hardhat zbyteToken --api balanceOf --account comu  --network $CORE  --config $CCONFIG
 # deploy dplat contracts and init states    
@@ -44,7 +49,6 @@ npx hardhat zbyteToken --api balanceOf --account comu  --network $CORE  --config
 find ./deployments/$CORE -type f ! -name '*ZbyteToken*'  ! -name '.chainId' -delete
 npx hardhat zDeploy --api core --owner zbyt --network $CORE --config $CCONFIG
 npx hardhat zDeploy --api initCoreStates --owner zbyt --network $CORE --config $CCONFIG
-
 
 # term 3 Dplat contracts on dplat chain
 npx hardhat zDeploy --api dplat --owner zbyt --network $DPLAT --config $DCONFIG
@@ -61,7 +65,7 @@ npx hardhat zDeploy --api transferOwnershipDplat --owner zbyt --newowner $DAO_AD
 
 # start test cases
 npx hardhat test test/zbyte.case1.test.js --network $DPLAT --config $DCONFIG
-
+# 
 # flags: user_is_ent, dapp_is_ent, prov_fund > amount, amount > charge, get_payer_view == actual_payer, 
 #          dapp_call_fails, dapp_call_reverts, #ent_has_policy, royalty
 # repeat for: prov_is_zblocks, prov_is_os_user
