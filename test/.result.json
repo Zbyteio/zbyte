@@ -26037,6 +26037,785 @@
                 "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
                 "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
             }
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+            "balZ": "2000.0",
+            "balL1": "4.519083919264093968"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x4C73728Eb0e83091Ec747e6e2Ead3504919B3f75",
+            "balZ": "0.0",
+            "balL1": "1.0"
+        },
+        {
+            "function": "deployCore"
+        },
+        {
+            "fwdN-setZbyteAddress": {
+                "function": "setZbyteAddress",
+                "ZbyteAddress": "0x4B264551eD876a822430CB99A9A7a2da723a3078"
+            },
+            "fwdN-setZbyteTokenForwarderAddress": {
+                "function": "setZbyteTokenForwarderAddress",
+                "ZbyteForwarderAddress": "0x1D957EB520b5136CC44bcd9e1e29A3f9EFbE80f8"
+            },
+            "fwdN-setEscrowAddress": {
+                "function": "setEscrowAddress",
+                "ZbyteEscrowAddress": "0xA89C028C242aaA79e7A81D620F589e885372F220"
+            },
+            "escrow-setRelayWrapper": {
+                "function": "setRelayWrapperAddress",
+                "relayWrapperAddress": "0x0fee01fD1e388297c9a33A4A10EF74E06397A174"
+            },
+            "relayWrapper-setEscrowAddress": {
+                "function": "setEscrowAddress",
+                "ZbyteEscrowAddress": "0xA89C028C242aaA79e7A81D620F589e885372F220"
+            },
+            "escrow-registerWorker": {
+                "function": "registerWorker",
+                "worker": "0x3774Ea2aB7B94fa2eDf7E72a2f051fe1EdC520F2"
+            }
+        },
+        {
+            "function": "deployDplat"
+        },
+        {
+            "zbyteFwdDPlat-setMinProcessingGas": {
+                "function": "setMinProcessingGas",
+                "MinimumProcessingGase": 25000
+            },
+            "zbyteFwdDPlat-setPostExecGas": {
+                "function": "setPostExecGas",
+                "PostExecGas": 55000
+            },
+            "zbyteFwdDPlat-setZbyteDPlat": {
+                "function": "setZbyteDPlat",
+                "ZbyteDPlat": "0x2D1d493ef0BeE638a83649a3B8186c27Eba531ea"
+            },
+            "zbyteFwdDPlat-registerWorker": {
+                "function": "registerWorker",
+                "WorkerAddress": [
+                    "0x3774Ea2aB7B94fa2eDf7E72a2f051fe1EdC520F2"
+                ],
+                "RegisterWorkerAddress": [
+                    true
+                ]
+            },
+            "zbyteFwdDPlat-setZbyteVToken": {
+                "function": "setZbyteVToken",
+                "ZbyteVToken": "0xf1f4B5698C268b95A12bf8f62d5859F205F4c619"
+            },
+            "zbyteFwdDPlat-setZbyteForwarderDPlat": {
+                "function": "ForwarderSet",
+                "ZbyteForwarderDPlat": "0x48227183f23f8714219547039367d23ce7D8A4a3"
+            },
+            "zbyteFwdDPlat-setZbytePriceFeeder": {
+                "function": "setZbytePriceFeeder",
+                "ZbytePriceFeeder": "0x9E90C7e3d59Be027b9B99D18BE82E0c75D062Db7"
+            },
+            "zbyteRelay-addRelayApprovee": {
+                "function": "addRelayApprovee",
+                "approveeAddress": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075"
+            },
+            "zbyteRelay-setRelayWrapper": {
+                "function": "setRelayWrapper",
+                "relayWrapperAddress": "0x0fee01fD1e388297c9a33A4A10EF74E06397A174"
+            },
+            "zbyteVToken-setPaymasterAddress": {
+                "function": "setPaymasterAddress",
+                "paymasterAddress": "0x48227183f23f8714219547039367d23ce7D8A4a3"
+            },
+            "zbyteVToken-setRoleCapability": {
+                "function": "setRoleCapability",
+                "role": 2,
+                "fnSig": "0xa9059cbb",
+                "enabled": true
+            },
+            "zbyteVToken-setUserRole": {
+                "function": "setUserRole",
+                "userAddress": "0x2D1d493ef0BeE638a83649a3B8186c27Eba531ea",
+                "role": 2,
+                "enabled": true
+            },
+            "zbyteVToken-setZbyteDPlatAddress": {
+                "function": "setZbyteDPlatAddress",
+                "dplatAddress": "0x2D1d493ef0BeE638a83649a3B8186c27Eba531ea"
+            },
+            "zbytePriceFeeder-registerWorker": {
+                "function": "registerWorker",
+                "worker": "0x3774Ea2aB7B94fa2eDf7E72a2f051fe1EdC520F2"
+            },
+            "zbytePriceFeeder-setNativeEthEquivalentZbyteInGwei": {
+                "function": "setNativeEthEquivalentZbyteInGwei",
+                "nativeEthEquivalentZbyteInGwei": "9000000000"
+            },
+            "zbytePriceFeeder-setZbytePriceInGwei": {
+                "function": "setNativeEthEquivalentZbyteInGwei",
+                "zbytePriceInGwei_": "10000000000"
+            },
+            "zbytePriceFeeder-setBurnRateInMill": {
+                "function": "setBurnRateInMill",
+                "burnRateInMill": "20"
+            }
+        },
+        {
+            "relayWrapper-setRelayAddress": {
+                "function": "setRelayAddress",
+                "relayAddress": "0x40070bA1ea00c98352dfa8487eeaF1802865dE1D",
+                "relayId": 0,
+                "chainId": 3777
+            },
+            "Escrow-setvERC20Address": {
+                "function": "setvERC20Address",
+                "vERC20Address": "0xf1f4B5698C268b95A12bf8f62d5859F205F4c619",
+                "dplatChainId": 3777
+            }
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x3774Ea2aB7B94fa2eDf7E72a2f051fe1EdC520F2",
+            "balZ": "0.0",
+            "balL1": "1.991727380871987773"
+        },
+        {
+            "ZbyteForwardercore-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            },
+            "zbyteEscrow-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            },
+            "RelayWrapper-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            }
+        },
+        {
+            "ZbyteRelay-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            },
+            "ZbyteForwardercore-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            },
+            "ZbyteVToken-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            },
+            "ZbyteDplat-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            },
+            "ZbytePriceFeeder-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            }
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+            "balZ": "2000.0",
+            "balL1": "4.503951910143037896"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x4C73728Eb0e83091Ec747e6e2Ead3504919B3f75",
+            "balZ": "0.0",
+            "balL1": "1.99994991999959936"
+        },
+        {
+            "function": "deployCore"
+        },
+        {
+            "fwdN-setZbyteAddress": {
+                "function": "setZbyteAddress",
+                "ZbyteAddress": "0x53dE852809b0f9fC47cC6F6512a03AE9ac7Be802"
+            },
+            "fwdN-setZbyteTokenForwarderAddress": {
+                "function": "setZbyteTokenForwarderAddress",
+                "ZbyteForwarderAddress": "0xb52Ae564CE92E02079fff00509755639Cbce8E35"
+            },
+            "fwdN-setEscrowAddress": {
+                "function": "setEscrowAddress",
+                "ZbyteEscrowAddress": "0x751524ab493522D8Ee2CFb78a401dD6438c6A323"
+            },
+            "escrow-setRelayWrapper": {
+                "function": "setRelayWrapperAddress",
+                "relayWrapperAddress": "0x2750c741FaC9532cfeA1F90fbc2212C2Ff27EcFD"
+            },
+            "relayWrapper-setEscrowAddress": {
+                "function": "setEscrowAddress",
+                "ZbyteEscrowAddress": "0x751524ab493522D8Ee2CFb78a401dD6438c6A323"
+            },
+            "escrow-registerWorker": {
+                "function": "registerWorker",
+                "worker": "0x3774Ea2aB7B94fa2eDf7E72a2f051fe1EdC520F2"
+            }
+        },
+        {
+            "function": "deployDplat"
+        },
+        {
+            "zbyteFwdDPlat-setMinProcessingGas": {
+                "function": "setMinProcessingGas",
+                "MinimumProcessingGase": 25000
+            },
+            "zbyteFwdDPlat-setPostExecGas": {
+                "function": "setPostExecGas",
+                "PostExecGas": 55000
+            },
+            "zbyteFwdDPlat-setZbyteDPlat": {
+                "function": "setZbyteDPlat",
+                "ZbyteDPlat": "0xD6609Ace59dC6e15252b6af09aE37f365cec2813"
+            },
+            "zbyteFwdDPlat-registerWorker": {
+                "function": "registerWorker",
+                "WorkerAddress": [
+                    "0x3774Ea2aB7B94fa2eDf7E72a2f051fe1EdC520F2"
+                ],
+                "RegisterWorkerAddress": [
+                    true
+                ]
+            },
+            "zbyteFwdDPlat-setZbyteVToken": {
+                "function": "setZbyteVToken",
+                "ZbyteVToken": "0x44DDc74057a5F6C477f4169081AE7F73E0C32d23"
+            },
+            "zbyteFwdDPlat-setZbyteForwarderDPlat": {
+                "function": "ForwarderSet",
+                "ZbyteForwarderDPlat": "0x1253485e4ef030F56d33306F423E321cc73757b3"
+            },
+            "zbyteFwdDPlat-setZbytePriceFeeder": {
+                "function": "setZbytePriceFeeder",
+                "ZbytePriceFeeder": "0xd5D3e008FA3Cc761FFA2F1c75720E8565D5bbea1"
+            },
+            "zbyteRelay-addRelayApprovee": {
+                "function": "addRelayApprovee",
+                "approveeAddress": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075"
+            },
+            "zbyteRelay-setRelayWrapper": {
+                "function": "setRelayWrapper",
+                "relayWrapperAddress": "0x2750c741FaC9532cfeA1F90fbc2212C2Ff27EcFD"
+            },
+            "zbyteVToken-setPaymasterAddress": {
+                "function": "setPaymasterAddress",
+                "paymasterAddress": "0x1253485e4ef030F56d33306F423E321cc73757b3"
+            },
+            "zbyteVToken-setRoleCapability": {
+                "function": "setRoleCapability",
+                "role": 2,
+                "fnSig": "0xa9059cbb",
+                "enabled": true
+            },
+            "zbyteVToken-setUserRole": {
+                "function": "setUserRole",
+                "userAddress": "0xD6609Ace59dC6e15252b6af09aE37f365cec2813",
+                "role": 2,
+                "enabled": true
+            },
+            "zbyteVToken-setZbyteDPlatAddress": {
+                "function": "setZbyteDPlatAddress",
+                "dplatAddress": "0xD6609Ace59dC6e15252b6af09aE37f365cec2813"
+            },
+            "zbytePriceFeeder-registerWorker": {
+                "function": "registerWorker",
+                "worker": "0x3774Ea2aB7B94fa2eDf7E72a2f051fe1EdC520F2"
+            },
+            "zbytePriceFeeder-setNativeEthEquivalentZbyteInGwei": {
+                "function": "setNativeEthEquivalentZbyteInGwei",
+                "nativeEthEquivalentZbyteInGwei": "9000000000"
+            },
+            "zbytePriceFeeder-setZbytePriceInGwei": {
+                "function": "setNativeEthEquivalentZbyteInGwei",
+                "zbytePriceInGwei_": "10000000000"
+            },
+            "zbytePriceFeeder-setBurnRateInMill": {
+                "function": "setBurnRateInMill",
+                "burnRateInMill": "20"
+            }
+        },
+        {
+            "relayWrapper-setRelayAddress": {
+                "function": "setRelayAddress",
+                "relayAddress": "0x9e387573C931E9639fF65496D9C26690b9C16B1E",
+                "relayId": 0,
+                "chainId": 3777
+            },
+            "Escrow-setvERC20Address": {
+                "function": "setvERC20Address",
+                "vERC20Address": "0x44DDc74057a5F6C477f4169081AE7F73E0C32d23",
+                "dplatChainId": 3777
+            }
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x3774Ea2aB7B94fa2eDf7E72a2f051fe1EdC520F2",
+            "balZ": "0.0",
+            "balL1": "2.988637302847267149"
+        },
+        {
+            "ZbyteForwardercore-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            },
+            "zbyteEscrow-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            },
+            "RelayWrapper-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            }
+        },
+        {
+            "ZbyteRelay-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            },
+            "ZbyteForwardercore-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            },
+            "ZbyteVToken-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            },
+            "ZbyteDplat-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            },
+            "ZbytePriceFeeder-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            }
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+            "balZ": "2000.0",
+            "balL1": "4.491443305042969056"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x4C73728Eb0e83091Ec747e6e2Ead3504919B3f75",
+            "balZ": "0.0",
+            "balL1": "2.99989983999919872"
+        },
+        {
+            "function": "deployCore"
+        },
+        {
+            "fwdN-setZbyteAddress": {
+                "function": "setZbyteAddress",
+                "ZbyteAddress": "0xe7ececf8bEC96Bbb735d65634E5b2F9722E765f2"
+            },
+            "fwdN-setZbyteTokenForwarderAddress": {
+                "function": "setZbyteTokenForwarderAddress",
+                "ZbyteForwarderAddress": "0xBA619cbA236f77fC21B7b730e64960983D413191"
+            },
+            "fwdN-setEscrowAddress": {
+                "function": "setEscrowAddress",
+                "ZbyteEscrowAddress": "0xEA5dd97dF7FCc36F99E4448bb34f7551469E0c9E"
+            },
+            "escrow-setRelayWrapper": {
+                "function": "setRelayWrapperAddress",
+                "relayWrapperAddress": "0x20a67FA8Ac91dBB47BD79e1bB4e1aa9d70E5A5aA"
+            },
+            "relayWrapper-setEscrowAddress": {
+                "function": "setEscrowAddress",
+                "ZbyteEscrowAddress": "0xEA5dd97dF7FCc36F99E4448bb34f7551469E0c9E"
+            },
+            "escrow-registerWorker": {
+                "function": "registerWorker",
+                "worker": "0x3774Ea2aB7B94fa2eDf7E72a2f051fe1EdC520F2"
+            }
+        },
+        {
+            "function": "deployDplat"
+        },
+        {
+            "zbyteFwdDPlat-setMinProcessingGas": {
+                "function": "setMinProcessingGas",
+                "MinimumProcessingGase": 25000
+            },
+            "zbyteFwdDPlat-setPostExecGas": {
+                "function": "setPostExecGas",
+                "PostExecGas": 55000
+            },
+            "zbyteFwdDPlat-setZbyteDPlat": {
+                "function": "setZbyteDPlat",
+                "ZbyteDPlat": "0x0783F5498AB12b0D7e603c60abe9aB2174EB4253"
+            },
+            "zbyteFwdDPlat-registerWorker": {
+                "function": "registerWorker",
+                "WorkerAddress": [
+                    "0x3774Ea2aB7B94fa2eDf7E72a2f051fe1EdC520F2"
+                ],
+                "RegisterWorkerAddress": [
+                    true
+                ]
+            },
+            "zbyteFwdDPlat-setZbyteVToken": {
+                "function": "setZbyteVToken",
+                "ZbyteVToken": "0xF4C96536CA5133ebdB85503325D95C3E5E9FC7A5"
+            },
+            "zbyteFwdDPlat-setZbyteForwarderDPlat": {
+                "function": "ForwarderSet",
+                "ZbyteForwarderDPlat": "0x2b3f5e4Ec690eDA471cf742Cac4E37dE00d49Bc8"
+            },
+            "zbyteFwdDPlat-setZbytePriceFeeder": {
+                "function": "setZbytePriceFeeder",
+                "ZbytePriceFeeder": "0x43548783609b28Cd25eAB8bBA0B411d68801f43F"
+            },
+            "zbyteRelay-addRelayApprovee": {
+                "function": "addRelayApprovee",
+                "approveeAddress": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075"
+            },
+            "zbyteRelay-setRelayWrapper": {
+                "function": "setRelayWrapper",
+                "relayWrapperAddress": "0x20a67FA8Ac91dBB47BD79e1bB4e1aa9d70E5A5aA"
+            },
+            "zbyteVToken-setPaymasterAddress": {
+                "function": "setPaymasterAddress",
+                "paymasterAddress": "0x2b3f5e4Ec690eDA471cf742Cac4E37dE00d49Bc8"
+            },
+            "zbyteVToken-setRoleCapability": {
+                "function": "setRoleCapability",
+                "role": 2,
+                "fnSig": "0xa9059cbb",
+                "enabled": true
+            },
+            "zbyteVToken-setUserRole": {
+                "function": "setUserRole",
+                "userAddress": "0x0783F5498AB12b0D7e603c60abe9aB2174EB4253",
+                "role": 2,
+                "enabled": true
+            },
+            "zbyteVToken-setZbyteDPlatAddress": {
+                "function": "setZbyteDPlatAddress",
+                "dplatAddress": "0x0783F5498AB12b0D7e603c60abe9aB2174EB4253"
+            },
+            "zbytePriceFeeder-registerWorker": {
+                "function": "registerWorker",
+                "worker": "0x3774Ea2aB7B94fa2eDf7E72a2f051fe1EdC520F2"
+            },
+            "zbytePriceFeeder-setNativeEthEquivalentZbyteInGwei": {
+                "function": "setNativeEthEquivalentZbyteInGwei",
+                "nativeEthEquivalentZbyteInGwei": "9000000000"
+            },
+            "zbytePriceFeeder-setZbytePriceInGwei": {
+                "function": "setNativeEthEquivalentZbyteInGwei",
+                "zbytePriceInGwei_": "10000000000"
+            },
+            "zbytePriceFeeder-setBurnRateInMill": {
+                "function": "setBurnRateInMill",
+                "burnRateInMill": "20"
+            }
+        },
+        {
+            "relayWrapper-setRelayAddress": {
+                "function": "setRelayAddress",
+                "relayAddress": "0x3Ec6117365334Adc02E558d53Da0D4a1d8c12F3d",
+                "relayId": 0,
+                "chainId": 3777
+            },
+            "Escrow-setvERC20Address": {
+                "function": "setvERC20Address",
+                "vERC20Address": "0xF4C96536CA5133ebdB85503325D95C3E5E9FC7A5",
+                "dplatChainId": 3777
+            }
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x3774Ea2aB7B94fa2eDf7E72a2f051fe1EdC520F2",
+            "balZ": "0.0",
+            "balL1": "3.984908455817436373"
+        },
+        {
+            "ZbyteForwardercore-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            },
+            "zbyteEscrow-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            },
+            "RelayWrapper-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            }
+        },
+        {
+            "ZbyteRelay-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            },
+            "ZbyteForwardercore-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            },
+            "ZbyteVToken-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            },
+            "ZbyteDplat-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            },
+            "ZbytePriceFeeder-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            }
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+            "balZ": "2000.0",
+            "balL1": "4.4789347479429006"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x4C73728Eb0e83091Ec747e6e2Ead3504919B3f75",
+            "balZ": "0.0",
+            "balL1": "3.99984975999879808"
+        },
+        {
+            "function": "deployCore"
+        },
+        {
+            "fwdN-setZbyteAddress": {
+                "function": "setZbyteAddress",
+                "ZbyteAddress": "0x53A92A4D97C719993f4E8d78115e4AE4daac21FD"
+            },
+            "fwdN-setZbyteTokenForwarderAddress": {
+                "function": "setZbyteTokenForwarderAddress",
+                "ZbyteForwarderAddress": "0x716f96aa665fee22845c55c0059BBb3187d81b1b"
+            },
+            "fwdN-setEscrowAddress": {
+                "function": "setEscrowAddress",
+                "ZbyteEscrowAddress": "0xD33a8233611AE341c5268522B923a2c6af404b02"
+            },
+            "escrow-setRelayWrapper": {
+                "function": "setRelayWrapperAddress",
+                "relayWrapperAddress": "0x331120B7717fE5B48C256d1a23Cee40a347DebE6"
+            },
+            "relayWrapper-setEscrowAddress": {
+                "function": "setEscrowAddress",
+                "ZbyteEscrowAddress": "0xD33a8233611AE341c5268522B923a2c6af404b02"
+            },
+            "escrow-registerWorker": {
+                "function": "registerWorker",
+                "worker": "0x3774Ea2aB7B94fa2eDf7E72a2f051fe1EdC520F2"
+            }
+        },
+        {
+            "function": "deployDplat"
+        },
+        {
+            "zbyteFwdDPlat-setMinProcessingGas": {
+                "function": "setMinProcessingGas",
+                "MinimumProcessingGase": 25000
+            },
+            "zbyteFwdDPlat-setPostExecGas": {
+                "function": "setPostExecGas",
+                "PostExecGas": 55000
+            },
+            "zbyteFwdDPlat-setZbyteDPlat": {
+                "function": "setZbyteDPlat",
+                "ZbyteDPlat": "0x23bd9C7856c37567a045Fd642f27AED0E987d30f"
+            },
+            "zbyteFwdDPlat-registerWorker": {
+                "function": "registerWorker",
+                "WorkerAddress": [
+                    "0x3774Ea2aB7B94fa2eDf7E72a2f051fe1EdC520F2"
+                ],
+                "RegisterWorkerAddress": [
+                    true
+                ]
+            },
+            "zbyteFwdDPlat-setZbyteVToken": {
+                "function": "setZbyteVToken",
+                "ZbyteVToken": "0x727D5A0cd664ee2DB9610d216ae0d1D263dF7AD8"
+            },
+            "zbyteFwdDPlat-setZbyteForwarderDPlat": {
+                "function": "ForwarderSet",
+                "ZbyteForwarderDPlat": "0xc4418C1d01D7308AF89E5B0f2190674aF9f4cC4d"
+            },
+            "zbyteFwdDPlat-setZbytePriceFeeder": {
+                "function": "setZbytePriceFeeder",
+                "ZbytePriceFeeder": "0x49575c8f4E50a1EFf9Dbdc52F40f28bC6C376271"
+            },
+            "zbyteRelay-addRelayApprovee": {
+                "function": "addRelayApprovee",
+                "approveeAddress": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075"
+            },
+            "zbyteRelay-setRelayWrapper": {
+                "function": "setRelayWrapper",
+                "relayWrapperAddress": "0x331120B7717fE5B48C256d1a23Cee40a347DebE6"
+            },
+            "zbyteVToken-setPaymasterAddress": {
+                "function": "setPaymasterAddress",
+                "paymasterAddress": "0xc4418C1d01D7308AF89E5B0f2190674aF9f4cC4d"
+            },
+            "zbyteVToken-setRoleCapability": {
+                "function": "setRoleCapability",
+                "role": 2,
+                "fnSig": "0xa9059cbb",
+                "enabled": true
+            },
+            "zbyteVToken-setUserRole": {
+                "function": "setUserRole",
+                "userAddress": "0x23bd9C7856c37567a045Fd642f27AED0E987d30f",
+                "role": 2,
+                "enabled": true
+            },
+            "zbyteVToken-setZbyteDPlatAddress": {
+                "function": "setZbyteDPlatAddress",
+                "dplatAddress": "0x23bd9C7856c37567a045Fd642f27AED0E987d30f"
+            },
+            "zbytePriceFeeder-registerWorker": {
+                "function": "registerWorker",
+                "worker": "0x3774Ea2aB7B94fa2eDf7E72a2f051fe1EdC520F2"
+            },
+            "zbytePriceFeeder-setNativeEthEquivalentZbyteInGwei": {
+                "function": "setNativeEthEquivalentZbyteInGwei",
+                "nativeEthEquivalentZbyteInGwei": "9000000000"
+            },
+            "zbytePriceFeeder-setZbytePriceInGwei": {
+                "function": "setNativeEthEquivalentZbyteInGwei",
+                "zbytePriceInGwei_": "10000000000"
+            },
+            "zbytePriceFeeder-setBurnRateInMill": {
+                "function": "setBurnRateInMill",
+                "burnRateInMill": "20"
+            }
+        },
+        {
+            "relayWrapper-setRelayAddress": {
+                "function": "setRelayAddress",
+                "relayAddress": "0xf6A30B14410390F4387f6FF58c669c2291FFfCBa",
+                "relayId": 0,
+                "chainId": 3777
+            },
+            "Escrow-setvERC20Address": {
+                "function": "setvERC20Address",
+                "vERC20Address": "0x727D5A0cd664ee2DB9610d216ae0d1D263dF7AD8",
+                "dplatChainId": 3777
+            }
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x3774Ea2aB7B94fa2eDf7E72a2f051fe1EdC520F2",
+            "balZ": "0.0",
+            "balL1": "4.981179703787606357"
+        },
+        {
+            "ZbyteForwardercore-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            },
+            "zbyteEscrow-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            },
+            "RelayWrapper-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            }
+        },
+        {
+            "ZbyteRelay-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            },
+            "ZbyteForwardercore-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            },
+            "ZbyteVToken-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            },
+            "ZbyteDplat-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            },
+            "ZbytePriceFeeder-transferOwnership": {
+                "function": "transferOwnership",
+                "prevowner": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+                "newowner": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+            }
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+            "balZ": "1300.0",
+            "balL1": "4.46642614284283176"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x4C73728Eb0e83091Ec747e6e2Ead3504919B3f75",
+            "balZ": "0.0",
+            "balL1": "3.99979967999839744"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x4661D1e9fBf54F7EE418D64A31192346e9E3B8bc",
+            "balZ": "0.0",
+            "balL1": "5.8587749667037628"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0xF641A99961D92fF62235EbBb13c5f00aFE907770",
+            "balZ": "0.0",
+            "balL1": "0.0"
+        },
+        {
+            "function": "deployCore"
+        },
+        {},
+        {},
+        {
+            "function": "deployDplat"
+        },
+        {
+            "function": "deployDplat"
         }
     ]
 }

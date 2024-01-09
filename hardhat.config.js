@@ -37,6 +37,16 @@ module.exports = {
         mnemonic: process.env.MNEMONIC,
         count: 15
      }
+    },
+    polygon: {
+      url: `https://polygon-mainnet.infura.io/v3/c4adc113c65d419fa4aa11d536d51e2c`,
+      accounts: constants.prvKeysList,
+      chainId: 137
+    },
+    avalanche: {
+      url: `https://avalanche-mainnet.infura.io/v3/c4adc113c65d419fa4aa11d536d51e2c`,
+      accounts: constants.prvKeysList,
+      chainId: 43114
     }
   }
 };
