@@ -29,6 +29,8 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
     /// error
     /// @notice Error(0x91acbad9) Error details for getRoyaltyFee failure.
     error GetRoyaltyFeeInZbyteFailed(bytes);
+    /// @notice Error(0x72b10f2e) Error unusal gas usage for enterprise policy updation.
+    error UnusualGasUsageForEnterprisePolicy(uint256,uint256);
 
     /// @notice Determines the payer for a transaction.
     /// @notice In the absence of an enteprise policy, if a dapp or user is registered with ent,
@@ -198,6 +200,7 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
             _infraFee = _infraFeePreCharge - _infraFeePreChargeRefund;
         }
 
+        uint256 _startGas = gasleft();
         if (_preExecStates.enterprise != bytes4(0)) {
                 uint256 _currentEnterpriseLimit = LibDPlatRegistration._getEnterpriseLimit(_preExecStates.enterprise);
                 if(_chargeEth != 0) {
@@ -214,6 +217,9 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
                     }
                 }
         }
+        uint256 _gasSpendOnEnterpriseUpdate = _startGas - gasleft();
+        if ((_preExecStates.enterpriseEligibilityGas * 11 / 10) < _gasSpendOnEnterpriseUpdate && _preExecStates.enterprise != bytes4(0) && _preExecStates.enterprisePolicy != address(0))
+            revert UnusualGasUsageForEnterprisePolicy(_preExecStates.enterpriseEligibilityGas, _gasSpendOnEnterpriseUpdate);
         emit PostExecFees(payer_, _infraFee, _infraFeeCharge, _refundEth);
     }
 }

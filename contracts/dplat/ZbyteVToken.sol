@@ -42,7 +42,7 @@ contract ZbyteVToken is Ownable, Pausable, ERC20, AuthSimple, IvERC20 {
     address private paymaster;
     // Address of the DPlat contract
     address private dplat;
-    // Allow users for swaping vZBYT back to ZBYT
+    // Allow users for swaping vZBYT
     bool allowUserSwap;
 
     /// @notice ZBYT ERC20 constructor
@@ -83,7 +83,7 @@ contract ZbyteVToken is Ownable, Pausable, ERC20, AuthSimple, IvERC20 {
         emit ZbyteDPlatAddressSet(dplat_);
     }
 
-    /// @notice Set allow user swap from vZBYT to ZBYT
+    /// @notice Set allow user swap from vZBYT
     /// @param allowUserSwap_ DPlat contract address
     function setAllowUserSwap(bool allowUserSwap_) public onlyOwner {
         allowUserSwap = allowUserSwap_;
