@@ -28,6 +28,9 @@ contract ZbyteAirdropNFT is ZbyteContext, ERC721, ERC721URIStorage, ERC721Pausab
   uint256 erc20PerToken;
   address distributor;
   string uriBase;
+  uint256 public royaltyPerToken;
+  address public royaltyReceiver;
+  address public dplatToken;
 
   event mintedForAirdrop(uint256,uint256);
   event Redeemed(address,uint256);
@@ -42,12 +45,21 @@ contract ZbyteAirdropNFT is ZbyteContext, ERC721, ERC721URIStorage, ERC721Pausab
 
   constructor(address erc20Address_,
               uint256 erc20PerToken_,
+              uint256 royaltyPerToken_,
+              address royaltyReceiver_,
+              address dplatTokenAddress_,
               address distributor_,
               string memory baseUri_)
               ERC721("DPLAT Airdrop","DPLATAIR") {
+    if(erc20Address_ == address(0) || royaltyReceiver_ == address(0) || dplatTokenAddress_ == address(0))
+      revert ZeroAddress();
+
     erc20Address = erc20Address_;
+    royaltyReceiver = royaltyReceiver_;
+    royaltyPerToken = royaltyPerToken_;
     erc20PerToken = erc20PerToken_;
     distributor = distributor_;
+    dplatToken = dplatTokenAddress_;
     uriBase = baseUri_;
     _nextTokenId = 1;
   }
@@ -67,6 +79,22 @@ contract ZbyteAirdropNFT is ZbyteContext, ERC721, ERC721URIStorage, ERC721Pausab
 
   function pause() public onlyOwner {
     _pause();
+  }
+
+  function setRoyaltyReceiver(address royaltyReceiver_) public onlyOwner {
+    if(royaltyReceiver_ == address(0))
+      revert ZeroAddress();
+    royaltyReceiver = royaltyReceiver_;
+  }
+
+  function setDPlatToken(address dplatTokenAddress_) public onlyOwner {
+    if(dplatTokenAddress_ == address(0))
+      revert ZeroAddress();
+    dplatToken = dplatTokenAddress_;
+  }
+
+  function setRoyaltyPerToken(uint256 royaltyPerToken_) public onlyOwner {
+    royaltyPerToken = royaltyPerToken_;
   }
 
   function unpause() public onlyOwner {
@@ -131,6 +159,7 @@ contract ZbyteAirdropNFT is ZbyteContext, ERC721, ERC721URIStorage, ERC721Pausab
       _burn(tokenId);
     }
     IERC20(erc20Address).safeTransfer(receiver,erc20PerToken*numTokens);
+    IERC20(dplatToken).safeTransferFrom(user,royaltyReceiver,royaltyPerToken*numTokens);
 
     emit Redeemed(_msgSender(),numTokens);
   }

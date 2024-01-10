@@ -44,10 +44,14 @@ async function deployDapp(dapp,depl) {
         let dusdtAddress = ZbyteDUSDT.address;
         let dusdtPerToken = ethers.parseUnits('1',18); // change for mainnet
         let distributorAddress = await lib.getAddress('prov'); 
+        let dplatToken = await lib.getAddress('ZbyteToken'); 
+        let royaltyReceiver = await lib.getAddress('prov'); 
+        let royaltyPerToken = ethers.parseUnits('1',18); // change for mainnet
         ZbyteAirdropNFT = await hre.deployments.deploy(
             'ZbyteAirdropNFT', {
                 from:deployer,
-                args: [dusdtAddress,dusdtPerToken,
+                args: [dusdtAddress,dusdtPerToken,royaltyPerToken,
+                            royaltyReceiver, dplatToken,
                             distributorAddress,"https://zbyte.io/"],
                 gasLimit: 6e6,
                 deterministicDeployment: false
