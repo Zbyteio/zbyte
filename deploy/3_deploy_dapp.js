@@ -59,6 +59,33 @@ async function deployDapp(dapp,depl) {
             dappAddress: ZbyteAirdropNFT.address,
             deployer: deployer
         }
+    } else if(dapp == "ZbyteStaking") {
+        let deployer = await lib.getAddress(depl);
+        ZbyteDUSDT = await hre.deployments.deploy(
+            'ZbyteDUSDT', {
+                from:deployer,
+                args: [],
+                gasLimit: 6e6,
+                deterministicDeployment: false
+            })
+        console.log('==ZbyteDUSDT addr=', ZbyteDUSDT.address);
+
+        let dusdtAddress = ZbyteDUSDT.address;
+        let dplatTokenAddress = await lib.getAddress('ZbyteToken');
+        ZbyteStaking = await hre.deployments.deploy(
+            'ZbyteStaking', {
+                from:deployer,
+                args: [dusdtAddress,dplatTokenAddress ],
+                gasLimit: 6e6,
+                deterministicDeployment: false
+            })
+        console.log('==ZbyteStaking addr=', ZbyteStaking.address);
+        ret = {
+            function:"deployDapp",
+            dapp: dapp,
+            dappAddress: ZbyteStaking.address,
+            deployer: deployer
+        }
     }
     return ret;
 }
