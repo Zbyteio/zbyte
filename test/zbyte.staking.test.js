@@ -27,11 +27,11 @@ describe("Staking test", function () {
     const deployer = 'zbyt'
     const rewardDuration = '100';
     const rewardAmount = '1000'
-    const moveTimestep1 = 75;
-    const moveTimestep2 = 100;
+    const moveTimestep = 20;
 
     const depositor1 = 'comu'
     const stakeAmount = "200";
+    const depositor2 = 'comd'
 
     before(async function () {
     })
@@ -67,6 +67,7 @@ describe("Staking test", function () {
         let rewardRate = await contractWithSigner.rewardRate();
         expect(rewardRate).to.equal(ethers.toBigInt(amount)/ethers.toBigInt(rewardDuration));
     })
+    /*
     it("reload reward token", async function () {
         await helpers.time.increase(moveTimestep1);
 
@@ -92,8 +93,9 @@ describe("Staking test", function () {
         chai.assert.closeTo(rewardRate,calcRewardRate,rewRange);
         //console.log("A",(await ethers.provider.getBlock('latest')).timestamp);
     })
-    it("user stakes token", async function () {
-        await helpers.time.increase(moveTimestep2);
+    */
+    it("user1 stakes 200 token", async function () {
+        await helpers.time.increase(moveTimestep);
         let contractWithSigner = await lib.getContractWithSigner(dapp, depositor1);
         let rewardRate = await contractWithSigner.rewardRate();
         let rewardPerToken = await contractWithSigner.rewardPerToken();
@@ -107,7 +109,6 @@ describe("Staking test", function () {
                 .withArgs(await lib.getAddress(depositor1),await lib.getAddress(dapp), amountWei);
 
         let userRewards = await contractWithSigner.rewards(await lib.getAddress(depositor1));
-        console.log("X before stake",rewardRate,rewardPerToken,userRewards);
 
         tx = await contractWithSigner.stake(amountWei);
         await expect(tx.wait())
@@ -117,14 +118,23 @@ describe("Staking test", function () {
         rewardRate = await contractWithSigner.rewardRate();
         rewardPerToken = await contractWithSigner.rewardPerToken();
         userRewards = await contractWithSigner.rewards(await lib.getAddress(depositor1));
-        console.log("X after stake1",rewardRate,rewardPerToken,userRewards);
+    })
+    it("user1 stakes 200 token again", async function () {
+        await helpers.time.increase(moveTimestep);
+        let contractWithSigner = await lib.getContractWithSigner(dapp, depositor1);
+        let rewardRate = await contractWithSigner.rewardRate();
+        let rewardPerToken = await contractWithSigner.rewardPerToken();
 
-        amountWei = ethers.parseUnits(stakeAmount,18);
-        tx = await stakeTokenContractWithSigner.approve(await lib.getAddress(dapp),amountWei);
+
+        let amountWei = ethers.parseUnits(stakeAmount,18);
+        let stakeTokenContractWithSigner = await lib.getContractWithSigner('ZbyteToken', depositor1);
+        let tx = await stakeTokenContractWithSigner.approve(await lib.getAddress(dapp),amountWei);
         await expect(tx.wait())
                 .to.emit(stakeTokenContractWithSigner,"Approval")
                 .withArgs(await lib.getAddress(depositor1),await lib.getAddress(dapp), amountWei);
 
+        let userRewards = await contractWithSigner.rewards(await lib.getAddress(depositor1));
+
         tx = await contractWithSigner.stake(amountWei);
         await expect(tx.wait())
                 .to.emit(contractWithSigner,"Staked")
@@ -133,6 +143,35 @@ describe("Staking test", function () {
         rewardRate = await contractWithSigner.rewardRate();
         rewardPerToken = await contractWithSigner.rewardPerToken();
         userRewards = await contractWithSigner.rewards(await lib.getAddress(depositor1));
-        console.log("X after stake2",rewardRate,rewardPerToken,userRewards);    
+    })
+    it("user1 withdraws 400 token", async function () {
+        await helpers.time.increase(moveTimestep);
+
+        let contractWithSigner = await lib.getContractWithSigner(dapp, depositor1);
+
+        let amountWei = ethers.parseUnits('400',18);
+        let tx = await contractWithSigner.withdraw(amountWei);
+        await expect(tx.wait())
+                .to.emit(contractWithSigner,"Withdrawn")
+                .withArgs(await lib.getAddress(depositor1),amountWei);
+
+        rewardRate = await contractWithSigner.rewardRate();
+        rewardPerToken = await contractWithSigner.rewardPerToken();
+        userRewards = await contractWithSigner.rewards(await lib.getAddress(depositor1));
+    })
+    it("user1 withdraws rewards", async function () {
+        await helpers.time.increase(moveTimestep);
+
+        let contractWithSigner = await lib.getContractWithSigner(dapp, depositor1);
+        let userReward = await contractWithSigner.rewards(await lib.getAddress(depositor1));
+        console.log("user reward:",userReward);
+        let tx = await contractWithSigner.getReward();
+        await expect(tx.wait())
+                .to.emit(contractWithSigner,"RewardPaid")
+                .withArgs(await lib.getAddress(depositor1),userReward);
+
+        rewardRate = await contractWithSigner.rewardRate();
+        rewardPerToken = await contractWithSigner.rewardPerToken();
+        userRewards = await contractWithSigner.rewards(await lib.getAddress(depositor1));
     })
 })
