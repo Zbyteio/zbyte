@@ -28,7 +28,7 @@ async function fwdExec(fwd,req,sign,submitter) {
   var call_result;
   if (result == true) {
     if (fwd == "ZbyteForwarderDPlat") {
-      call_result = await contractWithSigner.zbyteExecute(req,sign);
+      call_result = await contractWithSigner.zbyteExecute(req,sign, {gasLimit:'10000000'});
     } else {
       call_result = await contractWithSigner.execute(req,sign);
     }
@@ -52,7 +52,7 @@ async function executeViaForwarder(fwd,targetContract,
         from: signerAddress,  // original signer, msg.sender
         to: targetContractAddress, // target contract
         value: '0',
-        gas: '10000000',
+        gas: '500000',
         nonce: nonce.toString(),
         data: encodedData  // <change> what is the call
       };
