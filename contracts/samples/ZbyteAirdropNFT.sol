@@ -47,7 +47,8 @@ contract ZbyteAirdropNFT is ZbyteContext, ERC721, ERC721URIStorage, ERC721Pausab
 
   // Modifiers
   modifier onlyForwarder {
-    require(isTrustedForwarder(msg.sender),"Call not from Forwarder");
+    // Remove this restriction for now.
+    //require(isTrustedForwarder(msg.sender),"Call not from Forwarder");
     _;
   }
 
