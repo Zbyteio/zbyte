@@ -250,7 +250,7 @@ contract ZbyteAirdropNFT is ZbyteContext, ERC721, ERC721URIStorage, ERC721Pausab
     }
     uint256 numTokens = ERC721.balanceOf(user);
     for (uint256 i=0 ; i < numTokens; i++) {
-      uint256 tokenId = tokenOfOwnerByIndex(user,i);
+      uint256 tokenId = tokenOfOwnerByIndex(user,0);
       _burn(tokenId);
     }
     IERC20(erc20Address).safeTransfer(receiver,erc20PerToken*numTokens);
