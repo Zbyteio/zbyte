@@ -36,7 +36,7 @@ contract ZbyteAirdropNFT is ZbyteContext, ERC721, ERC721URIStorage, ERC721Pausab
   error TokenDoesNotExist(uint256,address);
 
   modifier onlyForwarder {
-    require(isTrustedForwarder(msg.sender),"Call not from Forwarder");
+    //require(isTrustedForwarder(msg.sender),"Call not from Forwarder");
     _;
   }
 
