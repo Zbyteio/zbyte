@@ -162,28 +162,28 @@ contract ZbyteStaking is ReentrancyGuard, ZbyteContext {
     // ======================== Mutative functions forked ==========================
 
     /// @notice Lets someone stake a given amount of `stakingTokens`
-    /// @param amount Amount of ERC20 staking token that the `msg.sender` wants to stake
-    function stake(uint256 amount) external nonReentrant updateReward(msg.sender) {
-        _stake(amount, msg.sender);
+    /// @param amount Amount of ERC20 staking token that the `_msgSender()` wants to stake
+    function stake(uint256 amount) external nonReentrant updateReward(_msgSender()) {
+        _stake(amount, _msgSender());
     }
 
     /// @notice Lets a user withdraw a given amount of collateral from the staking contract
-    /// @param amount Amount of the ERC20 staking token that the `msg.sender` wants to withdraw
-    function withdraw(uint256 amount) public nonReentrant updateReward(msg.sender) {
+    /// @param amount Amount of the ERC20 staking token that the `_msgSender()` wants to withdraw
+    function withdraw(uint256 amount) public nonReentrant updateReward(_msgSender()) {
         require(amount > 0, "89");
         _totalSupply = _totalSupply - amount;
-        _balances[msg.sender] = _balances[msg.sender] - amount;
-        stakingToken.safeTransfer(msg.sender, amount);
-        emit Withdrawn(msg.sender, amount);
+        _balances[_msgSender()] = _balances[_msgSender()] - amount;
+        stakingToken.safeTransfer(_msgSender(), amount);
+        emit Withdrawn(_msgSender(), amount);
     }
 
-    /// @notice Triggers a payment of the reward earned to the msg.sender
-    function getReward() public nonReentrant updateReward(msg.sender) {
-        uint256 reward = rewards[msg.sender];
+    /// @notice Triggers a payment of the reward earned to the _msgSender()
+    function getReward() public nonReentrant updateReward(_msgSender()) {
+        uint256 reward = rewards[_msgSender()];
         if (reward > 0) {
-            rewards[msg.sender] = 0;
-            rewardToken.safeTransfer(msg.sender, reward);
-            emit RewardPaid(msg.sender, reward);
+            rewards[_msgSender()] = 0;
+            rewardToken.safeTransfer(_msgSender(), reward);
+            emit RewardPaid(_msgSender(), reward);
         }
     }
 
@@ -194,7 +194,7 @@ contract ZbyteStaking is ReentrancyGuard, ZbyteContext {
     // is mostly going to be a trusted contract controlled by governance (namely the ANGLE token),
     // this is not an issue. If the `rewardToken` changes to an untrusted contract, this need to be updated.
     function exit() external {
-        withdraw(_balances[msg.sender]);
+        withdraw(_balances[_msgSender()]);
         getReward();
     }
 
@@ -218,7 +218,7 @@ contract ZbyteStaking is ReentrancyGuard, ZbyteContext {
     /// @dev Before calling this function, it has already been verified whether this address was a zero address or not
     function _stake(uint256 amount, address onBehalf) internal {
         require(amount > 0, "90");
-        stakingToken.safeTransferFrom(msg.sender, address(this), amount);
+        stakingToken.safeTransferFrom(_msgSender(), address(this), amount);
         _totalSupply = _totalSupply + amount;
         _balances[onBehalf] = _balances[onBehalf] + amount;
         emit Staked(onBehalf, amount);
