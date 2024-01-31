@@ -307,6 +307,14 @@ abstract contract EscrowERC20 is ZbyteContext, IEscrowERC20, ReentrancyGuard {
         return 0;
     }
 
+    /// @notice Redeems underlying assest to a receiver
+    /// @param receiver_ Receiver address
+    /// @param amount_ Token amount
+    function _redeemUlAsset(address receiver_,
+                           uint256 amount_) internal {
+        IERC20(ulAsset).safeTransfer(receiver_, amount_);
+    }
+
     /// @notice Hook called before token deposit
     /// @param relay_ Relay identifier that should be used for the crosschain call
     /// @param chain_ Target chain identifier

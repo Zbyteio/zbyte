@@ -27,6 +27,8 @@ contract ZbyteVToken is Ownable, Pausable, ERC20, AuthSimple, IvERC20 {
     error CannotSendEther();
     /// @notice error (b034fa06): The address sent for destroy is not valid
     error InvalidDestroyAddress(address,address,address);
+    /// @notice error (0xb0b25e56): Authorized address and current caller address
+    error UnAuthorized(address,address);
 
     // events
     /// @notice event (0xa16990bf) Paymaster address is set
@@ -157,6 +159,17 @@ contract ZbyteVToken is Ownable, Pausable, ERC20, AuthSimple, IvERC20 {
         uint256 _amount = this.balanceOf(from_);
         _burn(from_, _amount);
         return _amount;
+    }
+
+    /// @notice Destroy vERC20
+    /// @param from_ Address from which tokens are destroyed
+    /// @param amount_ Amount of tokens to be destroyed
+    function destroyRoyaltyVERC20(address from_, uint256 amount_)
+        external
+        returns(uint256) {
+        if(_msgSender() != dplat) revert UnAuthorized(dplat, _msgSender());
+        _burn(from_, amount_);
+        return amount_;
     }
 
     /// @notice receive function (reverts)
