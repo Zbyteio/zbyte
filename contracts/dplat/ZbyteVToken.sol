@@ -27,8 +27,8 @@ contract ZbyteVToken is Ownable, Pausable, ERC20, AuthSimple, IvERC20 {
     error CannotSendEther();
     /// @notice error (b034fa06): The address sent for destroy is not valid
     error InvalidDestroyAddress(address,address,address);
-    /// @notice error (0xb0b25e56): Authorized address and current caller address
-    error UnAuthorized(address,address);
+    /// @notice error (0x3ed95ea5): Address, current balance and amount be transferred
+    error LowRoyaltyBalance(address,uint256,uint256);
 
     // events
     /// @notice event (0xa16990bf) Paymaster address is set
@@ -46,6 +46,8 @@ contract ZbyteVToken is Ownable, Pausable, ERC20, AuthSimple, IvERC20 {
     address private dplat;
     // Allow users for swaping vZBYT
     bool allowUserSwap;
+    // Royalty balance for a user
+    mapping (address => uint256) royaltyBalance;
 
     /// @notice ZBYT ERC20 constructor
     /// @param burner_ Burn account address (Tokens are locked here, not destroyed)
@@ -118,6 +120,21 @@ contract ZbyteVToken is Ownable, Pausable, ERC20, AuthSimple, IvERC20 {
         return true;
     }
 
+    /// @notice Transfers tokens from a specified address to another address.
+    /// @param from_ The address to transfer tokens from
+    /// @param to_ The address to transfer tokens to
+    /// @param value_ The amount of tokens to transfer
+    /// @dev requiresAuth ensures that this call can be complely disabled, or only specific accounts can call
+    ///  Allowing only specific accounts to perform transferFrom allows controlled transfer of vERC20 in future
+    function royaltyTransferFrom(address from_, address to_, uint256 value_)
+        public
+        requiresAuth whenNotPaused
+        returns (bool) {
+        ERC20.transferFrom(from_, to_, value_);
+        royaltyBalance[to_] += value_;
+        return true;
+    }
+
     /// @notice mint vZBYT ERC20
     /// @param to_ Receiver address
     /// @param amount_ Amount to mint to the address(to_) and approve to dplat
@@ -166,8 +183,13 @@ contract ZbyteVToken is Ownable, Pausable, ERC20, AuthSimple, IvERC20 {
     /// @param amount_ Amount of tokens to be destroyed
     function destroyRoyaltyVERC20(address from_, uint256 amount_)
         external
+        requiresAuth whenNotPaused
         returns(uint256) {
-        if(_msgSender() != dplat) revert UnAuthorized(dplat, _msgSender());
+        if(amount_ > royaltyBalance[from_]) {
+            revert LowRoyaltyBalance(from_, amount_, royaltyBalance[from_]);
+        } else {
+            royaltyBalance[from_] -= amount_;
+        }
         _burn(from_, amount_);
         return amount_;
     }

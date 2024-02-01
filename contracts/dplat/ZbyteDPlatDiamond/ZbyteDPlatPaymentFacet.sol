@@ -25,8 +25,6 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
     event PreExecFees(address,bytes4,uint256,uint256,uint256);
     /// @notice Event(0x5ccdbb95) Address of the payer, Pre Exec charge, Post Exec Charge, Refund if neccessary
     event PostExecFees(address,uint256,uint256,uint256);
-    /// @notice Event(0x0bcb4cce) Royalty payer, receiver, amount
-    event RoyaltyPayment(address Payer, address Receiver, uint256 Amount);
 
     /// error
     /// @notice Error(0x91acbad9) Error details for getRoyaltyFee failure.
@@ -150,8 +148,7 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
             if(_dPlatFee != 0)
                 ZbyteVToken(payable(_dsb.zbyteVToken)).burn(_feePayer, _dPlatFee);
             if(_royaltyFee != 0) {
-                ZbyteVToken(payable(_dsb.zbyteVToken)).destroyRoyaltyVERC20(_royaltyPayer, _royaltyFee);
-                emit RoyaltyPayment(_royaltyPayer, _royaltyReceiver, _royaltyFee);
+                ZbyteVToken(payable(_dsb.zbyteVToken)).royaltyTransferFrom(_royaltyPayer, _royaltyReceiver, _royaltyFee);
             }
         }
 

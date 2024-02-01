@@ -42,7 +42,8 @@ abstract contract EscrowERC20 is ZbyteContext, IEscrowERC20, ReentrancyGuard {
     enum Action {
         NONE,
         DEPOSIT,
-        WITHDRAW
+        WITHDRAW,
+        WITHDRAWROYALTY
     }
     /// @notice Parameters of the deposit/withdraw operation.
     struct PendingAction {
@@ -287,14 +288,14 @@ abstract contract EscrowERC20 is ZbyteContext, IEscrowERC20, ReentrancyGuard {
                 emit ERC20DepositFailedAndRefunded(ack_, success_,retval_);
             }
             delete pendingAction[ack_];
-        } else if (_pAction.action == Action.WITHDRAW) {
+        } else if (_pAction.action == Action.WITHDRAW || _pAction.action == Action.WITHDRAWROYALTY) {
             if (chain_ != _chainId) {
                 revert InvalidCallbackMessage(_chainId, _amount, chain_, retval_);
             }
 
             if (success_) {
                 IERC20(ulAsset).safeTransfer(_nAddress, retval_);
-                _record(Action.WITHDRAW, _amount, _chainId);
+                _record(_pAction.action, _amount, _chainId);
                 emit ERC20WithdrawConfirmed(ack_, success_,retval_);
             } else {
                 emit ERC20WithdrawFailed(ack_, success_, retval_);
@@ -307,12 +308,39 @@ abstract contract EscrowERC20 is ZbyteContext, IEscrowERC20, ReentrancyGuard {
         return 0;
     }
 
-    /// @notice Redeems underlying assest to a receiver
-    /// @param receiver_ Receiver address
-    /// @param amount_ Token amount
-    function _redeemUlAsset(address receiver_,
-                           uint256 amount_) internal {
-        IERC20(ulAsset).safeTransfer(receiver_, amount_);
+    function _withdrawRoyalty(uint256 relay_,
+                              uint256 chain_,
+                              address vERC20Depositor_,
+                              address receiver_,
+                              uint256 amount_)
+                              internal returns(bool result) {
+        address verc20_ = vERC20Addresses[chain_];
+        _beforeTokenWithdraw(relay_, chain_, vERC20Depositor_, receiver_, verc20_);
+
+        bytes32 _ack = keccak256(abi.encodePacked(chain_,vERC20Depositor_,receiver_,nonce));
+        nonce = nonce + 1;
+        PendingAction memory pAction;
+        pAction.action = Action.WITHDRAWROYALTY;
+        pAction.nAddress = receiver_;
+        pAction.rAddress = vERC20Depositor_;
+        pAction.chainId = chain_;
+        pAction.amount = amount_;
+        pendingAction[_ack] = pAction;
+        result = relayWrapper.performCrossChainCall(relay_,
+                                block.chainid,
+                                chain_,
+                                verc20_,
+                                abi.encodeWithSignature("destroyRoyaltyVERC20(address,uint256)",vERC20Depositor_,amount_),
+                                _ack,
+                                address(this),
+                                "");
+
+        require(result, "_withdrawRoyalty: callRemote failed.");
+        
+        _afterTokenWithdraw(relay_, chain_, vERC20Depositor_, receiver_, verc20_);
+
+        emit ERC20Withdrawn(_msgSender(), vERC20Depositor_, receiver_, chain_, _ack);
+        return result;
     }
 
     /// @notice Hook called before token deposit
