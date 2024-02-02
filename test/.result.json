@@ -30085,6 +30085,175 @@
             "user": "0x3774Ea2aB7B94fa2eDf7E72a2f051fe1EdC520F2",
             "balZ": "60.0",
             "balL1": "7.931836432392860189"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+            "balZ": "0.0",
+            "balL1": "0.039857285638530613"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x4C73728Eb0e83091Ec747e6e2Ead3504919B3f75",
+            "balZ": "0.0",
+            "balL1": "0.0"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x8DAEBA8cdfe06B0ddFb3c43473F11144B15A4075",
+            "balZ": "0.0",
+            "balL1": "0.039857285638530613"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x4C73728Eb0e83091Ec747e6e2Ead3504919B3f75",
+            "balZ": "0.0",
+            "balL1": "0.0"
+        },
+        {
+            "function": "deployCore"
+        },
+        {
+            "function": "deployDplat"
+        },
+        {
+            "function": "deployCore"
+        },
+        {
+            "function": "deployDplat"
+        },
+        {
+            "zbytePriceFeeder-registerWorker": {
+                "function": "registerWorker",
+                "worker": "0xfdFDBdf4E7e578B905AEa0AfBb9b21C992cEaeE7"
+            },
+            "zbytePriceFeeder-setNativeEthEquivalentZbyteInGwei": {
+                "function": "setNativeEthEquivalentZbyteInGwei",
+                "nativeEthEquivalentZbyteInGwei": "9000000000"
+            },
+            "zbytePriceFeeder-setZbytePriceInGwei": {
+                "function": "setNativeEthEquivalentZbyteInGwei",
+                "zbytePriceInGwei_": "10000000000"
+            },
+            "zbytePriceFeeder-setBurnRateInMill": {
+                "function": "setBurnRateInMill",
+                "burnRateInMill": "20"
+            }
+        },
+        {
+            "zbyteVToken-setUserRole": {
+                "function": "setUserRole",
+                "userAddress": "0x75855400530508A049E52356639dd5016acd121C",
+                "role": 2,
+                "enabled": true
+            },
+            "zbyteVToken-setRoleCapability": {
+                "function": "setRoleCapability",
+                "role": 2,
+                "fnSig": "0xa9059cbb",
+                "enabled": true
+            },
+            "zbyteVToken-setZbyteDPlatAddress": {
+                "function": "setZbyteDPlatAddress",
+                "dplatAddress": "0x75855400530508A049E52356639dd5016acd121C"
+            },
+            "zbytePriceFeeder-registerWorker": {
+                "function": "registerWorker",
+                "worker": "0xfdFDBdf4E7e578B905AEa0AfBb9b21C992cEaeE7"
+            },
+            "zbytePriceFeeder-setNativeEthEquivalentZbyteInGwei": {
+                "function": "setNativeEthEquivalentZbyteInGwei",
+                "nativeEthEquivalentZbyteInGwei": "9000000000"
+            },
+            "zbytePriceFeeder-setZbytePriceInGwei": {
+                "function": "setNativeEthEquivalentZbyteInGwei",
+                "zbytePriceInGwei_": "10000000000"
+            },
+            "zbytePriceFeeder-setBurnRateInMill": {
+                "function": "setBurnRateInMill",
+                "burnRateInMill": "20"
+            }
+        },
+        {
+            "function": "deployDplat"
+        },
+        {
+            "function": "deployDplat"
+        },
+        {
+            "zbyteFwdDPlat-setMinProcessingGas": {
+                "function": "setMinProcessingGas",
+                "MinimumProcessingGase": 25000
+            },
+            "zbyteFwdDPlat-setPostExecGas": {
+                "function": "setPostExecGas",
+                "PostExecGas": 55000
+            },
+            "zbyteFwdDPlat-setZbyteDPlat": {
+                "function": "setZbyteDPlat",
+                "ZbyteDPlat": "0xCbb51B20a21bC11B520D08b3E0BBAc2b14b4479b"
+            },
+            "zbyteFwdDPlat-registerWorker": {
+                "function": "registerWorker",
+                "WorkerAddress": [
+                    "0xfdFDBdf4E7e578B905AEa0AfBb9b21C992cEaeE7"
+                ],
+                "RegisterWorkerAddress": [
+                    true
+                ]
+            },
+            "zbyteFwdDPlat-setZbyteVToken": {
+                "function": "setZbyteVToken",
+                "ZbyteVToken": "0xb0191571532d3a208e3d6252A39F8F070C226c79"
+            },
+            "zbyteFwdDPlat-setZbyteForwarderDPlat": {
+                "function": "ForwarderSet",
+                "ZbyteForwarderDPlat": "0x2081DF6245288da393b2fBd55166F9025eEB7702"
+            },
+            "zbyteFwdDPlat-setZbytePriceFeeder": {
+                "function": "setZbytePriceFeeder",
+                "ZbytePriceFeeder": "0x5F164B350b8d45536C4461218e31B330Ad370a16"
+            },
+            "zbyteRelay-addRelayApprovee": {
+                "function": "addRelayApprovee",
+                "approveeAddress": "0x4661D1e9fBf54F7EE418D64A31192346e9E3B8bc"
+            },
+            "zbyteVToken-setPaymasterAddress": {
+                "function": "setPaymasterAddress",
+                "paymasterAddress": "0x2081DF6245288da393b2fBd55166F9025eEB7702"
+            },
+            "zbyteVToken-setRoleCapability": {
+                "function": "setRoleCapability",
+                "role": 2,
+                "fnSig": "0xa9059cbb",
+                "enabled": true
+            },
+            "zbyteVToken-setUserRole": {
+                "function": "setUserRole",
+                "userAddress": "0xCbb51B20a21bC11B520D08b3E0BBAc2b14b4479b",
+                "role": 2,
+                "enabled": true
+            },
+            "zbyteVToken-setZbyteDPlatAddress": {
+                "function": "setZbyteDPlatAddress",
+                "dplatAddress": "0xCbb51B20a21bC11B520D08b3E0BBAc2b14b4479b"
+            },
+            "zbytePriceFeeder-registerWorker": {
+                "function": "registerWorker",
+                "worker": "0xfdFDBdf4E7e578B905AEa0AfBb9b21C992cEaeE7"
+            },
+            "zbytePriceFeeder-setNativeEthEquivalentZbyteInGwei": {
+                "function": "setNativeEthEquivalentZbyteInGwei",
+                "nativeEthEquivalentZbyteInGwei": "9000000000"
+            },
+            "zbytePriceFeeder-setZbytePriceInGwei": {
+                "function": "setNativeEthEquivalentZbyteInGwei",
+                "zbytePriceInGwei_": "10000000000"
+            },
+            "zbytePriceFeeder-setBurnRateInMill": {
+                "function": "setBurnRateInMill",
+                "burnRateInMill": "20"
+            }
         }
     ]
 }

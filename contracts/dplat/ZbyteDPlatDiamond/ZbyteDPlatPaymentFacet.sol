@@ -147,9 +147,8 @@ contract ZbyteDPlatPaymentFacet is ZbyteContextDiamond {
                 ZbyteVToken(payable(_dsb.zbyteVToken)).transferFrom(_feePayer, address(this), _infraFee);
             if(_dPlatFee != 0)
                 ZbyteVToken(payable(_dsb.zbyteVToken)).burn(_feePayer, _dPlatFee);
-            if(_royaltyFee != 0) {
-                ZbyteVToken(payable(_dsb.zbyteVToken)).royaltyTransferFrom(_royaltyPayer, _royaltyReceiver, _royaltyFee);
-            }
+            if(_royaltyFee != 0) 
+                ZbyteVToken(payable(_dsb.zbyteVToken)).transferFrom(_royaltyPayer, _royaltyReceiver, _royaltyFee);
         }
 
         LibDPlatBase._setPreExecStates(_feePayerEnterprise, _enterpriseEligibilityGas, _enterprisePolicy, user_, dapp_, functionSig_);
