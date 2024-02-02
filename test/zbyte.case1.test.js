@@ -763,3 +763,52 @@ describe("Zbyte case8 test", function () {
         console.log("getPayer ret: ", ret);
     })
 })
+
+describe("Zbyte case8 test", function () {
+    const dapp = 'SampleDstoreDapp'
+    const deployer = 'comu'
+    const invoker = 'paag'
+    const fnnameWrite = 'storeValue'
+    const fnWriteparam = "14";
+    const fnnameVerify = 'storedValue'
+    const fnVerifyParam = "0x000000000000000000000000000000000000000000000000000000000000000e"
+
+    const relay = "ZbyteRelay"
+    const sender = 'zbyt'
+    const receiver = deployer;
+    const amount = "100"
+    const worker = 'wrkr'
+    
+    before(async function () {
+    })
+    it("deposit vZBYT for comu", async function () {
+        const zbyteFwdCore = require("../scripts/_zbyteForwarderCore.js")
+        const dplatChain = process.env.DPLAT
+        retval = await zbyteFwdCore.approveAndDeposit(relay,sender,
+                receiver,amount,dplatChain,worker);
+        expect(verifyResult({function:"approveAndDeposit"}, retval)).to.eq(true);
+        var balances = await readBalances([deployer,invoker])
+        expect(Number(balances[deployer]['balVZ'])).to.greaterThanOrEqual(Number(amount));
+    })
+    it("Withdraw Royalty", async function () {
+        const zbyteVToken = require("../scripts/_zbyteVToken.js");
+        const zbyteEscrow = require("../scripts/_zbyteEscrow.js");
+        const dplatChain = process.env.DPLAT
+        await zbyteVToken.setRoleCapability('3',"approve(address spender, uint256 amount) public returns (bool)",true,'zbyt');
+        await zbyteVToken.setUserRole('zbyt', '1', true, 'zbyt');
+        await zbyteVToken.setUserRole('zbyt', '2', true, 'zbyt');
+        await zbyteVToken.setUserRole(deployer,'3',true, 'zbyt');
+        await zbyteVToken.approve(deployer,'zbyt','10')
+
+        var balancesBefore = await readBalances([deployer,invoker,worker]);
+        await zbyteVToken.royaltyTransferFrom('zbyt', deployer, worker, '10');
+        var balancesAfter = await readBalances([deployer,invoker,worker]);
+        expect(Number(balancesAfter[worker]['balVZ'])).to.eq(Number(balancesBefore[worker]['balVZ']) + Number('10'));
+
+        balancesBefore = await readBalances([deployer,invoker,worker]);
+        await zbyteEscrow.withdrawRoyalty('ZbyteRelay', dplatChain, worker,'10');
+        balancesAfter = await readBalances([deployer,invoker,worker]);
+
+        expect(Number(balancesAfter[worker]['balZ'])).to.eq(Number(balancesBefore[worker]['balZ']) + Number('10'));
+    })
+})

@@ -47,7 +47,7 @@ contract ZbyteVToken is Ownable, Pausable, ERC20, AuthSimple, IvERC20 {
     // Allow users for swaping vZBYT
     bool allowUserSwap;
     // Royalty balance for a user
-    mapping (address => uint256) royaltyBalance;
+    mapping (address => uint256) public royaltyBalance;
 
     /// @notice ZBYT ERC20 constructor
     /// @param burner_ Burn account address (Tokens are locked here, not destroyed)

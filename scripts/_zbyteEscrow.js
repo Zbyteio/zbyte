@@ -89,12 +89,13 @@ async function withdraw(relay,dplatChain,paymaster,receiver,owner) {
                             contractWithSigner.target,destroyCallData)
         let ownerAddress = await lib.getAddress(owner);
         let relayId = constants.relayNameToId[relay];
+        let modifiedPayload = abiCoder.encode(["address","bytes"], [destRelay, payload]);
         const tx = await contractWithSigner.withdraw(relayId,dplatChainId,paymasterAddress,receiverAddress);
         await expect(tx.wait())
                       .to.emit(contractWithSigner,"ERC20Withdrawn")  // Escro called relay
                       .withArgs(ownerAddress,paymasterAddress,receiverAddress,dplatChainId,ack)
                       .to.emit(relayContract,"RelayCallRemoteReceived")  // source side relay received call
-                      .withArgs(coreChainId,relayContract.target,dplatChainId,destRelay,payload);
+                      .withArgs(coreChainId,relayContract.target,dplatChainId,destRelay,modifiedPayload);
 
         let retval = { function: "withdraw",
                        srcChain: hre.network.name, srcRelay: relayContract.target,
@@ -106,6 +107,56 @@ async function withdraw(relay,dplatChain,paymaster,receiver,owner) {
     }
   }
   
+async function withdrawRoyalty(relay,dplatChain,owner,amount) {
+    try{
+  
+        let contractWithSigner = await lib.getContractWithSigner(contractName, owner);
+        let dplatChainId = lib.nameToChainId(dplatChain);
+        let receiverAddress = await lib.getAddress(owner);
+        let senderAddress = await lib.getAddress(owner);
+        // let paymasterAddress = await lib.getAddressOnChain(paymaster,dplatChain);
+        var amountWei = ethers.parseUnits(amount,18);
+        let nonce = await contractWithSigner.getNonce();
+  
+        let ack = ethers.solidityPackedKeccak256(["uint256","address","address","uint256"],
+                [dplatChainId,senderAddress,receiverAddress,nonce]);
+  
+        let relayContract = await lib.getContract("ZbyteRelay")
+        console.log("withdrawRoyalty: " + dplatChainId + "," + receiverAddress + "," + senderAddress);
+        let coreChainId = lib.nameToChainId(hre.network.name)
+        let destRelay = await lib.getAddressOnChain('ZbyteRelay',dplatChain);
+        let zbyteVTokenAddress = await lib.getAddressOnChain('ZbyteVToken',dplatChain);
+        let vAddressStored = await contractWithSigner.vERC20Addresses(dplatChainId);
+  
+        expect(zbyteVTokenAddress).to.equal(vAddressStored);
+        let relayWrapper = await lib.getContract('RelayWrapper');
+  
+        let ABI = [ "function destroyRoyaltyVERC20(address account, uint256 amount)" ];
+        let iface = new ethers.Interface(ABI);
+        var destroyCallData =  iface.encodeFunctionData("destroyRoyaltyVERC20", [senderAddress,amountWei]);
+        let payload = await relayWrapper.updatePayload(dplatChainId,vAddressStored,ack,
+                            contractWithSigner.target,destroyCallData)
+        let ownerAddress = await lib.getAddress(owner);
+        let relayId = constants.relayNameToId[relay];
+        const abiCoder = new ethers.AbiCoder();
+        let modifiedPayload = abiCoder.encode(["address","bytes"], [destRelay, payload]);
+        console.log("withdrawRoyalty: ", coreChainId,relayContract.target,dplatChainId,destRelay,modifiedPayload);
+        const tx = await contractWithSigner.withdrawRoyalty(relayId,dplatChainId,amountWei);
+        await expect(tx.wait())
+                      .to.emit(contractWithSigner,"ERC20Withdrawn")  // Escro called relay
+                      .withArgs(ownerAddress,senderAddress,receiverAddress,dplatChainId,ack)
+                      .to.emit(relayContract,"RelayCallRemoteReceived")  // source side relay received call
+                      .withArgs(coreChainId,relayContract.target,dplatChainId,destRelay,modifiedPayload);
+
+        let retval = { function: "withdrawRoyalty",
+                       srcChain: hre.network.name, srcRelay: relayContract.target,
+                       destChain: dplatChain, destRelay: destRelay.target, data: payload,
+                       ack:ack,caller:'escrow'};
+        return retval;
+    } catch (error) {
+        console.log(error);
+    }
+  }
 
 async function setvERC20Address(owner,dplatChain) {
     try {
@@ -221,5 +272,6 @@ module.exports = {
     pause:pause,
     unpause:unpause,
     getPendingAction:getPendingAction,
-    registerWorker:registerWorker
+    registerWorker:registerWorker,
+    withdrawRoyalty:withdrawRoyalty
 }

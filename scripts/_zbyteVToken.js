@@ -106,6 +106,28 @@ async function transferFrom(approvee, sender, receiver, amount) {
     }
 }
 
+async function royaltyTransferFrom(approvee, sender, receiver, amount) {
+    try {
+        let contractWithSigner = await lib.getContractWithSigner(contractName, approvee);
+
+        var amountWei = ethers.parseUnits(amount,18);
+        var approveeAddress = await lib.getAddress(approvee);
+        var senderAddress = await lib.getAddress(sender);
+        var receiverAddress = await lib.getAddress(receiver);
+        console.log("royaltyTransferFrom: " + approveeAddress + "," + senderAddress + "," +
+            amountWei + "," + receiverAddress);
+        const tx = await contractWithSigner.royaltyTransferFrom(senderAddress,receiverAddress,amountWei);
+        await expect(tx.wait())
+                .to.emit(contractWithSigner,"Transfer")
+                .withArgs(senderAddress,receiverAddress,amountWei);
+        return {function: "royaltyTransferFrom",
+                sender: senderAddress, receiver: receiverAddress,
+                amount: ethers.formatUnits(amountWei,18)}
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 async function approve(approver, approvee, amount) {
     try {
         let contractWithSigner = await lib.getContractWithSigner(contractName, approver);
@@ -265,5 +287,6 @@ module.exports = {
     approve:approve,
     setZbyteDPlatAddress:setZbyteDPlatAddress,
     mintVZbyteGasless:mintVZbyteGasless,
-    setPaymasterAddress:setPaymasterAddress
+    setPaymasterAddress:setPaymasterAddress,
+    royaltyTransferFrom:royaltyTransferFrom
 }

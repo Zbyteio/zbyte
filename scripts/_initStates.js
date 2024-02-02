@@ -136,12 +136,22 @@ async function initDplatStates(owner) {
             true,'zbyt')
         retval["zbyteVToken-setRoleCapability"] = ret;
 
+        ret = await zbyteVToken.setRoleCapability(1,
+            "destroyRoyaltyVERC20(address from_, uint256 amount_) public returns(uint256)",
+            true,'zbyt')
+        retval["zbyteVToken-setRoleCapability"] = ret;
+
         ret = await zbyteVToken.setUserRole('ZbyteRelay',1,true,'zbyt')
         retval["zbyteVToken-setUserRole"] = ret;
 
         ret = await zbyteVToken.setRoleCapability(2,
             "transferFrom(address from_, address to_, uint256 value_) public returns (bool)", true,'zbyt')
         retval["zbyteVToken-setRoleCapability"] = ret;
+
+        ret = await zbyteVToken.setRoleCapability(2,
+            "royaltyTransferFrom(address from_, address to_, uint256 value_) public returns (bool)", true,'zbyt')
+        retval["zbyteVToken-setRoleCapability"] = ret;
+
         ret = await zbyteVToken.setRoleCapability(2,
             "burn(address from_, uint256 amount_) external returns(uint256)",
             true,'zbyt')
