@@ -804,11 +804,12 @@ describe("Zbyte case8 test", function () {
         await zbyteVToken.royaltyTransferFrom('zbyt', deployer, worker, '10');
         var balancesAfter = await readBalances([deployer,invoker,worker]);
         expect(Number(balancesAfter[worker]['balVZ'])).to.eq(Number(balancesBefore[worker]['balVZ']) + Number('10'));
+        expect(Number(balancesAfter[deployer]['balVZ'])).to.eq(Number(balancesBefore[deployer]['balVZ']) - Number('10'));
 
         balancesBefore = await readBalances([deployer,invoker,worker]);
         await zbyteEscrow.withdrawRoyalty('ZbyteRelay', dplatChain, worker,'10');
         balancesAfter = await readBalances([deployer,invoker,worker]);
-
+        expect(Number(balancesAfter[worker]['balVZ'])).to.eq(Number(balancesBefore[worker]['balVZ']) - Number('10'));
         expect(Number(balancesAfter[worker]['balZ'])).to.eq(Number(balancesBefore[worker]['balZ']) + Number('10'));
     })
 })
