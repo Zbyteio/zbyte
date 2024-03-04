@@ -190,7 +190,7 @@ contract OrderBook is ZbyteContext {
         for (uint256 i = 0; i < askOrders.length && !buyOrder.isFilled; i++) {
             Order storage sellOrder = askOrders[i];
 
-            if (sellOrder.price <= buyOrder.price && !sellOrder.isFilled) {
+            if (sellOrder.price <= buyOrder.price && !sellOrder.isFilled && sellOrder.baseToken == buyOrder.baseToken && sellOrder.quoteToken == buyOrder.quoteToken) {
                 uint256 tradeQuantity = min(
                     buyOrder.quantity,
                     sellOrder.quantity
@@ -247,7 +247,7 @@ contract OrderBook is ZbyteContext {
         for (uint256 i = 0; i < bidOrders.length && !sellOrder.isFilled; i++) {
             Order storage buyOrder = bidOrders[i];
 
-            if (buyOrder.price >= sellOrder.price && !buyOrder.isFilled) {
+            if (buyOrder.price >= sellOrder.price && !buyOrder.isFilled  && sellOrder.baseToken == buyOrder.baseToken && sellOrder.quoteToken == buyOrder.quoteToken) {
                 uint256 tradeQuantity = min(
                     buyOrder.quantity,
                     sellOrder.quantity
@@ -301,6 +301,14 @@ contract OrderBook is ZbyteContext {
     function getBidOrderIndex(uint256 orderId) public view returns (uint256) {
         require(orderId < bidOrders.length, "Order ID out of range");
         return orderId;
+    }
+
+    function getAskOrderLength() public view returns (uint256) {
+        return askOrders.length;
+    }
+
+    function getBidOrderLength() public view returns (uint256) {
+        return bidOrders.length;
     }
 
     /**
