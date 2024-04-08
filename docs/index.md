@@ -1,154 +1,5 @@
 # Solidity API
 
-## SampleDstoreDapp
-
-To prepare a contract for DPlat compatibility:
-1. Users are required to derive from the abstract\
-contract called ZbyteContext.\
-2. Replace the msg.sender with _msgSender() and msg.data with _msgData().
-
-### DStoreSet
-
-```solidity
-event DStoreSet(address, uint256)
-```
-
-### storedValue
-
-```solidity
-uint8 storedValue
-```
-
-### storedBy
-
-```solidity
-address storedBy
-```
-
-### constructor
-
-```solidity
-constructor(address forwarder_) public
-```
-
-### storeValue
-
-```solidity
-function storeValue(uint8 _value) public
-```
-
-## ZbyteContext
-
-_ERC2771Context with a function to set forwarder_
-
-### CannotSendEther
-
-```solidity
-error CannotSendEther()
-```
-
-error (0xbf064619): Contract cannot receive ether
-
-### ZeroAddress
-
-```solidity
-error ZeroAddress()
-```
-
-error (0xd92e233d): Address is address(0)
-
-### ZeroValue
-
-```solidity
-error ZeroValue()
-```
-
-error(): Value sent is 0
-
-### ForwarderSet
-
-```solidity
-event ForwarderSet(address, address)
-```
-
-event (0x94aed472): Forwarder address is changed
-
-### isTrustedForwarder
-
-```solidity
-function isTrustedForwarder(address forwarder_) public view virtual returns (bool)
-```
-
-Check if the given address is the trusted forwarder
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| forwarder_ | address | Address to check |
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | bool | true if forwarder_ is trusted forwarder |
-
-### _setTrustedForwarder
-
-```solidity
-function _setTrustedForwarder(address forwarder_) internal
-```
-
-Set a trusted forwarder address
-
-_emits ForwarderSet on success_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| forwarder_ | address | Trusted forwarder address |
-
-### setTrustedForwarder
-
-```solidity
-function setTrustedForwarder(address forwarder_) public
-```
-
-Set the forwarder contract address
-
-_onlyOwner can call_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| forwarder_ | address | Frwarder conract address |
-
-### _getTrustedForwarder
-
-```solidity
-function _getTrustedForwarder() internal view returns (address)
-```
-
-Get the trusted forwarder address
-
-### _msgSender
-
-```solidity
-function _msgSender() internal view virtual returns (address sender)
-```
-
-Extract true caller if called via trusted forwarder
-
-### _msgData
-
-```solidity
-function _msgData() internal view virtual returns (bytes)
-```
-
-Extract data if called via trusted forwarder
-
 ## EscrowERC20
 
 _DPLAT ERC20 escrow abstract contract_
@@ -2134,6 +1985,16 @@ Authorized workers
 constructor(address forwarder_) public
 ```
 
+Constructor function to initialize the contract with a trusted forwarder address.
+
+_The trusted forwarder is used for meta transactions._
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| forwarder_ | address | The address of the trusted forwarder contract. |
+
 ### onlyAuthorized
 
 ```solidity
@@ -2277,6 +2138,17 @@ DPlat fee in terms of Zbyte
 ```solidity
 function setPrices(uint256 nativeEthEquivalentZbyteInGwei_, uint256 zbytePriceInGwei_) external
 ```
+
+Sets the prices for the native ETH equivalent of Zbyte and the Zbyte price in Gwei.
+
+_This function is restricted to be called only by authorized users._
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| nativeEthEquivalentZbyteInGwei_ | uint256 | The price of the native ETH equivalent of Zbyte in Gwei. |
+| zbytePriceInGwei_ | uint256 | The price of Zbyte in Gwei. |
 
 ### setBurnRateInMill
 
@@ -3304,7 +3176,266 @@ function _msgData() internal view returns (bytes)
 
 ERC2771 _msgData override
 
+## OrderBook
+
+_A decentralized order book contract for trading ERC20 tokens._
+
+### base
+
+```solidity
+contract IERC20 base
+```
+
+### quote
+
+```solidity
+contract IERC20 quote
+```
+
+< The base ERC20 token for trading.
+
+### Order
+
+```solidity
+struct Order {
+  uint256 id;
+  address trader;
+  bool isBuyOrder;
+  uint256 price;
+  uint256 quantity;
+  bool isFilled;
+  address baseToken;
+  address quoteToken;
+}
+```
+
+### bidOrders
+
+```solidity
+struct OrderBook.Order[] bidOrders
+```
+
+### askOrders
+
+```solidity
+struct OrderBook.Order[] askOrders
+```
+
+< Array to store bid (buy) orders.
+
+### OrderCanceled
+
+```solidity
+event OrderCanceled(uint256 orderId, address trader, bool isBuyOrder)
+```
+
+< Array to store ask (sell) orders.
+
+### TradeExecuted
+
+```solidity
+event TradeExecuted(uint256 buyOrderId, uint256 sellOrderId, address buyer, address seller, uint256 price, uint256 quantity)
+```
+
+< Event emitted when an order is canceled.
+
+### constructor
+
+```solidity
+constructor(address forwarder_) public
+```
+
+_Constructor to set the trusted forwarder._
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| forwarder_ | address | The address of the trusted forwarder. |
+
+### placeBuyOrder
+
+```solidity
+function placeBuyOrder(uint256 price, uint256 quantity, address baseToken, address quoteToken) external
+```
+
+_Place a buy order._
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| price | uint256 | The price per token of the order. |
+| quantity | uint256 | The quantity of tokens in the order. |
+| baseToken | address | The ERC20 token address for the base asset. |
+| quoteToken | address | The ERC20 token address for the quote asset. |
+
+### placeSellOrder
+
+```solidity
+function placeSellOrder(uint256 price, uint256 quantity, address baseToken, address quoteToken) external
+```
+
+_Place a sell order._
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| price | uint256 | The price per token of the order. |
+| quantity | uint256 | The quantity of tokens in the order. |
+| baseToken | address | The ERC20 token address for the base asset. |
+| quoteToken | address | The ERC20 token address for the quote asset. |
+
+### cancelOrder
+
+```solidity
+function cancelOrder(uint256 orderId, bool isBuyOrder) external
+```
+
+_Cancel an existing order._
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| orderId | uint256 | The ID of the order to cancel. |
+| isBuyOrder | bool | Flag indicating if the order to cancel is a buy order. |
+
+### insertBidOrder
+
+```solidity
+function insertBidOrder(struct OrderBook.Order newOrder) internal
+```
+
+_Internal function to insert a new buy order into the bidOrders array
+while maintaining sorted order (highest to lowest price)._
+
+### insertAskOrder
+
+```solidity
+function insertAskOrder(struct OrderBook.Order newOrder) internal
+```
+
+_Internal function to insert a new sell order into the askOrders array
+while maintaining sorted order (lowest to highest price)._
+
+### matchBuyOrder
+
+```solidity
+function matchBuyOrder(uint256 buyOrderId) internal
+```
+
+_Internal function to match a buy order with compatible ask orders._
+
+### matchSellOrder
+
+```solidity
+function matchSellOrder(uint256 sellOrderId) internal
+```
+
+_Internal function to match a sell order with compatible bid orders._
+
+### getBidOrderIndex
+
+```solidity
+function getBidOrderIndex(uint256 orderId) public view returns (uint256)
+```
+
+_Get the index of a buy order in the bidOrders array._
+
+### getAskOrderLength
+
+```solidity
+function getAskOrderLength() public view returns (uint256)
+```
+
+### getBidOrderLength
+
+```solidity
+function getBidOrderLength() public view returns (uint256)
+```
+
+### getAskOrderIndex
+
+```solidity
+function getAskOrderIndex(uint256 orderId) public view returns (uint256)
+```
+
+_Get the index of a sell order in the askOrders array._
+
+### min
+
+```solidity
+function min(uint256 a, uint256 b) internal pure returns (uint256)
+```
+
+_Helper function to find the minimum of two values._
+
+## SampleDstoreDapp
+
+This contract serves as a sample data storage decentralized application (DApp).
+It allows users to store a uint8 value along with the address of the entity performing the storage operation.
+To prepare a contract for DPlat compatibility:
+1. Users are required to derive from the abstract contract called ZbyteContext.
+2. Replace the usage of msg.sender with _msgSender() and msg.data with _msgData().
+
+### DStoreSet
+
+```solidity
+event DStoreSet(address, uint256)
+```
+
+_Emitted when a value is stored._
+
+### storedValue
+
+```solidity
+uint8 storedValue
+```
+
+Stored uint8 value
+
+### storedBy
+
+```solidity
+address storedBy
+```
+
+Address of the entity that stored the value
+
+### constructor
+
+```solidity
+constructor(address forwarder_) public
+```
+
+Constructor to set the trusted forwarder
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| forwarder_ | address | The address of the trusted forwarder |
+
+### storeValue
+
+```solidity
+function storeValue(uint8 _value) public
+```
+
+Function to store a uint8 value
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| _value | uint8 | The uint8 value to be stored |
+
 ## Auth
+
+This abstract contract defines role-based access control (RBAC) mechanisms
+to manage user roles and capabilities within a smart contract system.
 
 ### UserRoleUpdated
 
@@ -3312,17 +3443,23 @@ ERC2771 _msgData override
 event UserRoleUpdated(address user, uint8 role, bool enabled)
 ```
 
+Emitted when a user role is updated.
+
 ### PublicCapabilityUpdated
 
 ```solidity
 event PublicCapabilityUpdated(bytes4 functionSig, bool enabled)
 ```
 
+Emitted when a public capability is updated.
+
 ### RoleCapabilityUpdated
 
 ```solidity
 event RoleCapabilityUpdated(uint8 role, bytes4 functionSig, bool enabled)
 ```
+
+Emitted when a role capability is updated.
 
 ### DiamondStorage
 
@@ -3346,11 +3483,15 @@ function diamondStorage() internal pure returns (struct Auth.DiamondStorage ds)
 function getOwner() public virtual returns (address)
 ```
 
+Internal function to access the diamond storage.
+
 ### doesUserHaveRole
 
 ```solidity
 function doesUserHaveRole(address user, uint8 role) public view returns (bool)
 ```
+
+Checks if a user has a specific role.
 
 ### doesRoleHaveCapability
 
@@ -3358,11 +3499,15 @@ function doesUserHaveRole(address user, uint8 role) public view returns (bool)
 function doesRoleHaveCapability(uint8 role, bytes4 functionSig) public view returns (bool)
 ```
 
+Checks if a role has access to a specific capability.
+
 ### canCall
 
 ```solidity
 function canCall(address user, bytes4 functionSig) public view returns (bool)
 ```
+
+Checks if a user can call a specific function.
 
 ### isAuthorized
 
@@ -3370,11 +3515,15 @@ function canCall(address user, bytes4 functionSig) public view returns (bool)
 function isAuthorized(address user, bytes4 functionSig) internal view returns (bool)
 ```
 
+Checks if a user is authorized to call a specific function.
+
 ### isAuthorizedOrOwner
 
 ```solidity
 function isAuthorizedOrOwner(address user, bytes4 functionSig) internal returns (bool)
 ```
+
+Checks if a user is authorized to call a specific function or is the owner.
 
 ### requiresAuth
 
@@ -3382,11 +3531,15 @@ function isAuthorizedOrOwner(address user, bytes4 functionSig) internal returns 
 modifier requiresAuth()
 ```
 
+Modifier to require authentication for a function call.
+
 ### requiresAuthOrOwner
 
 ```solidity
 modifier requiresAuthOrOwner()
 ```
+
+Modifier to require authentication or ownership for a function call.
 
 ### setPublicCapability
 
@@ -3394,11 +3547,15 @@ modifier requiresAuthOrOwner()
 function setPublicCapability(bytes4 functionSig, bool enabled) public
 ```
 
+Sets the public access status of a capability.
+
 ### setRoleCapability
 
 ```solidity
 function setRoleCapability(uint8 role, bytes4 functionSig, bool enabled) public
 ```
+
+Sets the access status of a capability for a specific role.
 
 ### setUserRole
 
@@ -3406,13 +3563,19 @@ function setRoleCapability(uint8 role, bytes4 functionSig, bool enabled) public
 function setUserRole(address user, uint8 role, bool enabled) public
 ```
 
+Sets the role of a user.
+
 ## AuthDiamond
+
+Abstract function to retrieve the owner address.
 
 ### getOwner
 
 ```solidity
 function getOwner() public virtual returns (address)
 ```
+
+Internal function to access the diamond storage.
 
 ## AuthSimple
 
@@ -3421,6 +3584,8 @@ function getOwner() public virtual returns (address)
 ```solidity
 function getOwner() public virtual returns (address)
 ```
+
+Internal function to access the diamond storage.
 
 ## LibCommonErrors
 
@@ -3507,6 +3672,118 @@ Checks if the given forwarder is the trusted forwarder
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | forwarder_ | address |  |
+
+## ZbyteContext
+
+_ERC2771Context with a function to set forwarder_
+
+### CannotSendEther
+
+```solidity
+error CannotSendEther()
+```
+
+error (0xbf064619): Contract cannot receive ether
+
+### ZeroAddress
+
+```solidity
+error ZeroAddress()
+```
+
+error (0xd92e233d): Address is address(0)
+
+### ZeroValue
+
+```solidity
+error ZeroValue()
+```
+
+error(): Value sent is 0
+
+### ForwarderSet
+
+```solidity
+event ForwarderSet(address, address)
+```
+
+event (0x94aed472): Forwarder address is changed
+
+### isTrustedForwarder
+
+```solidity
+function isTrustedForwarder(address forwarder_) public view virtual returns (bool)
+```
+
+Check if the given address is the trusted forwarder
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| forwarder_ | address | Address to check |
+
+#### Return Values
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| [0] | bool | true if forwarder_ is trusted forwarder |
+
+### _setTrustedForwarder
+
+```solidity
+function _setTrustedForwarder(address forwarder_) internal
+```
+
+Set a trusted forwarder address
+
+_emits ForwarderSet on success_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| forwarder_ | address | Trusted forwarder address |
+
+### setTrustedForwarder
+
+```solidity
+function setTrustedForwarder(address forwarder_) public
+```
+
+Set the forwarder contract address
+
+_onlyOwner can call_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| forwarder_ | address | Frwarder conract address |
+
+### _getTrustedForwarder
+
+```solidity
+function _getTrustedForwarder() internal view returns (address)
+```
+
+Get the trusted forwarder address
+
+### _msgSender
+
+```solidity
+function _msgSender() internal view virtual returns (address sender)
+```
+
+Extract true caller if called via trusted forwarder
+
+### _msgData
+
+```solidity
+function _msgData() internal view virtual returns (bytes)
+```
+
+Extract data if called via trusted forwarder
 
 ## ZbyteContextDiamond
 

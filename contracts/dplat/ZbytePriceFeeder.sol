@@ -30,6 +30,9 @@ contract ZbytePriceFeeder is IZbytePriceFeeder, ZbyteContext {
     /// @notice Authorized workers
     mapping(address => bool) public authorizedWorkers;
 
+    /// @notice Constructor function to initialize the contract with a trusted forwarder address.
+    /// @dev The trusted forwarder is used for meta transactions.
+    /// @param forwarder_ The address of the trusted forwarder contract.
     constructor(address forwarder_) {
         _setTrustedForwarder(forwarder_);
     }
@@ -115,6 +118,10 @@ contract ZbytePriceFeeder is IZbytePriceFeeder, ZbyteContext {
         return convertMillToZbyte(burnRateInMill);
     }
 
+    /// @notice Sets the prices for the native ETH equivalent of Zbyte and the Zbyte price in Gwei.
+    /// @dev This function is restricted to be called only by authorized users.
+    /// @param nativeEthEquivalentZbyteInGwei_ The price of the native ETH equivalent of Zbyte in Gwei.
+    /// @param zbytePriceInGwei_ The price of Zbyte in Gwei.
     function setPrices(uint256 nativeEthEquivalentZbyteInGwei_, uint256 zbytePriceInGwei_) external onlyAuthorized {
         setNativeEthEquivalentZbyteInGwei(nativeEthEquivalentZbyteInGwei_);
         setZbytePriceInGwei(zbytePriceInGwei_);
