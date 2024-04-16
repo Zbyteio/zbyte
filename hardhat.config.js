@@ -43,6 +43,11 @@ module.exports = {
       accounts: constants.prvKeysList,
       chainId: 137
     },
+    amoy: {
+      url: `https://polygon-amoy.infura.io/v3/c4adc113c65d419fa4aa11d536d51e2c`,
+      accounts: constants.prvKeysList,
+      chainId: 80002
+    },
     avalanche: {
       url: `https://avalanche-mainnet.infura.io/v3/c4adc113c65d419fa4aa11d536d51e2c`,
       accounts: constants.prvKeysList,

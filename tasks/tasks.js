@@ -44,7 +44,7 @@ task("zDeploy", "Deploy contracts")
             retval = await deployDplat(taskArgs.owner);
         } else if(taskArgs.api == "dapp") {
             const deployDapp = require("../deploy/3_deploy_dapp.js");
-            retval = await deployDapp(taskArgs.dapp, taskArgs.deployer);
+            retval = await deployDapp("SampleDstoreDapp", taskArgs.owner);
         } else if(taskArgs.api == "initCoreStates") {
             const init = require("../scripts/_initStates.js");
             retval = await init.initCoreStates(taskArgs.owner);
