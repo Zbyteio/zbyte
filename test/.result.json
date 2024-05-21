@@ -30816,6 +30816,79 @@
         },
         {
             "function": "initDappStates"
+        },
+        {
+            "function": "deployDplat"
+        },
+        {
+            "function": "deployDplat"
+        },
+        {
+            "function": "deployDplat"
+        },
+        {
+            "function": "deployDplat"
+        },
+        {
+            "function": "deployDplat"
+        },
+        {
+            "zbytePriceFeeder-registerWorker": {
+                "function": "registerWorker",
+                "worker": "0xfdFDBdf4E7e578B905AEa0AfBb9b21C992cEaeE7"
+            },
+            "zbytePriceFeeder-setNativeEthEquivalentZbyteInGwei": {
+                "function": "setNativeEthEquivalentZbyteInGwei",
+                "nativeEthEquivalentZbyteInGwei": "9000000000"
+            },
+            "zbytePriceFeeder-setZbytePriceInGwei": {
+                "function": "setNativeEthEquivalentZbyteInGwei",
+                "zbytePriceInGwei_": "10000000000"
+            },
+            "zbytePriceFeeder-setBurnRateInMill": {
+                "function": "setBurnRateInMill",
+                "burnRateInMill": "20"
+            }
+        },
+        {
+            "zbytePriceFeeder-registerWorker": {
+                "function": "registerWorker",
+                "worker": "0xfdFDBdf4E7e578B905AEa0AfBb9b21C992cEaeE7"
+            },
+            "zbytePriceFeeder-setNativeEthEquivalentZbyteInGwei": {
+                "function": "setNativeEthEquivalentZbyteInGwei",
+                "nativeEthEquivalentZbyteInGwei": "9000000000"
+            },
+            "zbytePriceFeeder-setZbytePriceInGwei": {
+                "function": "setNativeEthEquivalentZbyteInGwei",
+                "zbytePriceInGwei_": "10000000000"
+            },
+            "zbytePriceFeeder-setBurnRateInMill": {
+                "function": "setBurnRateInMill",
+                "burnRateInMill": "20"
+            }
+        },
+        {
+            "relayWrapper-setRelayAddress": {
+                "function": "setRelayAddress",
+                "relayAddress": "0xf3FAde15f5A96E83CED6FC9E391E72234fDbDd44",
+                "relayId": 0,
+                "chainId": 296
+            },
+            "Escrow-setvERC20Address": {
+                "function": "setvERC20Address",
+                "vERC20Address": "0x41f266810181A3212F6c4A08322FB2825819f28C",
+                "dplatChainId": 296
+            }
+        },
+        {
+            "function": "deployDapp",
+            "dapp": "SampleDstoreDapp",
+            "dappAddress": "0x4390E5492Cf0899d75a18b62F2F82dD10d9f2F43",
+            "deployer": "0xea16B31Ca57005b27f0b0B33E6B28E2953E634Bb"
+        },
+        {
+            "function": "initDappStates"
         }
     ]
 }

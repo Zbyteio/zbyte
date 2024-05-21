@@ -52,6 +52,11 @@ module.exports = {
       url: `https://avalanche-mainnet.infura.io/v3/c4adc113c65d419fa4aa11d536d51e2c`,
       accounts: constants.prvKeysList,
       chainId: 43114
+    },
+    hederatest: {
+      url: `https://testnet.hashio.io/api	`,
+      accounts: constants.prvKeysList,
+      chainId: 296
     }
   }
 };
