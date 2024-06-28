@@ -1,0 +1,685 @@
+{
+  "address": "0xf3FAde15f5A96E83CED6FC9E391E72234fDbDd44",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "forwarder_",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "CannotSendEther",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "InvalidChain",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "InvalidDestinationRelay",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "NotApproved",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "NotRelayWrapperOrSelf",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ZeroValue",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "ForwarderSet",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "RelayApproveeAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "name": "RelayCallRemoteReceived",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "RelayReceiveCallExecuted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "RelayWrapperSet",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "approvee_",
+          "type": "address"
+        }
+      ],
+      "name": "addRelayApprovee",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "destChain_",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "destRelay_",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes",
+          "name": "payload_",
+          "type": "bytes"
+        }
+      ],
+      "name": "callRemote",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "forwarder_",
+          "type": "address"
+        }
+      ],
+      "name": "isTrustedForwarder",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "srcChain_",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "srcRelay_",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes",
+          "name": "payload_",
+          "type": "bytes"
+        }
+      ],
+      "name": "receiveCall",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "relayWrapper",
+      "outputs": [
+        {
+          "internalType": "contract IRelayWrapper",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "wrapper_",
+          "type": "address"
+        }
+      ],
+      "name": "setRelayWrapper",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "forwarder_",
+          "type": "address"
+        }
+      ],
+      "name": "setTrustedForwarder",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "destChain_",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "destContract_",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "ack_",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "callbackContract_",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes",
+          "name": "data_",
+          "type": "bytes"
+        }
+      ],
+      "name": "updatePayload",
+      "outputs": [
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x436d5834857a86c741d9a2b43cb719c60024d8742b782addb15802e7bd5d04ae",
+  "receipt": {
+    "to": null,
+    "from": "0x4661D1e9fBf54F7EE418D64A31192346e9E3B8bc",
+    "contractAddress": "0xf3FAde15f5A96E83CED6FC9E391E72234fDbDd44",
+    "transactionIndex": 9,
+    "gasUsed": "805008",
+    "logsBloom": "0x00000000000000000010000000000040000000000000000000800000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000008000000000000005000000000000000000000000000000000000020000000000000000000800000000000000000000000001000000400000000000000000000400000000000000000004000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002000000000000000000020000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x400aaeed52c9c47eb428a3980b509e564673e4c397396828b117cd3ef9884aba",
+    "transactionHash": "0x436d5834857a86c741d9a2b43cb719c60024d8742b782addb15802e7bd5d04ae",
+    "logs": [
+      {
+        "transactionIndex": 9,
+        "blockNumber": 11852651,
+        "transactionHash": "0x436d5834857a86c741d9a2b43cb719c60024d8742b782addb15802e7bd5d04ae",
+        "address": "0xf3FAde15f5A96E83CED6FC9E391E72234fDbDd44",
+        "topics": [
+          "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "0x0000000000000000000000004661d1e9fbf54f7ee418d64a31192346e9e3b8bc"
+        ],
+        "data": "0x",
+        "logIndex": 42,
+        "blockHash": "0x400aaeed52c9c47eb428a3980b509e564673e4c397396828b117cd3ef9884aba"
+      },
+      {
+        "transactionIndex": 9,
+        "blockNumber": 11852651,
+        "transactionHash": "0x436d5834857a86c741d9a2b43cb719c60024d8742b782addb15802e7bd5d04ae",
+        "address": "0xf3FAde15f5A96E83CED6FC9E391E72234fDbDd44",
+        "topics": [
+          "0x94aed472e01353526c04ec91cee149d41e78d848ec851c72be532bf7b120bd30"
+        ],
+        "data": "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000360982a70d8f7453350bb68807f26e32ca214dc4",
+        "logIndex": 43,
+        "blockHash": "0x400aaeed52c9c47eb428a3980b509e564673e4c397396828b117cd3ef9884aba"
+      }
+    ],
+    "blockNumber": 11852651,
+    "cumulativeGasUsed": "3026326",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "0x360982a70D8f7453350bb68807F26E32Ca214Dc4"
+  ],
+  "numDeployments": 1,
+  "solcInputHash": "e67aaade3ce54eefff91fdef20cb9e9e",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"forwarder_\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"CannotSendEther\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"InvalidChain\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"InvalidDestinationRelay\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"NotApproved\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"NotRelayWrapperOrSelf\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ZeroValue\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"ForwarderSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"RelayApproveeAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"RelayCallRemoteReceived\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"RelayReceiveCallExecuted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"RelayWrapperSet\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"approvee_\",\"type\":\"address\"}],\"name\":\"addRelayApprovee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"destChain_\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"destRelay_\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"payload_\",\"type\":\"bytes\"}],\"name\":\"callRemote\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"forwarder_\",\"type\":\"address\"}],\"name\":\"isTrustedForwarder\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"srcChain_\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"srcRelay_\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"payload_\",\"type\":\"bytes\"}],\"name\":\"receiveCall\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"relayWrapper\",\"outputs\":[{\"internalType\":\"contract IRelayWrapper\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"wrapper_\",\"type\":\"address\"}],\"name\":\"setRelayWrapper\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"forwarder_\",\"type\":\"address\"}],\"name\":\"setTrustedForwarder\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"destChain_\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"destContract_\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"ack_\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"callbackContract_\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"data_\",\"type\":\"bytes\"}],\"name\":\"updatePayload\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"pure\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"The Zbyte Relay contract\",\"kind\":\"dev\",\"methods\":{\"addRelayApprovee(address)\":{\"params\":{\"approvee_\":\"Address of the approvee\"}},\"callRemote(uint256,address,bytes)\":{\"params\":{\"destChain_\":\"Chain id of destination chain\",\"destRelay_\":\"Address of the trusted relay on destination chain\",\"payload_\":\"Payload to be used for the destination call\"}},\"constructor\":{\"params\":{\"forwarder_\":\"Forwarder contact address\"}},\"isTrustedForwarder(address)\":{\"params\":{\"forwarder_\":\"Address to check\"},\"returns\":{\"_0\":\"true if forwarder_ is trusted forwarder\"}},\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"receiveCall(uint256,address,bytes)\":{\"details\":\"Call can be made only by approved accounts or self\",\"params\":{\"payload_\":\"Payload to be used for the call on this chain\",\"srcChain_\":\"Chain id of source chain\",\"srcRelay_\":\"Address of the trusted relay on source chain\"}},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.\"},\"setRelayWrapper(address)\":{\"params\":{\"wrapper_\":\"RelayWrapper contact address\"}},\"setTrustedForwarder(address)\":{\"details\":\"onlyOwner can call\",\"params\":{\"forwarder_\":\"Frwarder conract address\"}},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"},\"updatePayload(uint256,address,bytes32,address,bytes)\":{\"params\":{\"ack_\":\"Unique hash of the cross chain deposit/mint call\",\"callbackContract_\":\"Address of contract on source chain to handle callback\",\"data_\":\"original payload\",\"destChain_\":\"Chain id of destination chain\",\"destContract_\":\"Address of contract to be called on destination chain\"}}},\"title\":\"The Zbyte Relay contract\",\"version\":1},\"userdoc\":{\"errors\":{\"CannotSendEther()\":[{\"notice\":\"error (0xbf064619): Contract cannot receive ether\"}],\"InvalidChain(uint256,uint256)\":[{\"notice\":\"error (0xc16b00ce): Current chain id does not match with the one sent in payload\"}],\"InvalidDestinationRelay(address,address)\":[{\"notice\":\"error (0x4a01d2ac): Invalid destination relay\"}],\"NotApproved(address)\":[{\"notice\":\"error (0x0ca968d8): Caller is not an approved caller\"}],\"NotRelayWrapperOrSelf(address,address)\":[{\"notice\":\"error (0x26fb3778): Caller is not the RelayWrapper or this contract\"}],\"ZeroAddress()\":[{\"notice\":\"error (0xd92e233d): Address is address(0)\"}],\"ZeroValue()\":[{\"notice\":\"error(): Value sent is 0\"}]},\"events\":{\"ForwarderSet(address,address)\":{\"notice\":\"event (0x94aed472): Forwarder address is changed\"},\"RelayApproveeAdded(address)\":{\"notice\":\"event (0xe89d9bcd): Approvee address is set\"},\"RelayCallRemoteReceived(uint256,address,uint256,address,bytes)\":{\"notice\":\"event (0x9a3d7ba1): Received the request to perform a remote call\"},\"RelayReceiveCallExecuted(bytes,bool,uint256)\":{\"notice\":\"event (0xceeaa702): Executed the call request from a source chain\"},\"RelayWrapperSet(address)\":{\"notice\":\"event (0x2658b600): Relay Wrapper address is set\"}},\"kind\":\"user\",\"methods\":{\"addRelayApprovee(address)\":{\"notice\":\"Set the approvee address\"},\"callRemote(uint256,address,bytes)\":{\"notice\":\"Initiate the remote chain call\"},\"constructor\":{\"notice\":\"Zbyte Relay constructor\"},\"isTrustedForwarder(address)\":{\"notice\":\"Check if the given address is the trusted forwarder\"},\"receiveCall(uint256,address,bytes)\":{\"notice\":\"Handle the call received from source chain\"},\"relayWrapper()\":{\"notice\":\"Address of the RelayWrapper (on core)\"},\"setRelayWrapper(address)\":{\"notice\":\"Set the RelayWrapper contract address\"},\"setTrustedForwarder(address)\":{\"notice\":\"Set the forwarder contract address\"},\"updatePayload(uint256,address,bytes32,address,bytes)\":{\"notice\":\"Update the payload to include additional information\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/relay/ZbyteRelay.sol\":\"ZbyteRelay\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[],\"viaIR\":true},\"sources\":{\"@openzeppelin/contracts/access/Ownable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity ^0.8.0;\\n\\nimport \\\"../utils/Context.sol\\\";\\n\\n/**\\n * @dev Contract module which provides a basic access control mechanism, where\\n * there is an account (an owner) that can be granted exclusive access to\\n * specific functions.\\n *\\n * By default, the owner account will be the one that deploys the contract. This\\n * can later be changed with {transferOwnership}.\\n *\\n * This module is used through inheritance. It will make available the modifier\\n * `onlyOwner`, which can be applied to your functions to restrict their use to\\n * the owner.\\n */\\nabstract contract Ownable is Context {\\n    address private _owner;\\n\\n    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);\\n\\n    /**\\n     * @dev Initializes the contract setting the deployer as the initial owner.\\n     */\\n    constructor() {\\n        _setOwner(_msgSender());\\n    }\\n\\n    /**\\n     * @dev Returns the address of the current owner.\\n     */\\n    function owner() public view virtual returns (address) {\\n        return _owner;\\n    }\\n\\n    /**\\n     * @dev Throws if called by any account other than the owner.\\n     */\\n    modifier onlyOwner() {\\n        require(owner() == _msgSender(), \\\"Ownable: caller is not the owner\\\");\\n        _;\\n    }\\n\\n    /**\\n     * @dev Leaves the contract without owner. It will not be possible to call\\n     * `onlyOwner` functions anymore. Can only be called by the current owner.\\n     *\\n     * NOTE: Renouncing ownership will leave the contract without an owner,\\n     * thereby removing any functionality that is only available to the owner.\\n     */\\n    function renounceOwnership() public virtual onlyOwner {\\n        _setOwner(address(0));\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Can only be called by the current owner.\\n     */\\n    function transferOwnership(address newOwner) public virtual onlyOwner {\\n        require(newOwner != address(0), \\\"Ownable: new owner is the zero address\\\");\\n        _setOwner(newOwner);\\n    }\\n\\n    function _setOwner(address newOwner) private {\\n        address oldOwner = _owner;\\n        _owner = newOwner;\\n        emit OwnershipTransferred(oldOwner, newOwner);\\n    }\\n}\\n\",\"keccak256\":\"0x6bb804a310218875e89d12c053e94a13a4607cdf7cc2052f3e52bd32a0dc50a1\",\"license\":\"MIT\"},\"@openzeppelin/contracts/security/Pausable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity ^0.8.0;\\n\\nimport \\\"../utils/Context.sol\\\";\\n\\n/**\\n * @dev Contract module which allows children to implement an emergency stop\\n * mechanism that can be triggered by an authorized account.\\n *\\n * This module is used through inheritance. It will make available the\\n * modifiers `whenNotPaused` and `whenPaused`, which can be applied to\\n * the functions of your contract. Note that they will not be pausable by\\n * simply including this module, only once the modifiers are put in place.\\n */\\nabstract contract Pausable is Context {\\n    /**\\n     * @dev Emitted when the pause is triggered by `account`.\\n     */\\n    event Paused(address account);\\n\\n    /**\\n     * @dev Emitted when the pause is lifted by `account`.\\n     */\\n    event Unpaused(address account);\\n\\n    bool private _paused;\\n\\n    /**\\n     * @dev Initializes the contract in unpaused state.\\n     */\\n    constructor() {\\n        _paused = false;\\n    }\\n\\n    /**\\n     * @dev Returns true if the contract is paused, and false otherwise.\\n     */\\n    function paused() public view virtual returns (bool) {\\n        return _paused;\\n    }\\n\\n    /**\\n     * @dev Modifier to make a function callable only when the contract is not paused.\\n     *\\n     * Requirements:\\n     *\\n     * - The contract must not be paused.\\n     */\\n    modifier whenNotPaused() {\\n        require(!paused(), \\\"Pausable: paused\\\");\\n        _;\\n    }\\n\\n    /**\\n     * @dev Modifier to make a function callable only when the contract is paused.\\n     *\\n     * Requirements:\\n     *\\n     * - The contract must be paused.\\n     */\\n    modifier whenPaused() {\\n        require(paused(), \\\"Pausable: not paused\\\");\\n        _;\\n    }\\n\\n    /**\\n     * @dev Triggers stopped state.\\n     *\\n     * Requirements:\\n     *\\n     * - The contract must not be paused.\\n     */\\n    function _pause() internal virtual whenNotPaused {\\n        _paused = true;\\n        emit Paused(_msgSender());\\n    }\\n\\n    /**\\n     * @dev Returns to normal state.\\n     *\\n     * Requirements:\\n     *\\n     * - The contract must be paused.\\n     */\\n    function _unpause() internal virtual whenPaused {\\n        _paused = false;\\n        emit Unpaused(_msgSender());\\n    }\\n}\\n\",\"keccak256\":\"0xa35b1f2a670cd2a701a52c398032c9fed72df1909fe394d77ceacbf074e8937b\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/Context.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity ^0.8.0;\\n\\n/**\\n * @dev Provides information about the current execution context, including the\\n * sender of the transaction and its data. While these are generally available\\n * via msg.sender and msg.data, they should not be accessed in such a direct\\n * manner, since when dealing with meta-transactions the account sending and\\n * paying for execution may not be the actual sender (as far as an application\\n * is concerned).\\n *\\n * This contract is only required for intermediate, library-like contracts.\\n */\\nabstract contract Context {\\n    function _msgSender() internal view virtual returns (address) {\\n        return msg.sender;\\n    }\\n\\n    function _msgData() internal view virtual returns (bytes calldata) {\\n        return msg.data;\\n    }\\n}\\n\",\"keccak256\":\"0x90565a39ae45c80f0468dc96c7b20d0afc3055f344c8203a0c9258239f350b9f\",\"license\":\"MIT\"},\"contracts/interface/relay/IRelayWrapper.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\n// --.. -... -.-- - . \\n// \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557 \\u2588\\u2588\\u2557   \\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\n// \\u255a\\u2550\\u2550\\u2588\\u2588\\u2588\\u2554\\u255d\\u2588\\u2588\\u2554\\u2550\\u2550\\u2588\\u2588\\u2557\\u255a\\u2588\\u2588\\u2557 \\u2588\\u2588\\u2554\\u255d\\u255a\\u2550\\u2550\\u2588\\u2588\\u2554\\u2550\\u2550\\u255d\\u2588\\u2588\\u2554\\u2550\\u2550\\u2550\\u2550\\u255d\\n//   \\u2588\\u2588\\u2588\\u2554\\u255d \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2554\\u255d \\u255a\\u2588\\u2588\\u2588\\u2588\\u2554\\u255d    \\u2588\\u2588\\u2551   \\u2588\\u2588\\u2588\\u2588\\u2588\\u2557  \\n//  \\u2588\\u2588\\u2588\\u2554\\u255d  \\u2588\\u2588\\u2554\\u2550\\u2550\\u2588\\u2588\\u2557  \\u255a\\u2588\\u2588\\u2554\\u255d     \\u2588\\u2588\\u2551   \\u2588\\u2588\\u2554\\u2550\\u2550\\u255d  \\n// \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2554\\u255d   \\u2588\\u2588\\u2551      \\u2588\\u2588\\u2551   \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\n// \\u255a\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u255d\\u255a\\u2550\\u2550\\u2550\\u2550\\u2550\\u255d    \\u255a\\u2550\\u255d      \\u255a\\u2550\\u255d   \\u255a\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u255d\\n// --.. -... -.-- - . \\n\\npragma solidity ^0.8.9;\\n\\n/// @title Relay wrapper interface (facilitates cross chain call during deposit/mint)\\ninterface IRelayWrapper {\\n\\n    function performCrossChainCall(\\n        uint256 relay_,\\n        uint256 srcChain_,\\n        uint256 destChain_,\\n        address destContract_,\\n        bytes calldata destCallData_,\\n        bytes32 ack_,\\n        address callbackContract_,\\n        bytes calldata relayParams_\\n    ) external payable returns (bool);\\n\\n    function isValidRelay(uint256 chainId, address relay_) external returns(bool);\\n    function updatePayload(uint256 destChain_,\\n                            address destContract_,\\n                            bytes32 ack_,\\n                            address callbackContract_,\\n                            bytes calldata data_) external pure returns(bytes memory);\\n}\",\"keccak256\":\"0x209615ffe8434d01b3e9c1ad353a47994bf4cbc0957623d32bb5edd03ff0d17e\",\"license\":\"MIT\"},\"contracts/relay/ZbyteRelay.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\n// --.. -... -.-- - . \\n// \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557 \\u2588\\u2588\\u2557   \\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\n// \\u255a\\u2550\\u2550\\u2588\\u2588\\u2588\\u2554\\u255d\\u2588\\u2588\\u2554\\u2550\\u2550\\u2588\\u2588\\u2557\\u255a\\u2588\\u2588\\u2557 \\u2588\\u2588\\u2554\\u255d\\u255a\\u2550\\u2550\\u2588\\u2588\\u2554\\u2550\\u2550\\u255d\\u2588\\u2588\\u2554\\u2550\\u2550\\u2550\\u2550\\u255d\\n//   \\u2588\\u2588\\u2588\\u2554\\u255d \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2554\\u255d \\u255a\\u2588\\u2588\\u2588\\u2588\\u2554\\u255d    \\u2588\\u2588\\u2551   \\u2588\\u2588\\u2588\\u2588\\u2588\\u2557  \\n//  \\u2588\\u2588\\u2588\\u2554\\u255d  \\u2588\\u2588\\u2554\\u2550\\u2550\\u2588\\u2588\\u2557  \\u255a\\u2588\\u2588\\u2554\\u255d     \\u2588\\u2588\\u2551   \\u2588\\u2588\\u2554\\u2550\\u2550\\u255d  \\n// \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2554\\u255d   \\u2588\\u2588\\u2551      \\u2588\\u2588\\u2551   \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\n// \\u255a\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u255d\\u255a\\u2550\\u2550\\u2550\\u2550\\u2550\\u255d    \\u255a\\u2550\\u255d      \\u255a\\u2550\\u255d   \\u255a\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u255d\\n// --.. -... -.-- - . \\n\\npragma solidity ^0.8.9;\\n\\nimport \\\"@openzeppelin/contracts/access/Ownable.sol\\\";\\nimport \\\"@openzeppelin/contracts/security/Pausable.sol\\\";\\nimport \\\"../interface/relay/IRelayWrapper.sol\\\";\\nimport \\\"../utils/ZbyteContext.sol\\\";\\n\\n/// @title The Zbyte Relay contract\\n/// @dev The Zbyte Relay contract\\ncontract ZbyteRelay is Ownable, ZbyteContext {\\n    // errors\\n    /// @notice error (0x0ca968d8): Caller is not an approved caller\\n    error NotApproved(address);\\n    /// @notice error (0x26fb3778): Caller is not the RelayWrapper or this contract\\n    error NotRelayWrapperOrSelf(address,address);\\n    /// @notice error (0xc16b00ce): Current chain id does not match with the one sent in payload\\n    error InvalidChain(uint256,uint256);\\n    /// @notice error (0x4a01d2ac): Invalid destination relay\\n    error InvalidDestinationRelay(address,address);\\n\\n    // events\\n    /// @notice event (0x9a3d7ba1): Received the request to perform a remote call\\n    event RelayCallRemoteReceived(uint256,address,uint256,address,bytes);\\n    /// @notice event (0xceeaa702): Executed the call request from a source chain\\n    event RelayReceiveCallExecuted(bytes,bool,uint256);\\n    /// @notice event (0x2658b600): Relay Wrapper address is set\\n    event RelayWrapperSet(address);\\n    /// @notice event (0xe89d9bcd): Approvee address is set\\n    event RelayApproveeAdded(address);\\n\\n    /// @notice mapping of approved addresses.  Only these addresses can invoke the 'receiveCall'\\n    mapping(address => bool) approved;\\n    /// @notice Address of the RelayWrapper (on core)\\n    IRelayWrapper public relayWrapper;\\n\\n    /// @notice Zbyte Relay constructor\\n    /// @param forwarder_ Forwarder contact address\\n    constructor(address forwarder_) {\\n        _setTrustedForwarder(forwarder_);\\n    }\\n\\n    /// @notice Modifier to check if the caller is approved or this contract\\n    modifier onlyApprovedOrSelf {\\n        if((approved[_msgSender()] != true) && (_msgSender() != address(this))) {\\n             revert NotApproved(_msgSender());\\n        }\\n        _;\\n    }\\n\\n    /// @notice Modifier to check if the caller is RelayWrapper or this contract\\n    modifier onlyRelayWrapperOrSelf {\\n        if ((_msgSender() != address(relayWrapper)) && (_msgSender() != address(this))) {\\n            revert NotRelayWrapperOrSelf(_msgSender(),address(relayWrapper));\\n        }\\n        _;\\n    }\\n\\n    /// @notice Set the RelayWrapper contract address\\n    /// @param wrapper_ RelayWrapper contact address\\n    function setRelayWrapper(address wrapper_) external onlyOwner {\\n        if(wrapper_ == address(0)) {\\n            revert ZeroAddress();\\n        }\\n\\n        relayWrapper = IRelayWrapper(wrapper_);\\n\\n        emit RelayWrapperSet(wrapper_);\\n    }\\n\\n    /// @notice Set the approvee address\\n    /// @param approvee_ Address of the approvee\\n    function addRelayApprovee(address approvee_) external onlyOwner {\\n        if(approvee_ == address(0)) {\\n            revert ZeroAddress();\\n        }\\n        approved[approvee_] = true;\\n\\n        emit RelayApproveeAdded(approvee_);\\n    }\\n\\n    /// @notice Initiate the remote chain call\\n    /// @param destChain_ Chain id of destination chain\\n    /// @param destRelay_ Address of the trusted relay on destination chain\\n    /// @param payload_ Payload to be used for the destination call\\n    function callRemote(uint256 destChain_,\\n                        address destRelay_,\\n                        bytes memory payload_) // (destChain,destContract,ack,callbackContract,destCallData_)\\n                        public\\n                        payable\\n                        onlyRelayWrapperOrSelf\\n                        returns (bool) {\\n        // initiate the remote call on source\\n        (uint256 _destChain,,,,) =\\n                abi.decode(payload_,(uint256,address,bytes32,address,bytes));\\n        require(_destChain == destChain_, \\\"Invalid destination chain\\\");\\n\\n        bytes memory _updatedPayload = abi.encode(destRelay_, payload_);\\n\\n        // loop if dest == src\\n        if (destChain_ == block.chainid) {\\n            this.receiveCall(block.chainid,address(this),_updatedPayload);\\n        }\\n\\n        emit RelayCallRemoteReceived(block.chainid,address(this),destChain_,destRelay_,_updatedPayload);\\n        return true;\\n    }\\n\\n    /// @notice Handle the call received from source chain\\n    /// @param srcChain_ Chain id of source chain\\n    /// @param srcRelay_ Address of the trusted relay on source chain\\n    /// @param payload_ Payload to be used for the call on this chain\\n    /// @dev Call can be made only by approved accounts or self\\n    function receiveCall(uint256 srcChain_,\\n                         address srcRelay_,\\n                         bytes memory payload_) // (destRelay_,(destChain,destContract,ack,callbackContract,destCallData_))\\n        onlyApprovedOrSelf\\n        external\\n        returns(bool) {\\n        // receive the call on dest\\n        (address _destRelay, bytes memory _callPayload) = abi.decode(payload_, (address, bytes));\\n        (uint256 _destChain, address _destContract,\\n         bytes32 _ack, address _callbackContract, bytes memory _data) = \\n                abi.decode(_callPayload,(uint256,address,bytes32,address,bytes));\\n        if(_destChain != block.chainid) {\\n            revert InvalidChain(_destChain, block.chainid);\\n        }\\n        if(_destRelay != address(this)) {\\n            revert InvalidDestinationRelay(_destRelay, address(this));\\n        }\\n\\n        (bool success, bytes memory returnData) = _destContract.call(_data);\\n        uint256 retval = abi.decode(returnData,(uint256));\\n        \\n        emit RelayReceiveCallExecuted(_callPayload,success,retval);\\n\\n\\n        if ((_ack != bytes32(0)) && (_callbackContract != address(0))) {\\n            bytes memory _updatedPayload = updatePayload(srcChain_,_callbackContract,\\n                                bytes32(0),address(0),\\n                               abi.encodeWithSignature(\\\"callbackHandler(uint256,bytes32,bool,uint256)\\\",\\n                                _destChain,_ack,success,retval));\\n            this.callRemote(srcChain_,srcRelay_,_updatedPayload);\\n        }\\n        return true;\\n    }\\n\\n    /// @notice Update the payload to include additional information\\n    /// @param destChain_ Chain id of destination chain\\n    /// @param destContract_ Address of contract to be called on destination chain\\n    /// @param ack_ Unique hash of the cross chain deposit/mint call\\n    /// @param callbackContract_ Address of contract on source chain to handle callback\\n    /// @param data_ original payload\\n    function updatePayload(uint256 destChain_,\\n                            address destContract_,\\n                            bytes32 ack_,\\n                            address callbackContract_,\\n                            bytes memory data_)\\n        public pure\\n        returns(bytes memory) {\\n        return abi.encode(destChain_,destContract_,ack_,callbackContract_,data_);\\n    }\\n\\n    /// @notice ERC2771 _msgSender override\\n    function _msgSender() internal view override(ZbyteContext,Context) returns (address sender) {\\n        return ZbyteContext._msgSender();\\n    }\\n\\n    /// @notice ERC2771 _msgData override\\n    function _msgData() internal view override(ZbyteContext,Context) returns (bytes calldata) {\\n        return ZbyteContext._msgData();\\n    }\\n}\",\"keccak256\":\"0xb890d879426dd089a4e2cba39980e1bc002687c6a6139fcdbd43d6ff8da31e65\",\"license\":\"MIT\"},\"contracts/utils/ZbyteContext.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\n// --.. -... -.-- - . \\n// \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557 \\u2588\\u2588\\u2557   \\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\n// \\u255a\\u2550\\u2550\\u2588\\u2588\\u2588\\u2554\\u255d\\u2588\\u2588\\u2554\\u2550\\u2550\\u2588\\u2588\\u2557\\u255a\\u2588\\u2588\\u2557 \\u2588\\u2588\\u2554\\u255d\\u255a\\u2550\\u2550\\u2588\\u2588\\u2554\\u2550\\u2550\\u255d\\u2588\\u2588\\u2554\\u2550\\u2550\\u2550\\u2550\\u255d\\n//   \\u2588\\u2588\\u2588\\u2554\\u255d \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2554\\u255d \\u255a\\u2588\\u2588\\u2588\\u2588\\u2554\\u255d    \\u2588\\u2588\\u2551   \\u2588\\u2588\\u2588\\u2588\\u2588\\u2557  \\n//  \\u2588\\u2588\\u2588\\u2554\\u255d  \\u2588\\u2588\\u2554\\u2550\\u2550\\u2588\\u2588\\u2557  \\u255a\\u2588\\u2588\\u2554\\u255d     \\u2588\\u2588\\u2551   \\u2588\\u2588\\u2554\\u2550\\u2550\\u255d  \\n// \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2554\\u255d   \\u2588\\u2588\\u2551      \\u2588\\u2588\\u2551   \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\n// \\u255a\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u255d\\u255a\\u2550\\u2550\\u2550\\u2550\\u2550\\u255d    \\u255a\\u2550\\u255d      \\u255a\\u2550\\u255d   \\u255a\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u255d\\n// --.. -... -.-- - . \\n\\npragma solidity ^0.8.9;\\n\\nimport \\\"@openzeppelin/contracts/utils/Context.sol\\\";\\nimport \\\"@openzeppelin/contracts/access/Ownable.sol\\\";\\n\\n/// @title The ZBYT ERC20 contract\\n/// @dev ERC2771Context with a function to set forwarder\\nabstract contract ZbyteContext is Context, Ownable {\\n    // errors\\n    /// @notice error (0xbf064619): Contract cannot receive ether\\n    error CannotSendEther();\\n    /// @notice error (0xd92e233d): Address is address(0)\\n    error ZeroAddress();\\n    /// @notice error(): Value sent is 0\\n    error ZeroValue();\\n\\n    // events\\n    /// @notice event (0x94aed472): Forwarder address is changed\\n    event ForwarderSet(address,address);\\n\\n    // Trusted forwarder address\\n    address private trustedForwarder;\\n\\n    // /// @notice ZbyteContext constructor\\n    // /// @param forwarder_ Forwarder contact address\\n    // constructor(address forwarder_) {\\n    //     _setTrustedForwarder(forwarder_);\\n    // }\\n\\n    /// @notice Check if the given address is the trusted forwarder\\n    /// @param forwarder_ Address to check\\n    /// @return true if forwarder_ is trusted forwarder\\n    function isTrustedForwarder(address forwarder_) public view virtual returns (bool) {\\n        return forwarder_ == trustedForwarder;\\n    }\\n\\n    /// @notice Set a trusted forwarder address\\n    /// @param forwarder_ Trusted forwarder address\\n    /// @dev emits ForwarderSet on success\\n    function _setTrustedForwarder(address forwarder_) internal {\\n        if (forwarder_ == address(0)) {\\n            revert ZeroAddress();\\n        }\\n        address oldForwarder = trustedForwarder;\\n        trustedForwarder = forwarder_;\\n\\n        emit ForwarderSet(oldForwarder,forwarder_);\\n    }\\n\\n    /// @notice Set the forwarder contract address\\n    /// @param forwarder_ Frwarder conract address\\n    /// @dev onlyOwner can call\\n    function setTrustedForwarder(address forwarder_) public onlyOwner {\\n        _setTrustedForwarder(forwarder_);\\n    }\\n\\n    /// @notice Get the trusted forwarder address\\n    function _getTrustedForwarder() internal view returns(address){\\n        return trustedForwarder;\\n    }\\n\\n    /// @notice Extract true caller if called via trusted forwarder\\n    function _msgSender() internal view virtual override returns (address sender) {\\n        if (isTrustedForwarder(msg.sender)) {\\n            // The assembly code is more direct than the Solidity version using `abi.decode`.\\n            assembly {\\n                sender := shr(96, calldataload(sub(calldatasize(), 20)))\\n            }\\n        } else {\\n            return super._msgSender();\\n        }\\n    }\\n\\n    /// @notice Extract data if called via trusted forwarder\\n    function _msgData() internal view virtual override returns (bytes calldata) {\\n        if (isTrustedForwarder(msg.sender)) {\\n            return msg.data[:msg.data.length - 20];\\n        } else {\\n            return super._msgData();\\n        }\\n    }\\n}\\n\",\"keccak256\":\"0x0c27022a50e80284df94f275bd72bc0c08af33480ab79d00e7ab6eb6741fce4f\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x60803461010057601f610de238819003918201601f19168301916001600160401b038311848410176101055780849260209460405283398101031261010057516001600160a01b0390818116908190036101005761005b61011b565b918060005493169260018060a01b03199380858316176000558260405192167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0600080a382156100f1577f94aed472e01353526c04ec91cee149d41e78d848ec851c72be532bf7b120bd30604085858581600154938416176001558351921682526020820152a1604051610ca290816101408239f35b63d92e233d60e01b8152600490fd5b600080fd5b634e487b7160e01b600052604160045260246000fd5b600154336001600160a01b039091160361013b5736601319013560601c90565b339056fe6040608081526004908136101561001557600080fd5b600091823560e01c80633710aee414610957578063572b6c051461092357806359197373146107185780635e82c8961461040f578063715018a6146103a65780638c9267d8146103255780638da5cb5b146102fd578063a1478a3b146102d4578063d50909bf1461021c578063da7422281461016c5763f2fde38b1461009a57600080fd5b34610168576020366003190112610168576100b36109d5565b83546001600160a01b038082169391926100d7826100cf610c48565b168614610b19565b169384156101165750506001600160a01b031916821783557f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e08380a380f35b906020608492519162461bcd60e51b8352820152602660248201527f4f776e61626c653a206e6577206f776e657220697320746865207a65726f206160448201526564647265737360d01b6064820152fd5b8280fd5b50919034610218576020366003190112610218576101886109d5565b9260018060a01b03916101a883855416846101a1610c48565b1614610b19565b82851691821561020a5750600180546001600160a01b03198116939093179055516001600160a01b03929091168216815292166020830152907f94aed472e01353526c04ec91cee149d41e78d848ec851c72be532bf7b120bd3090604090a180f35b905163d92e233d60e01b8152fd5b5080fd5b509190346102185760a0366003190112610218576001600160a01b0360243581811693908490036102d1576064359182168092036102d1576084359067ffffffffffffffff82116102d15750936102ad6102bb926102806102cd9736908501610a44565b908551968794356020860152868501526044356060850152608084015260a08084015260c0830190610af4565b03601f1981018452836109f0565b51918291602083526020830190610af4565b0390f35b80fd5b50503461021857816003193601126102185760035490516001600160a01b039091168152602090f35b505034610218578160031936011261021857905490516001600160a01b039091168152602090f35b509034610168576020366003190112610168576103406109d5565b83546001600160a01b03919061035b908316836101a1610c48565b1691821561020a5750816020917fe89d9bcd6e6564e32cb0a8cc5f4d2e790a492f9bb77fb92abf2f2962f31e301d93855260028352808520600160ff1982541617905551908152a180f35b83346102d157806003193601126102d157805481906001600160a01b0380821691906103dc906103d4610c48565b168314610b19565b6001600160a01b03191682557f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e08280a380f35b50346101685761041e36610a8b565b6001600160a01b039591939192919086610436610c48565b16845260209660028852600160ff88872054161515141580610705575b6106e457815182019187818403126106e057610470898201610b64565b908881015167ffffffffffffffff948582116106dc5784928c8493816104999401920101610b78565b9216916104ad8b82518301018c8301610bba565b9397919516954688036106be5730810361068e5750918a9291838f9381948451940192165af13d15610687578b8b3d6104f16104e882610a28565b925192836109f0565b81528a81923d92013e5b8c81805181010312610683576105498d938d9593857fceeaa702a518f36d50869123114b6e3359e30ff4646dd53d7560d2620fe8ce5994015187819851948594606086526060860190610af4565b92151580988501528301520390a18015158061067a575b61056e575b8b8b5160018152f35b8a5194633fcc4a8160e01b8d87015260248601526044850152606484015260848301526084825260c08201928284109084111761066757916105f661060e928a969594838b528660e0830152610100820152876101208201528761014082015260a06101608201526105e4610180820182610af4565b0360df198101835260bf1901826109f0565b8751635919737360e01b815296879485948501610c20565b038184305af190811561065c575061062f575b808080808080808080610565565b61064e90833d8511610655575b61064681836109f0565b810190610c08565b5038610621565b503d61063c565b8351903d90823e3d90fd5b634e487b7160e01b865260418452602486fd5b50831515610560565b8980fd5b60606104fb565b8d5163128074ab60e21b81526001600160a01b03909116818b0190815230602082015281906040010390fd5b0390fd5b508c516333a22e9160e11b8152808a01889052466024820152604490fd5b8880fd5b8580fd5b86836024926106f1610c48565b92516301952d1b60e31b8152921690820152fd5b5061070e610c48565b8116301415610453565b5061072236610a8b565b92909461072d610c48565b6003546001600160a01b03939190841690841681141580610910575b6108d65750602096846107638988518901018a8901610bba565b5050505003610893579061079e88926107908951968792169889868401528a808401526060830190610af4565b03601f1981018652856109f0565b468514610800575b50857fd1ced4627f645185c0fdc8e6799eb1463ee2b9ed7dfd932c34f065a62107e64186866107f6878551938493468552308986015287850152606084015260a0608084015260a0830190610af4565b0390a15160018152f35b8651632f41644b60e11b815292919083908190610824908790309046908501610c20565b038184305af19081156108885750916107f6917fd1ced4627f645185c0fdc8e6799eb1463ee2b9ed7dfd932c34f065a62107e64195949361086b575b8791939495506107a6565b61088190883d8a116106555761064681836109f0565b5038610860565b8651903d90823e3d90fd5b865162461bcd60e51b8152808301899052601960248201527f496e76616c69642064657374696e6174696f6e20636861696e000000000000006044820152606490fd5b906106ba87926108e4610c48565b93516304df66ef60e31b81526001600160a01b0394851693810193845293166020830152829160400190565b50610919610c48565b8416301415610749565b505034610218576020366003190112610218576020906109416109d5565b60018060a01b0380600154169116149051908152f35b509034610168576020366003190112610168576109726109d5565b83546001600160a01b03919061098d908316836101a1610c48565b1691821561020a5750600380546001600160a01b03191683179055519081527f2658b60088ed475dba9a64a406a5a95e0f97c0dbca5fc49683d6e3408f7ff78d90602090a180f35b600435906001600160a01b03821682036109eb57565b600080fd5b90601f8019910116810190811067ffffffffffffffff821117610a1257604052565b634e487b7160e01b600052604160045260246000fd5b67ffffffffffffffff8111610a1257601f01601f191660200190565b81601f820112156109eb57803590610a5b82610a28565b92610a6960405194856109f0565b828452602083830101116109eb57816000926020809301838601378301015290565b60606003198201126109eb57600435916024356001600160a01b03811681036109eb57916044359067ffffffffffffffff82116109eb57610ace91600401610a44565b90565b60005b838110610ae45750506000910152565b8181015183820152602001610ad4565b90602091610b0d81518092818552858086019101610ad1565b601f01601f1916010190565b15610b2057565b606460405162461bcd60e51b815260206004820152602060248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e65726044820152fd5b51906001600160a01b03821682036109eb57565b81601f820112156109eb578051610b8e81610a28565b92610b9c60405194856109f0565b818452602082840101116109eb57610ace9160208085019101610ad1565b91909160a0818403126109eb57805192610bd660208301610b64565b92604083015192610be960608201610b64565b92608082015167ffffffffffffffff81116109eb57610ace9201610b78565b908160209103126109eb575180151581036109eb5790565b9081526001600160a01b039091166020820152606060408201819052610ace92910190610af4565b600154336001600160a01b0390911603610c685736601319013560601c90565b339056fea26469706673582212202201c1da6defbc22b1501d6214eaf58462c482c34c9d9bdcf9c58a34a82bdb8064736f6c63430008110033",
+  "deployedBytecode": "0x6040608081526004908136101561001557600080fd5b600091823560e01c80633710aee414610957578063572b6c051461092357806359197373146107185780635e82c8961461040f578063715018a6146103a65780638c9267d8146103255780638da5cb5b146102fd578063a1478a3b146102d4578063d50909bf1461021c578063da7422281461016c5763f2fde38b1461009a57600080fd5b34610168576020366003190112610168576100b36109d5565b83546001600160a01b038082169391926100d7826100cf610c48565b168614610b19565b169384156101165750506001600160a01b031916821783557f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e08380a380f35b906020608492519162461bcd60e51b8352820152602660248201527f4f776e61626c653a206e6577206f776e657220697320746865207a65726f206160448201526564647265737360d01b6064820152fd5b8280fd5b50919034610218576020366003190112610218576101886109d5565b9260018060a01b03916101a883855416846101a1610c48565b1614610b19565b82851691821561020a5750600180546001600160a01b03198116939093179055516001600160a01b03929091168216815292166020830152907f94aed472e01353526c04ec91cee149d41e78d848ec851c72be532bf7b120bd3090604090a180f35b905163d92e233d60e01b8152fd5b5080fd5b509190346102185760a0366003190112610218576001600160a01b0360243581811693908490036102d1576064359182168092036102d1576084359067ffffffffffffffff82116102d15750936102ad6102bb926102806102cd9736908501610a44565b908551968794356020860152868501526044356060850152608084015260a08084015260c0830190610af4565b03601f1981018452836109f0565b51918291602083526020830190610af4565b0390f35b80fd5b50503461021857816003193601126102185760035490516001600160a01b039091168152602090f35b505034610218578160031936011261021857905490516001600160a01b039091168152602090f35b509034610168576020366003190112610168576103406109d5565b83546001600160a01b03919061035b908316836101a1610c48565b1691821561020a5750816020917fe89d9bcd6e6564e32cb0a8cc5f4d2e790a492f9bb77fb92abf2f2962f31e301d93855260028352808520600160ff1982541617905551908152a180f35b83346102d157806003193601126102d157805481906001600160a01b0380821691906103dc906103d4610c48565b168314610b19565b6001600160a01b03191682557f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e08280a380f35b50346101685761041e36610a8b565b6001600160a01b039591939192919086610436610c48565b16845260209660028852600160ff88872054161515141580610705575b6106e457815182019187818403126106e057610470898201610b64565b908881015167ffffffffffffffff948582116106dc5784928c8493816104999401920101610b78565b9216916104ad8b82518301018c8301610bba565b9397919516954688036106be5730810361068e5750918a9291838f9381948451940192165af13d15610687578b8b3d6104f16104e882610a28565b925192836109f0565b81528a81923d92013e5b8c81805181010312610683576105498d938d9593857fceeaa702a518f36d50869123114b6e3359e30ff4646dd53d7560d2620fe8ce5994015187819851948594606086526060860190610af4565b92151580988501528301520390a18015158061067a575b61056e575b8b8b5160018152f35b8a5194633fcc4a8160e01b8d87015260248601526044850152606484015260848301526084825260c08201928284109084111761066757916105f661060e928a969594838b528660e0830152610100820152876101208201528761014082015260a06101608201526105e4610180820182610af4565b0360df198101835260bf1901826109f0565b8751635919737360e01b815296879485948501610c20565b038184305af190811561065c575061062f575b808080808080808080610565565b61064e90833d8511610655575b61064681836109f0565b810190610c08565b5038610621565b503d61063c565b8351903d90823e3d90fd5b634e487b7160e01b865260418452602486fd5b50831515610560565b8980fd5b60606104fb565b8d5163128074ab60e21b81526001600160a01b03909116818b0190815230602082015281906040010390fd5b0390fd5b508c516333a22e9160e11b8152808a01889052466024820152604490fd5b8880fd5b8580fd5b86836024926106f1610c48565b92516301952d1b60e31b8152921690820152fd5b5061070e610c48565b8116301415610453565b5061072236610a8b565b92909461072d610c48565b6003546001600160a01b03939190841690841681141580610910575b6108d65750602096846107638988518901018a8901610bba565b5050505003610893579061079e88926107908951968792169889868401528a808401526060830190610af4565b03601f1981018652856109f0565b468514610800575b50857fd1ced4627f645185c0fdc8e6799eb1463ee2b9ed7dfd932c34f065a62107e64186866107f6878551938493468552308986015287850152606084015260a0608084015260a0830190610af4565b0390a15160018152f35b8651632f41644b60e11b815292919083908190610824908790309046908501610c20565b038184305af19081156108885750916107f6917fd1ced4627f645185c0fdc8e6799eb1463ee2b9ed7dfd932c34f065a62107e64195949361086b575b8791939495506107a6565b61088190883d8a116106555761064681836109f0565b5038610860565b8651903d90823e3d90fd5b865162461bcd60e51b8152808301899052601960248201527f496e76616c69642064657374696e6174696f6e20636861696e000000000000006044820152606490fd5b906106ba87926108e4610c48565b93516304df66ef60e31b81526001600160a01b0394851693810193845293166020830152829160400190565b50610919610c48565b8416301415610749565b505034610218576020366003190112610218576020906109416109d5565b60018060a01b0380600154169116149051908152f35b509034610168576020366003190112610168576109726109d5565b83546001600160a01b03919061098d908316836101a1610c48565b1691821561020a5750600380546001600160a01b03191683179055519081527f2658b60088ed475dba9a64a406a5a95e0f97c0dbca5fc49683d6e3408f7ff78d90602090a180f35b600435906001600160a01b03821682036109eb57565b600080fd5b90601f8019910116810190811067ffffffffffffffff821117610a1257604052565b634e487b7160e01b600052604160045260246000fd5b67ffffffffffffffff8111610a1257601f01601f191660200190565b81601f820112156109eb57803590610a5b82610a28565b92610a6960405194856109f0565b828452602083830101116109eb57816000926020809301838601378301015290565b60606003198201126109eb57600435916024356001600160a01b03811681036109eb57916044359067ffffffffffffffff82116109eb57610ace91600401610a44565b90565b60005b838110610ae45750506000910152565b8181015183820152602001610ad4565b90602091610b0d81518092818552858086019101610ad1565b601f01601f1916010190565b15610b2057565b606460405162461bcd60e51b815260206004820152602060248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e65726044820152fd5b51906001600160a01b03821682036109eb57565b81601f820112156109eb578051610b8e81610a28565b92610b9c60405194856109f0565b818452602082840101116109eb57610ace9160208085019101610ad1565b91909160a0818403126109eb57805192610bd660208301610b64565b92604083015192610be960608201610b64565b92608082015167ffffffffffffffff81116109eb57610ace9201610b78565b908160209103126109eb575180151581036109eb5790565b9081526001600160a01b039091166020820152606060408201819052610ace92910190610af4565b600154336001600160a01b0390911603610c685736601319013560601c90565b339056fea26469706673582212202201c1da6defbc22b1501d6214eaf58462c482c34c9d9bdcf9c58a34a82bdb8064736f6c63430008110033",
+  "devdoc": {
+    "details": "The Zbyte Relay contract",
+    "kind": "dev",
+    "methods": {
+      "addRelayApprovee(address)": {
+        "params": {
+          "approvee_": "Address of the approvee"
+        }
+      },
+      "callRemote(uint256,address,bytes)": {
+        "params": {
+          "destChain_": "Chain id of destination chain",
+          "destRelay_": "Address of the trusted relay on destination chain",
+          "payload_": "Payload to be used for the destination call"
+        }
+      },
+      "constructor": {
+        "params": {
+          "forwarder_": "Forwarder contact address"
+        }
+      },
+      "isTrustedForwarder(address)": {
+        "params": {
+          "forwarder_": "Address to check"
+        },
+        "returns": {
+          "_0": "true if forwarder_ is trusted forwarder"
+        }
+      },
+      "owner()": {
+        "details": "Returns the address of the current owner."
+      },
+      "receiveCall(uint256,address,bytes)": {
+        "details": "Call can be made only by approved accounts or self",
+        "params": {
+          "payload_": "Payload to be used for the call on this chain",
+          "srcChain_": "Chain id of source chain",
+          "srcRelay_": "Address of the trusted relay on source chain"
+        }
+      },
+      "renounceOwnership()": {
+        "details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
+      },
+      "setRelayWrapper(address)": {
+        "params": {
+          "wrapper_": "RelayWrapper contact address"
+        }
+      },
+      "setTrustedForwarder(address)": {
+        "details": "onlyOwner can call",
+        "params": {
+          "forwarder_": "Frwarder conract address"
+        }
+      },
+      "transferOwnership(address)": {
+        "details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+      },
+      "updatePayload(uint256,address,bytes32,address,bytes)": {
+        "params": {
+          "ack_": "Unique hash of the cross chain deposit/mint call",
+          "callbackContract_": "Address of contract on source chain to handle callback",
+          "data_": "original payload",
+          "destChain_": "Chain id of destination chain",
+          "destContract_": "Address of contract to be called on destination chain"
+        }
+      }
+    },
+    "title": "The Zbyte Relay contract",
+    "version": 1
+  },
+  "userdoc": {
+    "errors": {
+      "CannotSendEther()": [
+        {
+          "notice": "error (0xbf064619): Contract cannot receive ether"
+        }
+      ],
+      "InvalidChain(uint256,uint256)": [
+        {
+          "notice": "error (0xc16b00ce): Current chain id does not match with the one sent in payload"
+        }
+      ],
+      "InvalidDestinationRelay(address,address)": [
+        {
+          "notice": "error (0x4a01d2ac): Invalid destination relay"
+        }
+      ],
+      "NotApproved(address)": [
+        {
+          "notice": "error (0x0ca968d8): Caller is not an approved caller"
+        }
+      ],
+      "NotRelayWrapperOrSelf(address,address)": [
+        {
+          "notice": "error (0x26fb3778): Caller is not the RelayWrapper or this contract"
+        }
+      ],
+      "ZeroAddress()": [
+        {
+          "notice": "error (0xd92e233d): Address is address(0)"
+        }
+      ],
+      "ZeroValue()": [
+        {
+          "notice": "error(): Value sent is 0"
+        }
+      ]
+    },
+    "events": {
+      "ForwarderSet(address,address)": {
+        "notice": "event (0x94aed472): Forwarder address is changed"
+      },
+      "RelayApproveeAdded(address)": {
+        "notice": "event (0xe89d9bcd): Approvee address is set"
+      },
+      "RelayCallRemoteReceived(uint256,address,uint256,address,bytes)": {
+        "notice": "event (0x9a3d7ba1): Received the request to perform a remote call"
+      },
+      "RelayReceiveCallExecuted(bytes,bool,uint256)": {
+        "notice": "event (0xceeaa702): Executed the call request from a source chain"
+      },
+      "RelayWrapperSet(address)": {
+        "notice": "event (0x2658b600): Relay Wrapper address is set"
+      }
+    },
+    "kind": "user",
+    "methods": {
+      "addRelayApprovee(address)": {
+        "notice": "Set the approvee address"
+      },
+      "callRemote(uint256,address,bytes)": {
+        "notice": "Initiate the remote chain call"
+      },
+      "constructor": {
+        "notice": "Zbyte Relay constructor"
+      },
+      "isTrustedForwarder(address)": {
+        "notice": "Check if the given address is the trusted forwarder"
+      },
+      "receiveCall(uint256,address,bytes)": {
+        "notice": "Handle the call received from source chain"
+      },
+      "relayWrapper()": {
+        "notice": "Address of the RelayWrapper (on core)"
+      },
+      "setRelayWrapper(address)": {
+        "notice": "Set the RelayWrapper contract address"
+      },
+      "setTrustedForwarder(address)": {
+        "notice": "Set the forwarder contract address"
+      },
+      "updatePayload(uint256,address,bytes32,address,bytes)": {
+        "notice": "Update the payload to include additional information"
+      }
+    },
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 7,
+        "contract": "contracts/relay/ZbyteRelay.sol:ZbyteRelay",
+        "label": "_owner",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      },
+      {
+        "astId": 9843,
+        "contract": "contracts/relay/ZbyteRelay.sol:ZbyteRelay",
+        "label": "trustedForwarder",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_address"
+      },
+      {
+        "astId": 8082,
+        "contract": "contracts/relay/ZbyteRelay.sol:ZbyteRelay",
+        "label": "approved",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_mapping(t_address,t_bool)"
+      },
+      {
+        "astId": 8086,
+        "contract": "contracts/relay/ZbyteRelay.sol:ZbyteRelay",
+        "label": "relayWrapper",
+        "offset": 0,
+        "slot": "3",
+        "type": "t_contract(IRelayWrapper)7619"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      },
+      "t_contract(IRelayWrapper)7619": {
+        "encoding": "inplace",
+        "label": "contract IRelayWrapper",
+        "numberOfBytes": "20"
+      },
+      "t_mapping(t_address,t_bool)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => bool)",
+        "numberOfBytes": "32",
+        "value": "t_bool"
+      }
+    }
+  }
+}

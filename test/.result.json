@@ -30889,6 +30889,116 @@
         },
         {
             "function": "initDappStates"
+        },
+        {
+            "function": "storeValue",
+            "storedBy": "0x1D682fe11d31D443250139d071cAEC471e4ce9b5",
+            "storedValue": "10"
+        },
+        {
+            "function": "transfer",
+            "sender": "0x4661D1e9fBf54F7EE418D64A31192346e9E3B8bc",
+            "receiver": "0x1D682fe11d31D443250139d071cAEC471e4ce9b5",
+            "amount": "100.0"
+        },
+        {
+            "function": "transfer",
+            "sender": "0x4661D1e9fBf54F7EE418D64A31192346e9E3B8bc",
+            "receiver": "0x0614d1Ec96c6E0ad7B3be2863309a8E7CaB837D6",
+            "amount": "100.0"
+        },
+        {
+            "function": "approve",
+            "approver": "0x1D682fe11d31D443250139d071cAEC471e4ce9b5",
+            "approvee": "0xd9CC83B69b6871c46Fc9F7902987c0cC8146Bb05",
+            "amount": "100.0"
+        },
+        {
+            "function": "approve",
+            "approver": "0x0614d1Ec96c6E0ad7B3be2863309a8E7CaB837D6",
+            "approvee": "0xd9CC83B69b6871c46Fc9F7902987c0cC8146Bb05",
+            "amount": "100.0"
+        },
+        null,
+        null,
+        {
+            "function": "deposit",
+            "srcChain": "amoy",
+            "srcRelay": "0xA4298e662fAC748f8eD33B47380D71c3D979072f",
+            "destChain": "hederatest",
+            "destRelay": "0xf3FAde15f5A96E83CED6FC9E391E72234fDbDd44",
+            "data": "0x000000000000000000000000f3fade15f5a96e83ced6fc9e391e72234fdbdd4400000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000120000000000000000000000000000000000000000000000000000000000000012800000000000000000000000041f266810181a3212f6c4a08322fb2825819f28cd21118b958ce2d431078cedab7f09d2f08a65f55ee53c4f5634506f13bf7c750000000000000000000000000d9cc83b69b6871c46fc9f7902987c0cc8146bb0500000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000004440c10f190000000000000000000000001d682fe11d31d443250139d071caec471e4ce9b5000000000000000000000000000000000000000000000004e1003b28d928000000000000000000000000000000000000000000000000000000000000",
+            "ack": "0xd21118b958ce2d431078cedab7f09d2f08a65f55ee53c4f5634506f13bf7c750",
+            "amount": "90",
+            "caller": "escrow"
+        },
+        {
+            "function": "deposit",
+            "srcChain": "amoy",
+            "srcRelay": "0xA4298e662fAC748f8eD33B47380D71c3D979072f",
+            "destChain": "hederatest",
+            "destRelay": "0xf3FAde15f5A96E83CED6FC9E391E72234fDbDd44",
+            "data": "0x000000000000000000000000f3fade15f5a96e83ced6fc9e391e72234fdbdd4400000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000120000000000000000000000000000000000000000000000000000000000000012800000000000000000000000041f266810181a3212f6c4a08322fb2825819f28c78d3710ac43c4718efe367afd3e1d203103d76394a7cca649368b6b814d11957000000000000000000000000d9cc83b69b6871c46fc9f7902987c0cc8146bb0500000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000004440c10f190000000000000000000000000614d1ec96c6e0ad7b3be2863309a8e7cab837d6000000000000000000000000000000000000000000000004e1003b28d928000000000000000000000000000000000000000000000000000000000000",
+            "ack": "0x78d3710ac43c4718efe367afd3e1d203103d76394a7cca649368b6b814d11957",
+            "amount": "90",
+            "caller": "escrow"
+        },
+        null,
+        null,
+        {
+            "function": "balanceOf",
+            "user": "0x1D682fe11d31D443250139d071cAEC471e4ce9b5",
+            "balZ": "90.0",
+            "balL1": "99.9629408"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x0614d1Ec96c6E0ad7B3be2863309a8E7CaB837D6",
+            "balZ": "90.0",
+            "balL1": "0.0"
+        },
+        {
+            "function": "deployDplat"
+        },
+        {
+            "function": "deployDapp",
+            "dapp": "SampleDstoreDapp",
+            "dappAddress": "0xBB88F5d77f72059f7540f4bca74e51685E0eAf6f",
+            "deployer": "0x4661D1e9fBf54F7EE418D64A31192346e9E3B8bc"
+        },
+        {
+            "zbytePriceFeeder-registerWorker": {
+                "function": "registerWorker",
+                "worker": "0xfdFDBdf4E7e578B905AEa0AfBb9b21C992cEaeE7"
+            },
+            "zbytePriceFeeder-setNativeEthEquivalentZbyteInGwei": {
+                "function": "setNativeEthEquivalentZbyteInGwei",
+                "nativeEthEquivalentZbyteInGwei": "9000000000"
+            },
+            "zbytePriceFeeder-setZbytePriceInGwei": {
+                "function": "setNativeEthEquivalentZbyteInGwei",
+                "zbytePriceInGwei_": "10000000000"
+            },
+            "zbytePriceFeeder-setBurnRateInMill": {
+                "function": "setBurnRateInMill",
+                "burnRateInMill": "20"
+            }
+        },
+        {
+            "relayWrapper-setRelayAddress": {
+                "function": "setRelayAddress",
+                "relayAddress": "0xf3FAde15f5A96E83CED6FC9E391E72234fDbDd44",
+                "relayId": 0,
+                "chainId": 84532
+            },
+            "Escrow-setvERC20Address": {
+                "function": "setvERC20Address",
+                "vERC20Address": "0x41f266810181A3212F6c4A08322FB2825819f28C",
+                "dplatChainId": 84532
+            }
+        },
+        {
+            "function": "initDappStates"
         }
     ]
 }

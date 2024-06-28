@@ -54,9 +54,14 @@ module.exports = {
       chainId: 43114
     },
     hederatest: {
-      url: `https://testnet.hashio.io/api	`,
+      url: `https://testnet.hashio.io/api`,
       accounts: constants.prvKeysList,
       chainId: 296
+    },
+    basetest: {
+      url: `https://sepolia.base.org`,
+      accounts: constants.prvKeysList,
+      chainId: 84532
     }
   }
 };
