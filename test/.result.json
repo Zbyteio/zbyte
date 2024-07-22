@@ -30999,6 +30999,33 @@
         },
         {
             "function": "initDappStates"
+        },
+        {
+            "function": "balanceOf",
+            "user": "0x1D682fe11d31D443250139d071cAEC471e4ce9b5",
+            "balZ": "0.0",
+            "balL1": "0.1"
+        },
+        {
+            "function": "deployDplat"
+        },
+        {
+            "zbytePriceFeeder-registerWorker": {
+                "function": "registerWorker",
+                "worker": "0xfdFDBdf4E7e578B905AEa0AfBb9b21C992cEaeE7"
+            },
+            "zbytePriceFeeder-setNativeEthEquivalentZbyteInGwei": {
+                "function": "setNativeEthEquivalentZbyteInGwei",
+                "nativeEthEquivalentZbyteInGwei": "9000000000"
+            },
+            "zbytePriceFeeder-setZbytePriceInGwei": {
+                "function": "setNativeEthEquivalentZbyteInGwei",
+                "zbytePriceInGwei_": "10000000000"
+            },
+            "zbytePriceFeeder-setBurnRateInMill": {
+                "function": "setBurnRateInMill",
+                "burnRateInMill": "20"
+            }
         }
     ]
 }

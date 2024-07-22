@@ -1,0 +1,809 @@
+{
+  "address": "0x3b59545337e8858159b22323ad1c93E47C658336",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "",
+          "type": "bytes4"
+        }
+      ],
+      "name": "EnterpriseAlreadyRegistered",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "EnterpriseDappAlreadyRegistered",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "EnterpriseDappNotRegistered",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "",
+          "type": "bytes4"
+        }
+      ],
+      "name": "EnterpriseNotRegistered",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "EnterpriseUserAlreadyRegistered",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "EnterpriseUserNotRegistered",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "",
+          "type": "bytes4"
+        }
+      ],
+      "name": "InvalidEnterprise",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "InvalidProvider",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NotAForwarder",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "NotARegisteredProvider",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "ProviderAgentAlreadyRegistered",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "ProviderAgentNotRegistered",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "ProviderAlreadyRegistered",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "ProviderNotRegistered",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ZeroAddress",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes4",
+          "name": "",
+          "type": "bytes4"
+        }
+      ],
+      "name": "ZbyteDPlatDappRegistered",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes4",
+          "name": "",
+          "type": "bytes4"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "ZbyteDPlatEnterpriseLimitSet",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes4",
+          "name": "",
+          "type": "bytes4"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "ZbyteDPlatEnterpriseRegistered",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes4",
+          "name": "",
+          "type": "bytes4"
+        }
+      ],
+      "name": "ZbyteDPlatEnterpriseUserRegistered",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "ZbyteDPlatProviderAgentRegistered",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "name": "ZbyteDPlatProviderRegistred",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "agent_",
+          "type": "address"
+        }
+      ],
+      "name": "deRegisterProviderAgent",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "dapp_",
+          "type": "address"
+        }
+      ],
+      "name": "deregisterDapp",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "enterprise_",
+          "type": "bytes4"
+        }
+      ],
+      "name": "deregisterEnterprise",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user_",
+          "type": "address"
+        }
+      ],
+      "name": "deregisterEnterpriseUser",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "deregisterProvider",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "enterprise_",
+          "type": "bytes4"
+        }
+      ],
+      "name": "getEnterpriseLimit",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "dapp_",
+          "type": "address"
+        }
+      ],
+      "name": "isEnterpriseDappRegistered",
+      "outputs": [
+        {
+          "internalType": "bytes4",
+          "name": "",
+          "type": "bytes4"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "enterprise_",
+          "type": "bytes4"
+        }
+      ],
+      "name": "isEnterpriseRegistered",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user_",
+          "type": "address"
+        }
+      ],
+      "name": "isEnterpriseUserRegistered",
+      "outputs": [
+        {
+          "internalType": "bytes4",
+          "name": "",
+          "type": "bytes4"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "agent_",
+          "type": "address"
+        }
+      ],
+      "name": "isProviderAgentRegistered",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "provider_",
+          "type": "address"
+        }
+      ],
+      "name": "isProviderRegistered",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "dapp_",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes4",
+          "name": "enterprise_",
+          "type": "bytes4"
+        }
+      ],
+      "name": "registerDapp",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "enterprise_",
+          "type": "bytes4"
+        }
+      ],
+      "name": "registerEnterprise",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user_",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes4",
+          "name": "enterprise_",
+          "type": "bytes4"
+        }
+      ],
+      "name": "registerEnterpriseUser",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "registerProvider",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "agent_",
+          "type": "address"
+        }
+      ],
+      "name": "registerProviderAgent",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "enterprise_",
+          "type": "bytes4"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount_",
+          "type": "uint256"
+        }
+      ],
+      "name": "setEnterpriseLimit",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x1876e2d17526dc0b2b259f42da350f2f42b8b4ce165f2ea23003cbf76ebbf8d1",
+  "receipt": {
+    "to": "0x4e59b44847b379578588920cA78FbF26c0B4956C",
+    "from": "0x4661D1e9fBf54F7EE418D64A31192346e9E3B8bc",
+    "contractAddress": "0x4e59b44847b379578588920cA78FbF26c0B4956C",
+    "transactionIndex": 3266,
+    "gasUsed": "124312",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0xf94eb71b5b69929ba68b7441d9d212c06f871e2906bc488b85dff667c071db56",
+    "transactionHash": "0x1876e2d17526dc0b2b259f42da350f2f42b8b4ce165f2ea23003cbf76ebbf8d1",
+    "logs": [],
+    "blockNumber": 66793849,
+    "cumulativeGasUsed": "124312",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "e67aaade3ce54eefff91fdef20cb9e9e",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"}],\"name\":\"EnterpriseAlreadyRegistered\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"EnterpriseDappAlreadyRegistered\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"EnterpriseDappNotRegistered\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"}],\"name\":\"EnterpriseNotRegistered\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"EnterpriseUserAlreadyRegistered\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"EnterpriseUserNotRegistered\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"}],\"name\":\"InvalidEnterprise\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"InvalidProvider\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"NotAForwarder\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"NotARegisteredProvider\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"ProviderAgentAlreadyRegistered\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"ProviderAgentNotRegistered\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"ProviderAlreadyRegistered\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"ProviderNotRegistered\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ZeroAddress\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"}],\"name\":\"ZbyteDPlatDappRegistered\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"ZbyteDPlatEnterpriseLimitSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"ZbyteDPlatEnterpriseRegistered\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"}],\"name\":\"ZbyteDPlatEnterpriseUserRegistered\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"ZbyteDPlatProviderAgentRegistered\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"name\":\"ZbyteDPlatProviderRegistred\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"agent_\",\"type\":\"address\"}],\"name\":\"deRegisterProviderAgent\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"dapp_\",\"type\":\"address\"}],\"name\":\"deregisterDapp\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"enterprise_\",\"type\":\"bytes4\"}],\"name\":\"deregisterEnterprise\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user_\",\"type\":\"address\"}],\"name\":\"deregisterEnterpriseUser\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"deregisterProvider\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"enterprise_\",\"type\":\"bytes4\"}],\"name\":\"getEnterpriseLimit\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"dapp_\",\"type\":\"address\"}],\"name\":\"isEnterpriseDappRegistered\",\"outputs\":[{\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"enterprise_\",\"type\":\"bytes4\"}],\"name\":\"isEnterpriseRegistered\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user_\",\"type\":\"address\"}],\"name\":\"isEnterpriseUserRegistered\",\"outputs\":[{\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"agent_\",\"type\":\"address\"}],\"name\":\"isProviderAgentRegistered\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"provider_\",\"type\":\"address\"}],\"name\":\"isProviderRegistered\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"dapp_\",\"type\":\"address\"},{\"internalType\":\"bytes4\",\"name\":\"enterprise_\",\"type\":\"bytes4\"}],\"name\":\"registerDapp\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"enterprise_\",\"type\":\"bytes4\"}],\"name\":\"registerEnterprise\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user_\",\"type\":\"address\"},{\"internalType\":\"bytes4\",\"name\":\"enterprise_\",\"type\":\"bytes4\"}],\"name\":\"registerEnterpriseUser\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"registerProvider\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"agent_\",\"type\":\"address\"}],\"name\":\"registerProviderAgent\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"enterprise_\",\"type\":\"bytes4\"},{\"internalType\":\"uint256\",\"name\":\"amount_\",\"type\":\"uint256\"}],\"name\":\"setEnterpriseLimit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Zbyte DPlat Registration Facet\",\"kind\":\"dev\",\"methods\":{\"deRegisterProviderAgent(address)\":{\"params\":{\"agent_\":\"The address of the provider agent to deregister.\"}},\"deregisterDapp(address)\":{\"params\":{\"dapp_\":\"The address of the Dapp to deregister.\"}},\"deregisterEnterprise(bytes4)\":{\"params\":{\"enterprise_\":\"The bytes4 identifier of the enterprise to deregister.\"}},\"deregisterEnterpriseUser(address)\":{\"params\":{\"user_\":\"The address of the user to deregister.\"}},\"isEnterpriseDappRegistered(address)\":{\"params\":{\"dapp_\":\"The address of the Dapp to check.\"},\"returns\":{\"_0\":\"The identifier of the associated registered enterprise.\"}},\"isEnterpriseRegistered(bytes4)\":{\"params\":{\"enterprise_\":\"The identifier of the enterprise to check.\"},\"returns\":{\"_0\":\"The address of the associated registered provider.\"}},\"isEnterpriseUserRegistered(address)\":{\"params\":{\"user_\":\"The address of the user to check.\"},\"returns\":{\"_0\":\"The identifier of the associated registered enterprise.\"}},\"isProviderAgentRegistered(address)\":{\"params\":{\"agent_\":\"The address of the provider agent to check.\"},\"returns\":{\"_0\":\"The address of the associated registered provider.\"}},\"isProviderRegistered(address)\":{\"params\":{\"provider_\":\"The address of the provider to check.\"},\"returns\":{\"_0\":\"A boolean indicating whether the provider is registered.\"}},\"registerDapp(address,bytes4)\":{\"params\":{\"dapp_\":\"The address of the Dapp to register.\",\"enterprise_\":\"The bytes4 identifier of the enterprise.\"}},\"registerEnterprise(bytes4)\":{\"params\":{\"enterprise_\":\"The bytes4 identifier of the enterprise to register.\"}},\"registerEnterpriseUser(address,bytes4)\":{\"params\":{\"enterprise_\":\"The bytes4 identifier of the enterprise.\",\"user_\":\"The address of the user to register.\"}},\"registerProvider()\":{\"details\":\"Relation between provider, agent, enterprise, users and dapps is as follows: zbyte\\\\ ____(1) <--------> (n) provider\\\\ ____________________________(1) <--------> (n) agent\\\\ ____________________________(1) <--------> (n) enterprise\\\\ ________________________________________________________(1) <--------> (n) user\\\\ ________________________________________________________(1) <--------> (n) dapp   For an enterprise usecase, an enterprise can allow users to invoke registered dapps.\\\\   Users can invoke the contract functions without any need to hold crypto assets.\\\\   L1 needed for the call is given by the authorized workers and providers compensate them in vERC20.\\\\ \\\\   For opensource usecase,\\\\   Users can invoke the contract functions without any need to hold L1 assets.\\\\   L1 needed for the call is given by the authorized workers and the users compensate them in vERC20\\\\ \\\\   NOTE: When one of the components (provider, enterprise, agent, user or dapp) is deregistered,\\\\    all the other components registered under it remain registered.\\\\    So, if the component is registered again, the entire subtree becomes active again\"},\"registerProviderAgent(address)\":{\"params\":{\"agent_\":\"The address of the provider agent to register.\"}},\"setEnterpriseLimit(bytes4,uint256)\":{\"params\":{\"amount_\":\"The new limit amount.\",\"enterprise_\":\"The bytes4 identifier of the enterprise.\"}}},\"version\":1},\"userdoc\":{\"errors\":{\"EnterpriseAlreadyRegistered(bytes4)\":[{\"notice\":\"error (0x6d998cea): Enterprise is already registered.\"}],\"EnterpriseDappAlreadyRegistered(address)\":[{\"notice\":\"error (0xbcb8afa4): Enterprise dapp is already registered.\"}],\"EnterpriseDappNotRegistered(address)\":[{\"notice\":\"error (0x31b254a2): Enterprise dapp is not registered.\"}],\"EnterpriseNotRegistered(bytes4)\":[{\"notice\":\"error (0xbd825961): Enterprise is not registered.\"}],\"EnterpriseUserAlreadyRegistered(address)\":[{\"notice\":\"error (0x43469070): Enterprise user is already registered.\"}],\"EnterpriseUserNotRegistered(address)\":[{\"notice\":\"error (0x1b7bfcf8): Enterprise user is not registered.\"}],\"InvalidEnterprise(bytes4)\":[{\"notice\":\"error (0x128c088b): Invalid enterprise hash.\"}],\"InvalidProvider(address)\":[{\"notice\":\"error (0x96271599): Invalid provider.\"}],\"NotAForwarder()\":[{\"notice\":\"error (0x5ac85bab): Caller is not a forwarder\"}],\"NotARegisteredProvider(address)\":[{\"notice\":\"error (0xca61871b): Not a registered provider.\"}],\"ProviderAgentAlreadyRegistered(address)\":[{\"notice\":\"error (0xe751ad65): Provider Agent is already registered.\"}],\"ProviderAgentNotRegistered(address)\":[{\"notice\":\"error (0xd0141a6a): Not a registered provider agent.\"}],\"ProviderAlreadyRegistered(address)\":[{\"notice\":\"errorserror (0x74f7822a): Provider already registered.\"}],\"ProviderNotRegistered(address)\":[{\"notice\":\"error (0x232cb27a): Provider not registered.\"}]},\"events\":{\"ZbyteDPlatDappRegistered(address,bytes4)\":{\"notice\":\"event (0x822d049d): Zbyte DPlat dapp is registered.\"},\"ZbyteDPlatEnterpriseLimitSet(bytes4,uint256,uint256)\":{\"notice\":\"event (0x75ee1f8e): Zbyte DPlat enterprise limit is set.\"},\"ZbyteDPlatEnterpriseRegistered(bytes4,address)\":{\"notice\":\"event (0xa98ff618): Zbyte DPlat enterprise is registered.\"},\"ZbyteDPlatEnterpriseUserRegistered(address,bytes4)\":{\"notice\":\"event (0x83439d26): Zbyte DPlat enterprise user is registered.\"},\"ZbyteDPlatProviderAgentRegistered(address,address)\":{\"notice\":\"event (0xb0c62993): Zbyte DPlat provider agent is registered.\"},\"ZbyteDPlatProviderRegistred(address,bool)\":{\"notice\":\"eventsevent (0x2a3043c9): Zbyte DPlat provider is registered.\"}},\"kind\":\"user\",\"methods\":{\"deRegisterProviderAgent(address)\":{\"notice\":\"Deregisters a provider agent.\"},\"deregisterDapp(address)\":{\"notice\":\"Deregisters a Dapp for an enterprise.\"},\"deregisterEnterprise(bytes4)\":{\"notice\":\"Deregisters an enterprise.\"},\"deregisterEnterpriseUser(address)\":{\"notice\":\"Deregisters an enterprise user.\"},\"deregisterProvider()\":{\"notice\":\"Deregisters a provider.\"},\"isEnterpriseDappRegistered(address)\":{\"notice\":\"Checks if an enterprise Dapp is registered and returns the associated enterprise identifier.\"},\"isEnterpriseRegistered(bytes4)\":{\"notice\":\"Checks if an enterprise is registered and returns the associated provider's address.\"},\"isEnterpriseUserRegistered(address)\":{\"notice\":\"Checks if an enterprise user is registered and returns the associated enterprise identifier.\"},\"isProviderAgentRegistered(address)\":{\"notice\":\"Checks if a provider agent is registered and returns the associated provider's address.\"},\"isProviderRegistered(address)\":{\"notice\":\"Checks if a provider is registered.\"},\"registerDapp(address,bytes4)\":{\"notice\":\"Registers a Dapp for an enterprise.\"},\"registerEnterprise(bytes4)\":{\"notice\":\"Registers an enterprise.\"},\"registerEnterpriseUser(address,bytes4)\":{\"notice\":\"Registers an enterprise user.\"},\"registerProvider()\":{\"notice\":\"Registers a provider.\"},\"registerProviderAgent(address)\":{\"notice\":\"Registers a provider agent.\"},\"setEnterpriseLimit(bytes4,uint256)\":{\"notice\":\"Sets the enterprise limit for a specific enterprise.\"}},\"notice\":\"Zbyte DPlat Registration Facet\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/dplat/ZbyteDPlatDiamond/ZbyteDPlatRegistrationFacet.sol\":\"ZbyteDPlatRegistrationFacet\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[],\"viaIR\":true},\"sources\":{\"contracts/dplat/ZbyteDPlatDiamond/LibDPlat.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\n// --.. -... -.-- - . \\n// \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557 \\u2588\\u2588\\u2557   \\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\n// \\u255a\\u2550\\u2550\\u2588\\u2588\\u2588\\u2554\\u255d\\u2588\\u2588\\u2554\\u2550\\u2550\\u2588\\u2588\\u2557\\u255a\\u2588\\u2588\\u2557 \\u2588\\u2588\\u2554\\u255d\\u255a\\u2550\\u2550\\u2588\\u2588\\u2554\\u2550\\u2550\\u255d\\u2588\\u2588\\u2554\\u2550\\u2550\\u2550\\u2550\\u255d\\n//   \\u2588\\u2588\\u2588\\u2554\\u255d \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2554\\u255d \\u255a\\u2588\\u2588\\u2588\\u2588\\u2554\\u255d    \\u2588\\u2588\\u2551   \\u2588\\u2588\\u2588\\u2588\\u2588\\u2557  \\n//  \\u2588\\u2588\\u2588\\u2554\\u255d  \\u2588\\u2588\\u2554\\u2550\\u2550\\u2588\\u2588\\u2557  \\u255a\\u2588\\u2588\\u2554\\u255d     \\u2588\\u2588\\u2551   \\u2588\\u2588\\u2554\\u2550\\u2550\\u255d  \\n// \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2554\\u255d   \\u2588\\u2588\\u2551      \\u2588\\u2588\\u2551   \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\n// \\u255a\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u255d\\u255a\\u2550\\u2550\\u2550\\u2550\\u2550\\u255d    \\u255a\\u2550\\u255d      \\u255a\\u2550\\u255d   \\u255a\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u255d\\n// --.. -... -.-- - . \\n\\npragma solidity ^0.8.9;\\n\\n/// @notice Library for DPlat base storage and functions\\n/// @dev Library for DPlat base storage and functions\\nlibrary LibDPlatBase {\\n    /// @notice To record PreExecute states \\n    struct PreExecStates {\\n        bytes4 enterprise;\\n        address enterprisePolicy;\\n        uint256 enterpriseEligibilityGas;\\n        address user;\\n        address dapp;\\n        bytes4 functionSig;\\n    }\\n\\n    /// @notice Diamond storage for DPlat Base struct\\n    struct DiamondStorage {\\n        PreExecStates preExecuteStates;\\n        address zbyteVToken; \\n        address zbytePriceFeeder;\\n    }\\n\\n    /// @notice Retrieves the DiamondStorage struct for the library.\\n    /// @dev zbyteVToken: The address of the ZbyteVToken\\\\\\n    ///  zbyteValueInNativeEthGwei: The value of Zbyte in native Ether (in Gwei)\\\\\\n    ///  zbyteBurnFactor: Burn factor, represents the percent of gas used that will be 'burnt'\\n    function diamondStorage() internal pure returns (DiamondStorage storage ds) {\\n        bytes32 storagePosition = keccak256(\\\"diamond.storage.LibDPlatBase.v1\\\");\\n        assembly {\\n            ds.slot := storagePosition\\n        }\\n    }\\n\\n    /// @notice Gets the ZbyteVToken address.\\n    /// @return The address of the ZbyteVToken.\\n    function _getZbyteVToken() internal view returns (address) {\\n        DiamondStorage storage _dsb = diamondStorage();\\n        return _dsb.zbyteVToken;\\n    }\\n\\n    /**\\n    * @dev Retrieves the address of the Zbyte price feeder from DiamondStorage.\\n    * @return The address of the Zbyte price feeder.\\n    */\\n    function _getZbytePriceFeeder() internal view returns (address) {\\n        DiamondStorage storage _dsb = diamondStorage();\\n        return _dsb.zbytePriceFeeder;\\n    }\\n\\n    /**\\n    * @dev Sets the pre-execution states with the specified enterprise identifier.\\n    * @param enterprise_ The enterprise identifier to be set in the pre-execution states.\\n    */\\n    function _setPreExecStates(bytes4 enterprise_, uint256 enterpriseEligibilityGas_, address enterprisePolicy_, address user_, address dapp_, bytes4 functionSig_) internal {\\n        DiamondStorage storage _dsb = diamondStorage();\\n        _dsb.preExecuteStates.enterprise = enterprise_;\\n        _dsb.preExecuteStates.enterpriseEligibilityGas = enterpriseEligibilityGas_;\\n        _dsb.preExecuteStates.enterprisePolicy = enterprisePolicy_;\\n        _dsb.preExecuteStates.user = user_;\\n        _dsb.preExecuteStates.dapp = dapp_;\\n        _dsb.preExecuteStates.functionSig = functionSig_;\\n    }\\n\\n    /**\\n    * @dev Retrieves the pre-execution states from DiamondStorage.\\n    * @return The pre-execution states stored in DiamondStorage.\\n    */\\n    function _getPreExecStates() internal view returns (PreExecStates memory) {\\n        DiamondStorage storage _dsb = diamondStorage();\\n        return _dsb.preExecuteStates;\\n    }\\n\\n}\\n\\n/// @notice Library for DPlat registration storage and functions\\n/// @dev Library for DPlat registration storage and functions\\nlibrary LibDPlatRegistration {\\n    /// @notice event (0x75ee1f8e): Zbyte DPlat enterprise limit is set.\\n    event ZbyteDPlatEnterpriseLimitSet(bytes4,uint256,uint256);\\n\\n    /// @notice Diamond storage for DPlat registration struct\\n    struct DiamondStorage {\\n        mapping(bytes4 => address) registeredEnterprises;\\n        mapping(bytes4 => address) registeredEnterprisePolicy;\\n        mapping(address => bytes4) registeredDapps;\\n        mapping(address => bytes4) registeredEnterpriseUsers;\\n        mapping(bytes4 => uint256) enterpriseLimit;\\n    }\\n\\n    /// @notice Retrieves the DiamondStorage struct for the library.\\n    /// @dev registeredEnterprises: Mapping of registered enterprises by bytes4 ID\\\\\\n    ///  registeredEnterprisePolicy: Mapping of enterprise policies by bytes4 ID\\\\\\n    ///  registeredDapps: Mapping of registered Dapps by address\\\\\\n    ///  registeredEnterpriseUsers: Mapping of registered enterprise users by address\\\\\\n    ///  enterpriseLimit: Mapping of enterprise limits by bytes4 ID\\n    function diamondStorage() internal pure returns (DiamondStorage storage ds) {\\n        bytes32 storagePosition = keccak256(\\\"diamond.storage.LibDPlatRegistration.v1\\\");\\n        assembly {\\n            ds.slot := storagePosition\\n        }\\n    }\\n\\n    /// @notice Gets the enterprise limit for a given enterprise ID.\\n    /// @param enterprise_ The enterprise ID.\\n    /// @return The enterprise limit.\\n    function _getEnterpriseLimit(bytes4 enterprise_) internal view returns (uint256) {\\n        DiamondStorage storage _dsp = diamondStorage();\\n        return _dsp.enterpriseLimit[enterprise_];\\n    }\\n\\n    /// @notice Sets the enterprise limit for a given enterprise ID.\\n    /// @param enterprise_ The enterprise ID.\\n    /// @param amount_ The limit amount to set.\\n    function _setEntepriseLimit(bytes4 enterprise_, uint256 amount_) internal {\\n        DiamondStorage storage _dsp = diamondStorage();\\n        uint256 _currentEnterpriseLimit = _dsp.enterpriseLimit[enterprise_];\\n        _dsp.enterpriseLimit[enterprise_] = amount_;\\n        emit ZbyteDPlatEnterpriseLimitSet(enterprise_,_currentEnterpriseLimit,amount_);\\n    }\\n\\n    /// @notice Checks if an enterprise has a registered policy and retrieves the policy address.\\n    /// @param enterprise_ The enterprise ID.\\n    /// @return Enterprise payment policy address.\\n    function _doesEnterpriseHavePolicy(bytes4 enterprise_) internal view returns (address) {\\n        DiamondStorage storage _dsp = diamondStorage();\\n        return _dsp.registeredEnterprisePolicy[enterprise_];\\n    }\\n\\n    /// @notice Checks if the given provider is registered\\n    /// @param provider_ The provider address\\n    /// @return bool indicating if the provider is registered\\n    function isProviderRegistered(address provider_) internal view returns(bool) {\\n        LibDPlatProvider.DiamondStorage storage _dsp = LibDPlatProvider.diamondStorage();\\n        return _dsp.registeredProviders[provider_];\\n    }\\n\\n    /// @notice Checks if the given agent is registered\\n    /// @param agent_ The agent address\\n    /// @return returns the address of provider if registered, or address(0)\\n    function isProviderAgentRegistered(address agent_) internal view returns(address) {\\n        LibDPlatProvider.DiamondStorage storage _dsp = LibDPlatProvider.diamondStorage();\\n        return _dsp.registeredProviderAgent[agent_];\\n    }\\n\\n    /// @notice Checks if the given enterprise is registered\\n    /// @param enterprise_ The enterprise bytes4 ID\\n    /// @return returns the address of provider if registered, or address(0)\\n    function isEnterpriseRegistered(bytes4 enterprise_) internal view returns(address) {\\n        LibDPlatRegistration.DiamondStorage storage _dsr = LibDPlatRegistration.diamondStorage();\\n        return _dsr.registeredEnterprises[enterprise_];\\n    }\\n\\n    /// @notice Checks if the given user is registered with an enterprise\\n    /// @param user_ The user address\\n    /// @return returns the address of provider if registered, or address(0)\\n    function isEnterpriseUserRegistered(address user_) internal view returns(bytes4) {\\n        LibDPlatRegistration.DiamondStorage storage _dsr = LibDPlatRegistration.diamondStorage();\\n        return _dsr.registeredEnterpriseUsers[user_];\\n    }\\n\\n    /// @notice Checks if the given dapp (contract) is registered with an enterprise\\n    /// @param dapp_ The contract address\\n    /// @return returns the address of provider if registered, or address(0)\\n    function isEnterpriseDappRegistered(address dapp_) internal view returns(bytes4) {\\n        LibDPlatRegistration.DiamondStorage storage _dsr = LibDPlatRegistration.diamondStorage();\\n        return _dsr.registeredDapps[dapp_];\\n    }\\n}\\n\\n/// @notice Library for DPlat provider storage and functions\\n/// @dev Library for DPlat provider storage and functions\\nlibrary LibDPlatProvider {\\n\\n    /// @notice Diamond storage for DPlat provider struct\\n    struct DiamondStorage {\\n        mapping(address => bool) registeredProviders;\\n        mapping(address => address) registeredProviderAgent;\\n    }\\n\\n    /// @notice Retrieves the DiamondStorage struct for the library.\\n    /// @dev registeredProviders: Mapping of registered providers by address\\\\\\n    ///  registeredProviderAgent: Mapping of registered provider agents by address\\n    function diamondStorage() internal pure returns (DiamondStorage storage ds) {\\n        bytes32 storagePosition = keccak256(\\\"diamond.storage.LibDPlatProvider.v1\\\");\\n        assembly {\\n            ds.slot := storagePosition\\n        }\\n    }\\n}\\n\",\"keccak256\":\"0x7d3877dec1adf309e350383d2b950ed6df871bcbe54af388eba4d3ca1c29d2ec\",\"license\":\"MIT\"},\"contracts/dplat/ZbyteDPlatDiamond/ZbyteDPlatRegistrationFacet.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\n// --.. -... -.-- - . \\n// \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557 \\u2588\\u2588\\u2557   \\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\n// \\u255a\\u2550\\u2550\\u2588\\u2588\\u2588\\u2554\\u255d\\u2588\\u2588\\u2554\\u2550\\u2550\\u2588\\u2588\\u2557\\u255a\\u2588\\u2588\\u2557 \\u2588\\u2588\\u2554\\u255d\\u255a\\u2550\\u2550\\u2588\\u2588\\u2554\\u2550\\u2550\\u255d\\u2588\\u2588\\u2554\\u2550\\u2550\\u2550\\u2550\\u255d\\n//   \\u2588\\u2588\\u2588\\u2554\\u255d \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2554\\u255d \\u255a\\u2588\\u2588\\u2588\\u2588\\u2554\\u255d    \\u2588\\u2588\\u2551   \\u2588\\u2588\\u2588\\u2588\\u2588\\u2557  \\n//  \\u2588\\u2588\\u2588\\u2554\\u255d  \\u2588\\u2588\\u2554\\u2550\\u2550\\u2588\\u2588\\u2557  \\u255a\\u2588\\u2588\\u2554\\u255d     \\u2588\\u2588\\u2551   \\u2588\\u2588\\u2554\\u2550\\u2550\\u255d  \\n// \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2554\\u255d   \\u2588\\u2588\\u2551      \\u2588\\u2588\\u2551   \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\n// \\u255a\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u255d\\u255a\\u2550\\u2550\\u2550\\u2550\\u2550\\u255d    \\u255a\\u2550\\u255d      \\u255a\\u2550\\u255d   \\u255a\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u255d\\n// --.. -... -.-- - . \\n\\npragma solidity ^0.8.9;\\n\\nimport \\\"./LibDPlat.sol\\\";\\nimport \\\"../../utils/LibCommonErrors.sol\\\";\\nimport \\\"../../utils/ZbyteContextDiamond.sol\\\";\\n\\n/// @notice Zbyte DPlat Registration Facet\\n/// @dev Zbyte DPlat Registration Facet\\ncontract ZbyteDPlatRegistrationFacet is ZbyteContextDiamond {\\n\\n    /// events\\n    /// @notice event (0x2a3043c9): Zbyte DPlat provider is registered.\\n    event ZbyteDPlatProviderRegistred(address,bool);\\n    /// @notice event (0xb0c62993): Zbyte DPlat provider agent is registered.\\n    event ZbyteDPlatProviderAgentRegistered(address,address);\\n    /// @notice event (0xa98ff618): Zbyte DPlat enterprise is registered.\\n    event ZbyteDPlatEnterpriseRegistered(bytes4,address);\\n    /// @notice event (0x83439d26): Zbyte DPlat enterprise user is registered.\\n    event ZbyteDPlatEnterpriseUserRegistered(address,bytes4);\\n    /// @notice event (0x822d049d): Zbyte DPlat dapp is registered.\\n    event ZbyteDPlatDappRegistered(address,bytes4);\\n    /// @notice event (0x75ee1f8e): Zbyte DPlat enterprise limit is set.\\n    event ZbyteDPlatEnterpriseLimitSet(bytes4,uint256,uint256);\\n\\n    ///errors\\n    /// @notice error (0x74f7822a): Provider already registered.\\n    error ProviderAlreadyRegistered(address);\\n    /// @notice error (0x232cb27a): Provider not registered.\\n    error ProviderNotRegistered(address);\\n    /// @notice error (0x128c088b): Invalid enterprise hash.\\n    error InvalidEnterprise(bytes4);\\n    /// @notice error (0xe751ad65): Provider Agent is already registered.\\n    error ProviderAgentAlreadyRegistered(address);\\n    /// @notice error (0xd0141a6a): Not a registered provider agent.\\n    error ProviderAgentNotRegistered(address);\\n    /// @notice error (0x96271599): Invalid provider.\\n    error InvalidProvider(address);\\n    /// @notice error (0x6d998cea): Enterprise is already registered.\\n    error EnterpriseAlreadyRegistered(bytes4);\\n    /// @notice error (0xbd825961): Enterprise is not registered.\\n    error EnterpriseNotRegistered(bytes4);\\n    /// @notice error (0xca61871b): Not a registered provider.\\n    error NotARegisteredProvider(address);\\n    /// @notice error (0x43469070): Enterprise user is already registered.\\n    error EnterpriseUserAlreadyRegistered(address);\\n    /// @notice error (0x1b7bfcf8): Enterprise user is not registered.\\n    error EnterpriseUserNotRegistered(address);\\n    /// @notice error (0xbcb8afa4): Enterprise dapp is already registered.\\n    error EnterpriseDappAlreadyRegistered(address);\\n    /// @notice error (0x31b254a2): Enterprise dapp is not registered.\\n    error EnterpriseDappNotRegistered(address);\\n\\n    /// @notice Internal function to set the registration status of a provider.\\n    /// @param provider_ The address of the provider whose registration status will be set.\\n    /// @param set_ A boolean indicating whether to set the provider as registered or not.\\n    /// @dev This function is used internally to manage the registration status of providers.\\n    function _setRegisteredProvider(address provider_, bool set_) internal {\\n        if (provider_ == address(0)) {\\n            revert LibCommonErrors.ZeroAddress();\\n        }\\n        LibDPlatProvider.DiamondStorage storage _dsp = LibDPlatProvider.diamondStorage();\\n        _dsp.registeredProviders[provider_] = set_;\\n        emit ZbyteDPlatProviderRegistred(provider_, set_);\\n    }\\n\\n    /// @notice Internal function to set the registration of a provider agent.\\n    /// @param agent_ The address of the agent whose provider registration will be set.\\n    /// @param provider_ The address of the provider associated with the agent.\\n    /// @dev This function is used internally to manage the registration of provider agents.\\n    function _setRegisteredProviderAgent(address agent_, address provider_) internal {\\n        if (agent_ == address(0)) {\\n            revert LibCommonErrors.ZeroAddress();\\n        }\\n        LibDPlatProvider.DiamondStorage storage _dsp = LibDPlatProvider.diamondStorage();\\n        _dsp.registeredProviderAgent[agent_] = provider_;\\n        emit ZbyteDPlatProviderAgentRegistered(agent_, provider_);\\n    }\\n\\n    /// @notice Internal function to set the registration status of an enterprise.\\n    /// @param enterprise_ The identifier of the enterprise whose registration status will be set.\\n    /// @param provider_ The address of the provider associated with the enterprise.\\n    /// @dev This function is used internally to manage the registration status of enterprises.\\n    function _setRegisteredEnterprise(bytes4 enterprise_, address provider_) internal {\\n        if (enterprise_ == bytes4(0)) {\\n            revert InvalidEnterprise(enterprise_);\\n        }\\n        LibDPlatRegistration.DiamondStorage storage _dsr = LibDPlatRegistration.diamondStorage();\\n        _dsr.registeredEnterprises[enterprise_] = provider_;\\n        emit ZbyteDPlatEnterpriseRegistered(enterprise_, provider_);\\n    }\\n\\n    /// @notice Internal function to set the registration status of an enterprise user.\\n    /// @param user_ The address of the user whose enterprise registration will be set.\\n    /// @param enterprise_ The identifier of the enterprise associated with the user.\\n    /// @dev This function is used internally to manage the registration status of enterprise users.\\n    function _setRegisteredEnterpriseUser(address user_, bytes4 enterprise_) internal {\\n        if (user_ == address(0)) {\\n            revert LibCommonErrors.ZeroAddress();\\n        }\\n        LibDPlatRegistration.DiamondStorage storage _dsr = LibDPlatRegistration.diamondStorage();\\n        _dsr.registeredEnterpriseUsers[user_] = enterprise_;\\n        emit ZbyteDPlatEnterpriseUserRegistered(user_,enterprise_);\\n    }\\n\\n    /// @notice Internal function to set the registration status of an enterprise Dapp.\\n    /// @param dapp_ The address of the Dapp whose enterprise registration will be set.\\n    /// @param enterprise_ The identifier of the enterprise associated with the Dapp.\\n    /// @dev This function is used internally to manage the registration status of enterprise Dapps.\\n    function _setRegisteredEnterpriseDapp(address dapp_, bytes4 enterprise_) internal {\\n        if (dapp_ == address(0)) {\\n            revert LibCommonErrors.ZeroAddress();\\n        }\\n        LibDPlatRegistration.DiamondStorage storage _dsr = LibDPlatRegistration.diamondStorage();\\n        _dsr.registeredDapps[dapp_] = enterprise_;\\n        emit ZbyteDPlatDappRegistered(dapp_, enterprise_);\\n    }\\n\\n    /// @notice Checks if a provider is registered.\\n    /// @param provider_ The address of the provider to check.\\n    /// @return A boolean indicating whether the provider is registered.\\n    function isProviderRegistered(address provider_) public view returns (bool) {\\n        return LibDPlatRegistration.isProviderRegistered(provider_);\\n    }\\n\\n    /// @notice Checks if a provider agent is registered and returns the associated provider's address.\\n    /// @param agent_ The address of the provider agent to check.\\n    /// @return The address of the associated registered provider.\\n    function isProviderAgentRegistered(address agent_) public view returns (address) {\\n        return LibDPlatRegistration.isProviderAgentRegistered(agent_);\\n    }\\n\\n    /// @notice Checks if an enterprise is registered and returns the associated provider's address.\\n    /// @param enterprise_ The identifier of the enterprise to check.\\n    /// @return The address of the associated registered provider.\\n    function isEnterpriseRegistered(bytes4 enterprise_) public view returns (address) {\\n        return LibDPlatRegistration.isEnterpriseRegistered(enterprise_);\\n    }\\n\\n    /// @notice Checks if an enterprise user is registered and returns the associated enterprise identifier.\\n    /// @param user_ The address of the user to check.\\n    /// @return The identifier of the associated registered enterprise.\\n    function isEnterpriseUserRegistered(address user_) public view returns (bytes4) {\\n        return LibDPlatRegistration.isEnterpriseUserRegistered(user_);\\n    }\\n\\n    /// @notice Checks if an enterprise Dapp is registered and returns the associated enterprise identifier.\\n    /// @param dapp_ The address of the Dapp to check.\\n    /// @return The identifier of the associated registered enterprise.\\n    function isEnterpriseDappRegistered(address dapp_) public view returns (bytes4) {\\n        return LibDPlatRegistration.isEnterpriseDappRegistered(dapp_);\\n    }\\n\\n    /// @notice Registers a provider.\\n    /// @dev Relation between provider, agent, enterprise, users and dapps is as follows:\\n    ///\\n    /// zbyte\\\\\\n    ///____(1) <--------> (n) provider\\\\\\n    ///____________________________(1) <--------> (n) agent\\\\\\n    ///____________________________(1) <--------> (n) enterprise\\\\\\n    ///________________________________________________________(1) <--------> (n) user\\\\\\n    ///________________________________________________________(1) <--------> (n) dapp\\n    ///\\n    ///   For an enterprise usecase, an enterprise can allow users to invoke registered dapps.\\\\\\n    ///   Users can invoke the contract functions without any need to hold crypto assets.\\\\\\n    ///   L1 needed for the call is given by the authorized workers and providers compensate them in vERC20.\\\\\\n    ///\\\\\\n    ///   For opensource usecase,\\\\\\n    ///   Users can invoke the contract functions without any need to hold L1 assets.\\\\\\n    ///   L1 needed for the call is given by the authorized workers and the users compensate them in vERC20\\\\\\n    ///\\\\\\n    ///   NOTE: When one of the components (provider, enterprise, agent, user or dapp) is deregistered,\\\\\\n    ///    all the other components registered under it remain registered.\\\\\\n    ///    So, if the component is registered again, the entire subtree becomes active again\\n    function registerProvider() public {\\n        if (isProviderRegistered(_msgSender())) revert ProviderAlreadyRegistered(_msgSender());\\n        _setRegisteredProvider(_msgSender(), true);\\n        _setRegisteredProviderAgent(_msgSender(), _msgSender());\\n    }\\n\\n    /// @notice Deregisters a provider.\\n    function deregisterProvider() public {\\n        if (!isProviderRegistered(_msgSender())) revert ProviderNotRegistered(_msgSender());\\n        _setRegisteredProvider(_msgSender(), false);\\n        _setRegisteredProviderAgent(_msgSender(), address(0));\\n    }\\n\\n    /// @notice Registers a provider agent.\\n    /// @param agent_ The address of the provider agent to register.\\n    function registerProviderAgent(address agent_) public {\\n        if (!isProviderRegistered(_msgSender())) revert ProviderNotRegistered(_msgSender());\\n        if (isProviderAgentRegistered(agent_) != address(0)) revert ProviderAgentAlreadyRegistered(agent_);\\n        _setRegisteredProviderAgent(agent_, _msgSender());\\n    }\\n\\n    /// @notice Deregisters a provider agent.\\n    /// @param agent_ The address of the provider agent to deregister.\\n    function deRegisterProviderAgent(address agent_) public {\\n        address _provider = isProviderAgentRegistered(agent_);\\n        if (_provider == address(0))  revert ProviderAgentNotRegistered(agent_);\\n        if (_provider != _msgSender())  revert InvalidProvider(_msgSender());\\n        if (!isProviderRegistered(_msgSender())) revert ProviderNotRegistered(_msgSender());\\n\\n        _setRegisteredProviderAgent(agent_, address(0));\\n    }\\n\\n    /// @notice Registers an enterprise.\\n    /// @param enterprise_ The bytes4 identifier of the enterprise to register.\\n    function registerEnterprise(bytes4 enterprise_) public {\\n        address _agentProvider = isProviderAgentRegistered(_msgSender());\\n        address _enterpriseProvider = isEnterpriseRegistered(enterprise_);\\n        if (_agentProvider == address(0)) revert ProviderAgentNotRegistered(_msgSender());\\n        if (!isProviderRegistered(_agentProvider)) revert NotARegisteredProvider(_agentProvider);\\n        if (_enterpriseProvider != address(0)) revert EnterpriseAlreadyRegistered(enterprise_);\\n\\n        _setRegisteredEnterprise(enterprise_, _agentProvider);\\n    }\\n\\n    /// @notice Deregisters an enterprise.\\n    /// @param enterprise_ The bytes4 identifier of the enterprise to deregister.\\n    function deregisterEnterprise(bytes4 enterprise_) public {\\n        address _agentProvider = isProviderAgentRegistered(_msgSender());\\n        address _enterpriseProvider = isEnterpriseRegistered(enterprise_);\\n        if (_agentProvider == address(0)) revert ProviderAgentNotRegistered(_msgSender());\\n        if (!isProviderRegistered(_agentProvider)) revert NotARegisteredProvider(_agentProvider);\\n        if (_enterpriseProvider != _agentProvider) revert InvalidProvider(_agentProvider);\\n        if (_enterpriseProvider == address(0)) revert EnterpriseNotRegistered(enterprise_);\\n\\n        _setRegisteredEnterprise(enterprise_, address(0));\\n    }\\n\\n    /// @notice Registers an enterprise user.\\n    /// @param user_ The address of the user to register.\\n    /// @param enterprise_ The bytes4 identifier of the enterprise.\\n    function registerEnterpriseUser(address user_, bytes4 enterprise_) public {\\n        if (enterprise_ == bytes4(0)) revert InvalidEnterprise(enterprise_);\\n        address _agentProvider = isProviderAgentRegistered(_msgSender());\\n        if (_agentProvider == address(0)) revert ProviderAgentNotRegistered(_msgSender());\\n        if (!isProviderRegistered(_agentProvider)) revert NotARegisteredProvider(_agentProvider);\\n        if (isEnterpriseRegistered(enterprise_) == address(0)) revert EnterpriseNotRegistered(enterprise_);\\n        if (isEnterpriseRegistered(enterprise_) != _agentProvider) revert InvalidProvider(_agentProvider);\\n        if (isEnterpriseUserRegistered(user_) != bytes4(0)) revert EnterpriseUserAlreadyRegistered(user_);\\n\\n        _setRegisteredEnterpriseUser(user_, enterprise_);\\n    }\\n\\n    /// @notice Deregisters an enterprise user.\\n    /// @param user_ The address of the user to deregister.\\n    function deregisterEnterpriseUser(address user_) public {\\n        bytes4  _userEnterprise = isEnterpriseUserRegistered(user_);\\n        address _agentProvider = isProviderAgentRegistered(_msgSender());\\n        if (_userEnterprise == bytes4(0)) revert EnterpriseUserNotRegistered(user_);\\n        if (isEnterpriseRegistered(_userEnterprise) == address(0)) revert EnterpriseNotRegistered(_userEnterprise);\\n        if (_agentProvider == address(0)) revert ProviderAgentNotRegistered(_msgSender());\\n        if (!isProviderRegistered(_agentProvider)) revert NotARegisteredProvider(_agentProvider);\\n        if (isEnterpriseRegistered(_userEnterprise) != _agentProvider) revert InvalidProvider(_agentProvider);\\n\\n        _setRegisteredEnterpriseUser(user_, bytes4(0));\\n    }\\n\\n    /// @notice Registers a Dapp for an enterprise.\\n    /// @param dapp_ The address of the Dapp to register.\\n    /// @param enterprise_ The bytes4 identifier of the enterprise.\\n    function registerDapp(address dapp_, bytes4 enterprise_) public {\\n        if (enterprise_ == bytes4(0)) revert InvalidEnterprise(enterprise_);\\n        address _agentProvider = isProviderAgentRegistered(_msgSender());\\n        if (_agentProvider == address(0)) revert ProviderAgentNotRegistered(_msgSender());\\n        if (!isProviderRegistered(_agentProvider)) revert NotARegisteredProvider(_agentProvider);\\n        if (isEnterpriseRegistered(enterprise_) == address(0)) revert EnterpriseNotRegistered(enterprise_);\\n        if (isEnterpriseRegistered(enterprise_) != _agentProvider) revert InvalidProvider(_agentProvider);\\n        if (isEnterpriseDappRegistered(dapp_) != bytes4(0)) revert EnterpriseDappAlreadyRegistered(dapp_);\\n\\n        _setRegisteredEnterpriseDapp(dapp_, enterprise_);\\n    }\\n\\n    /// @notice Deregisters a Dapp for an enterprise.\\n    /// @param dapp_ The address of the Dapp to deregister.\\n    function deregisterDapp(address dapp_) public {\\n        bytes4  _dappEnterprise = isEnterpriseDappRegistered(dapp_);\\n        address _agentProvider = isProviderAgentRegistered(_msgSender());\\n        if (_dappEnterprise == bytes4(0)) revert EnterpriseDappNotRegistered(dapp_);\\n        if (isEnterpriseRegistered(_dappEnterprise) == address(0)) revert EnterpriseNotRegistered(_dappEnterprise);\\n        if (_agentProvider == address(0)) revert ProviderAgentNotRegistered(_msgSender());\\n        if (!isProviderRegistered(_agentProvider)) revert NotARegisteredProvider(_agentProvider);\\n        if (isEnterpriseRegistered(_dappEnterprise) != _agentProvider) revert InvalidProvider(_agentProvider);\\n\\n        _setRegisteredEnterpriseDapp(dapp_, bytes4(0));\\n    }\\n\\n    /// @notice Sets the enterprise limit for a specific enterprise.\\n    /// @param enterprise_ The bytes4 identifier of the enterprise.\\n    /// @param amount_ The new limit amount.\\n    function setEnterpriseLimit(bytes4 enterprise_, uint256 amount_) public {\\n        address _agentProvider = isProviderAgentRegistered(_msgSender());\\n        address _enterpriseProvider = isEnterpriseRegistered(enterprise_);\\n        if (_agentProvider == address(0)) revert ProviderAgentNotRegistered(_msgSender());\\n        if (!isProviderRegistered(_agentProvider)) revert NotARegisteredProvider(_agentProvider);\\n        if (_enterpriseProvider != _agentProvider) revert InvalidProvider(_agentProvider);\\n        if (_enterpriseProvider == address(0)) revert EnterpriseNotRegistered(enterprise_);\\n\\n        LibDPlatRegistration._setEntepriseLimit(enterprise_, amount_);\\n    }\\n\\n    function getEnterpriseLimit(bytes4 enterprise_) public view returns(uint256) {\\n        return LibDPlatRegistration._getEnterpriseLimit(enterprise_);\\n    }\\n}\\n\",\"keccak256\":\"0x79a36fcf8251c6eb22bdd6bc582c4c580c0b4e14989c8709f811af517fcee4be\",\"license\":\"MIT\"},\"contracts/utils/LibCommonErrors.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\n// --.. -... -.-- - . \\n// \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557 \\u2588\\u2588\\u2557   \\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\n// \\u255a\\u2550\\u2550\\u2588\\u2588\\u2588\\u2554\\u255d\\u2588\\u2588\\u2554\\u2550\\u2550\\u2588\\u2588\\u2557\\u255a\\u2588\\u2588\\u2557 \\u2588\\u2588\\u2554\\u255d\\u255a\\u2550\\u2550\\u2588\\u2588\\u2554\\u2550\\u2550\\u255d\\u2588\\u2588\\u2554\\u2550\\u2550\\u2550\\u2550\\u255d\\n//   \\u2588\\u2588\\u2588\\u2554\\u255d \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2554\\u255d \\u255a\\u2588\\u2588\\u2588\\u2588\\u2554\\u255d    \\u2588\\u2588\\u2551   \\u2588\\u2588\\u2588\\u2588\\u2588\\u2557  \\n//  \\u2588\\u2588\\u2588\\u2554\\u255d  \\u2588\\u2588\\u2554\\u2550\\u2550\\u2588\\u2588\\u2557  \\u255a\\u2588\\u2588\\u2554\\u255d     \\u2588\\u2588\\u2551   \\u2588\\u2588\\u2554\\u2550\\u2550\\u255d  \\n// \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2554\\u255d   \\u2588\\u2588\\u2551      \\u2588\\u2588\\u2551   \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\n// \\u255a\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u255d\\u255a\\u2550\\u2550\\u2550\\u2550\\u2550\\u255d    \\u255a\\u2550\\u255d      \\u255a\\u2550\\u255d   \\u255a\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u255d\\n// --.. -... -.-- - . \\n\\npragma solidity ^0.8.9;\\n\\nlibrary LibCommonErrors {\\n    error ZeroAddress();\\n    error NotOwner();\\n    error Unauthorized();\\n    error ArraySizeMismatched(uint256,uint256);\\n}\",\"keccak256\":\"0x006e1f3215160b9f8ce3bb50c938e68b30e0d8e0bb3f4627d7aab29e6dee7d3a\",\"license\":\"MIT\"},\"contracts/utils/LibZbyteForwarderFacet.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\n// --.. -... -.-- - . \\n// \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557 \\u2588\\u2588\\u2557   \\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\n// \\u255a\\u2550\\u2550\\u2588\\u2588\\u2588\\u2554\\u255d\\u2588\\u2588\\u2554\\u2550\\u2550\\u2588\\u2588\\u2557\\u255a\\u2588\\u2588\\u2557 \\u2588\\u2588\\u2554\\u255d\\u255a\\u2550\\u2550\\u2588\\u2588\\u2554\\u2550\\u2550\\u255d\\u2588\\u2588\\u2554\\u2550\\u2550\\u2550\\u2550\\u255d\\n//   \\u2588\\u2588\\u2588\\u2554\\u255d \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2554\\u255d \\u255a\\u2588\\u2588\\u2588\\u2588\\u2554\\u255d    \\u2588\\u2588\\u2551   \\u2588\\u2588\\u2588\\u2588\\u2588\\u2557  \\n//  \\u2588\\u2588\\u2588\\u2554\\u255d  \\u2588\\u2588\\u2554\\u2550\\u2550\\u2588\\u2588\\u2557  \\u255a\\u2588\\u2588\\u2554\\u255d     \\u2588\\u2588\\u2551   \\u2588\\u2588\\u2554\\u2550\\u2550\\u255d  \\n// \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2554\\u255d   \\u2588\\u2588\\u2551      \\u2588\\u2588\\u2551   \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\n// \\u255a\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u255d\\u255a\\u2550\\u2550\\u2550\\u2550\\u2550\\u255d    \\u255a\\u2550\\u255d      \\u255a\\u2550\\u255d   \\u255a\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u255d\\n// --.. -... -.-- - . \\n\\npragma solidity ^0.8.9;\\nimport \\\"hardhat-deploy/solc_0.8/diamond/libraries/LibDiamond.sol\\\";\\n\\n/// @notice The Zbyte Forwarder Facet\\n/// @dev The Zbyte Forwarder Facet\\nlibrary LibZbyteForwarderFacet {\\n\\n    /// @notice Diamond storage for DPlat registration struct\\n    struct DiamondStorage {\\n        address trustedForwarder;\\n    }\\n\\n    /// @notice Retrieves the DiamondStorage struct for the library.\\n    /// @dev trustedForwarder: Address of the trusted forwarder\\n    function diamondStorage() internal pure returns(DiamondStorage storage ds) {\\n        bytes32 storagePosition = keccak256(\\\"diamond.storage.LibZbyteForwarderFacet.v1\\\");\\n        assembly {\\n            ds.slot := storagePosition\\n        }\\n    }\\n\\n    /// @notice Sets the address of trusted forwarder\\n    /// @param forwarder_: Address of the trusted forwarder\\n    function _setTrustedForwarder(address forwarder_) internal {\\n        LibDiamond.enforceIsContractOwner();\\n        DiamondStorage storage dsc = diamondStorage();\\n        dsc.trustedForwarder = forwarder_;\\n    }\\n\\n    /// @notice Gets the address of trusted forwarder\\n    function _getTrustedForwarder() internal view returns(address) {\\n        DiamondStorage storage dsc = diamondStorage();\\n        return dsc.trustedForwarder;\\n    }\\n\\n    /// @notice Checks if the given forwarder is the trusted forwarder\\n    /// @param forwarder_: Address of the forwarder to check\\n    function isTrustedForwarder(address forwarder_) internal view returns(bool) {\\n        DiamondStorage storage dsc = diamondStorage();\\n        return forwarder_ == dsc.trustedForwarder;\\n    }\\n}\",\"keccak256\":\"0x046f66cd93dfb0106178dea0021caab2112b4fe405634753c433ef0b2d4722e4\",\"license\":\"MIT\"},\"contracts/utils/ZbyteContextDiamond.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\n// --.. -... -.-- - . \\n// \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557 \\u2588\\u2588\\u2557   \\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\n// \\u255a\\u2550\\u2550\\u2588\\u2588\\u2588\\u2554\\u255d\\u2588\\u2588\\u2554\\u2550\\u2550\\u2588\\u2588\\u2557\\u255a\\u2588\\u2588\\u2557 \\u2588\\u2588\\u2554\\u255d\\u255a\\u2550\\u2550\\u2588\\u2588\\u2554\\u2550\\u2550\\u255d\\u2588\\u2588\\u2554\\u2550\\u2550\\u2550\\u2550\\u255d\\n//   \\u2588\\u2588\\u2588\\u2554\\u255d \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2554\\u255d \\u255a\\u2588\\u2588\\u2588\\u2588\\u2554\\u255d    \\u2588\\u2588\\u2551   \\u2588\\u2588\\u2588\\u2588\\u2588\\u2557  \\n//  \\u2588\\u2588\\u2588\\u2554\\u255d  \\u2588\\u2588\\u2554\\u2550\\u2550\\u2588\\u2588\\u2557  \\u255a\\u2588\\u2588\\u2554\\u255d     \\u2588\\u2588\\u2551   \\u2588\\u2588\\u2554\\u2550\\u2550\\u255d  \\n// \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2554\\u255d   \\u2588\\u2588\\u2551      \\u2588\\u2588\\u2551   \\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2588\\u2557\\n// \\u255a\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u255d\\u255a\\u2550\\u2550\\u2550\\u2550\\u2550\\u255d    \\u255a\\u2550\\u255d      \\u255a\\u2550\\u255d   \\u255a\\u2550\\u2550\\u2550\\u2550\\u2550\\u2550\\u255d\\n// --.. -... -.-- - . \\n\\npragma solidity ^0.8.9;\\n\\nimport \\\"hardhat-deploy/solc_0.8/diamond/libraries/LibDiamond.sol\\\";\\nimport \\\"./LibZbyteForwarderFacet.sol\\\";\\n\\ncontract ZbyteContextDiamond {\\n    /// @notice error (0x5ac85bab): Caller is not a forwarder\\n    error NotAForwarder();\\n\\n    /// @notice modifier to enforce that the caller is the owner\\n    modifier onlyOwner {\\n        LibDiamond.enforceIsContractOwner();\\n        _;\\n    }\\n\\n    /// @notice modifier to enforce that the caller is the forwarder\\n    modifier onlyForwarder {\\n        if(LibZbyteForwarderFacet.isTrustedForwarder(_msgSender())) revert NotAForwarder();\\n        _;\\n    }\\n\\n    /// @notice Extract true caller if called via trusted forwarder\\n    function _msgSender() internal view returns (address ret) {\\n        if (msg.data.length >= 20 && LibZbyteForwarderFacet.isTrustedForwarder(msg.sender)) {\\n            // At this point we know that the sender is a trusted forwarder,\\n            // so we trust that the last bytes of msg.data are the verified sender address.\\n            // extract sender address from the end of msg.data\\n            assembly {\\n                ret := shr(96,calldataload(sub(calldatasize(),20)))\\n            }\\n        } else {\\n            ret = msg.sender;\\n        }\\n    }\\n\\n    /// @notice Extract data if called via trusted forwarder\\n    function _msgData() internal view returns (bytes calldata ret) {\\n        if (msg.data.length >= 20 && LibZbyteForwarderFacet.isTrustedForwarder(msg.sender)) {\\n            return msg.data[0:msg.data.length-20];\\n        } else {\\n            return msg.data;\\n        }\\n    }\\n}\",\"keccak256\":\"0x75604132530d5762cb3372036cef4627656a690690da7eb7d9628a3cd244ab5f\",\"license\":\"MIT\"},\"hardhat-deploy/solc_0.8/diamond/interfaces/IDiamondCut.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\n/******************************************************************************\\\\\\n* Author: Nick Mudge <nick@perfectabstractions.com> (https://twitter.com/mudgen)\\n* EIP-2535 Diamonds: https://eips.ethereum.org/EIPS/eip-2535\\n/******************************************************************************/\\n\\ninterface IDiamondCut {\\n    enum FacetCutAction {Add, Replace, Remove}\\n    // Add=0, Replace=1, Remove=2\\n\\n    struct FacetCut {\\n        address facetAddress;\\n        FacetCutAction action;\\n        bytes4[] functionSelectors;\\n    }\\n\\n    /// @notice Add/replace/remove any number of functions and optionally execute\\n    ///         a function with delegatecall\\n    /// @param _diamondCut Contains the facet addresses and function selectors\\n    /// @param _init The address of the contract or facet to execute _calldata\\n    /// @param _calldata A function call, including function selector and arguments\\n    ///                  _calldata is executed with delegatecall on _init\\n    function diamondCut(\\n        FacetCut[] calldata _diamondCut,\\n        address _init,\\n        bytes calldata _calldata\\n    ) external;\\n\\n    event DiamondCut(FacetCut[] _diamondCut, address _init, bytes _calldata);\\n}\\n\",\"keccak256\":\"0xc00c16bfa30a3fa5f3dc684f7f8ba62c259962b25f647d9588739458989717fc\",\"license\":\"MIT\"},\"hardhat-deploy/solc_0.8/diamond/libraries/LibDiamond.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\n/******************************************************************************\\\\\\n* Author: Nick Mudge <nick@perfectabstractions.com> (https://twitter.com/mudgen)\\n* EIP-2535 Diamonds: https://eips.ethereum.org/EIPS/eip-2535\\n/******************************************************************************/\\nimport { IDiamondCut } from \\\"../interfaces/IDiamondCut.sol\\\";\\n\\nlibrary LibDiamond {\\n    bytes32 constant DIAMOND_STORAGE_POSITION = keccak256(\\\"diamond.standard.diamond.storage\\\");\\n\\n    struct FacetAddressAndPosition {\\n        address facetAddress;\\n        uint96 functionSelectorPosition; // position in facetFunctionSelectors.functionSelectors array\\n    }\\n\\n    struct FacetFunctionSelectors {\\n        bytes4[] functionSelectors;\\n        uint256 facetAddressPosition; // position of facetAddress in facetAddresses array\\n    }\\n\\n    struct DiamondStorage {\\n        // maps function selector to the facet address and\\n        // the position of the selector in the facetFunctionSelectors.selectors array\\n        mapping(bytes4 => FacetAddressAndPosition) selectorToFacetAndPosition;\\n        // maps facet addresses to function selectors\\n        mapping(address => FacetFunctionSelectors) facetFunctionSelectors;\\n        // facet addresses\\n        address[] facetAddresses;\\n        // Used to query if a contract implements an interface.\\n        // Used to implement ERC-165.\\n        mapping(bytes4 => bool) supportedInterfaces;\\n        // owner of the contract\\n        address contractOwner;\\n    }\\n\\n    function diamondStorage() internal pure returns (DiamondStorage storage ds) {\\n        bytes32 position = DIAMOND_STORAGE_POSITION;\\n        assembly {\\n            ds.slot := position\\n        }\\n    }\\n\\n    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);\\n\\n    function setContractOwner(address _newOwner) internal {\\n        DiamondStorage storage ds = diamondStorage();\\n        address previousOwner = ds.contractOwner;\\n        ds.contractOwner = _newOwner;\\n        emit OwnershipTransferred(previousOwner, _newOwner);\\n    }\\n\\n    function contractOwner() internal view returns (address contractOwner_) {\\n        contractOwner_ = diamondStorage().contractOwner;\\n    }\\n\\n    function enforceIsContractOwner() internal view {\\n        require(msg.sender == diamondStorage().contractOwner, \\\"LibDiamond: Must be contract owner\\\");\\n    }\\n\\n    event DiamondCut(IDiamondCut.FacetCut[] _diamondCut, address _init, bytes _calldata);\\n\\n    // Internal function version of diamondCut\\n    function diamondCut(\\n        IDiamondCut.FacetCut[] memory _diamondCut,\\n        address _init,\\n        bytes memory _calldata\\n    ) internal {\\n        for (uint256 facetIndex; facetIndex < _diamondCut.length; facetIndex++) {\\n            IDiamondCut.FacetCutAction action = _diamondCut[facetIndex].action;\\n            if (action == IDiamondCut.FacetCutAction.Add) {\\n                addFunctions(_diamondCut[facetIndex].facetAddress, _diamondCut[facetIndex].functionSelectors);\\n            } else if (action == IDiamondCut.FacetCutAction.Replace) {\\n                replaceFunctions(_diamondCut[facetIndex].facetAddress, _diamondCut[facetIndex].functionSelectors);\\n            } else if (action == IDiamondCut.FacetCutAction.Remove) {\\n                removeFunctions(_diamondCut[facetIndex].facetAddress, _diamondCut[facetIndex].functionSelectors);\\n            } else {\\n                revert(\\\"LibDiamondCut: Incorrect FacetCutAction\\\");\\n            }\\n        }\\n        emit DiamondCut(_diamondCut, _init, _calldata);\\n        initializeDiamondCut(_init, _calldata);\\n    }\\n\\n    function addFunctions(address _facetAddress, bytes4[] memory _functionSelectors) internal {\\n        require(_functionSelectors.length > 0, \\\"LibDiamondCut: No selectors in facet to cut\\\");\\n        DiamondStorage storage ds = diamondStorage();        \\n        require(_facetAddress != address(0), \\\"LibDiamondCut: Add facet can't be address(0)\\\");\\n        uint96 selectorPosition = uint96(ds.facetFunctionSelectors[_facetAddress].functionSelectors.length);\\n        // add new facet address if it does not exist\\n        if (selectorPosition == 0) {\\n            addFacet(ds, _facetAddress);            \\n        }\\n        for (uint256 selectorIndex; selectorIndex < _functionSelectors.length; selectorIndex++) {\\n            bytes4 selector = _functionSelectors[selectorIndex];\\n            address oldFacetAddress = ds.selectorToFacetAndPosition[selector].facetAddress;\\n            require(oldFacetAddress == address(0), \\\"LibDiamondCut: Can't add function that already exists\\\");\\n            addFunction(ds, selector, selectorPosition, _facetAddress);\\n            selectorPosition++;\\n        }\\n    }\\n\\n    function replaceFunctions(address _facetAddress, bytes4[] memory _functionSelectors) internal {\\n        require(_functionSelectors.length > 0, \\\"LibDiamondCut: No selectors in facet to cut\\\");\\n        DiamondStorage storage ds = diamondStorage();\\n        require(_facetAddress != address(0), \\\"LibDiamondCut: Add facet can't be address(0)\\\");\\n        uint96 selectorPosition = uint96(ds.facetFunctionSelectors[_facetAddress].functionSelectors.length);\\n        // add new facet address if it does not exist\\n        if (selectorPosition == 0) {\\n            addFacet(ds, _facetAddress);\\n        }\\n        for (uint256 selectorIndex; selectorIndex < _functionSelectors.length; selectorIndex++) {\\n            bytes4 selector = _functionSelectors[selectorIndex];\\n            address oldFacetAddress = ds.selectorToFacetAndPosition[selector].facetAddress;\\n            require(oldFacetAddress != _facetAddress, \\\"LibDiamondCut: Can't replace function with same function\\\");\\n            removeFunction(ds, oldFacetAddress, selector);\\n            addFunction(ds, selector, selectorPosition, _facetAddress);\\n            selectorPosition++;\\n        }\\n    }\\n\\n    function removeFunctions(address _facetAddress, bytes4[] memory _functionSelectors) internal {\\n        require(_functionSelectors.length > 0, \\\"LibDiamondCut: No selectors in facet to cut\\\");\\n        DiamondStorage storage ds = diamondStorage();\\n        // if function does not exist then do nothing and return\\n        require(_facetAddress == address(0), \\\"LibDiamondCut: Remove facet address must be address(0)\\\");\\n        for (uint256 selectorIndex; selectorIndex < _functionSelectors.length; selectorIndex++) {\\n            bytes4 selector = _functionSelectors[selectorIndex];\\n            address oldFacetAddress = ds.selectorToFacetAndPosition[selector].facetAddress;\\n            removeFunction(ds, oldFacetAddress, selector);\\n        }\\n    }\\n\\n    function addFacet(DiamondStorage storage ds, address _facetAddress) internal {\\n        enforceHasContractCode(_facetAddress, \\\"LibDiamondCut: New facet has no code\\\");\\n        ds.facetFunctionSelectors[_facetAddress].facetAddressPosition = ds.facetAddresses.length;\\n        ds.facetAddresses.push(_facetAddress);\\n    }    \\n\\n\\n    function addFunction(DiamondStorage storage ds, bytes4 _selector, uint96 _selectorPosition, address _facetAddress) internal {\\n        ds.selectorToFacetAndPosition[_selector].functionSelectorPosition = _selectorPosition;\\n        ds.facetFunctionSelectors[_facetAddress].functionSelectors.push(_selector);\\n        ds.selectorToFacetAndPosition[_selector].facetAddress = _facetAddress;\\n    }\\n\\n    function removeFunction(DiamondStorage storage ds, address _facetAddress, bytes4 _selector) internal {        \\n        require(_facetAddress != address(0), \\\"LibDiamondCut: Can't remove function that doesn't exist\\\");\\n        // an immutable function is a function defined directly in a diamond\\n        require(_facetAddress != address(this), \\\"LibDiamondCut: Can't remove immutable function\\\");\\n        // replace selector with last selector, then delete last selector\\n        uint256 selectorPosition = ds.selectorToFacetAndPosition[_selector].functionSelectorPosition;\\n        uint256 lastSelectorPosition = ds.facetFunctionSelectors[_facetAddress].functionSelectors.length - 1;\\n        // if not the same then replace _selector with lastSelector\\n        if (selectorPosition != lastSelectorPosition) {\\n            bytes4 lastSelector = ds.facetFunctionSelectors[_facetAddress].functionSelectors[lastSelectorPosition];\\n            ds.facetFunctionSelectors[_facetAddress].functionSelectors[selectorPosition] = lastSelector;\\n            ds.selectorToFacetAndPosition[lastSelector].functionSelectorPosition = uint96(selectorPosition);\\n        }\\n        // delete the last selector\\n        ds.facetFunctionSelectors[_facetAddress].functionSelectors.pop();\\n        delete ds.selectorToFacetAndPosition[_selector];\\n\\n        // if no more selectors for facet address then delete the facet address\\n        if (lastSelectorPosition == 0) {\\n            // replace facet address with last facet address and delete last facet address\\n            uint256 lastFacetAddressPosition = ds.facetAddresses.length - 1;\\n            uint256 facetAddressPosition = ds.facetFunctionSelectors[_facetAddress].facetAddressPosition;\\n            if (facetAddressPosition != lastFacetAddressPosition) {\\n                address lastFacetAddress = ds.facetAddresses[lastFacetAddressPosition];\\n                ds.facetAddresses[facetAddressPosition] = lastFacetAddress;\\n                ds.facetFunctionSelectors[lastFacetAddress].facetAddressPosition = facetAddressPosition;\\n            }\\n            ds.facetAddresses.pop();\\n            delete ds.facetFunctionSelectors[_facetAddress].facetAddressPosition;\\n        }\\n    }\\n\\n    function initializeDiamondCut(address _init, bytes memory _calldata) internal {\\n        if (_init == address(0)) {\\n            require(_calldata.length == 0, \\\"LibDiamondCut: _init is address(0) but_calldata is not empty\\\");\\n        } else {\\n            require(_calldata.length > 0, \\\"LibDiamondCut: _calldata is empty but _init is not address(0)\\\");\\n            if (_init != address(this)) {\\n                enforceHasContractCode(_init, \\\"LibDiamondCut: _init address has no code\\\");\\n            }\\n            (bool success, bytes memory error) = _init.delegatecall(_calldata);\\n            if (!success) {\\n                if (error.length > 0) {\\n                    // bubble up the error\\n                    revert(string(error));\\n                } else {\\n                    revert(\\\"LibDiamondCut: _init function reverted\\\");\\n                }\\n            }\\n        }\\n    }\\n\\n    function enforceHasContractCode(address _contract, string memory _errorMessage) internal view {\\n        uint256 contractSize;\\n        assembly {\\n            contractSize := extcodesize(_contract)\\n        }\\n        require(contractSize > 0, _errorMessage);\\n    }\\n}\\n\",\"keccak256\":\"0x2205345e83eb86f5281f159a9215a096cb6d404782619f9b8e9d7a4a46c32a37\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x60808060405234610016576110a6908161001c8239f35b600080fdfe6040608081526004908136101561001557600080fd5b60009160e08335811c908162d2522c14610d185781630ce8a33b14610c5c5781631ead914e14610c2d5781632352face14610bdc578163264fb29c14610bb45781633118ae9a14610b815781635446689214610b465781637d266ae314610ab15781637f131248146109795781639ae2bf8e146108bd5781639bbdfaa214610785578163b2f0403614610620578163bac579ac14610521578163c52c73f414610403578163c9e2ab051461023757508063e5cf2a5b146101db5763f769c6d0146100de57600080fd5b346101d757826003193601126101d75760ff6101006100fb610ffd565b610ebc565b54166101ae576001600160a01b03610116610ffd565b169081156101a0575090817f2a3043c965fd883d586cb6563326a8ed21310c87bfcd1a15073ea7f8abb0bfd39284527f96806dd98d766f67e82444fc94615c2d202c6291c29cb3f12d9f396f091d960a602052818420600160ff19825416179055815190815260016020820152a161019d61018f610ffd565b610197610ffd565b90610f9b565b80f35b825163d92e233d60e01b8152fd5b602492506101ba610ffd565b9151633a7bc11560e11b81526001600160a01b0390921690820152fd5b8280fd5b5050346102335760203660031901126102335760209181906001600160e01b0319610204610e1c565b1681527fbd11ea486bc2027fd35886fb74ddac0d047d847fe642609550f64c01bbda08c9845220549051908152f35b5080fd5b84929150346101d757836003193601126101d757610253610e01565b9061025c610e33565b926001600160e01b03198085169081156103ec576001600160a01b03918261028a610285610ffd565b610e83565b54169081156103cb5760ff61029e83610ebc565b5416156103b4578089526000805160206110518339815191529081602052848b8b2054161561039e57895260205280838a8a2054160361038857506102e285610ef5565b54841b166103705783161561036257507f822d049d73911511595a71d104ca3f850ba9414497d561dc7d3b62368370c081939461035c918461032385610ef5565b805463ffffffff19169190921c179055516001600160a01b0390921682526001600160e01b031990921660208201529081906040820190565b0390a180f35b855163d92e233d60e01b8152fd5b8651632f2e2be960e21b815293169083015250602490fd5b836024918a5191639627159960e01b8352820152fd5b856024918c519163bd82596160e01b8352820152fd5b895163ca61871b60e01b8152808601839052602490fd5b60248a86866103d8610ffd565b925163680a0d3560e11b8152921690820152fd5b875163128c088b60e01b8152808401839052602490fd5b828585346102335760203660031901126102335761041f610e1c565b6001600160a01b03939084610435610285610ffd565b54169063ffffffff60e01b16918285526000805160206110518339815191529586602052808587205416908315610514575060ff61047284610ebc565b5416156104fe576104e75782156104d057508394827fa98ff618fe850b493c45b37cec43b3f7b12c0b0c7db7b16be3b960bbccff7e569552602052828520816001600160601b0360a01b82541617905582519182526020820152a180f35b835163128c088b60e01b8152908101839052602490fd5b83516336ccc67560e11b8152908101839052602490fd5b5060249184519163ca61871b60e01b8352820152fd5b85836024926103d8610ffd565b84929150346101d757836003193601126101d75761053d610e01565b90610546610e33565b926001600160e01b03198085169081156103ec576001600160a01b03918261056f610285610ffd565b54169081156103cb5760ff61058383610ebc565b5416156103b4578089526000805160206110518339815191529081602052848b8b2054161561039e57895260205280838a8a2054160361038857506105c785610e4a565b54841b166106085783161561036257507f83439d262abb77f2a182f4828aa620aa37fcd2aa498a6a175ef00d2bcdd9a7cc939461035c918461032385610e4a565b8651630434690760e41b815293169083015250602490fd5b9050346107815760203660031901126107815761063b610e01565b9061064582610ef5565b546001600160a01b03911b8161065c610285610ffd565b5416906001600160e01b0319168015610769578087526000805160206110518339815191529081602052838789205416156107535782156107465760ff6106a284610ebc565b54161561072f57875260205280828688205416036107195750811691821561070b5750906106f17f822d049d73911511595a71d104ca3f850ba9414497d561dc7d3b62368370c0819392610ef5565b63ffffffff1981541690558151908152836020820152a180f35b835163d92e233d60e01b8152fd5b83602491865191639627159960e01b8352820152fd5b865163ca61871b60e01b8152808701849052602490fd5b60248787866103d8610ffd565b8560249188519163bd82596160e01b8352820152fd5b85516318d92a5160e11b815283851681870152602490fd5b8380fd5b5050346101d757816003193601126101d75761079f610e1c565b91602435916001600160a01b03806107b8610285610ffd565b54169463ffffffff60e01b16948587526000805160206110518339815191526020528184882054169181156108b0575060ff6107f382610ebc565b54161561089a5780820361088457501561086f5750916060917f75ee1f8ec2f9fcf77a5e91bae172d141fd760dac1761cbe90fbeea078ec4ac88938286527fbd11ea486bc2027fd35886fb74ddac0d047d847fe642609550f64c01bbda08c960205280862054828288205581519384526020840152820152a180f35b83602492519163bd82596160e01b8352820152fd5b90506024925191639627159960e01b8352820152fd5b9050602492519163ca61871b60e01b8352820152fd5b84846024926103d8610ffd565b505090346101d75760203660031901126101d7576108d9610e01565b916001600160a01b03806108ec85610e83565b5416801561096157816108fd610ffd565b16036109415760ff6109106100fb610ffd565b541615610921578461019d85610f2e565b6024935061092d610ffd565b9251631196593d60e11b8152921690820152fd5b6024935061094d610ffd565b9251639627159960e01b8152921690820152fd5b5060249392519263680a0d3560e11b84521690820152fd5b8285853461023357602036600319011261023357610995610e1c565b926001600160a01b0390816109ab610285610ffd565b54169463ffffffff60e01b16918285526000805160206110518339815191529586602052818587205416918115610aa4575060ff6109e882610ebc565b541615610a8e57808203610a78575015610a63578115610a4e57508293817fa98ff618fe850b493c45b37cec43b3f7b12c0b0c7db7b16be3b960bbccff7e5694526020528184206001600160601b0360a01b81541690558151908152836020820152a180f35b915163128c088b60e01b815291820152602490fd5b915163bd82596160e01b815291820152602490fd5b82602491865191639627159960e01b8352820152fd5b8260249186519163ca61871b60e01b8352820152fd5b85846024926103d8610ffd565b5050346101d75760203660031901126101d757610acc610e01565b9160ff610ada6100fb610ffd565b541615610b1e576001600160a01b039081610af485610e83565b5416610b07578461019d85610197610ffd565b5163e751ad6560e01b815292169082015260249150fd5b602491610b29610ffd565b9151631196593d60e11b81526001600160a01b0390921690820152fd5b915050346101d75760203660031901126101d75760209250610b6e610b69610e01565b610e4a565b54901b90519063ffffffff60e01b168152f35b50505034610233576020366003190112610233576020906001600160a01b03610bab610285610e01565b54169051908152f35b915050346101d75760203660031901126101d75760209250610b6e610bd7610e01565b610ef5565b50505034610233576020366003190112610233576020916001600160e01b0319610c04610e1c565b16815260008051602061105183398151915283528190205490516001600160a01b039091168152f35b505050346102335760203660031901126102335760209060ff610c516100fb610e01565b541690519015158152f35b5050346101d757826003193601126101d75760ff610c7b6100fb610ffd565b541615610d0c576001600160a01b03610c92610ffd565b169081156101a0575090817f2a3043c965fd883d586cb6563326a8ed21310c87bfcd1a15073ea7f8abb0bfd39284527f96806dd98d766f67e82444fc94615c2d202c6291c29cb3f12d9f396f091d960a60205281842060ff1981541690558151908152836020820152a161019d610d07610ffd565b610f2e565b60249250610b29610ffd565b90503461078157602036600319011261078157610d33610e01565b90610d3d82610e4a565b546001600160a01b03911b81610d54610285610ffd565b5416906001600160e01b0319168015610de9578087526000805160206110518339815191529081602052838789205416156107535782156107465760ff610d9a84610ebc565b54161561072f57875260205280828688205416036107195750811691821561070b5750906106f17f83439d262abb77f2a182f4828aa620aa37fcd2aa498a6a175ef00d2bcdd9a7cc9392610e4a565b855163036f7f9f60e31b815283851681870152602490fd5b600435906001600160a01b0382168203610e1757565b600080fd5b600435906001600160e01b031982168203610e1757565b602435906001600160e01b031982168203610e1757565b6001600160a01b031660009081527fbd11ea486bc2027fd35886fb74ddac0d047d847fe642609550f64c01bbda08c86020526040902090565b6001600160a01b031660009081527f96806dd98d766f67e82444fc94615c2d202c6291c29cb3f12d9f396f091d960b6020526040902090565b6001600160a01b031660009081527f96806dd98d766f67e82444fc94615c2d202c6291c29cb3f12d9f396f091d960a6020526040902090565b6001600160a01b031660009081527fbd11ea486bc2027fd35886fb74ddac0d047d847fe642609550f64c01bbda08c76020526040902090565b6001600160a01b038116908115610f89577fb0c62993da455bf43a6f32bb6e49959e49609dcc6c80a1a2afef7cdb424b5b4b91610f6c604092610e83565b80546001600160a01b0319169055815190815260006020820152a1565b60405163d92e233d60e01b8152600490fd5b6001600160a01b0391818316908115610f89577fb0c62993da455bf43a6f32bb6e49959e49609dcc6c80a1a2afef7cdb424b5b4b93610fdb604094610e83565b911690816001600160601b0360a01b82541617905582519182526020820152a1565b60143610158061101d575b156110195736601319013560601c90565b3390565b507f580a56aff4c8445faf8644f12c3b0f5d37fcb3a8e0a0f9b1b360da94678271dd546001600160a01b0316331461100856febd11ea486bc2027fd35886fb74ddac0d047d847fe642609550f64c01bbda08c5a26469706673582212206d07b7bf18d290c96b24738ab2b27c4bbad128e2a2fa1b359fb6fb8af53c92f564736f6c63430008110033",
+  "deployedBytecode": "0x6040608081526004908136101561001557600080fd5b60009160e08335811c908162d2522c14610d185781630ce8a33b14610c5c5781631ead914e14610c2d5781632352face14610bdc578163264fb29c14610bb45781633118ae9a14610b815781635446689214610b465781637d266ae314610ab15781637f131248146109795781639ae2bf8e146108bd5781639bbdfaa214610785578163b2f0403614610620578163bac579ac14610521578163c52c73f414610403578163c9e2ab051461023757508063e5cf2a5b146101db5763f769c6d0146100de57600080fd5b346101d757826003193601126101d75760ff6101006100fb610ffd565b610ebc565b54166101ae576001600160a01b03610116610ffd565b169081156101a0575090817f2a3043c965fd883d586cb6563326a8ed21310c87bfcd1a15073ea7f8abb0bfd39284527f96806dd98d766f67e82444fc94615c2d202c6291c29cb3f12d9f396f091d960a602052818420600160ff19825416179055815190815260016020820152a161019d61018f610ffd565b610197610ffd565b90610f9b565b80f35b825163d92e233d60e01b8152fd5b602492506101ba610ffd565b9151633a7bc11560e11b81526001600160a01b0390921690820152fd5b8280fd5b5050346102335760203660031901126102335760209181906001600160e01b0319610204610e1c565b1681527fbd11ea486bc2027fd35886fb74ddac0d047d847fe642609550f64c01bbda08c9845220549051908152f35b5080fd5b84929150346101d757836003193601126101d757610253610e01565b9061025c610e33565b926001600160e01b03198085169081156103ec576001600160a01b03918261028a610285610ffd565b610e83565b54169081156103cb5760ff61029e83610ebc565b5416156103b4578089526000805160206110518339815191529081602052848b8b2054161561039e57895260205280838a8a2054160361038857506102e285610ef5565b54841b166103705783161561036257507f822d049d73911511595a71d104ca3f850ba9414497d561dc7d3b62368370c081939461035c918461032385610ef5565b805463ffffffff19169190921c179055516001600160a01b0390921682526001600160e01b031990921660208201529081906040820190565b0390a180f35b855163d92e233d60e01b8152fd5b8651632f2e2be960e21b815293169083015250602490fd5b836024918a5191639627159960e01b8352820152fd5b856024918c519163bd82596160e01b8352820152fd5b895163ca61871b60e01b8152808601839052602490fd5b60248a86866103d8610ffd565b925163680a0d3560e11b8152921690820152fd5b875163128c088b60e01b8152808401839052602490fd5b828585346102335760203660031901126102335761041f610e1c565b6001600160a01b03939084610435610285610ffd565b54169063ffffffff60e01b16918285526000805160206110518339815191529586602052808587205416908315610514575060ff61047284610ebc565b5416156104fe576104e75782156104d057508394827fa98ff618fe850b493c45b37cec43b3f7b12c0b0c7db7b16be3b960bbccff7e569552602052828520816001600160601b0360a01b82541617905582519182526020820152a180f35b835163128c088b60e01b8152908101839052602490fd5b83516336ccc67560e11b8152908101839052602490fd5b5060249184519163ca61871b60e01b8352820152fd5b85836024926103d8610ffd565b84929150346101d757836003193601126101d75761053d610e01565b90610546610e33565b926001600160e01b03198085169081156103ec576001600160a01b03918261056f610285610ffd565b54169081156103cb5760ff61058383610ebc565b5416156103b4578089526000805160206110518339815191529081602052848b8b2054161561039e57895260205280838a8a2054160361038857506105c785610e4a565b54841b166106085783161561036257507f83439d262abb77f2a182f4828aa620aa37fcd2aa498a6a175ef00d2bcdd9a7cc939461035c918461032385610e4a565b8651630434690760e41b815293169083015250602490fd5b9050346107815760203660031901126107815761063b610e01565b9061064582610ef5565b546001600160a01b03911b8161065c610285610ffd565b5416906001600160e01b0319168015610769578087526000805160206110518339815191529081602052838789205416156107535782156107465760ff6106a284610ebc565b54161561072f57875260205280828688205416036107195750811691821561070b5750906106f17f822d049d73911511595a71d104ca3f850ba9414497d561dc7d3b62368370c0819392610ef5565b63ffffffff1981541690558151908152836020820152a180f35b835163d92e233d60e01b8152fd5b83602491865191639627159960e01b8352820152fd5b865163ca61871b60e01b8152808701849052602490fd5b60248787866103d8610ffd565b8560249188519163bd82596160e01b8352820152fd5b85516318d92a5160e11b815283851681870152602490fd5b8380fd5b5050346101d757816003193601126101d75761079f610e1c565b91602435916001600160a01b03806107b8610285610ffd565b54169463ffffffff60e01b16948587526000805160206110518339815191526020528184882054169181156108b0575060ff6107f382610ebc565b54161561089a5780820361088457501561086f5750916060917f75ee1f8ec2f9fcf77a5e91bae172d141fd760dac1761cbe90fbeea078ec4ac88938286527fbd11ea486bc2027fd35886fb74ddac0d047d847fe642609550f64c01bbda08c960205280862054828288205581519384526020840152820152a180f35b83602492519163bd82596160e01b8352820152fd5b90506024925191639627159960e01b8352820152fd5b9050602492519163ca61871b60e01b8352820152fd5b84846024926103d8610ffd565b505090346101d75760203660031901126101d7576108d9610e01565b916001600160a01b03806108ec85610e83565b5416801561096157816108fd610ffd565b16036109415760ff6109106100fb610ffd565b541615610921578461019d85610f2e565b6024935061092d610ffd565b9251631196593d60e11b8152921690820152fd5b6024935061094d610ffd565b9251639627159960e01b8152921690820152fd5b5060249392519263680a0d3560e11b84521690820152fd5b8285853461023357602036600319011261023357610995610e1c565b926001600160a01b0390816109ab610285610ffd565b54169463ffffffff60e01b16918285526000805160206110518339815191529586602052818587205416918115610aa4575060ff6109e882610ebc565b541615610a8e57808203610a78575015610a63578115610a4e57508293817fa98ff618fe850b493c45b37cec43b3f7b12c0b0c7db7b16be3b960bbccff7e5694526020528184206001600160601b0360a01b81541690558151908152836020820152a180f35b915163128c088b60e01b815291820152602490fd5b915163bd82596160e01b815291820152602490fd5b82602491865191639627159960e01b8352820152fd5b8260249186519163ca61871b60e01b8352820152fd5b85846024926103d8610ffd565b5050346101d75760203660031901126101d757610acc610e01565b9160ff610ada6100fb610ffd565b541615610b1e576001600160a01b039081610af485610e83565b5416610b07578461019d85610197610ffd565b5163e751ad6560e01b815292169082015260249150fd5b602491610b29610ffd565b9151631196593d60e11b81526001600160a01b0390921690820152fd5b915050346101d75760203660031901126101d75760209250610b6e610b69610e01565b610e4a565b54901b90519063ffffffff60e01b168152f35b50505034610233576020366003190112610233576020906001600160a01b03610bab610285610e01565b54169051908152f35b915050346101d75760203660031901126101d75760209250610b6e610bd7610e01565b610ef5565b50505034610233576020366003190112610233576020916001600160e01b0319610c04610e1c565b16815260008051602061105183398151915283528190205490516001600160a01b039091168152f35b505050346102335760203660031901126102335760209060ff610c516100fb610e01565b541690519015158152f35b5050346101d757826003193601126101d75760ff610c7b6100fb610ffd565b541615610d0c576001600160a01b03610c92610ffd565b169081156101a0575090817f2a3043c965fd883d586cb6563326a8ed21310c87bfcd1a15073ea7f8abb0bfd39284527f96806dd98d766f67e82444fc94615c2d202c6291c29cb3f12d9f396f091d960a60205281842060ff1981541690558151908152836020820152a161019d610d07610ffd565b610f2e565b60249250610b29610ffd565b90503461078157602036600319011261078157610d33610e01565b90610d3d82610e4a565b546001600160a01b03911b81610d54610285610ffd565b5416906001600160e01b0319168015610de9578087526000805160206110518339815191529081602052838789205416156107535782156107465760ff610d9a84610ebc565b54161561072f57875260205280828688205416036107195750811691821561070b5750906106f17f83439d262abb77f2a182f4828aa620aa37fcd2aa498a6a175ef00d2bcdd9a7cc9392610e4a565b855163036f7f9f60e31b815283851681870152602490fd5b600435906001600160a01b0382168203610e1757565b600080fd5b600435906001600160e01b031982168203610e1757565b602435906001600160e01b031982168203610e1757565b6001600160a01b031660009081527fbd11ea486bc2027fd35886fb74ddac0d047d847fe642609550f64c01bbda08c86020526040902090565b6001600160a01b031660009081527f96806dd98d766f67e82444fc94615c2d202c6291c29cb3f12d9f396f091d960b6020526040902090565b6001600160a01b031660009081527f96806dd98d766f67e82444fc94615c2d202c6291c29cb3f12d9f396f091d960a6020526040902090565b6001600160a01b031660009081527fbd11ea486bc2027fd35886fb74ddac0d047d847fe642609550f64c01bbda08c76020526040902090565b6001600160a01b038116908115610f89577fb0c62993da455bf43a6f32bb6e49959e49609dcc6c80a1a2afef7cdb424b5b4b91610f6c604092610e83565b80546001600160a01b0319169055815190815260006020820152a1565b60405163d92e233d60e01b8152600490fd5b6001600160a01b0391818316908115610f89577fb0c62993da455bf43a6f32bb6e49959e49609dcc6c80a1a2afef7cdb424b5b4b93610fdb604094610e83565b911690816001600160601b0360a01b82541617905582519182526020820152a1565b60143610158061101d575b156110195736601319013560601c90565b3390565b507f580a56aff4c8445faf8644f12c3b0f5d37fcb3a8e0a0f9b1b360da94678271dd546001600160a01b0316331461100856febd11ea486bc2027fd35886fb74ddac0d047d847fe642609550f64c01bbda08c5a26469706673582212206d07b7bf18d290c96b24738ab2b27c4bbad128e2a2fa1b359fb6fb8af53c92f564736f6c63430008110033",
+  "devdoc": {
+    "details": "Zbyte DPlat Registration Facet",
+    "kind": "dev",
+    "methods": {
+      "deRegisterProviderAgent(address)": {
+        "params": {
+          "agent_": "The address of the provider agent to deregister."
+        }
+      },
+      "deregisterDapp(address)": {
+        "params": {
+          "dapp_": "The address of the Dapp to deregister."
+        }
+      },
+      "deregisterEnterprise(bytes4)": {
+        "params": {
+          "enterprise_": "The bytes4 identifier of the enterprise to deregister."
+        }
+      },
+      "deregisterEnterpriseUser(address)": {
+        "params": {
+          "user_": "The address of the user to deregister."
+        }
+      },
+      "isEnterpriseDappRegistered(address)": {
+        "params": {
+          "dapp_": "The address of the Dapp to check."
+        },
+        "returns": {
+          "_0": "The identifier of the associated registered enterprise."
+        }
+      },
+      "isEnterpriseRegistered(bytes4)": {
+        "params": {
+          "enterprise_": "The identifier of the enterprise to check."
+        },
+        "returns": {
+          "_0": "The address of the associated registered provider."
+        }
+      },
+      "isEnterpriseUserRegistered(address)": {
+        "params": {
+          "user_": "The address of the user to check."
+        },
+        "returns": {
+          "_0": "The identifier of the associated registered enterprise."
+        }
+      },
+      "isProviderAgentRegistered(address)": {
+        "params": {
+          "agent_": "The address of the provider agent to check."
+        },
+        "returns": {
+          "_0": "The address of the associated registered provider."
+        }
+      },
+      "isProviderRegistered(address)": {
+        "params": {
+          "provider_": "The address of the provider to check."
+        },
+        "returns": {
+          "_0": "A boolean indicating whether the provider is registered."
+        }
+      },
+      "registerDapp(address,bytes4)": {
+        "params": {
+          "dapp_": "The address of the Dapp to register.",
+          "enterprise_": "The bytes4 identifier of the enterprise."
+        }
+      },
+      "registerEnterprise(bytes4)": {
+        "params": {
+          "enterprise_": "The bytes4 identifier of the enterprise to register."
+        }
+      },
+      "registerEnterpriseUser(address,bytes4)": {
+        "params": {
+          "enterprise_": "The bytes4 identifier of the enterprise.",
+          "user_": "The address of the user to register."
+        }
+      },
+      "registerProvider()": {
+        "details": "Relation between provider, agent, enterprise, users and dapps is as follows: zbyte\\ ____(1) <--------> (n) provider\\ ____________________________(1) <--------> (n) agent\\ ____________________________(1) <--------> (n) enterprise\\ ________________________________________________________(1) <--------> (n) user\\ ________________________________________________________(1) <--------> (n) dapp   For an enterprise usecase, an enterprise can allow users to invoke registered dapps.\\   Users can invoke the contract functions without any need to hold crypto assets.\\   L1 needed for the call is given by the authorized workers and providers compensate them in vERC20.\\ \\   For opensource usecase,\\   Users can invoke the contract functions without any need to hold L1 assets.\\   L1 needed for the call is given by the authorized workers and the users compensate them in vERC20\\ \\   NOTE: When one of the components (provider, enterprise, agent, user or dapp) is deregistered,\\    all the other components registered under it remain registered.\\    So, if the component is registered again, the entire subtree becomes active again"
+      },
+      "registerProviderAgent(address)": {
+        "params": {
+          "agent_": "The address of the provider agent to register."
+        }
+      },
+      "setEnterpriseLimit(bytes4,uint256)": {
+        "params": {
+          "amount_": "The new limit amount.",
+          "enterprise_": "The bytes4 identifier of the enterprise."
+        }
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "errors": {
+      "EnterpriseAlreadyRegistered(bytes4)": [
+        {
+          "notice": "error (0x6d998cea): Enterprise is already registered."
+        }
+      ],
+      "EnterpriseDappAlreadyRegistered(address)": [
+        {
+          "notice": "error (0xbcb8afa4): Enterprise dapp is already registered."
+        }
+      ],
+      "EnterpriseDappNotRegistered(address)": [
+        {
+          "notice": "error (0x31b254a2): Enterprise dapp is not registered."
+        }
+      ],
+      "EnterpriseNotRegistered(bytes4)": [
+        {
+          "notice": "error (0xbd825961): Enterprise is not registered."
+        }
+      ],
+      "EnterpriseUserAlreadyRegistered(address)": [
+        {
+          "notice": "error (0x43469070): Enterprise user is already registered."
+        }
+      ],
+      "EnterpriseUserNotRegistered(address)": [
+        {
+          "notice": "error (0x1b7bfcf8): Enterprise user is not registered."
+        }
+      ],
+      "InvalidEnterprise(bytes4)": [
+        {
+          "notice": "error (0x128c088b): Invalid enterprise hash."
+        }
+      ],
+      "InvalidProvider(address)": [
+        {
+          "notice": "error (0x96271599): Invalid provider."
+        }
+      ],
+      "NotAForwarder()": [
+        {
+          "notice": "error (0x5ac85bab): Caller is not a forwarder"
+        }
+      ],
+      "NotARegisteredProvider(address)": [
+        {
+          "notice": "error (0xca61871b): Not a registered provider."
+        }
+      ],
+      "ProviderAgentAlreadyRegistered(address)": [
+        {
+          "notice": "error (0xe751ad65): Provider Agent is already registered."
+        }
+      ],
+      "ProviderAgentNotRegistered(address)": [
+        {
+          "notice": "error (0xd0141a6a): Not a registered provider agent."
+        }
+      ],
+      "ProviderAlreadyRegistered(address)": [
+        {
+          "notice": "errorserror (0x74f7822a): Provider already registered."
+        }
+      ],
+      "ProviderNotRegistered(address)": [
+        {
+          "notice": "error (0x232cb27a): Provider not registered."
+        }
+      ]
+    },
+    "events": {
+      "ZbyteDPlatDappRegistered(address,bytes4)": {
+        "notice": "event (0x822d049d): Zbyte DPlat dapp is registered."
+      },
+      "ZbyteDPlatEnterpriseLimitSet(bytes4,uint256,uint256)": {
+        "notice": "event (0x75ee1f8e): Zbyte DPlat enterprise limit is set."
+      },
+      "ZbyteDPlatEnterpriseRegistered(bytes4,address)": {
+        "notice": "event (0xa98ff618): Zbyte DPlat enterprise is registered."
+      },
+      "ZbyteDPlatEnterpriseUserRegistered(address,bytes4)": {
+        "notice": "event (0x83439d26): Zbyte DPlat enterprise user is registered."
+      },
+      "ZbyteDPlatProviderAgentRegistered(address,address)": {
+        "notice": "event (0xb0c62993): Zbyte DPlat provider agent is registered."
+      },
+      "ZbyteDPlatProviderRegistred(address,bool)": {
+        "notice": "eventsevent (0x2a3043c9): Zbyte DPlat provider is registered."
+      }
+    },
+    "kind": "user",
+    "methods": {
+      "deRegisterProviderAgent(address)": {
+        "notice": "Deregisters a provider agent."
+      },
+      "deregisterDapp(address)": {
+        "notice": "Deregisters a Dapp for an enterprise."
+      },
+      "deregisterEnterprise(bytes4)": {
+        "notice": "Deregisters an enterprise."
+      },
+      "deregisterEnterpriseUser(address)": {
+        "notice": "Deregisters an enterprise user."
+      },
+      "deregisterProvider()": {
+        "notice": "Deregisters a provider."
+      },
+      "isEnterpriseDappRegistered(address)": {
+        "notice": "Checks if an enterprise Dapp is registered and returns the associated enterprise identifier."
+      },
+      "isEnterpriseRegistered(bytes4)": {
+        "notice": "Checks if an enterprise is registered and returns the associated provider's address."
+      },
+      "isEnterpriseUserRegistered(address)": {
+        "notice": "Checks if an enterprise user is registered and returns the associated enterprise identifier."
+      },
+      "isProviderAgentRegistered(address)": {
+        "notice": "Checks if a provider agent is registered and returns the associated provider's address."
+      },
+      "isProviderRegistered(address)": {
+        "notice": "Checks if a provider is registered."
+      },
+      "registerDapp(address,bytes4)": {
+        "notice": "Registers a Dapp for an enterprise."
+      },
+      "registerEnterprise(bytes4)": {
+        "notice": "Registers an enterprise."
+      },
+      "registerEnterpriseUser(address,bytes4)": {
+        "notice": "Registers an enterprise user."
+      },
+      "registerProvider()": {
+        "notice": "Registers a provider."
+      },
+      "registerProviderAgent(address)": {
+        "notice": "Registers a provider agent."
+      },
+      "setEnterpriseLimit(bytes4,uint256)": {
+        "notice": "Sets the enterprise limit for a specific enterprise."
+      }
+    },
+    "notice": "Zbyte DPlat Registration Facet",
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [],
+    "types": null
+  }
+}
