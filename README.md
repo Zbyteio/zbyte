@@ -36,3 +36,16 @@ DEPLOYMENT ADDRESSES OF ALL THE SMART CONTRACTS
 | CHAIN Contract | PriceFeeder | 0xc2c344D51deB4f8c75Be992C0D2ccC79059A1029 | Hedera |
 
 
+
+
+
+
+This summary presents the comparison between the direct call and the call via DPlat, highlighting the difference in gas usage and the percentage increase in gas consumption when using DPlat.
+| **Aspect**               | **Direct Call**                                                                                                            | **Call via DPlat**                                                                                                        |
+|--------------------------|---------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| **Transaction URL**      | [Direct Call on Polygon](https://polygonscan.com/tx/0x554a10cefe2859610cf1b7cfdf15e0ddc1a980cddbccdd3e8293c044addbd31b) | [Call via DPlat on Polygon](https://polygonscan.com/tx/0x23f05a8a7c3726b973b0f00d9ad090ac2540d8a9c8f29748ae47e34f525449e9) |
+| **Gas Used**             | 2,322,423 units                                                                                                           | 2,413,130 units                                                                                                           |
+| **Difference in Gas**    | -                                                                                                                         | 90,707 units                                                                                                              |
+| **Percentage Increase**  | -                                                                                                                         | 3.75%                                                                                                                     |
+
+
