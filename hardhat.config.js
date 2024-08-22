@@ -64,11 +64,17 @@ module.exports = {
       chainId: 84532
     },
     hedera: {
-      //url: `https://twilight-attentive-card.hedera-mainnet.quiknode.pro/13f50a5e488608f538c2b0143bed06658f6f5fdb/`,
-      url: `https://mainnet.hedera.validationcloud.io/v1/cT55tYBL7gZhJtA3TdxkrVO4DKzkJ0t6n1_CerxS8HI`,
+      url: `https://twilight-attentive-card.hedera-mainnet.quiknode.pro/13f50a5e488608f538c2b0143bed06658f6f5fdb/`,
+      //url: `https://mainnet.hedera.validationcloud.io/v1/cT55tYBL7gZhJtA3TdxkrVO4DKzkJ0t6n1_CerxS8HI`,
       accounts: constants.prvKeysList,
       chainId: 295,
       timeout: 100_000,
+    },
+    base: {
+      url: `https://base.llamarpc.com`,
+      accounts: constants.prvKeysList,
+      chainId: 8453,
+      time_out: 100_000,
     }
   }
 };
